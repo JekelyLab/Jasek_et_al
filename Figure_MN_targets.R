@@ -1,3 +1,7 @@
+#Desmosomal connectome paper R - Natverse code to plot all muscle targets of MNs and the desmosomal partners of those muscles
+#code for Figures showing MNs and their Muscle and desmosomal targets Jasek et al 2021 paper
+#Gaspar Jekely - 5th Feb 2021
+
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 Sys.setenv('R_MAX_VSIZE'=8000000000)
@@ -15,6 +19,7 @@ require("graphics")
 # can run this separate file using source function
 source("~/R/conn.R")
 workdir <- "/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure_MNs"
+#workdir <- "/your_working_directory/"
 setwd(workdir)
 
 catmaid_get_volumelist(conn = NULL, pid = 11)
@@ -38,11 +43,11 @@ bounding_dots = nlapply(read.neurons.catmaid("^bounding_dots$", pid=11,
 #MN plotting
 ##########################################
 
-MN_names <- c("MNwave","MNsmile","MNche","vMN1-2","MNbow", "MNbiramous", "MNhose", "MNcrab", "MNladder", "MNspider type1", "MNspider type2","MNring")
-annotations_MN <- c("celltype68","celltype182","celltype165","vMN1-2","celltype67", "celltype63", "celltype66", "celltype65", "celltype151","celltype61","celltype62","celltype64")
-annotations_MN_mus <- c("MNwave_mus","MNsmile_mus","MNche_mus","vMN1-2_mus","MNbow_mus", "MNbiramous_mus", "MNhose_mus","MNcrab_mus", "MNladder_mus","MNspider_type1_mus",
+MN_names <- c("MNsmile","MNche","vMN1-2","MNbow", "MNwave","MNbiramous", "MNhose", "MNcrab", "MNladder", "MNspider type1", "MNspider type2","MNring")
+annotations_MN <- c("celltype182","celltype165","vMN1-2","celltype67", "celltype68", "celltype63", "celltype66", "celltype65", "celltype151","celltype61","celltype62","celltype64")
+annotations_MN_mus <- c("MNsmile_mus","MNche_mus","vMN1-2_mus","MNbow_mus", "MNwave_mus","MNbiramous_mus", "MNhose_mus","MNcrab_mus", "MNladder_mus","MNspider_type1_mus",
                         "MNspider_type2_mus","MNring_mus")
-annotations_MN_mus_des <- c("MNwave_mus_des","MNsmile_mus_des","MNche_mus_des","vMN1-2_mus_des","MNbow_mus_des", "MNbiramous_mus_des", "MNhose_mus_des","MNcrab_mus_des", "MNladder_mus_des",
+annotations_MN_mus_des <- c("MNsmile_mus_des","MNche_mus_des","vMN1-2_mus_des","MNbow_mus_des", "MNwave_mus_des", "MNbiramous_mus_des", "MNhose_mus_des","MNcrab_mus_des", "MNladder_mus_des",
                             "MNspider_type1_mus_des","MNspider_type2_mus_des","MNring_mus_des")
 colors=hcl.colors(40, palette = "Blues 3", rev=F)
 length(MN_names)
