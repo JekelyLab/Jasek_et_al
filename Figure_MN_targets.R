@@ -29,7 +29,7 @@ outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"),
 yolk <- catmaid_get_volume(4, rval = c("mesh3d", "catmaidmesh", "raw"),
   invertFaces = T, conn = NULL, pid = 11)
 
-chaeta = nlapply(read.neurons.catmaid("^chaeta$", pid=11, 
+#chaeta = nlapply(read.neurons.catmaid("^chaeta$", pid=11, 
                                           fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
 acicula = nlapply(read.neurons.catmaid("^acicula$", pid=11, 
                                       fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
@@ -58,7 +58,7 @@ par3d(windowRect = c(0, 0, 600, 800)); nview3d("ventral", extramat=rotationMatri
 clear3d(type = "lights"); rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rgl.light(-60, -30, specular = "gray5")
 
 
-for (i in c(1:12)){
+for (i in c(6:6)){
 #read skeletons from catmaid by annotation
 MN = nlapply(read.neurons.catmaid(annotations_MN[i], pid=11, 
                                           fetch.annotations = F), function(x) smooth_neuron(x, sigma=6000))
@@ -81,6 +81,8 @@ plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
        col="#E2E2E2") 
 plot3d(bounding_dots, WithConnectors = F, WithNodes = F, soma=F, lwd=1, rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1, col="white") 
+plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=1, rev = FALSE, fixup = F, add=T, 
+       forceClipregion = TRUE, alpha=0.4, col="gray10") 
 plot3d(MN, WithConnectors = F, NeuronNames = F, WithNodes = F, soma=T, lwd=3,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col=colors[1:length(MN)])
@@ -88,12 +90,12 @@ plot3d(MN, WithConnectors = F, NeuronNames = F, WithNodes = F, soma=T, lwd=3,
 texts3d(47000,0, 0, text = MN_names[i], col= "Black", cex = 1.5)
 rgl.snapshot(paste(MN_names[i], "_1.png", sep=""))
 #plot muscles clustered by nblast clusters
-plot3d(hckcs, k=10, col=hcl.colors(length(MN_mus), palette='OrYel'), db=MN_mus, soma=F, add=T, lwd=3, alpha=1)
+plot3d(hckcs, k=10, col=hcl.colors(15, palette='OrYel'), db=MN_mus, soma=F, add=T, lwd=3, alpha=1)
 #add a text label
 texts3d(47000,0, 7000, text = paste(MN_names[i], " muscle targets"), col= "Red", cex = 1.5)
 rgl.snapshot(paste(MN_names[i], "_2.png", sep=""))
 plot3d(MN_mus_des, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.6,
        col=hcl.colors(length(MN_mus_des), palette='YlGn'))
 #add a text label
 texts3d(47000,0, 14000, text = "desmosomal targets", col=hcl.colors(1, palette='YlGn'), cex = 1.5)
@@ -128,15 +130,17 @@ for (i in c(1:12)){
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
          col="#E2E2E2") 
   plot3d(bounding_dots, WithConnectors = F, WithNodes = F, soma=F, lwd=1, rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1, col="white") 
+  plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=1, rev = FALSE, fixup = F, add=T, 
+         forceClipregion = TRUE, alpha=0.4, col="gray10") 
   plot3d(MN, WithConnectors = F, NeuronNames = F, WithNodes = F, soma=T, lwd=3,
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
          col=colors[1:length(MN)])
   rgl.snapshot(paste(MN_names[i], "_all1.png", sep=""))
   #plot muscles clustered by nblast clusters
-  plot3d(hckcs, k=10, col=hcl.colors(length(MN_mus), palette='OrYel'), db=MN_mus, soma=F, add=T, lwd=3, alpha=1)
+  plot3d(hckcs, k=10, col=hcl.colors(15, palette='OrYel'), db=MN_mus, soma=F, add=T, lwd=3, alpha=1)
     rgl.snapshot(paste(MN_names[i], "_all2.png", sep=""))
   plot3d(MN_mus_des, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
+         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.6,
          col=hcl.colors(length(MN_mus_des), palette='YlGn'))
   rgl.snapshot(paste(MN_names[i], "_all3.png", sep=""))
 }
