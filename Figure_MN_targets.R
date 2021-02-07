@@ -18,8 +18,7 @@ require("graphics")
 # catmaid connection, needs username, password AND token - weird!
 # can run this separate file using source function
 source("~/R/conn.R")
-workdir <- "/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure_MNs"
-#workdir <- "/your_working_directory/"
+workdir <- "/your_working_directory/"
 setwd(workdir)
 
 catmaid_get_volumelist(conn = NULL, pid = 11)
@@ -29,7 +28,7 @@ outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"),
 yolk <- catmaid_get_volume(4, rval = c("mesh3d", "catmaidmesh", "raw"),
   invertFaces = T, conn = NULL, pid = 11)
 
-#chaeta = nlapply(read.neurons.catmaid("^chaeta$", pid=11, 
+chaeta = nlapply(read.neurons.catmaid("^chaeta$", pid=11, 
                                           fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
 acicula = nlapply(read.neurons.catmaid("^acicula$", pid=11, 
                                       fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
