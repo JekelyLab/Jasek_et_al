@@ -18,7 +18,8 @@ require("graphics")
 # catmaid connection, needs username, password AND token - weird!
 # can run this separate file using source function
 source("~/R/conn.R")
-workdir <- "/your_working_directory/"
+workdir <- "/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure_MNs"
+#workdir <- "/your_working_directory/"
 setwd(workdir)
 
 catmaid_get_volumelist(conn = NULL, pid = 11)
