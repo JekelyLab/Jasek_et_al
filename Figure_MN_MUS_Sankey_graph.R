@@ -10,7 +10,7 @@ library(natverse)
 library(RColorBrewer)
 
 #set working directory
-setwd("/set_you_directory/")
+setwd("/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure_MNs")
 
 # catmaid connection, needs username, password AND token - weird!
 # can run this separate file using source function
