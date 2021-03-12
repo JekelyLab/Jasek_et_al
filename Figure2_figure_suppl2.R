@@ -10,7 +10,7 @@ options(timeout = 4000000)
 # load nat and all associated packages, incl catmaid
 library(natverse)
 #set working directory
-setwd('/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Suppl_Fig_Aciculae_chaetae/')
+setwd('/work_dir/')
 
 # catmaid connection, needs username, password AND token
 # can run this separate file using source function
@@ -190,7 +190,7 @@ plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
        col="#E2E2E2") 
 plot3d(acicula, WithConnectors = T, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="grey60")
+       col="grey10")
 plot3d(circumacicular, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
        col="#FD8D3C")
