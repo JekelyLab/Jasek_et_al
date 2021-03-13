@@ -33,7 +33,7 @@ acicula = nlapply(read.neurons.catmaid("^acicula$", pid=11,
 muscle = nlapply(read.neurons.catmaid("^muscle$", pid=11, 
                                        fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
 
-desmosome_connectome_new_non_muscle = nlapply(read.neurons.catmaid("^desmosome_connectome_old_non_muscle$", pid=11, 
+desmosome_connectome_non_muscle = nlapply(read.neurons.catmaid("^desmosome_connectome_non_muscle$", pid=11, 
                                                                    fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
 
 
