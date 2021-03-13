@@ -110,6 +110,9 @@ transitivity_desmo <- lapply(1:1000, function(x)
 x <- transitivity(induced_subgraph(desmo_conn_graph_bi, vids, impl = "auto"))}
 )
 
+#######################################
+#generate and quantify scale-free graphs
+
 #generate a scale-free graph
 scale_free_graph <- sample_fitness_pl(
   length(V(desmo_conn_graph)),
@@ -142,7 +145,7 @@ transitivity_sf <- lapply(1:1000, function(x) x=transitivity(sample_fitness_pl(
 
 #do the same but assing weights from the desmo graph
 modularity_sf_weight <- lapply(1:1000, function(x) {
-  sf_graph <- scale_free_graph <- sample_fitness_pl(
+  sf_graph <- sample_fitness_pl(
     length(V(desmo_conn_graph)),
     length(E(desmo_conn_graph)),
     4,
@@ -156,8 +159,22 @@ modularity_sf_weight <- lapply(1:1000, function(x) {
 }
 )
 
+#calculate the length of maximal cliques of 1000 preferential attachment graphs
+#run with min=3, was also run with min=4 which returned 0 clique
+max_cliques_sf <- lapply(1:1000, function(x) x=length(max_cliques(sample_fitness_pl(
+  length(V(desmo_conn_graph)),length(E(desmo_conn_graph)),
+  4,exponent.in = -1, loops = FALSE,multiple = FALSE,
+  finite.size.correction = TRUE
+), min=3))
+)
+sum(as.numeric(max_cliques_sf))
+median(as.numeric(max_cliques_sf))
+hist(as.numeric(max_cliques_sf))
+
+
+
 #####################################
-#with preferential attachment
+#graphs with preferential attachment
 
 graph_pa_age <- sample_pa_age(
   length(V(desmo_conn_graph)),
@@ -188,7 +205,7 @@ modularity_pa <- lapply(1:1000, function(x)
   )))
 )
 
-#calculate the global transitivity (clustering coefficient) of 1000 scale free graphs
+#calculate the global transitivity (clustering coefficient) of 1000 preferential attachment graphs
 transitivity_pa <- lapply(1:1000, function(x) x=transitivity(graph_pa_age <- sample_pa_age(
   length(V(desmo_conn_graph)),
   pa.exp=1,aging.exp=-2,
@@ -199,6 +216,20 @@ transitivity_pa <- lapply(1:1000, function(x) x=transitivity(graph_pa_age <- sam
   deg.coef = 1,age.coef = 1,time.window = NULL
 )))
 
+#calculate the length of maximal cliques of 1000 preferential attachment graphs
+#run with min=3, was also run with min=4 which returns no cliques
+max_cliques_pa <- lapply(1:1000, function(x) x=length(max_cliques(sample_pa_age(
+  length(V(desmo_conn_graph)),
+  pa.exp=1,aging.exp=-2,
+  m = 2, aging.bin = 300,
+  out.dist = NULL,out.seq = NULL,
+  out.pref = FALSE,directed = F,
+  zero.deg.appeal = 1,zero.age.appeal = 0,
+  deg.coef = 1,age.coef = 1,time.window = NULL), min=3))
+)
+max(as.numeric(max_cliques_pa))
+median(as.numeric(max_cliques_pa))
+hist(as.numeric(max_cliques_pa))
 
 #plot histograms of modularity scores
 pdf(file='Desmosomal_and_Erdos_graph_modularity.pdf', width=10, height = 8)
@@ -248,15 +279,15 @@ packageVersion("leiden")
 pdf(file='Desmosomal_Erdos_and_sf_graph_transitivity.pdf', width=10, height = 8)
 {
   hist_desmo_transitivity <- hist(as.numeric(transitivity_desmo),
-                               xlim=c(0,0.1),ylim=c(0,400),ylab = 'count',xlab='transitivity', main=NA)
+                               xlim=c(0,0.1),ylim=c(0,400),ylab = 'count',xlab='global transitivity', main=NA)
   hist_erdos_transitivity <- hist(as.numeric(transitivity_erdos),
-                                  xlim=c(0,0.1),ylim=c(0,400),ylab = 'count',xlab='transitivity', main=NA,col='red')
+                                  xlim=c(0,0.1),ylim=c(0,400),ylab = 'count',xlab='global transitivity', main=NA,col='red')
   hist_sf_transitivity <- hist(as.numeric(transitivity_sf),
-                     xlim=c(0,0.1),ylim=c(0,400),ylab = 'count',xlab='transitivity', main=NA, col='cyan')
+                     xlim=c(0,0.1),ylim=c(0,400),ylab = 'count',xlab='global transitivity', main=NA, col='cyan')
   hist_pa_transitivity <- hist(as.numeric(transitivity_pa),
-                               xlim=c(0,0.1),ylim=c(0,400),ylab = 'count',xlab='transitivity', main=NA, col='cyan')
+                               xlim=c(0,0.1),ylim=c(0,400),ylab = 'count',xlab='global transitivity', main=NA, col='cyan')
   
-  plot(hist_desmo_transitivity,add=F,xlim=c(0,0.1),ylim=c(0,400),ylab = 'count',xlab='transitivity', main=NA)
+  plot(hist_desmo_transitivity,add=F,xlim=c(0,0.1),ylim=c(0,400),ylab = 'count',xlab='global transitivity', main=NA)
   plot(hist_erdos_transitivity,add=T, col='red')
   plot(hist_sf_transitivity,add=T, col='cyan')
   plot(hist_pa_transitivity,add=T, col='grey50')
@@ -281,6 +312,8 @@ mean(weights_desmo)
 diameter(desmo_conn_graph_largest)
 diameter(erdos_graph)
 diameter(scale_free_graph)
+diameter(graph_pa_age)
+
 mean_distance(desmo_conn_graph)
 mean_distance(erdos_graph)
 mean_distance(scale_free_graph)
@@ -293,18 +326,27 @@ count_motifs(scale_free_graph, 4)
 max(count_triangles(desmo_conn_graph))
 (triangles(desmo_conn_graph))
 
+#triangles
 count_triangles(desmo_conn_graph)
 sort(count_triangles(desmo_conn_graph), decreasing=T)
+max(count_triangles(desmo_conn_graph))
 max(count_triangles(erdos_graph))
 max(count_triangles(scale_free_graph))
+max(count_triangles(graph_pa_age))
 count_triangles(desmo_conn_graph, vids=V(desmo_conn_graph)[223])
 V(desmo_conn_graph)[223]
-transitivity(desmo_conn_graph, type='global')
-transitivity(erdos_graph)
-transitivity(scale_free_graph)
-transitivity(graph_pa_age)
-count_triangles(graph_pa_age)
+count_triangles(erdos_graph)
 
+#cliques
+length(largest_cliques(desmo_conn_graph))
+length(largest_cliques(erdos_graph))
+length(largest_cliques(scale_free_graph))
+length(largest_cliques(graph_pa_age))
+clique_num(graph_pa_age)
+length(max_cliques(desmo_conn_graph, min=3))
+length(max_cliques(erdos_graph, min=3))
+length(max_cliques(scale_free_graph, min=3))
+length(max_cliques(graph_pa_age, min=3))
 
 pdf(file='Desmosomal_graph_weight_degree.pdf', width=10, height = 8)
 {
