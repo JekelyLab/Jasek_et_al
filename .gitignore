@@ -5,6 +5,9 @@
 # Session Data files
 .RData
 
+#R env file
+Figure3-figure-supplement1_Renvironment.RData
+
 # User-specific files
 .Ruserdata
 
