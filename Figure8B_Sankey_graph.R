@@ -13,7 +13,7 @@ library(RColorBrewer)
 
 
 #set working directory
-setwd("/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure_MNs")
+setwd("/working_directory/")
 
 # catmaid connection, needs username, password AND token - weird!
 # can run this separate file using source function
@@ -86,7 +86,6 @@ for (df in celltypelist){
   #celltype_names[[length(celltype_names) + 1]] <- paste(Reduce(intersect2, strsplit(neuro_names, NULL)), collapse = '')
   celltype_names[[length(celltype_names) + 1]] <- paste(neuro_names[1], sep = "_")
 }
-celltype_names[1]
 
 synapse_matrix = as.data.frame(synapse_matrix)
 
@@ -96,12 +95,6 @@ synapse_matrix=setNames(synapse_matrix, as.character(celltype_names))
 #assign row names to matrix
 rownames(synapse_matrix) <- as.character(celltype_names)
 synapse_matrix = as.matrix(synapse_matrix)
-synapse_matrix
-
-
-#we remove all-zero rows and columns
-#synapse_matrix = synapse_matrix[ rowSums(synapse_matrix)!=0, ] 
-#synapse_matrix = synapse_matrix[ ,colSums(synapse_matrix[1:nrow(synapse_matrix),1:ncol(synapse_matrix)])!=0]
 
 
 
@@ -119,7 +112,6 @@ library(htmlwidgets)
 celltype_conn_graph <- graph_from_adjacency_matrix(synapse_matrix,
                                                    mode = c("directed"),
                                                    weighted = NULL,  diag = TRUE, add.colnames = NULL, add.rownames = NA)
-celltype_conn_graph
 
 wc <- cluster_walktrap(celltype_conn_graph)
 members <- membership(wc)
@@ -137,9 +129,6 @@ forceNetwork(Links = celltype_conn_graph_d3$links, Nodes = celltype_conn_graph_d
 
 #we need to define the value for proper plotting
 celltype_conn_graph_d3$links$value=1
-
-celltype_conn_graph_d3$links
-
 
 # Plot
 sn <- sankeyNetwork(Links = celltype_conn_graph_d3$links, Nodes = celltype_conn_graph_d3$nodes, Source = "source",
