@@ -1,3 +1,5 @@
+#R code to generate the Sankey graph in Figure 8 panel B of the 2021 Jasek et al Desmosomal connectome paper
+
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 Sys.setenv('R_MAX_VSIZE'=8000000000)
@@ -8,6 +10,7 @@ library(natverse)
 
 #load RColorBrewer for color palette 
 library(RColorBrewer)
+
 
 #set working directory
 setwd("/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure_MNs")
@@ -135,29 +138,16 @@ forceNetwork(Links = celltype_conn_graph_d3$links, Nodes = celltype_conn_graph_d
 #we need to define the value for proper plotting
 celltype_conn_graph_d3$links$value=1
 
+celltype_conn_graph_d3$links
 
 
 # Plot
 sn <- sankeyNetwork(Links = celltype_conn_graph_d3$links, Nodes = celltype_conn_graph_d3$nodes, Source = "source",
-              Target = "target",  NodeID = "name",Value = 'value', 
-              LinkGroup="group", NodeGroup="group", units = "", 
+              Target = "target", NodeID = "name",Value = 'value', 
+              units = "", 
               colourScale = JS("d3.scaleOrdinal(d3.schemeCategory20);"), fontSize = 20,
               fontFamily = "sans", nodeWidth = 40, nodePadding = 4, margin = NULL,
               height = NULL, width = NULL, iterations = 162, sinksRight = T)
-
-sn <- onRender(
-  sn,
-  '
-  function(el,x) {
-    d3.select(el)
-      .selectAll(".node text")
-      .attr("text-anchor", "middle")
-      .attr("width", 20)
-      .style("writing-mode", "horizontal")
-      .style("text-orientation", horizontal);
-  }
-  '
-)
 
 sn
 #save it by first opening it 'as a webpage a'in a new window' and then save from browser as pdf = pdf() saving from R did not work
