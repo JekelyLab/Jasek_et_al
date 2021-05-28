@@ -1,10 +1,10 @@
+#R code to quantify modularity of the desmosomal connectome, code for Figure 4 of the 2021 Jasek et al desmosomal connectome paper
 #quantification of the modularity of the desmosomal connectome and random scale-free and Erdos graphs of similar statistics
-#code for Figure3-figure-supplement1 of the Jasek et al 2021 desmosomal connectome paper
 #Gaspar Jekely 2021 March
 
 #set working directory
 
-setwd('/Users/gaspar/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure3-figure-supplement1/')
+setwd('/working_directory/')
 
 #read csv exported from gephi as table
 #this is also in the github page as desmosomal-connectome.csv
