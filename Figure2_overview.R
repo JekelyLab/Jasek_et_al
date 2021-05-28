@@ -1,4 +1,4 @@
-#R code to generate panels B and C in Figure1 in Jasek et al. 2021 Platynereis desmosomal connectome paper
+#R code to generate panels B and C in Figure2 in Jasek et al. 2021 Platynereis desmosomal connectome paper
 #Uses Natverse and accesses the data on catmaid
 #Gaspar Jekely March 2021
 

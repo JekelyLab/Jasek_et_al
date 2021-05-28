@@ -1,5 +1,5 @@
 #Desmosomal connectome paper R - Natverse code to plot all muscle cell types
-#code for Video1 of the Jasek et al 2021 desmosomal connectome paper
+#code for Video1 and Figure 1 panels A-H in the Jasek et al 2021 desmosomal connectome paper
 #Gaspar Jekely - 4th Feb 2021
 
 # load nat and associated packages

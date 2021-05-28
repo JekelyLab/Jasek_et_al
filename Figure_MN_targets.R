@@ -18,7 +18,7 @@ require("graphics")
 # catmaid connection, needs username, password AND token - weird!
 # can run this separate file using source function
 source("~/R/conn.R")
-workdir <- "/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure_MNs"
+workdir <- "/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure8-figure-supplement1-MN-targets"
 #workdir <- "/your_working_directory/"
 setwd(workdir)
 
@@ -58,7 +58,7 @@ par3d(windowRect = c(0, 0, 600, 800)); nview3d("ventral", extramat=rotationMatri
 clear3d(type = "lights"); rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rgl.light(-60, -30, specular = "gray5")
 
 
-for (i in c(6:6)){
+for (i in c(1:12)){
 #read skeletons from catmaid by annotation
 MN = nlapply(read.neurons.catmaid(annotations_MN[i], pid=11, 
                                           fetch.annotations = F), function(x) smooth_neuron(x, sigma=6000))
@@ -74,31 +74,31 @@ blast_scores <- nblast_allbyall(MN_MUS_dots)
 # Hierarchically cluster the n.blast scores
 hckcs <- nhclust(scoremat=blast_scores)
 # 3d plotting of clustering results and other cells
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
-       col="#E2E2E2") 
+#plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+#       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
+#       col="#E2E2E2") 
 plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.15,
        col="#E2E2E2") 
 plot3d(bounding_dots, WithConnectors = F, WithNodes = F, soma=F, lwd=1, rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1, col="white") 
-plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=1, rev = FALSE, fixup = F, add=T, 
-       forceClipregion = TRUE, alpha=0.4, col="gray10") 
+#plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=1, rev = FALSE, fixup = F, add=T, 
+#       forceClipregion = TRUE, alpha=0.6, col="gray10") 
 plot3d(MN, WithConnectors = F, NeuronNames = F, WithNodes = F, soma=T, lwd=3,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col=colors[1:length(MN)])
 #add a text label
-texts3d(47000,0, 0, text = MN_names[i], col= "Black", cex = 1.5)
+#texts3d(47000,0, 0, text = MN_names[i], col= "Black", cex = 1.5)
 rgl.snapshot(paste(MN_names[i], "_1.png", sep=""))
 #plot muscles clustered by nblast clusters
 plot3d(hckcs, k=10, col=hcl.colors(15, palette='OrYel'), db=MN_mus, soma=F, add=T, lwd=3, alpha=1)
 #add a text label
-texts3d(47000,0, 7000, text = paste(MN_names[i], " muscle targets"), col= "Red", cex = 1.5)
+#texts3d(47000,0, 7000, text = paste(MN_names[i], " muscle targets"), col= "Red", cex = 1.5)
 rgl.snapshot(paste(MN_names[i], "_2.png", sep=""))
 plot3d(MN_mus_des, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.6,
        col=hcl.colors(length(MN_mus_des), palette='YlGn'))
 #add a text label
-texts3d(47000,0, 14000, text = "desmosomal targets", col=hcl.colors(1, palette='YlGn'), cex = 1.5)
+#texts3d(47000,0, 14000, text = "desmosomal targets", col=hcl.colors(1, palette='YlGn'), cex = 1.5)
 rgl.snapshot(paste(MN_names[i], "_3.png", sep=""))
 clear3d() 
 }

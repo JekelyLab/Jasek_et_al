@@ -1,4 +1,4 @@
-#R code to generate the graph in Figure_segmental_distribution_of_muscles in Jasek et al. 2021 Platynereis desmosomal connectome paper
+#R code to generate the graph in Figure1 panel I on the segmentaldistributionof muscles in Jasek et al. 2021 Platynereis desmosomal connectome paper
 #Uses Natverse and accesses the data on catmaid
 #Gaspar Jekely March 2021
 

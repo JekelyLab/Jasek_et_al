@@ -1,4 +1,4 @@
-#R code to generate the figures showing the different Leiden modules of the desmosomal connectome graph from Jasek et al 2021
+#R code to generate the anatomical panels of Figure 3 showing the different Leiden modules of the desmosomal connectome graph from Jasek et al 2021
 #Uses Natverse and accesses the data on catmaid
 #needs as input a json file exported from gephi with module annotations (clusters)
 #Gaspar Jekely Feb 2021
@@ -22,9 +22,11 @@ library(data.table)
 source("~/R/conn.R")
 setwd("/working_directory/")
 
+
 #load json file exported from gephi with the Leiden clusters colored
 #would also work on a json file from catmaid but that uses HEX color codes so the relevant lines in the code would need to be skipped
-graph2_json <- fromJSON(file = "full-graph-leiden-from-gephi.json")
+#the Figure3-Leiden-modules.json file is also on github
+graph2_json <- fromJSON(file = "Figure3-Leiden-modules.json")
 
 cells_with_color <- data.table(id=numeric(), color=character())
 setnames(cells_with_color, c("id"), c("skid"))
