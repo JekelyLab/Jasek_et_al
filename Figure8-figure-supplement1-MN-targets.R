@@ -18,8 +18,7 @@ require("graphics")
 # catmaid connection, needs username, password AND token - weird!
 # can run this separate file using source function
 source("~/R/conn.R")
-workdir <- "/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure8-figure-supplement2-MN-targets/"
-#workdir <- "/your_working_directory/"
+workdir <- "/your_working_directory/"
 setwd(workdir)
 
 catmaid_get_volumelist(conn = NULL, pid = 11)
@@ -43,7 +42,7 @@ bounding_dots = nlapply(read.neurons.catmaid("^bounding_dots$", pid=11,
 #MN plotting
 ##########################################
 
-MN_names <- c("MNsmile","MNchae","vMN1-2","MNbow", "MNwave","MNbiramous", "MNhose", "MNcrab", "MNladder", "MNspider type1", "MNspider type2","MNring")
+MN_names <- c("MNacicX","MNchae","vMN1-2","MNbow", "MNwave","MNbiramous", "MNhose", "MNcrab", "MNladder", "MNspider type1", "MNspider type2","MNring")
 annotations_MN <- c("celltype69","celltype165","vMN1-2","celltype67", "celltype68", "celltype63", "celltype66", "celltype65", "celltype151","celltype61","celltype62","celltype64")
 annotations_MN_mus <- c("MNacicX_MUS","MNche_mus","vMN1-2_mus","MNbow_mus", "MNwave_mus","MNbiramous_mus", "MNhose_mus","MNcrab_mus", "MNladder_mus","MNspider_type1_mus",
                         "MNspider_type2_mus","MNring_mus")
@@ -140,7 +139,7 @@ for (i in c(1:12)){
   plot3d(hckcs, k=10, col=hcl.colors(15, palette='OrYel'), db=MN_mus, soma=F, add=T, lwd=3, alpha=1)
     rgl.snapshot(paste(MN_names[i], "_all2.png", sep=""))
   plot3d(MN_mus_des, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.6,
+         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
          col=hcl.colors(length(MN_mus_des), palette='YlGn'))
   rgl.snapshot(paste(MN_names[i], "_all3.png", sep=""))
 }
@@ -161,7 +160,7 @@ nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1)); par3d(zoom=0.5)
 for (i in 1:185){
   play3d( spin3d( axis = c(0, 0, 10), rpm = 0.2), duration = 2)
   print (i)
-  Sys.sleep(10)
+  Sys.sleep(0.1)
   #save a snapshot in the working directory
   rgl.snapshot(paste("MN_targets_spin", i, ".png", sep = ""))
 }
