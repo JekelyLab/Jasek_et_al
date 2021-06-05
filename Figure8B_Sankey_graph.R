@@ -11,9 +11,13 @@ library(natverse)
 #load RColorBrewer for color palette 
 library(RColorBrewer)
 
+#for regex
+library(dplyr)
+library(readr)
 
 #set working directory
-setwd("/working_directory/")
+setwd('/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure8-desmo-MN/')
+#setwd("/working_directory/")
 
 # catmaid connection, needs username, password AND token - weird!
 # can run this separate file using source function
@@ -23,8 +27,8 @@ source("~/R/conn.R")
 # and your code won't contain potentially compromising info
 
 
-MN_names <- c("MNsmile","MNche","vMN1-2","MNbow", "MNwave","MNbiramous", "MNhose", "MNcrab", "MNladder", "MNspider type1", "MNspider type2","MNring")
-annotations_MN <- c("celltype182","celltype165","vMN1-2","celltype67", "celltype68", "celltype63", "celltype66", "celltype65", "celltype151","celltype61","celltype62","celltype64")
+MN_names <- c("MNacicX","MNchae","vMN1-2","MNbow", "MNwave","MNbiramous", "MNhose", "MNcrab", "MNladder", "MNspider type1", "MNspider type2","MNring")
+annotations_MN <- c("celltype69","celltype165","vMN1-2","celltype67", "celltype68", "celltype63", "celltype66", "celltype65", "celltype151","celltype61","celltype62","celltype64")
 length(MN_names)
 
 annotations_MN_MUSlist = list()
@@ -81,11 +85,12 @@ celltype_names=list()
 for (df in celltypelist){
   #to retrieves all the neuron names in one element of the celltype list
   neuro_names <- as.character(attr(df,"df")$name)
-  #to retrieve the common characters in the neuron names (as generic celltype name)
-  #print (paste(Reduce(intersect2, strsplit(neuro_names, NULL)), collapse = ''))
-  #celltype_names[[length(celltype_names) + 1]] <- paste(Reduce(intersect2, strsplit(neuro_names, NULL)), collapse = '')
   celltype_names[[length(celltype_names) + 1]] <- paste(neuro_names[1], sep = "_")
 }
+
+
+#truncate the celltype names at the first _
+celltype_names <- sub(x=celltype_names, "_(.)*", replacement="")
 
 synapse_matrix = as.data.frame(synapse_matrix)
 
@@ -113,11 +118,16 @@ celltype_conn_graph <- graph_from_adjacency_matrix(synapse_matrix,
                                                    mode = c("directed"),
                                                    weighted = NULL,  diag = TRUE, add.colnames = NULL, add.rownames = NA)
 
-wc <- cluster_walktrap(celltype_conn_graph)
+#extract strongly connected componenets
+celltype_conn_graph_conn <- components(celltype_conn_graph, mode = c("strong"))
+celltype_conn_graph_conn <- induced_subgraph(celltype_conn_graph, celltype_conn_graph_conn$members, impl="copy_and_delete")
+
+#cluster the graph
+wc <- cluster_walktrap(celltype_conn_graph_conn)
 members <- membership(wc)
-members
+
 # Convert to object suitable for networkD3
-celltype_conn_graph_d3 <- igraph_to_networkD3(celltype_conn_graph, group = members)
+celltype_conn_graph_d3 <- igraph_to_networkD3(celltype_conn_graph_conn, group = members)
 
 #The NodeGroup vector in the Nodes data frame needs to be non-numeric so we convert it to character
 celltype_conn_graph_d3$nodes$group <- as.character(celltype_conn_graph_d3$nodes$group)
@@ -130,13 +140,16 @@ forceNetwork(Links = celltype_conn_graph_d3$links, Nodes = celltype_conn_graph_d
 #we need to define the value for proper plotting
 celltype_conn_graph_d3$links$value=1
 
-# Plot
-sn <- sankeyNetwork(Links = celltype_conn_graph_d3$links, Nodes = celltype_conn_graph_d3$nodes, Source = "source",
-              Target = "target", NodeID = "name",Value = 'value', 
-              units = "", 
-              colourScale = JS("d3.scaleOrdinal(d3.schemeCategory20);"), fontSize = 20,
-              fontFamily = "sans", nodeWidth = 40, nodePadding = 4, margin = NULL,
-              height = NULL, width = NULL, iterations = 162, sinksRight = T)
+#we can reassign the group if we want to color by MUS vs MN instead of network group (optional)
+celltype_conn_graph_d3$nodes$group=c(c(rep('1',times=12)),c(rep('2',times=42)))
 
-sn
+# Plot
+sankeyNetwork(Links = celltype_conn_graph_d3$links, Nodes = celltype_conn_graph_d3$nodes, Source = "source",
+              Target = "target", NodeID = "name",Value = 'value', 
+              units = "", NodeGroup="group",
+              colourScale = JS("d3.scaleOrdinal(d3.schemeCategory10);"), fontSize = 10,
+              fontFamily = NULL, nodeWidth = 40, nodePadding = 4, margin = NULL,
+              height = 500, width = 600, iterations = 32, sinksRight = TRUE)
+
+
 #save it by first opening it 'as a webpage a'in a new window' and then save from browser as pdf = pdf() saving from R did not work
