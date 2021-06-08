@@ -16,16 +16,12 @@ library(dplyr)
 library(readr)
 
 #set working directory
-setwd('/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure8-desmo-MN/')
-#setwd("/working_directory/")
+setwd("/working_directory/")
 
 # catmaid connection, needs username, password AND token - weird!
-# can run this separate file using source function
-source("~/R/conn.R")
-# best practice is to store this info in your .Renviron file and R will
-# automatically read and store it on start-up - you don't have to deal with it,
-# and your code won't contain potentially compromising info
-
+# can run this in a separate file using source function  source("~/R/conn.R")
+catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
+setwd("/work_directory/")
 
 MN_names <- c("MNacicX","MNchae","vMN1-2","MNbow", "MNwave","MNbiramous", "MNhose", "MNcrab", "MNladder", "MNspider type1", "MNspider type2","MNring")
 annotations_MN <- c("celltype69","celltype165","vMN1-2","celltype67", "celltype68", "celltype63", "celltype66", "celltype65", "celltype151","celltype61","celltype62","celltype64")

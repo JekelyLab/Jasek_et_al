@@ -12,8 +12,8 @@ library(natverse)
 
 # catmaid connection, needs username, password AND token - weird!
 # can run this in a separate file using source function  source("~/R/conn.R")
-conn = catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
-setwd("/work_directory/")
+catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
+setwd("/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure1_figure_supplement2_Aciculae_chaetae/")
 
 #retrieve cells and smooth them with sigma 6000
 chaeta = nlapply(read.neurons.catmaid("^celltype_non_neuronal22$", pid=11, 
@@ -36,6 +36,25 @@ noER_circumchaetal<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal27$", 
 
 EC_circumchaetal<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal28$", pid=11, fetch.annotations = T), 
                               function(x) smooth_neuron(x, sigma=6000))	
+
+
+#retrieve segmentally grouped cells and noto/neuropodial cellssmooth them with sigma 6000
+head = nlapply(read.neurons.catmaid("^episphere$", pid=11, 
+                                      fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+segment_0 = nlapply(read.neurons.catmaid("^segment_0$", pid=11, 
+                                    fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+segment_1 = nlapply(read.neurons.catmaid("^segment_1$", pid=11, 
+                                    fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+segment_2 = nlapply(read.neurons.catmaid("^segment_2$", pid=11, 
+                                    fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+segment_3 = nlapply(read.neurons.catmaid("^segment_3$", pid=11, 
+                                    fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+pygidium = nlapply(read.neurons.catmaid("^pygidium$", pid=11, 
+                                         fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+neuropodium = nlapply(read.neurons.catmaid("^neuropodium$", pid=11, 
+                                        fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+notopodium = nlapply(read.neurons.catmaid("^notopodium$", pid=11, 
+                                        fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
 
 
 #load volumes based on catmaid id
@@ -335,3 +354,57 @@ rgl.bg(color='white')
          col=hcl.colors(length(bl_with_desm), 'Spectral'))
   rgl.snapshot("bl_with_desm.png")
 }
+
+
+
+#############################################
+#3d plotting of segments and noto/neuropodia
+#############################################
+
+#help to pick some colors
+library(RColorBrewer)
+display.brewer.all(colorblindFriendly = TRUE)
+blues=brewer.pal(9, 'Blues')
+
+# 3d plotting of cells
+nopen3d(); mfrow3d(1, 2)  #defines the two scenes
+#define the size of the rgl window, the view and zoom
+par3d(windowRect = c(20, 30, 1200, 800)); nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1))
+par3d(zoom=0.52)
+
+
+#plot meshes and background reference cells
+plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
+       col="#E2E2E2") 
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
+       col="#E2E2E2") 
+plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
+       col="grey60")
+plot3d(head, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
+       col="#FD8D3C")
+
+#move to next panel in rgl window
+next3d(clear=F)
+#define view
+nview3d("right", extramat=rotationMatrix(pi, 0, 1, 1))
+#define a sagittal clipping plane and re-zoom
+clipplanes3d(1, 0, 0.16, -75700)
+par3d(zoom=0.52)
+
+#plot 
+plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
+       col="#E2E2E2") 
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
+       col="#E2E2E2") 
+plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
+       col="grey60")
+plot3d(circumacicular, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
+       col="#FD8D3C")

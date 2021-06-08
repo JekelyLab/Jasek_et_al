@@ -11,7 +11,7 @@ require("graphics")
 
 # catmaid connection, needs username, password AND token - weird!
 # can run this in a separate file using source function  source("~/R/conn.R")
-conn = catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
+catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
 setwd("/work_directory/")
 
 #read some meshes and cells from catmaid for plotting an anatomical background
