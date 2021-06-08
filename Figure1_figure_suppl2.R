@@ -38,24 +38,16 @@ EC_circumchaetal<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal28$", pi
                               function(x) smooth_neuron(x, sigma=6000))	
 
 
-#retrieve segmentally grouped cells and noto/neuropodial cellssmooth them with sigma 6000
-head = nlapply(read.neurons.catmaid("^episphere$", pid=11, 
-                                      fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-segment_0 = nlapply(read.neurons.catmaid("^segment_0$", pid=11, 
-                                    fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-segment_1 = nlapply(read.neurons.catmaid("^segment_1$", pid=11, 
-                                    fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-segment_2 = nlapply(read.neurons.catmaid("^segment_2$", pid=11, 
-                                    fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-segment_3 = nlapply(read.neurons.catmaid("^segment_3$", pid=11, 
-                                    fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-pygidium = nlapply(read.neurons.catmaid("^pygidium$", pid=11, 
-                                         fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-neuropodium = nlapply(read.neurons.catmaid("^neuropodium$", pid=11, 
-                                        fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-notopodium = nlapply(read.neurons.catmaid("^notopodium$", pid=11, 
-                                        fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
 
+
+# exclude neurons with no soma or multiple soma tags - necessary for clustering
+sum = summary(segment_2)
+np = np_raw[rownames(sum[sum$nsoma==1,])]
+np[1:2]
+# print rows of summary table for neurons with no soma or multiple tags
+sum[sum$nsoma!=1,]
+two_soma_skids = as.numeric(rownames(sum[sum$nsoma==2,]))
+two_soma_skids
 
 #load volumes based on catmaid id
 outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"),
@@ -355,56 +347,3 @@ rgl.bg(color='white')
   rgl.snapshot("bl_with_desm.png")
 }
 
-
-
-#############################################
-#3d plotting of segments and noto/neuropodia
-#############################################
-
-#help to pick some colors
-library(RColorBrewer)
-display.brewer.all(colorblindFriendly = TRUE)
-blues=brewer.pal(9, 'Blues')
-
-# 3d plotting of cells
-nopen3d(); mfrow3d(1, 2)  #defines the two scenes
-#define the size of the rgl window, the view and zoom
-par3d(windowRect = c(20, 30, 1200, 800)); nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1))
-par3d(zoom=0.52)
-
-
-#plot meshes and background reference cells
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
-       col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-       col="#E2E2E2") 
-plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="grey60")
-plot3d(head, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="#FD8D3C")
-
-#move to next panel in rgl window
-next3d(clear=F)
-#define view
-nview3d("right", extramat=rotationMatrix(pi, 0, 1, 1))
-#define a sagittal clipping plane and re-zoom
-clipplanes3d(1, 0, 0.16, -75700)
-par3d(zoom=0.52)
-
-#plot 
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
-       col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-       col="#E2E2E2") 
-plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="grey60")
-plot3d(circumacicular, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="#FD8D3C")
