@@ -16,10 +16,9 @@ require("graphics")
 # load nat and all associated packages, incl catmaid
 
 # catmaid connection, needs username, password AND token - weird!
-# can run this separate file using source function
-source("~/R/conn.R")
-workdir <- "/your_working_directory/"
-setwd(workdir)
+# can run this in a separate file using source function  source("~/R/conn.R")
+conn = catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
+setwd("/work_directory/")
 
 catmaid_get_volumelist(conn = NULL, pid = 11)
 outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"),

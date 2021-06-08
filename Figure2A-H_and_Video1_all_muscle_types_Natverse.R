@@ -9,11 +9,10 @@ library(nat)
 options(nat.plotengine = 'rgl')
 require("graphics")
 
-# catmaid connection, needs username, password AND token
-# can run this separate file using source function
-source("~/R/conn.R")
-workdir <- "/your_working_directory/"
-setwd(workdir)
+# catmaid connection, needs username, password AND token - weird!
+# can run this in a separate file using source function  source("~/R/conn.R")
+conn = catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
+setwd("/work_directory/")
 
 #read some meshes and cells from catmaid for plotting an anatomical background
 outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"),

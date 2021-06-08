@@ -19,9 +19,10 @@ library(igraph)
 library(rjson)
 library(data.table)
 
-source("~/R/conn.R")
-setwd("/working_directory/")
-
+# catmaid connection, needs username, password AND token - weird!
+# can run this in a separate file using source function  source("~/R/conn.R")
+conn = catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
+setwd("/work_directory/")
 
 #load json file exported from gephi with the Leiden clusters colored
 #would also work on a json file from catmaid but that uses HEX color codes so the relevant lines in the code would need to be skipped

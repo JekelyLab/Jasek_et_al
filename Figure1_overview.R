@@ -1,4 +1,4 @@
-#R code to generate panels B and C in Figure2 in Jasek et al. 2021 Platynereis desmosomal connectome paper
+#R code to generate panels B and C in Figure1 in Jasek et al. 2021 Platynereis desmosomal connectome paper
 #Uses Natverse and accesses the data on catmaid
 #Gaspar Jekely March 2021
 
@@ -16,17 +16,16 @@ require("graphics")
 # load nat and all associated packages, incl catmaid
 
 # catmaid connection, needs username, password AND token - weird!
-# can run this separate file using source function
-source("~/R/conn.R")
-workdir <- "/work_directory/"
-setwd(workdir)
+# can run this in a separate file using source function  source("~/R/conn.R")
+conn = catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
+setwd("/work_directory/")
 
-catmaid_get_volumelist(conn = NULL, pid = 11)
+catmaid_get_volumelist(conn = conn, pid = 11)
 outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"),
-  invertFaces = T, conn = NULL, pid = 11)
+  invertFaces = T, conn = conn, pid = 11)
 
 yolk <- catmaid_get_volume(4, rval = c("mesh3d", "catmaidmesh", "raw"),
-  invertFaces = T, conn = NULL, pid = 11)
+  invertFaces = T, conn = conn, pid = 11)
 
 acicula = nlapply(read.neurons.catmaid("^acicula$", pid=11, 
                                       fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))

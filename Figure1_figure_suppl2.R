@@ -1,4 +1,4 @@
-#R code to generate figure panels for Figure 2 figure supplement 2 in Jasek et al. 2021 Platynereis desmosomal connectome paper
+#R code to generate figure panels for Figure 1 figure supplement 2 in Jasek et al. 2021 Platynereis desmosomal connectome paper
 #Uses Natverse and accesses the data on catmaid
 #Gaspar Jekely March 2021
 
@@ -9,15 +9,11 @@ options(timeout = 4000000)
 
 # load nat and all associated packages, incl catmaid
 library(natverse)
-#set working directory
-setwd('/work_dir/')
 
-# catmaid connection, needs username, password AND token
-# can run this separate file using source function
-source("~/R/conn.R")
-# best practice is to store this info in your .Renviron file and R will
-# automatically read and store it on start-up - you don't have to deal with it,
-# and your code won't contain potentially compromising info
+# catmaid connection, needs username, password AND token - weird!
+# can run this in a separate file using source function  source("~/R/conn.R")
+conn = catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
+setwd("/work_directory/")
 
 #retrieve cells and smooth them with sigma 6000
 chaeta = nlapply(read.neurons.catmaid("^celltype_non_neuronal22$", pid=11, 

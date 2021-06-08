@@ -1,4 +1,4 @@
-#R code to generate the graph in Figure1 panel I on the segmentaldistributionof muscles in Jasek et al. 2021 Platynereis desmosomal connectome paper
+#R code to generate the graph in Figure2 panel I on the segmentaldistributionof muscles in Jasek et al. 2021 Platynereis desmosomal connectome paper
 #Uses Natverse and accesses the data on catmaid
 #Gaspar Jekely March 2021
 
@@ -8,15 +8,10 @@ gc() #free up memrory and report the memory usage
 # load nat and all associated packages, incl catmaid
 library(natverse)
 
-#set working directory
-setwd('/workdir/')
-
-# catmaid connection, needs username, password AND token
-# can run this separate file using source function
-source("~/R/conn.R")
-# best practice is to store this info in your .Renviron file and R will
-# automatically read and store it on start-up - you don't have to deal with it,
-# and your code won't contain potentially compromising info
+# catmaid connection, needs username, password AND token - weird!
+# can run this in a separate file using source function  source("~/R/conn.R")
+conn = catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
+setwd("/work_directory/")
 
 #############################
 #define function to retrieve skids from a neuron list based on one to three annotations
