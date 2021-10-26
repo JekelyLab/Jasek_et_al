@@ -18,8 +18,7 @@ require("graphics")
 # catmaid connection, needs username, password AND token - weird!
 # can run this in a separate file using source function  source("~/R/conn.R")
 catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
-setwd("/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure1-overview/")
-source("~/R/conn.R")
+setwd("/working_dir/")
 
 catmaid_get_volumelist(conn = NULL, pid = 11)
 outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"),
@@ -103,23 +102,18 @@ rgl.snapshot("desmosomal_connectome_mus_desmosomes.png")
 
 #panel D of Figure 2
 clear3d()
-
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.04,
-       col="#E2E2E2") 
-
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.1,
-       col="#E2E2E2") 
-
-plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=3,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
-       col="black") 
-
 plot3d(desmosome_connectome_non_muscle, WithConnectors = F, WithNodes = F, soma=T, lwd=1,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
        col=hcl.colors(2000, palette='Blues')) 
-
+plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.04,
+       col="#E2E2E2") 
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.1,
+       col="#E2E2E2") 
+plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=3,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
+       col="black") 
 #make snapshot
 rgl.snapshot("desmosomal_connectome_mus_partners.png")
 
