@@ -12,7 +12,11 @@ require("graphics")
 # catmaid connection, needs username, password AND token - weird!
 # can run this in a separate file using source function  source("~/R/conn.R")
 catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
-setwd("/work_directory/")
+setwd("/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure2_Mus_types")
+
+source("~/R/conn.R")
+
+
 
 #read some meshes and cells from catmaid for plotting an anatomical background
 outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"),
@@ -48,12 +52,11 @@ celltypelist[[38]]$`1450345`
 annotation_celltypelist[[38]]$annotation
 
 left_skids = list(); counter=0
-for (df1 in annotation_celltypelist){    #iterate through the celltype list 
+for (df1 in annotation_celltypelist){    #iterate through the cell type list 
   counter=counter+1
   #add cells with left_side annotation to left_skids list
   left_skids[[counter]] <- df1[df1$annotation == "left_side",1]
 }
-
 
 
 ##########################################
@@ -194,7 +197,6 @@ for (j in c(37:89)){    #iterate through the celltype list
  rgl.snapshot(paste("MUScelltypes_all", j, ".png", sep = ""))
 }
 
-
 #light moves across the 3d scene
 for (i in c(12:-12)){
   clear3d(type = "lights")
@@ -222,3 +224,84 @@ for (i in 1:185){
 }
 
 
+
+
+###############################
+#plot individual muscle clusters
+###############################
+
+
+# 3d plotting of cells
+nopen3d(); mfrow3d(1, 2)  #defines the two scenes
+#define the size of the rgl window, the view and zoom
+par3d(windowRect = c(0, 0, 600, 800)); nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1)); par3d(zoom=0.5)
+
+#define the size of the rgl window
+par3d(windowRect = c(20, 30, 1200, 800)) 
+
+#define view and zoom
+nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1)); par3d(zoom=0.5)
+
+#plot meshes and background reference cells
+plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
+       col="#E2E2E2") 
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
+       col="#E2E2E2") 
+plot3d(bounding_dots, WithConnectors = F, WithNodes = F, soma=F, lwd=1, rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1, col="white") 
+plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
+       col="grey50")
+
+#move to next panel in rgl window
+next3d(clear=F)
+#define view
+nview3d("right", extramat=rotationMatrix(pi, 0, 1, 1))
+#define a sagittal clipping plane and re-zoom
+clipplanes3d(1, 0, 0.16, -75700)
+par3d(zoom=0.55)
+
+#plot meshes and background reference cells to the second panel
+plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
+       col="#E2E2E2") 
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
+       col="#E2E2E2") 
+plot3d(bounding_dots, WithConnectors = F, WithNodes = F, soma=F, lwd=1, rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1, col="white") 
+plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
+       col="grey50")
+#define the lighting
+clear3d(type = "lights"); 
+rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rgl.light(-60, -30, specular = "gray5")
+#set background color
+bg3d("gray100")
+next3d(clear=F)
+rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rgl.light(-60, -30, specular = "gray5")
+
+
+counter = 0
+#plot only gut cells
+for (j in c(79:89)){    #iterate through the celltype list 
+  counter = counter+1; print(j)
+   #assign color
+  color= color_head
+  cells=celltypelist[[j]]
+  #smooth with sigma 6000
+  cells_smoothed=nlapply(cells, function(x) smooth_neuron(x, sigma=6000))
+  #plot cells
+  plot3d(cells_smoothed, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
+  next3d(clear=F)
+  skids_raw=left_skids[j]
+  #retrieve from catmaid all left cells of a type
+  for (skids in skids_raw){
+    if(skids_raw=="integer(0)") break; #some muscle celltypes are in the middle of the body so do not have righ or left members
+    cells = nlapply(read.neurons.catmaid(skids, pid=11, 
+                                         fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+    plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
+  }
+}
+
+rgl.snapshot(paste("MUScelltypes_gut_pharynx_head", i, ".png", sep = ""))
