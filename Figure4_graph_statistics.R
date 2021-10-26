@@ -2,9 +2,19 @@
 #quantification of the modularity of the desmosomal connectome and random scale-free and Erdos graphs of similar statistics
 #Gaspar Jekely 2021 March
 
+
+# Load packages
+library(igraph)
+#https://rdrr.io/cran/igraph/man/
+library(leiden)
+#https://github.com/TomKellyGenetics/leiden
+
+library(reticulate)
+
 #set working directory
 
-setwd('/working_directory/')
+setwd('/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure4-network-statistics/')
+
 
 #read csv exported from gephi as table
 #this is also in the github page as desmosomal-connectome.csv
@@ -20,13 +30,7 @@ desmo_conn_graph <- graph_from_adjacency_matrix(desmo_conn_matrix, mode = "undir
 #graph analysis
 ##############################
 
-# Load packages
-library(igraph)
-#https://rdrr.io/cran/igraph/man/
-library(leiden)
-#https://github.com/TomKellyGenetics/leiden
-
-#check connected componenets
+#check connected components
 cl <- components(desmo_conn_graph)
 components(desmo_conn_graph)
 
@@ -66,46 +70,52 @@ partition <- leiden(desmo_conn_graph_largest, partition_type = "RBConfigurationV
 max(partition)
 #calculate modularity
 
-system.time( modularity(desmo_conn_graph,leiden(desmo_conn_graph, resolution_parameter = 0.95)))
+system.time(modularity(desmo_conn_graph,leiden(desmo_conn_graph, resolution_parameter = 0.95)))
 system.time(modularity(cluster_louvain(desmo_conn_graph)))
 #will use louvain clustering to calculate modularity
 
-#sample 1000 Erdos graphs with same number of nodes and edges as the desmosomal graph and return their modularity score in a list
-modularity_erdos <- lapply(1:1000, function(x) 
-  x=modularity(cluster_louvain(erdos.renyi.game(length(V(desmo_conn_graph)), 
-  length(E(desmo_conn_graph)),
-  type = "gnm",directed = FALSE,loops = FALSE))))
 
-#do the same but assing weights from the desmo graph
-modularity_erdos_weighted <- lapply(1:1000, function(x) {
+#define a modularity_leiden function
+modularity_leiden <- function(graph) {
+  modularity(graph,leiden(graph, resolution_parameter = 0.95))
+}
+
+
+#sample 1000 Erdos graphs with same number of nodes and edges as the desmosomal graph and return their modularity score in a list
+modularity_erdos <-lapply(1:10, function(x) 
+  modularity_leiden(erdos.renyi.game(length(V(desmo_conn_graph)), length(E(desmo_conn_graph)),type = "gnm",directed = FALSE,loops = FALSE))
+)
+
+#do the same but assign weights from the desmo graph
+modularity_erdos_weighted <- lapply(1:10, function(x) {
   erdos_graph <- erdos.renyi.game(length(V(desmo_conn_graph)), 
                                   length(E(desmo_conn_graph)),
                                   type = "gnm",directed = FALSE,loops = FALSE)
   E(erdos_graph)$weight <- E(desmo_conn_graph)$weight
-  x=modularity(cluster_louvain(erdos_graph))}
+  x=modularity_leiden(erdos_graph)}
   )
 
 #calculate the global transitivity (clustering coefficient) of 1000 Erdos graphs
-transitivity_erdos <- lapply(1:1000, function(x) 
+transitivity_erdos <- lapply(1:10, function(x) 
   x=transitivity(erdos.renyi.game(length(V(desmo_conn_graph)), 
   length(E(desmo_conn_graph)),
   type = "gnm",directed = FALSE,loops = FALSE)
 ))
 
 #sample subgraphs from the weighted desmosomal graph
-modularity_desmo_subgraphs <- lapply(1:1000, function(x)
+modularity_desmo_subgraphs <- lapply(1:10, function(x)
 {vids <- sample(V(desmo_conn_graph),length(V(desmo_conn_graph))-100)
-x <- modularity(cluster_louvain(induced_subgraph(desmo_conn_graph, vids, impl = "auto")))}
+x <- modularity_leiden(induced_subgraph(desmo_conn_graph, vids, impl = "auto"))}
 )
 
 #sample subgraphs from the binarised desmosomal graph
-modularity_desmo_bi_subgraphs <- lapply(1:1000, function(x)
+modularity_desmo_bi_subgraphs <- lapply(1:10, function(x)
 {vids <- sample(V(desmo_conn_graph_bi),length(V(desmo_conn_graph))-100)
-x <- modularity(cluster_louvain(induced_subgraph(desmo_conn_graph_bi, vids, impl = "auto")))}
+x <- modularity_leiden(induced_subgraph(desmo_conn_graph_bi, vids, impl = "auto"))}
 )
 
 #calculate the global transitivity (clustering coefficient) of 1000 subsamples binarised desmosomal graphs 
-transitivity_desmo <- lapply(1:1000, function(x) 
+transitivity_desmo <- lapply(1:10, function(x) 
 {vids <- sample(V(desmo_conn_graph_bi),length(V(desmo_conn_graph))-100)
 x <- transitivity(induced_subgraph(desmo_conn_graph_bi, vids, impl = "auto"))}
 )
@@ -125,8 +135,8 @@ scale_free_graph <- sample_fitness_pl(
 )
 
 #sample 1000 scale-free graphs with same number of edges and nodes as the desmosomal graph and return their modularity score in a list
-modularity_sf <- lapply(1:1000, function(x) 
-  x=modularity(cluster_louvain(sample_fitness_pl(
+modularity_sf <- lapply(1:10, function(x) 
+  x=modularity_leiden(sample_fitness_pl(
     length(V(desmo_conn_graph)),
     length(E(desmo_conn_graph)),
     4,
@@ -134,17 +144,17 @@ modularity_sf <- lapply(1:1000, function(x)
     loops = FALSE,
     multiple = FALSE,
     finite.size.correction = TRUE
-))))
+)))
 
 #calculate the global transitivity (clustering coefficient) of 1000 scale free graphs
-transitivity_sf <- lapply(1:1000, function(x) x=transitivity(sample_fitness_pl(
+transitivity_sf <- lapply(1:10, function(x) x=transitivity(sample_fitness_pl(
   length(V(desmo_conn_graph)),length(E(desmo_conn_graph)),
   4,exponent.in = -1, loops = FALSE,multiple = FALSE,
   finite.size.correction = TRUE
 )))
 
-#do the same but assing weights from the desmo graph
-modularity_sf_weight <- lapply(1:1000, function(x) {
+#do the same but assign weights from the desmo graph
+modularity_sf_weight <- lapply(1:10, function(x) {
   sf_graph <- sample_fitness_pl(
     length(V(desmo_conn_graph)),
     length(E(desmo_conn_graph)),
@@ -155,13 +165,13 @@ modularity_sf_weight <- lapply(1:1000, function(x) {
     finite.size.correction = TRUE
   )
   E(sf_graph)$weight <- E(desmo_conn_graph)$weight
-  x=modularity(cluster_louvain(sf_graph))
+  x=modularity_leiden(sf_graph)
 }
 )
 
 #calculate the length of maximal cliques of 1000 preferential attachment graphs
 #run with min=3, was also run with min=4 which returned 0 clique
-max_cliques_sf <- lapply(1:1000, function(x) x=length(max_cliques(sample_fitness_pl(
+max_cliques_sf <- lapply(1:10, function(x) x=length(max_cliques(sample_fitness_pl(
   length(V(desmo_conn_graph)),length(E(desmo_conn_graph)),
   4,exponent.in = -1, loops = FALSE,multiple = FALSE,
   finite.size.correction = TRUE
@@ -185,7 +195,7 @@ graph_pa_age <- sample_pa_age(
   zero.deg.appeal = 1,zero.age.appeal = 0,
   deg.coef = 1,age.coef = 1,time.window = NULL
 )
-modularity(cluster_louvain(graph_pa_age))
+modularity_leiden(graph_pa_age)
 transitivity(graph_pa_age)
 max(degree(graph_pa_age))
 gsize(graph_pa_age)
@@ -193,8 +203,8 @@ gsize(desmo_conn_graph)
 length(V(desmo_conn_graph))
 
 #sample 1000 preferential attachment graphs with same number of nodes and very similar number of edges as the desmosomal graph and return their modularity score in a list
-modularity_pa <- lapply(1:1000, function(x) 
-  x=modularity(cluster_louvain(graph_pa_age <- sample_pa_age(
+modularity_pa <- lapply(1:10, function(x) 
+  x=modularity_leiden(graph_pa_age <- sample_pa_age(
     length(V(desmo_conn_graph)),
     pa.exp=1,aging.exp=-2,
     m = 2, aging.bin = 300,
@@ -202,11 +212,11 @@ modularity_pa <- lapply(1:1000, function(x)
     out.pref = FALSE,directed = F,
     zero.deg.appeal = 1,zero.age.appeal = 0,
     deg.coef = 1,age.coef = 1,time.window = NULL
-  )))
+  ))
 )
 
 #calculate the global transitivity (clustering coefficient) of 1000 preferential attachment graphs
-transitivity_pa <- lapply(1:1000, function(x) x=transitivity(graph_pa_age <- sample_pa_age(
+transitivity_pa <- lapply(1:10, function(x) x=transitivity(graph_pa_age <- sample_pa_age(
   length(V(desmo_conn_graph)),
   pa.exp=1,aging.exp=-2,
   m = 2, aging.bin = 300,
@@ -218,7 +228,7 @@ transitivity_pa <- lapply(1:1000, function(x) x=transitivity(graph_pa_age <- sam
 
 #calculate the length of maximal cliques of 1000 preferential attachment graphs
 #run with min=3, was also run with min=4 which returns no cliques
-max_cliques_pa <- lapply(1:1000, function(x) x=length(max_cliques(sample_pa_age(
+max_cliques_pa <- lapply(1:10, function(x) x=length(max_cliques(sample_pa_age(
   length(V(desmo_conn_graph)),
   pa.exp=1,aging.exp=-2,
   m = 2, aging.bin = 300,
@@ -267,7 +277,7 @@ median(as.numeric(modularity_desmo_subgraphs))
 median(as.numeric(modularity_sf))
 median(as.numeric(modularity_sf_weight))
 median(as.numeric(modularity_pa))
-modularity(cluster_louvain(desmo_conn_graph))
+modularity_leiden(desmo_conn_graph)
 
 #check package versions
 packageVersion("igraph") 
