@@ -70,6 +70,10 @@ system.time(modularity(desmo_conn_graph,leiden(desmo_conn_graph, resolution_para
 system.time(modularity(cluster_louvain(desmo_conn_graph)))
 #will use louvain clustering to calculate modularity - for revision recalculated with Leiden
 
+#define a modularity_leiden function
+modularity_leiden <- function(graph) {
+  modularity(graph,leiden(graph, resolution_parameter = 0.95))
+}
 
 #######################################
 #generate and analyse Erdos-Renyi graphs
@@ -91,8 +95,8 @@ erdos_graphs_1000_wg <- lapply(1:10, function(x) {
 )
 
 #calculate modularity scores
-modularity_erdos <- lapply(erdos_graphs_1000, function(x) modularity(cluster_louvain(x)))
-modularity_erdos_wg <- lapply(erdos_graphs_1000_wg, function(x) modularity(cluster_louvain(x)))
+modularity_erdos <- lapply(erdos_graphs_1000, function(x) modularity_leiden(x))
+modularity_erdos_wg <- lapply(erdos_graphs_1000_wg, function(x) modularity_leiden(x))
 
 #calculate mean distance
 meandist_erdos <- lapply(erdos_graphs_1000, function(x) mean_distance(x))
@@ -135,8 +139,8 @@ x <- induced_subgraph(desmo_conn_graph_bi_largest, vids, impl = "auto")}
 )
 
 #calculate modularity scores
-modularity_desmo <- lapply(desmo_subgraphs_1000, function(x) modularity(cluster_louvain(x)))
-modularity_desmo_bi <- lapply(desmo_bi_subgraphs_1000, function(x) modularity(cluster_louvain(x)))
+modularity_desmo <- lapply(desmo_subgraphs_1000, function(x) modularity_leiden(x))
+modularity_desmo_bi <- lapply(desmo_bi_subgraphs_1000, function(x) modularity_leiden(x))
 
 #calculate mean distance (same for weighted and unweighted so only for weighted)
 meandist_desmo <- lapply(desmo_subgraphs_1000, function(x) mean_distance(x))
@@ -221,8 +225,8 @@ transitivity_sf <- lapply(sf_graphs_1000, function(x) transitivity(x))
 mean(as.numeric(transitivity_sf))
 
 #calculate modularity score
-modularity_sf <- lapply(sf_graphs_1000, function(x) modularity(cluster_louvain(x)))
-modularity_sf_wg <- lapply(sf_graphs_wg_1000, function(x) modularity(cluster_louvain(x)))
+modularity_sf <- lapply(sf_graphs_1000, function(x) modularity_leiden(x))
+modularity_sf_wg <- lapply(sf_graphs_wg_1000, function(x) modularity_leiden(x))
 
 #calculate eigen vector centrality 
 eigen_centr_sf <- lapply(sf_graphs_1000, function(x) eigen_centrality(x, directed = FALSE, weights = NA, scale = TRUE))
@@ -272,8 +276,8 @@ max(as.numeric(max_cliques_pa))
 transitivity_pa <- lapply(pa_graphs_1000, function(x) transitivity(x))
 
 #calculate modularity score
-modularity_pa <- lapply(pa_graphs_1000, function(x) modularity(cluster_louvain(x)))
-modularity_pa_wg <- lapply(pa_graphs_1000_wg, function(x) modularity(cluster_louvain(x)))
+modularity_pa <- lapply(pa_graphs_1000, function(x) modularity_leiden(x))
+modularity_pa_wg <- lapply(pa_graphs_1000_wg, function(x) modularity_leiden(x))
 mean(as.numeric(modularity_pa))
 
 #calculate eigen vector centrality 
@@ -336,7 +340,7 @@ median(as.numeric(modularity_sf))
 median(as.numeric(modularity_sf_wg))
 median(as.numeric(modularity_pa))
 median(as.numeric(modularity_pa_wg))
-modularity(cluster_louvain(desmo_conn_graph))
+modularity_leiden(desmo_conn_graph)
 
 #check package versions
 packageVersion("igraph") 
