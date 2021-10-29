@@ -99,13 +99,13 @@ modularity_leiden <- function(graph) {
 #generate and analyse Erdos-Renyi graphs
 
 #sample 1000 Erdos graphs with same number of nodes and edges as the desmosomal graph 
-erdos_graphs_1000 <- lapply(1:10, function(x) 
+erdos_graphs_1000 <- lapply(1:1000, function(x) 
   x=erdos.renyi.game(length(V(desmo_conn_graph_largest)), 
                      length(E(desmo_conn_graph_largest)),
                      type = "gnm",directed = FALSE,loops = FALSE))
 
 #do the same but assing weights from the desmo graph
-erdos_graphs_1000_wg <- lapply(1:10, function(x) {
+erdos_graphs_1000_wg <- lapply(1:1000, function(x) {
   erdos_graph <- erdos.renyi.game(length(V(desmo_conn_graph_largest)), 
                                   length(E(desmo_conn_graph_largest)),
                                   type = "gnm",directed = FALSE,loops = FALSE)
@@ -147,13 +147,13 @@ eigen_centr_erdos <- lapply(erdos_graphs_1000, function(x) eigen_centrality(x, d
 #subsample and quantify the desmosomal graph
 
 #sample subgraphs from the weighted desmosomal graph
-desmo_subgraphs_1000 <- lapply(1:10, function(x)
+desmo_subgraphs_1000 <- lapply(1:1000, function(x)
 {vids <- sample(V(desmo_conn_graph_largest),length(V(desmo_conn_graph_largest))-100)
 x <- induced_subgraph(desmo_conn_graph_largest, vids, impl = "auto")}
 )
 
 #sample subgraphs from the binarised desmosomal graph
-desmo_bi_subgraphs_1000 <- lapply(1:10, function(x)
+desmo_bi_subgraphs_1000 <- lapply(1:1000, function(x)
 {vids <- sample(V(desmo_conn_graph_bi_largest),length(V(desmo_conn_graph_largest))-100)
 x <- induced_subgraph(desmo_conn_graph_bi_largest, vids, impl = "auto")}
 )
@@ -197,13 +197,13 @@ eigen_centr_desmo <- lapply(desmo_subgraphs_1000, function(x) eigen_centrality(x
 #subsample and quantify the connectome graph
 
 #sample subgraphs from the weighted connectome graph
-neuro_conn_subgraphs_1000 <- lapply(1:10, function(x)
+neuro_conn_subgraphs_1000 <- lapply(1:1000, function(x)
 {vids <- sample(V(neuro_conn_graph_largest),length(V(neuro_conn_graph_largest))-100)
 x <- induced_subgraph(neuro_conn_graph_largest, vids, impl = "auto")}
 )
 
 #sample subgraphs from the binarised desmosomal graph
-neuro_conn_bi_subgraphs_1000 <- lapply(1:10, function(x)
+neuro_conn_bi_subgraphs_1000 <- lapply(1:1000, function(x)
 {vids <- sample(V(neuro_conn_graph_bi_largest),length(V(neuro_conn_graph_largest))-100)
 x <- induced_subgraph(neuro_conn_graph_bi_largest, vids, impl = "auto")}
 )
@@ -249,7 +249,7 @@ eigen_centr_neuro_conn <- lapply(neuro_conn_subgraphs_1000, function(x) eigen_ce
 #generate and quantify scale-free graphs
 
 #sample 1000 scale-free graphs with same number of edges and nodes as the desmosomal graph and return their modularity score in a list
-sf_graphs_1000 <- lapply(1:10, function(x) 
+sf_graphs_1000 <- lapply(1:1000, function(x) 
   x=sample_fitness_pl(
     length(V(desmo_conn_graph_largest)),
     length(E(desmo_conn_graph_largest)),
@@ -261,7 +261,7 @@ sf_graphs_1000 <- lapply(1:10, function(x)
   ))
 
 #do the same but assing weights from the desmo graph
-sf_graphs_wg_1000 <- lapply(1:10, function(x) {
+sf_graphs_wg_1000 <- lapply(1:1000, function(x) {
   sf_graph <- sample_fitness_pl(
     length(V(desmo_conn_graph_largest)),
     length(E(desmo_conn_graph_largest)),
@@ -308,7 +308,7 @@ eigen_centr_sf <- lapply(sf_graphs_1000, function(x) eigen_centrality(x, directe
 #graphs with preferential attachment
 
 #sample 1000 preferential attachment graphs with same number of nodes and very similar number of edges as the desmosomal graph
-pa_graphs_1000 <- lapply(1:10, function(x) x=(sample_pa_age(
+pa_graphs_1000 <- lapply(1:1000, function(x) x=(sample_pa_age(
   length(V(desmo_conn_graph)),  pa.exp=1,aging.exp=-2,
   m = 2, aging.bin = 300,  out.dist = NULL,out.seq = NULL,
   out.pref = FALSE,directed = F,  zero.deg.appeal = 1,zero.age.appeal = 0,
@@ -316,7 +316,7 @@ pa_graphs_1000 <- lapply(1:10, function(x) x=(sample_pa_age(
 ))
 
 #do the same and assign weights from a random sample of the desmosomal graph
-pa_graphs_1000_wg <- lapply(1:10, function(x) {pa_graph <- sample_pa_age(
+pa_graphs_1000_wg <- lapply(1:1000, function(x) {pa_graph <- sample_pa_age(
   length(V(desmo_conn_graph)),  pa.exp=1,aging.exp=-2,
   m = 2, aging.bin = 300,  out.dist = NULL,out.seq = NULL,
   out.pref = FALSE,directed = F,  zero.deg.appeal = 1,zero.age.appeal = 0,
@@ -643,9 +643,9 @@ pdf(file='Meandistance_values.pdf', width=8, height = 8)
   hist_meandist_pa <- hist(as.numeric(meandist_pa))
   hist_meandist_erdos <- hist(as.numeric(meandist_erdos))
   par(mar=c(6,6,2,2)) 
-  plot(hist_meandist_desmo,add=F,xlim=c(5,10),ylim=c(0,300),
+  plot(hist_meandist_desmo,add=F,xlim=c(5,10),ylim=c(0,5),
        main=NA, cex.axis=2, xlab='', ylab='')
-  plot(hist_meandist_neuro_conn,add=T, col = hcl.colors(1,palette = 'Oranges',alpha=0.4),border = hcl.colors(1,palette = 'Blues',alpha=0.4))
+  plot(hist_meandist_neuro_conn,add=T, col = hcl.colors(1,palette = 'Oranges',alpha=0.4),border = hcl.colors(1,palette = 'Grays',alpha=0.4))
   plot(hist_meandist_sf,add=T, col = hcl.colors(1,palette = 'Blues',alpha=0.4),border = hcl.colors(1,palette = 'Blues',alpha=0.4))
   plot(hist_meandist_pa,add=T,col = hcl.colors(1,palette = 'Reds',alpha=0.5))
   plot(hist_meandist_erdos,add=T, border = hcl.colors(1,palette = 'Grays',alpha=0.5) )
@@ -665,7 +665,7 @@ pdf(file='diameter_values.pdf', width=8, height = 8)
   hist_diameter_pa <- hist(as.numeric(diameter_pa))
   hist_diameter_erdos <- hist(as.numeric(diameter_erdos))
   par(mar=c(6,6,2,2)) 
-  plot(hist_diameter_desmo,add=F,xlim=c(0,90),ylim=c(0,500),
+  plot(hist_diameter_desmo,add=F,xlim=c(0,100),ylim=c(0,500),
        main=NA, cex.axis=2, xlab='', ylab='')
   plot(hist_diameter_neuro_conn,add=T, col = hcl.colors(1,palette = 'Oranges',alpha=0.4),border = hcl.colors(1,palette = 'Blues',alpha=0.4))
   plot(hist_diameter_sf,add=T, col = hcl.colors(1,palette = 'Blues',alpha=0.4),border = hcl.colors(1,palette = 'Blues',alpha=0.4))
