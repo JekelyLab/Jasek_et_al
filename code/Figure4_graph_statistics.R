@@ -2,26 +2,31 @@
 #code for Figure4 of the Jasek et al 2021 desmosomal connectome paper
 #Gaspar Jekely 2021 March
 
-#set working directory
-
-#setwd('/workdir/')
-
+# Load packages
+library(igraph)
+#https://rdrr.io/cran/igraph/man/
+library(leiden)
+#https://github.com/TomKellyGenetics/leiden
+library(reticulate)
+wdir <- getwd()
 start <- Sys.time()
 
-setwd('/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure4-network-statistics/')
 
 #read csv exported from gephi as table
 #this is also in the github page as desmosomal-connectome.csv
-desmo_conn_table <- read.csv('desmosomal-connectome.csv', sep = ";", header = T) 
+desmo_conn_table <- read.csv('data/adjacency_matrix_desmosomal_connectome_CATMAID.csv', sep = ",", header = T) 
+#desmo_conn_table <- read.csv('data/desmosomal-connectome.csv', sep = ";", header = T) 
 
-dim(desmo_conn_table[2:2525])
-desmo_conn_matrix <- as.matrix(desmo_conn_table[2:2525],nrow=nrow(desmo_conn_table),ncol=ncol(desmo_conn_table)-1)
+dim(desmo_conn_table)
+desmo_conn_table[1:3,1:3]
+desmo_conn_matrix <- as.matrix(desmo_conn_table[2:2534],nrow=nrow(desmo_conn_table),ncol=ncol(desmo_conn_table)-1)
+desmo_conn_matrix[1:3,1:3]
 desmo_conn_graph <- graph_from_adjacency_matrix(desmo_conn_matrix, mode = "undirected", weighted = T,
                                                 diag = TRUE, add.colnames = NULL, add.rownames = NA)
 
-neuro_conn_table <- read.csv('adjacency_matrix_catmaid_neuronal_connectome.csv', sep = ",", header = T) 
+neuro_conn_table <- read.csv('data/adjacency_matrix_catmaid_neuronal_connectome.csv', sep = ",", header = T) 
 dim(neuro_conn_table)
-neuro_conn_matrix <- as.matrix(neuro_conn_table[2:2728],nrow=nrow(neuro_conn_table),ncol=ncol(neuro_conn_table)-1)
+neuro_conn_matrix <- as.matrix(neuro_conn_table[2:2729],nrow=nrow(neuro_conn_table),ncol=ncol(neuro_conn_table)-1)
 neuro_conn_graph <- graph_from_adjacency_matrix(neuro_conn_matrix, mode = "undirected", weighted = T,
                                                 diag = TRUE, add.colnames = NULL, add.rownames = NA)
 
@@ -30,11 +35,6 @@ neuro_conn_graph <- graph_from_adjacency_matrix(neuro_conn_matrix, mode = "undir
 #graph analysis
 ##############################
 
-# Load packages
-library(igraph)
-#https://rdrr.io/cran/igraph/man/
-library(leiden)
-#https://github.com/TomKellyGenetics/leiden
 
 #check connected componenets
 cl <- components(desmo_conn_graph)
