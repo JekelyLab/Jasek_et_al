@@ -405,12 +405,15 @@ pdf(file='images/modularity_weighted.pdf', width=8, height = 8)
   hist_pa_weighted <- hist(as.numeric(modularity_pa_wg),
                           plot=FALSE)
   par(mar=c(6,6,2,2)) 
-  plot(hist_desmo_subgraphs,add=F,xlim=c(0.5,0.9),ylim=c(0,350),ylab = '',xlab='', cex.axis=2,main=NA)
+  plot(hist_desmo_subgraphs,add=F,xlim=c(0.5,0.9),ylim=c(0,350),ylab = '',xlab='', cex.axis=2,main=NA,
+       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.7))
   plot(hist_neuro_conn_subgraphs,add=T, 
-       col = alpha("#ffc45d", alpha=0.8), border = "grey50")
-  plot(hist_erdos_weighted,add=T)
+       col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
+  plot(hist_erdos_weighted,add=T,
+       col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.7))
   plot(hist_sf_weighted,add=T, col = hcl.colors(1,palette = 'Blues',alpha=0.4), border = hcl.colors(1,palette = 'Blues',alpha=0.4))
-  plot(hist_pa_weighted,add=T, col = hcl.colors(1,palette = 'Reds',alpha=0.4), border = hcl.colors(1,palette = 'Reds',alpha=0.5))
+  plot(hist_pa_weighted,add=T, 
+       col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
   title(xlab='modularity, weighted', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
 dev.off()
@@ -428,17 +431,20 @@ pdf(file='images/modularity_bi.pdf', width=8, height = 8)
   hist_pa <- hist(as.numeric(modularity_pa),
                   plot=FALSE)
   par(mar=c(6,6,2,2)) 
-  plot(hist_desmo_bi_subgraphs,add=F,xlim=c(0.5,0.9),ylim=c(0,400),ylab = '',xlab='', cex.axis=2,main=NA)
+  plot(hist_desmo_bi_subgraphs,add=F,xlim=c(0.5,0.9),ylim=c(0,400),ylab = '',xlab='', cex.axis=2,main=NA,
+       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.7))
   plot(hist_neuro_conn_bi_subgraphs,add=T,
-       col = alpha("#ffc45d", alpha=0.8), border = "grey50")
-  plot(hist_erdos,add=T)
+       col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
+  plot(hist_erdos,add=T,
+       col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.7))
   plot(hist_sf,add=T, col = hcl.colors(1,palette = 'Blues',alpha=0.4), border = hcl.colors(1,palette = 'Blues',alpha=0.4))
-  plot(hist_pa,add=T,col = hcl.colors(1,palette = 'Reds',alpha=0.5), border = hcl.colors(1,palette = 'Reds',alpha=0.5))
+  plot(hist_pa,add=T,
+       col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
   title(xlab='modularity, unweighted', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
 dev.off()
 
-
+{
 #calculate median modularity values
 median(as.numeric(modularity_erdos))
 median(as.numeric(modularity_erdos_wg))
@@ -455,7 +461,7 @@ modularity_leiden(desmo_conn_graph)
 #check package versions
 packageVersion("igraph") 
 packageVersion("leiden") 
-
+}
 
 #############################################
 #plot histograms of transitivity scores
@@ -473,23 +479,26 @@ pdf(file='images/transitivity.pdf', width=8, height = 8)
   hist_pa_transitivity <- hist(as.numeric(transitivity_pa),
                                plot=FALSE)
   par(mar=c(6,6,2,2)) 
-  plot(hist_desmo_transitivity,add=F,xlim=c(0,0.11),ylim=c(0,400),ylab = '',xlab='', cex.axis=2, main=NA)
+  plot(hist_desmo_transitivity,add=F,xlim=c(0,0.11),ylim=c(0,400),ylab = '',xlab='', cex.axis=2, main=NA,
+       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.7))
   plot(hist_neuro_conn_transitivity,add=T, 
-       col = alpha("#ffc45d", alpha=0.8), border = "grey50")
-  plot(hist_erdos_transitivity,add=T)
+       col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
+  plot(hist_erdos_transitivity,add=T,
+       col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.2))
   plot(hist_sf_transitivity,add=T, 
        col = alpha("#000000", 0.8))
-  plot(hist_pa_transitivity,add=T, col = hcl.colors(1,palette = 'Reds',alpha=0.4), border = hcl.colors(1,palette = 'Reds',alpha=0.4))
+  plot(hist_pa_transitivity,add=T, 
+       col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
   title(xlab='global transitivity', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
 dev.off()
-
+{
 median(as.numeric(transitivity_desmo))
 median(as.numeric(transitivity_neuro_conn))
 median(as.numeric(transitivity_erdos))
 median(as.numeric(transitivity_sf))
 median(as.numeric(transitivity_pa))
-
+}
 
 ################################################
 #plot histograms of max clique scores
@@ -511,23 +520,26 @@ pdf(file='images/3cliques.pdf', width=8, height = 8)
   hist_pa_cliques3 <- hist(as.numeric(max_cliques_pa),
                            plot=FALSE)
   par(mar=c(6,6,2,2)) 
-  plot(hist_desmo_cliques3,add=F, xlim=c(0,1800),ylim=c(0,400),ylab = '',xlab='',
-       cex.axis=2, main=NA)
+  plot(hist_desmo_cliques3,add=F, xlim=c(1,1800),ylim=c(0,300),ylab = '',xlab='',
+       cex.axis=2, main=NA,
+       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.4))
   plot(hist_neuro_conn_cliques3,add=T, 
-       col = alpha("#ffc45d", alpha=0.8), border = "grey50")
-  plot(hist_erdos_cliques3,add=T, border = hcl.colors(1,palette = 'Grays',alpha=0.3))
+       col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
+  plot(hist_erdos_cliques3,add=T, 
+       col = alpha("#D55E00", 0.8), border = alpha("grey20", 0))
   plot(hist_sf_cliques3,add=T,
        col = alpha("#000000", 0.8))
   #plot(hist_desmo_cliques4,add=T,border='red')
-  plot(hist_pa_cliques3,add=T, col = hcl.colors(1,palette = 'Reds',alpha=0.4), border = hcl.colors(1,palette = 'Reds',alpha=1))
+  plot(hist_pa_cliques3,add=T, 
+       col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
   title(xlab='# of 3-cliques', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
 dev.off()
 
+{
 #calculate node weights
 weights_desmo <- strength(desmo_conn_graph_largest, vids = V(desmo_conn_graph_largest),
                           loops = TRUE)
-
 #other network parameters
 mean(weights_desmo)
 diameter(desmo_conn_graph_largest)
@@ -548,7 +560,7 @@ V(desmo_conn_graph)[223]
 length(largest_cliques(desmo_conn_graph))
 clique_num(desmo_conn_graph)
 length(max_cliques(desmo_conn_graph, min=3))
-
+}
 #########################################
 #plot degree and weight distributions
 
@@ -564,19 +576,20 @@ pdf(file='images/Degree_distr.pdf', width=8, height = 8)
                             breaks=c(0:150), plot=FALSE)
   par(mar=c(6,6,2,2)) 
   plot(hist_degree_desmo$density,xlim=c(1,40),ylim=c(0,0.35),
-       main=NA, cex.axis=2, xlab='', ylab='',col='grey30',lwd=5, log="x")
+       main=NA, cex.axis=2, xlab='', ylab='',lwd=5, log="x",
+       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.7))
   lines(hist_degree_neuro_conn$density, 
-        col = 'orange',lty=6,lwd=8)
+        col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7),lty=6,lwd=8)
   lines(hist_degree_sf$density, 
         col = alpha("#000000", 0.8),lty=1,lwd=8)
   lines(hist_degree_pa$density,
-        col = 'red', lwd=5)
+        col = 'grey40', lwd=5)
   lines(hist_degree_erdos$density, 
-        col = hcl.colors(1,palette = 'Grays',alpha=0.5) ,lty=6,lwd=7)
+        col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.7),lty=6,lwd=7)
   title(xlab='degree', ylab = 'frequency', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
   legend("topright", inset=.02, title="",
          c("desmo", "Neuro", "sf", "pa", "Erdös"), lwd=c(12,5,6,7), cex=2, lty=c(3,6,1,5,6),
-         col=c('black','orange','grey80','red','grey40'),bty='n',
+         col=c(alpha("#0072B2", 0.6),alpha("#E69F00", 0.7),'grey80','grey40',alpha("#D55E00", 0.8)),bty='n',
          x.intersp=1, ncol=1)
 }
 dev.off()
@@ -598,19 +611,20 @@ pdf(file='images/Weight_distr.pdf', width=8, height = 8)
                             breaks=c(0:150), plot=FALSE)
   par(mar=c(6,6,2,2)) 
   plot(hist_weight_desmo$density,xlim=c(1,1000),ylim=c(0,0.13),
-       main=NA, cex.axis=2, xlab='', ylab='',col='grey30',lwd=5, log = "x")
+       main=NA, cex.axis=2, xlab='', ylab='',lwd=5, log = "x",
+       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.7))
   lines(hist_weight_neuro_conn$density, 
-        col = 'orange',lty=6,lwd=8)
+        col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7),lty=6,lwd=8)
   lines(hist_weight_sf$density, 
         col = alpha("#000000", 0.8),lty=1,lwd=8)
   lines(hist_weight_pa$density,
-        col = 'red', lwd=5)
+        col = 'grey40', lwd=5)
   lines(hist_weight_erdos$density, 
-        col = hcl.colors(1,palette = 'Grays',alpha=0.5) ,lty=6,lwd=7)
+        col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.7) ,lty=6,lwd=7)
   title(xlab='weight', ylab = 'frequency', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
   legend("topright", inset=.02, title="",
          c("desmo","Neuro","sf", "pa", "Erdös"), lwd=c(12,5,6,7), cex=2, lty=c(3,6,1,5,6),
-         col=c('grey30', 'orange','grey80','red','grey40'),bty='n',
+         col=c(alpha("#0072B2", 0.6), alpha("#E69F00", 0.7),'grey80','grey40',alpha("#D55E00", 0.8)),bty='n',
          x.intersp=1, ncol=1)
 }
 dev.off()
@@ -628,13 +642,14 @@ pdf(file='images/Eigenvalues.pdf', width=8, height = 8)
   hist_eigen_erdos <- hist(as.numeric(lapply(eigen_centr_erdos, function(x) x[]$value)), plot=FALSE)
   par(mar=c(6,6,2,2)) 
   plot(hist_eigen_desmo,add=F,xlim=c(5,25),ylim=c(0,300),
-       main=NA, cex.axis=2, xlab='', ylab='', log="x")
+       main=NA, cex.axis=2, xlab='', ylab='', log="x",
+       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.7))
   plot(hist_eigen_neuro_conn,add=T, 
-       col = alpha("#ffc45d", alpha=0.8), border = "grey50")
+       col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
   plot(hist_eigen_sf,add=T, 
        col = alpha("#000000", 0.8))
-  plot(hist_eigen_pa,add=T,col = hcl.colors(1,palette = 'Reds',alpha=0.5))
-  plot(hist_eigen_erdos,add=T, border = hcl.colors(1,palette = 'Grays',alpha=0.5) )
+  plot(hist_eigen_pa,add=T,col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
+  plot(hist_eigen_erdos,add=T, col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.2) )
   title(xlab='Eigenvalue', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
 dev.off()
@@ -668,20 +683,7 @@ pdf(file='images/diameter_values.pdf', width=8, height = 8)
 }
 dev.off()
 
-col = alpha("#000000", 0.8)
-col = alpha("#000000", 0.8)
 
-col = hcl.colors(1,palette = 'Reds',alpha=0.5),border  = hcl.colors(1,palette = 'Reds',alpha=0.5)
-col = alpha("#009E73", 0.8), border = alpha("grey20", 0.7)
-
-border = hcl.colors(1,palette = 'Grays',alpha=0.5)
-col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.7)
-
-col = alpha("#CC79A7", 0.8), border = alpha("grey20", 0.7)
-barplot(1:8, col=c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", 
-               "#CC79A7", "#000000"))
-"#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", 
-"#CC79A7", "#000000")
 #####################################################
 #mean distance values
 
@@ -694,12 +696,15 @@ pdf(file='images/Meandistance_values.pdf', width=8, height = 8)
   hist_meandist_erdos <- hist(as.numeric(meandist_erdos), plot=FALSE)
   par(mar=c(6,6,2,2)) 
   plot(hist_meandist_desmo,add=F,xlim=c(3,10),ylim=c(0,450),
-       main=NA, cex.axis=2, xlab='', ylab='')
+       main=NA, cex.axis=2, xlab='', ylab='',
+       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.7))
   plot(hist_meandist_neuro_conn,add=T, 
-       col = alpha("#ffc45d", alpha=0.8), border = alpha("#ffc45d", alpha=0.8))
+       col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
   plot(hist_meandist_sf,add=T, col = alpha("#000000", 0.8))
-  plot(hist_meandist_pa,add=T,col = hcl.colors(1,palette = 'Reds',alpha=0.5))
-  plot(hist_meandist_erdos,add=T, border = hcl.colors(1,palette = 'Grays',alpha=0.5) )
+  plot(hist_meandist_pa,add=T,
+       col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
+  plot(hist_meandist_erdos,add=T, 
+       col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.3) )
   title(xlab='mean distance', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
 dev.off()
