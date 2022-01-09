@@ -406,14 +406,15 @@ pdf(file='images/modularity_weighted.pdf', width=8, height = 8)
                           plot=FALSE)
   par(mar=c(6,6,2,2)) 
   plot(hist_desmo_subgraphs,add=F,xlim=c(0.5,0.9),ylim=c(0,350),ylab = '',xlab='', cex.axis=2,main=NA,
-       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.7))
+       log="x", col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.3))
   plot(hist_neuro_conn_subgraphs,add=T, 
        col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
   plot(hist_erdos_weighted,add=T,
        col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.7))
-  plot(hist_sf_weighted,add=T, col = hcl.colors(1,palette = 'Blues',alpha=0.4), border = hcl.colors(1,palette = 'Blues',alpha=0.4))
+  plot(hist_sf_weighted,add=T, 
+       col = alpha("#000000", 0.6))
   plot(hist_pa_weighted,add=T, 
-       col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
+       col = alpha("grey90", 0.5), border = alpha("grey20", 0.5))
   title(xlab='modularity, weighted', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
 dev.off()
@@ -437,9 +438,10 @@ pdf(file='images/modularity_bi.pdf', width=8, height = 8)
        col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
   plot(hist_erdos,add=T,
        col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.7))
-  plot(hist_sf,add=T, col = hcl.colors(1,palette = 'Blues',alpha=0.4), border = hcl.colors(1,palette = 'Blues',alpha=0.4))
+  plot(hist_sf,add=T, 
+       col = alpha("#000000", 0.6))
   plot(hist_pa,add=T,
-       col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
+       col = alpha("grey90", 0.5), border = alpha("grey20", 0.5))
   title(xlab='modularity, unweighted', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
 dev.off()
@@ -486,9 +488,9 @@ pdf(file='images/transitivity.pdf', width=8, height = 8)
   plot(hist_erdos_transitivity,add=T,
        col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.2))
   plot(hist_sf_transitivity,add=T, 
-       col = alpha("#000000", 0.8))
+       col = alpha("#000000", 0.6))
   plot(hist_pa_transitivity,add=T, 
-       col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
+       col = alpha("grey90", 0.5), border = alpha("grey20", 0.5))
   title(xlab='global transitivity', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
 dev.off()
@@ -528,10 +530,10 @@ pdf(file='images/3cliques.pdf', width=8, height = 8)
   plot(hist_erdos_cliques3,add=T, 
        col = alpha("#D55E00", 0.8), border = alpha("grey20", 0))
   plot(hist_sf_cliques3,add=T,
-       col = alpha("#000000", 0.8))
+       col = alpha("#000000", 0.6))
   #plot(hist_desmo_cliques4,add=T,border='red')
   plot(hist_pa_cliques3,add=T, 
-       col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
+       col = alpha("grey90", 0.5), border = alpha("grey20", 0.5))
   title(xlab='# of 3-cliques', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
 dev.off()
@@ -581,7 +583,7 @@ pdf(file='images/Degree_distr.pdf', width=8, height = 8)
   lines(hist_degree_neuro_conn$density, 
         col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7),lty=6,lwd=8)
   lines(hist_degree_sf$density, 
-        col = alpha("#000000", 0.8),lty=1,lwd=8)
+        col = alpha("#000000", 0.6),lty=1,lwd=8)
   lines(hist_degree_pa$density,
         col = 'grey40', lwd=5)
   lines(hist_degree_erdos$density, 
@@ -594,9 +596,6 @@ pdf(file='images/Degree_distr.pdf', width=8, height = 8)
 }
 dev.off()
 
-weights_neuro_conn
-hist(unlist(weights_desmo), breaks=c(0:100), plot=T)
-hist(unlist(weights_neuro_conn), breaks=c(0:440), plot=T)
 
 pdf(file='images/Weight_distr.pdf', width=8, height = 8)
 {  hist_weight_desmo <- hist(unlist(weights_desmo),
@@ -616,7 +615,7 @@ pdf(file='images/Weight_distr.pdf', width=8, height = 8)
   lines(hist_weight_neuro_conn$density, 
         col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7),lty=6,lwd=8)
   lines(hist_weight_sf$density, 
-        col = alpha("#000000", 0.8),lty=1,lwd=8)
+        col = alpha("#000000", 0.6),lty=1,lwd=8)
   lines(hist_weight_pa$density,
         col = 'grey40', lwd=5)
   lines(hist_weight_erdos$density, 
@@ -647,8 +646,8 @@ pdf(file='images/Eigenvalues.pdf', width=8, height = 8)
   plot(hist_eigen_neuro_conn,add=T, 
        col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
   plot(hist_eigen_sf,add=T, 
-       col = alpha("#000000", 0.8))
-  plot(hist_eigen_pa,add=T,col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
+       col = alpha("#000000", 0.6))
+  plot(hist_eigen_pa,add=T,col = alpha("grey90", 0.5), border = alpha("grey20", 0.5))
   plot(hist_eigen_erdos,add=T, col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.2) )
   title(xlab='Eigenvalue', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
@@ -674,9 +673,9 @@ pdf(file='images/diameter_values.pdf', width=8, height = 8)
   plot(hist_diameter_neuro_conn,add=T, 
        col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
   plot(hist_diameter_sf,add=T, 
-       col = alpha("#000000", 0.8))
+       col = alpha("#000000", 0.6))
   plot(hist_diameter_pa,add=T,
-       col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
+       col = alpha("grey90", 0.5), border = alpha("grey20", 0.5))
   plot(hist_diameter_erdos,add=T, 
        col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.7))
   title(xlab='diameter', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
@@ -700,9 +699,9 @@ pdf(file='images/Meandistance_values.pdf', width=8, height = 8)
        col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.7))
   plot(hist_meandist_neuro_conn,add=T, 
        col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
-  plot(hist_meandist_sf,add=T, col = alpha("#000000", 0.8))
+  plot(hist_meandist_sf,add=T, col = alpha("#000000", 0.6))
   plot(hist_meandist_pa,add=T,
-       col = alpha("grey90", 0.5), border = alpha("grey20", 0.7))
+       col = alpha("grey90", 0.5), border = alpha("grey20", 0.5))
   plot(hist_meandist_erdos,add=T, 
        col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.3) )
   title(xlab='mean distance', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
