@@ -481,17 +481,17 @@ pdf(file='images/transitivity.pdf', width=8, height = 8)
   hist_pa_transitivity <- hist(as.numeric(transitivity_pa),
                                plot=FALSE)
   par(mar=c(6,6,2,2)) 
-  plot(hist_desmo_transitivity,add=F,xlim=c(0,0.11),ylim=c(0,400),ylab = '',xlab='', cex.axis=2, main=NA,
-       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.7))
+  plot(hist_desmo_transitivity,add=F,xlim=c(0.0001,0.4),ylim=c(0,400),ylab = '',xlab='', cex.axis=2, main=NA,
+       log="x", col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.))
   plot(hist_neuro_conn_transitivity,add=T, 
-       col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
+       col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.2))
   plot(hist_erdos_transitivity,add=T,
-       col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.2))
+       col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.3))
   plot(hist_sf_transitivity,add=T, 
        col = alpha("#000000", 0.6))
   plot(hist_pa_transitivity,add=T, 
-       col = alpha("grey90", 0.5), border = alpha("grey20", 0.5))
-  title(xlab='global transitivity', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
+       col = alpha("grey90", 0.5), border = alpha("grey20", 0.3))
+  title(xlab='clustering coefficient', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
 dev.off()
 {
@@ -522,13 +522,13 @@ pdf(file='images/3cliques.pdf', width=8, height = 8)
   hist_pa_cliques3 <- hist(as.numeric(max_cliques_pa),
                            plot=FALSE)
   par(mar=c(6,6,2,2)) 
-  plot(hist_desmo_cliques3,add=F, xlim=c(1,1800),ylim=c(0,300),ylab = '',xlab='',
-       cex.axis=2, main=NA,
-       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.4))
+  plot(hist_desmo_cliques3,add=F, xlim=c(1,4000),ylim=c(0,300),ylab = '',xlab='',
+       cex.axis=2, main=NA, log="x",
+       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.3))
   plot(hist_neuro_conn_cliques3,add=T, 
-       col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
+       col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.3))
   plot(hist_erdos_cliques3,add=T, 
-       col = alpha("#D55E00", 0.8), border = alpha("grey20", 0))
+       col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.4))
   plot(hist_sf_cliques3,add=T,
        col = alpha("#000000", 0.6))
   #plot(hist_desmo_cliques4,add=T,border='red')
@@ -695,10 +695,10 @@ pdf(file='images/Meandistance_values.pdf', width=8, height = 8)
   hist_meandist_erdos <- hist(as.numeric(meandist_erdos), plot=FALSE)
   par(mar=c(6,6,2,2)) 
   plot(hist_meandist_desmo,add=F,xlim=c(3,10),ylim=c(0,450),
-       main=NA, cex.axis=2, xlab='', ylab='',
-       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.7))
+       main=NA, cex.axis=2, xlab='', ylab='', log="x",
+       col = alpha("#0072B2", 0.6), border = alpha("grey20", 0.5))
   plot(hist_meandist_neuro_conn,add=T, 
-       col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.7))
+       col = alpha("#E69F00", 0.7), border = alpha("grey20", 0.4))
   plot(hist_meandist_sf,add=T, col = alpha("#000000", 0.6))
   plot(hist_meandist_pa,add=T,
        col = alpha("grey90", 0.5), border = alpha("grey20", 0.5))
@@ -723,7 +723,7 @@ Fig4B <- ggdraw() + draw_image(magick::image_read_pdf("images/Weight_distr.pdf",
                                                       density = 300))
 Fig4C <- ggdraw() + draw_image(magick::image_read_pdf("images/modularity_weighted.pdf", 
                                                       density = 300))
-Fig4D <- ggdraw() + draw_image(magick::image_read_pdf("images/Transitivity.pdf", 
+Fig4D <- ggdraw() + draw_image(magick::image_read_pdf("images/transitivity.pdf", 
                                                       density = 300))
 Fig4E <- ggdraw() + draw_image(magick::image_read_pdf("images/3cliques.pdf", 
                                                       density = 300))
