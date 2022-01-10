@@ -1,4 +1,4 @@
-#quantification of the modularity of the desmosomal connectome and random scale-free and Erdos graphs of similar statistics
+#quantification of the modularity of the desmosomal connectome and random scale-free and Erdös graphs of similar statistics
 #code for Figure4 of the Jasek et al 2021 desmosomal connectome paper
 #Gaspar Jekely 2021 March
 
@@ -117,51 +117,51 @@ modularity_leiden <- function(graph) {
 
 
 #######################################
-#generate and analyse Erdos-Renyi graphs
+#generate and analyse Erdös-Renyi graphs
 
-#sample 1000 Erdos graphs with same number of nodes and edges as the desmosomal graph 
-erdos_graphs_1000 <- lapply(1:1000, function(x) 
-  x=erdos.renyi.game(length(V(desmo_conn_graph_largest)), 
+#sample 1000 Erdös graphs with same number of nodes and edges as the desmosomal graph 
+Erdös_graphs_1000 <- lapply(1:1000, function(x) 
+  x=Erdös.renyi.game(length(V(desmo_conn_graph_largest)), 
                      length(E(desmo_conn_graph_largest)),
                      type = "gnm",directed = FALSE,loops = FALSE))
 
 #do the same but assign weights from the desmo graph
-erdos_graphs_1000_wg <- lapply(1:1000, function(x) {
-  erdos_graph <- erdos.renyi.game(length(V(desmo_conn_graph_largest)), 
+Erdös_graphs_1000_wg <- lapply(1:1000, function(x) {
+  Erdös_graph <- Erdös.renyi.game(length(V(desmo_conn_graph_largest)), 
                                   length(E(desmo_conn_graph_largest)),
                                   type = "gnm",directed = FALSE,loops = FALSE)
-  E(erdos_graph)$weight <- E(desmo_conn_graph_largest)$weight
-  x <- erdos_graph
+  E(Erdös_graph)$weight <- E(desmo_conn_graph_largest)$weight
+  x <- Erdös_graph
 }
 )
 
 #calculate modularity scores
-modularity_erdos <- lapply(erdos_graphs_1000, function(x) modularity_leiden(x))
-modularity_erdos_wg <- lapply(erdos_graphs_1000_wg, function(x) modularity_leiden(x))
+modularity_erdos <- lapply(Erdös_graphs_1000, function(x) modularity_leiden(x))
+modularity_erdos_wg <- lapply(Erdös_graphs_1000_wg, function(x) modularity_leiden(x))
 
 #calculate mean distance
-meandist_erdos <- lapply(erdos_graphs_1000, function(x) mean_distance(x))
+meandist_erdos <- lapply(Erdös_graphs_1000, function(x) mean_distance(x))
 mean(as.numeric(meandist_erdos))
 
 #calculate diameter
-diameter_erdos <- lapply(erdos_graphs_1000, function(x) diameter(x))
+diameter_erdos <- lapply(Erdös_graphs_1000, function(x) diameter(x))
 mean(as.numeric(diameter_erdos))
 
 #degree of all nodes
-degree_erdos <- lapply(erdos_graphs_1000, function(x) degree(x))
+degree_erdos <- lapply(Erdös_graphs_1000, function(x) degree(x))
 
 #weights of all nodes
-weights_erdos <- lapply(erdos_graphs_1000_wg, function(x) strength(x))
+weights_erdos <- lapply(Erdös_graphs_1000_wg, function(x) strength(x))
 
 #calculate the length of maximal cliques, run with min=3, was also run with min=4 which returns no cliques
-max_cliques_erdos <- lapply(erdos_graphs_1000, function(x) length(max_cliques(x, min=3)))
+max_cliques_erdos <- lapply(Erdös_graphs_1000, function(x) length(max_cliques(x, min=3)))
 max(as.numeric(max_cliques_erdos))
 
 #calculate the global transitivity (clustering coefficient) 
-transitivity_erdos <- lapply(erdos_graphs_1000, function(x) transitivity(x))
+transitivity_erdos <- lapply(Erdös_graphs_1000, function(x) transitivity(x))
 
 #calculate eigen vector centrality 
-eigen_centr_erdos <- lapply(erdos_graphs_1000, function(x) eigen_centrality(x, directed = FALSE, weights = NA, scale = TRUE))
+eigen_centr_erdos <- lapply(Erdös_graphs_1000, function(x) eigen_centrality(x, directed = FALSE, weights = NA, scale = TRUE))
 
 
 beep()
@@ -442,7 +442,7 @@ pdf(file='images/modularity_bi.pdf', width=8, height = 8)
        col = alpha("#000000", 0.6))
   plot(hist_pa,add=T,
        col = alpha("grey90", 0.5), border = alpha("grey20", 0.5))
-  title(xlab='modularity, unweighted', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
+  title(xlab='modularity', ylab = 'count', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
 }
 dev.off()
 
@@ -590,7 +590,7 @@ pdf(file='images/Degree_distr.pdf', width=8, height = 8)
         col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.7),lty=6,lwd=7)
   title(xlab='degree', ylab = 'frequency', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
   legend("topright", inset=.02, title="",
-         c("desmo", "Neuro", "sf", "pa", "Erdös"), lwd=c(12,5,6,7), cex=2, lty=c(3,6,1,5,6),
+         c("desmo", "neuro", "sf", "pa", "Erdös"), lwd=c(12,5,6,7), cex=2, lty=c(3,6,1,5,6),
          col=c(alpha("#0072B2", 0.6),alpha("#E69F00", 0.7),'grey80','grey40',alpha("#D55E00", 0.8)),bty='n',
          x.intersp=1, ncol=1)
 }
@@ -622,7 +622,7 @@ pdf(file='images/Weight_distr.pdf', width=8, height = 8)
         col = alpha("#D55E00", 0.8), border = alpha("grey20", 0.7) ,lty=6,lwd=7)
   title(xlab='weight', ylab = 'frequency', mgp = c(4,1, 0),cex.lab=3, font.lab=2) 
   legend("topright", inset=.02, title="",
-         c("desmo","Neuro","sf", "pa", "Erdös"), lwd=c(12,5,6,7), cex=2, lty=c(3,6,1,5,6),
+         c("desmo","neuro","sf", "pa", "Erdös"), lwd=c(12,5,6,7), cex=2, lty=c(3,6,1,5,6),
          col=c(alpha("#0072B2", 0.6), alpha("#E69F00", 0.7),'grey80','grey40',alpha("#D55E00", 0.8)),bty='n',
          x.intersp=1, ncol=1)
 }
@@ -722,17 +722,47 @@ Fig4A <- ggdraw() + draw_image(magick::image_read_pdf("images/Degree_distr.pdf",
 Fig4B <- ggdraw() + draw_image(magick::image_read_pdf("images/Weight_distr.pdf", 
                                                       density = 300))
 Fig4C <- ggdraw() + draw_image(magick::image_read_pdf("images/modularity_weighted.pdf", 
-                                                      density = 300))
+                                                      density = 300)) +
+  draw_label("desmo", x = 0.9, y = 0.67, fontfamily = "sans", size = 8) +
+  draw_label("neuro", x = 0.49, y = 0.6, fontfamily = "sans", size = 8) +
+  draw_label("sf", x = 0.26, y = 0.5, fontfamily = "sans", size = 8) +
+  draw_label("pa", x = 0.76, y = 0.5, fontfamily = "sans", size = 8) +
+  draw_label("Erdös", x = 0.38, y = 0.75, fontfamily = "sans", size = 8)
 Fig4D <- ggdraw() + draw_image(magick::image_read_pdf("images/transitivity.pdf", 
-                                                      density = 300))
+                                                      density = 300)) +
+  draw_label("desmo", x = 0.72, y = 0.71, fontfamily = "sans", size = 8) +
+  draw_label("neuro", x = 0.91, y = 0.63, fontfamily = "sans", size = 8) +
+  draw_label("sf", x = 0.5, y = 0.75, fontfamily = "sans", size = 8) +
+  draw_label("pa", x = 0.66, y = 0.5, fontfamily = "sans", size = 8) +
+  draw_label("Erdös", x = 0.3, y = 0.49, fontfamily = "sans", size = 8)
 Fig4E <- ggdraw() + draw_image(magick::image_read_pdf("images/3cliques.pdf", 
-                                                      density = 300))
+                                                      density = 300)) +
+  draw_label("desmo", x = 0.76, y = 0.61, fontfamily = "sans", size = 8) +
+  draw_label("neuro", x = 0.91, y = 0.8, fontfamily = "sans", size = 8) +
+  draw_label("sf", x = 0.48, y = 0.55, fontfamily = "sans", size = 8) +
+  draw_label("pa", x = 0.62, y = 0.5, fontfamily = "sans", size = 8) +
+  draw_label("Erdös", x = 0.29, y = 0.75, fontfamily = "sans", size = 8)
 Fig4F <- ggdraw() + draw_image(magick::image_read_pdf("images/Eigenvalues.pdf", 
-                                                      density = 300))
+                                                      density = 300)) +
+  draw_label("desmo", x = 0.46, y = 0.71, fontfamily = "sans", size = 8) +
+  draw_label("neuro", x = 0.81, y = 0.93, fontfamily = "sans", size = 8) +
+  draw_label("sf", x = 0.32, y = 0.83, fontfamily = "sans", size = 8) +
+  draw_label("pa", x = 0.26, y = 0.59, fontfamily = "sans", size = 8) +
+  draw_label("Erdös", x = 0.22, y = 0.68, fontfamily = "sans", size = 8)
 Fig4G <- ggdraw() + draw_image(magick::image_read_pdf("images/diameter_values.pdf", 
-                                                      density = 300))
+                                                      density = 300)) +
+  draw_label("desmo", x = 0.88, y = 0.63, fontfamily = "sans", size = 8) +
+  draw_label("neuro", x = 0.7, y = 0.55, fontfamily = "sans", size = 8) +
+  draw_label("sf", x = 0.24, y = 0.84, fontfamily = "sans", size = 8) +
+  draw_label("pa", x = 0.37, y = 0.58, fontfamily = "sans", size = 8) +
+  draw_label("Erdös", x = 0.31, y = 0.72, fontfamily = "sans", size = 8)
 Fig4H <- ggdraw() + draw_image(magick::image_read_pdf("images/Meandistance_values.pdf", 
-                                                      density = 300))
+                                                      density = 300)) +
+  draw_label("desmo", x = 0.88, y = 0.64, fontfamily = "sans", size = 8) +
+  draw_label("neuro", x = 0.25, y = 0.78, fontfamily = "sans", size = 8) +
+  draw_label("sf", x = 0.545, y = 0.64, fontfamily = "sans", size = 8) +
+  draw_label("pa", x = 0.72, y = 0.48, fontfamily = "sans", size = 8) +
+  draw_label("Erdös", x = 0.6, y = 0.74, fontfamily = "sans", size = 8)
 
 
 { Fig4 <- plot_grid(Fig4A,Fig4B,Fig4C,Fig4D,Fig4E,Fig4F,Fig4G,Fig4H,
