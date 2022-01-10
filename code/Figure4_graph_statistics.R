@@ -775,6 +775,8 @@ Fig4H <- ggdraw() + draw_image(magick::image_read_pdf("images/Meandistance_value
   
   ggsave("figures/Figure_4.pdf", limitsize = FALSE, 
          units = c("px"), Fig4, width = 2600, height = 1400)
+  ggsave("figures/Figure_4.png", limitsize = FALSE, 
+         units = c("px"), Fig4, width = 2600, height = 1400)
 }
 
 
