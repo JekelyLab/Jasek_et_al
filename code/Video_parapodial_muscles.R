@@ -8,6 +8,7 @@ library(nat)
 options(nat.plotengine = 'rgl')
 require("graphics")
 
+
 # catmaid connection, needs username, password AND token - weird!
 {
   # can run this separate file using source function
