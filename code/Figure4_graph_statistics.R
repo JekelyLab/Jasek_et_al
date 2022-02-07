@@ -10,6 +10,8 @@ library(leiden)
 library(reticulate)
 wdir <- getwd()
 start <- Sys.time()
+library(beepr) #to run beep() after a section finished
+
 
 
 #read csv exported from gephi as table
@@ -19,7 +21,7 @@ desmo_conn_table <- read.csv('data/adjacency_matrix_desmosomal_connectome_CATMAI
 
 dim(desmo_conn_table)
 desmo_conn_table[1:3,1:3]
-desmo_conn_matrix <- as.matrix(desmo_conn_table[2:2534],nrow=nrow(desmo_conn_table),ncol=ncol(desmo_conn_table)-1)
+desmo_conn_matrix <- as.matrix(desmo_conn_table[2:2533],nrow=nrow(desmo_conn_table),ncol=ncol(desmo_conn_table)-1)
 desmo_conn_matrix[1:3,1:3]
 desmo_conn_graph <- graph_from_adjacency_matrix(desmo_conn_matrix, mode = "undirected", weighted = T,
                                                 diag = TRUE, add.colnames = NULL, add.rownames = NA)
@@ -61,7 +63,7 @@ length(V(desmo_conn_graph))
 gsize(desmo_conn_graph)
 #number of edges
 is_weighted(desmo_conn_graph)
-sum(E(c)$weight)
+sum(E(desmo_conn_graph)$weight)
 
 #convert into binary matrix
 desmo_conn_matrix_bi<-as.matrix((desmo_conn_matrix>0)+0)
@@ -104,7 +106,7 @@ erdos_graphs_1000 <- lapply(1:1000, function(x)
                      length(E(desmo_conn_graph_largest)),
                      type = "gnm",directed = FALSE,loops = FALSE))
 
-#do the same but assing weights from the desmo graph
+#do the same but assign weights from the desmo graph
 erdos_graphs_1000_wg <- lapply(1:1000, function(x) {
   erdos_graph <- erdos.renyi.game(length(V(desmo_conn_graph_largest)), 
                                   length(E(desmo_conn_graph_largest)),
@@ -142,6 +144,7 @@ transitivity_erdos <- lapply(erdos_graphs_1000, function(x) transitivity(x))
 #calculate eigen vector centrality 
 eigen_centr_erdos <- lapply(erdos_graphs_1000, function(x) eigen_centrality(x, directed = FALSE, weights = NA, scale = TRUE))
 
+beep()
 
 ################################
 #subsample and quantify the desmosomal graph
@@ -191,7 +194,7 @@ transitivity_desmo_bi <- lapply(desmo_bi_subgraphs_1000, function(x) transitivit
 #calculate eigen vector centrality 
 eigen_centr_desmo <- lapply(desmo_subgraphs_1000, function(x) eigen_centrality(x, directed = FALSE, weights = NA, scale = TRUE))
 
-
+beep()
 
 ################################
 #subsample and quantify the connectome graph
@@ -242,6 +245,7 @@ transitivity_neuro_conn_bi <- lapply(neuro_conn_bi_subgraphs_1000, function(x) t
 eigen_centr_neuro_conn <- lapply(neuro_conn_subgraphs_1000, function(x) eigen_centrality(x, directed = FALSE, weights = NA, scale = TRUE))
 
 
+beep()
 
 
 
@@ -260,7 +264,7 @@ sf_graphs_1000 <- lapply(1:1000, function(x)
     finite.size.correction = TRUE
   ))
 
-#do the same but assing weights from the desmo graph
+#do the same but assign weights from the desmo graph
 sf_graphs_wg_1000 <- lapply(1:1000, function(x) {
   sf_graph <- sample_fitness_pl(
     length(V(desmo_conn_graph_largest)),
@@ -356,6 +360,7 @@ mean(as.numeric(modularity_pa))
 eigen_centr_pa <- lapply(pa_graphs_1000, function(x) eigen_centrality(x, directed = FALSE, weights = NA, scale = TRUE))
 eigen_centr_pa_wg <- lapply(pa_graphs_1000_wg, function(x) eigen_centrality(x, directed = FALSE, weights = NA, scale = TRUE))
 
+beep()
 
 
 #########################
