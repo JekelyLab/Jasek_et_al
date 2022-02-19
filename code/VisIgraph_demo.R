@@ -25,6 +25,21 @@ cl <- components(Conn_graph)
 g_graph_largest = induced_subgraph(g, which(cl$membership == 1))
 g_graph_largest
 
+
+
+# Serialise the graph to Gephi format
+gexf_data <- rgexf::igraph.to.gexf(g_graph_largest)
+# Write the network into a gexf (Gephi) file
+write.gexf(gexf_data, output = "data/g_graph_largest.gexf")
+#do force field layout and Leiden modularity in Gephi
+
+#reimport gephi file after layout in gephi
+gexf_data <- read.gexf("data/g_graph_largest_layout.gexf")
+
+#convert to igraph
+g_graph_largest <- rgexf::gexf.to.igraph(gexf_data)
+
+
 #calculate node weights
 weights=strength(g_graph_largest, vids = V(g_graph_largest), mode = c("all"),
                  loops = TRUE)
@@ -34,22 +49,8 @@ degree=degree(g_graph_largest, v = V(g_graph_largest), mode = c("all"), loops = 
 V(g_graph_largest)$value <- degree
 E(g_graph_largest)$value <- E(g_graph_largest)$weight
 
-
-
-# Serialise the graph to Gephi format
-#gexf_data <- rgexf::igraph.to.gexf(g_graph_largest)
-# Write the network into a gexf (Gephi) file
-#write.gexf(gexf_data, output = "data/g_graph_largest.gexf")
-#do force field layout and Leiden modularity in Gephi
-
-#reimport gephi file after layout in gephi
-#gexf_data <- read.gexf("data/g_graph_largest_layout.gexf")
-
-#convert to igraph
-#g_graph_largest <- rgexf::gexf.to.igraph(gexf_data)
-
-# Compute Leiden communitites from the graph data
-com <- cluster_leiden(g_graph_largest,
+# Compute Leiden communities from the graph data
+com <- igraph::cluster_leiden(g_graph_largest,
                       objective_function = "modularity",
                       weights = NULL,
                       resolution_parameter = 0.3,
@@ -79,18 +80,17 @@ Conn_graph.visn$edges$value <- Conn_graph.visn$edges$weight
 Conn_graph.visn$nodes$group <- com$membership
 #colour by group
 Conn_graph.visn$nodes$color <- unlist(lapply(Conn_graph.visn$nodes$group, function(x) col[Conn_graph.visn$nodes$group[x]]))
-
 Conn_graph.visn$nodes$size <- sqrt(V(g_graph_largest)$value)*10
 
 
 #plot the same graph by using the coordinates from the gephi layout
 visNet <- visNetwork(Conn_graph.visn$nodes,Conn_graph.visn$edges) %>% 
-  visIgraphLayout(layout = "layout_nicely", physics = TRUE, randomSeed = 42) %>%
+  visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
   visNodes(borderWidth=0.3, 
            color = list(background=Conn_graph.visn$nodes$color, border='black'),
            opacity=1,
            shape='dot',
-           physics=TRUE,
+           physics=FASLE,
            font=list(color='black', size=0),
            scaling = list(label=list(enabled=TRUE, min=16, max=28))) %>%
   visEdges(smooth = list(type = 'curvedCW', roundness=0.1),
@@ -106,3 +106,4 @@ visNet <- visNetwork(Conn_graph.visn$nodes,Conn_graph.visn$edges) %>%
                      damping=1))
 
 visNet
+
