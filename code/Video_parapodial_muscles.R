@@ -4,6 +4,7 @@
 
 library(natverse)
 library(nat)
+library(hash)
 options(nat.plotengine = 'rgl')
 require("graphics")
 
@@ -34,32 +35,67 @@ plot3d(acicula_sg2l, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
 plot3d(chaeta_sg2l, WithConnectors = F, WithNodes = F, soma=T, lwd=1,
        rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=1,
        col="grey80")
+# add text labels for chaetae and aciculae
+texts3d(77000,92000, 90000, text = "aciculae", col='black', cex = 2)
+texts3d(77000,92000, 86000, text = "chaetae", col='black', cex = 2)
+
 #we define a z clipping plane for the frontal view
 par3d(zoom=0.52)
 nview3d("ventral", extramat=rotationMatrix(0.2, 1, 1, 0))
 #z-axis clip
-clipplanes3d(0, 0, -1, 125000)
+clipplanes3d(0, 0, -1, 133000)
 #z-axis clip from top
-clipplanes3d(0, 0, 1, -50000)
+clipplanes3d(0, 0, 1, -70000)
 #y-axis clip
 clipplanes3d(1, 0, 0.16, -80700)
 par3d(windowRect = c(0, 0, 800, 800)) #resize for frontal view
 
 
+# define which muscles to plot
+MUS_list <- c("MUSac-i", "MUSac-neuDx", "MUSac-notP")
+
 # read and plot muscles
-
-MUS_list <- c("MUSobA-re_sg2l","MUSac-notA_sg2l", "MUSac-notP_sg2l", "MUSobA-arc_sg2l", "MUSobP-M_sg2l")
-
 read_and_plot <- function (x, color) {
-  xskids <- catmaid_query_by_name(x, pid=11)
+  xsg2l <- paste(x, "_sg2l", sep = "") # only segment 2 on the left
+  xskids <- catmaid_query_by_name(xsg2l, pid=11) # include skeletons and outlines
   xskids <- xskids$skid
-
   neurons = nlapply(read.neurons.catmaid(xskids, pid=11),
-                  function(x) smooth_neuron(x, sigma=1000))
+                  function(y) smooth_neuron(y, sigma=1000))
   plot3d(neurons, WithConnectors = F, WithNodes = F, soma=TRUE, lwd=3,
         rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=1,
         col=color)
+  # add text labels
+  texts3d(unlist(txt_pos[[x]]), text = x, col='black', cex = 2)
+  # cleanup
+  rm(xskids)
+  rm(neurons)
+  rm(x)
+  rm(xsg2l)
 }
+
+
+# x,y,z coordinates for muscle text labels
+txt_pos <- hash(
+  "MUSobA-re" = c(105000,110000, 82000),
+  "MUSobA-arc" = c(110000,120000, 100000),
+  "MUSobA-mpp" = c(94000,105000, 77000),
+  "MUSobA-lpp" = c(90000,115000, 80000),
+  "MUSobA-trans" = c(11000,110000, 80000),
+  "MUSobP-neuD" = c(110000,78000, 107000),
+  "MUSobP-neuV" = c(98000,120000, 111000),
+  "MUSac-neuAV" = c(88000,114000, 90000),
+  "MUSac-neure" = c(76000,100000, 87000),
+  "MUSchae-neuDac" = c(104000,99000, 95000),
+  "MUSac-neuDach" = c(90000,94000, 86000),
+  "MUSac-neuPV" = c(86000,123000, 107000),
+  "MUSac-neuDy" = c(92000,100000, 108000),
+  "MUSac-notM" = c(90000,95000, 85000),
+  "MUSac-notA" = c(92000,70000, 88000),
+  "MUSchae-notAac" = c(100000,85000, 115000),
+  "MUSac-notP" = c(100000,73000, 112000),
+  "MUSac-i" = c(69000,95000, 87000),
+  "MUSac-neuDx" = c(85000,92000, 103000)
+)
 
 
 i = 1
@@ -68,21 +104,12 @@ while (i <= length(Okabe_Ito) && i <= length(MUS_list)) {
   i = i+1
 }
 
-#add text labels in 3D
-#adjust x,y,z coordinates
-texts3d(100000,121000, 82000, text = "MUSobA-re", col='black', cex = 2)
-texts3d(100000,69000, 85500, text = "MUSac-notA", col='black', cex = 2)
-texts3d(100000,83000, 115000, text = "MUSac-notP", col='black', cex = 2)
-texts3d(110000,120000, 100000, text = "MUSobA-arc", col='black', cex = 2)
-texts3d(90000,115000, 115000, text = "MUSobP-M", col='black', cex = 2)
-texts3d(77000,92000, 90000, text = "aciculae", col='black', cex = 2)
-texts3d(87000,92000, 86000, text = "chaetae", col='black', cex = 2)
-
 #export rotation by frame for video
 for (i in 1:240){
-  play3d( spin3d( axis = c(0, 0, 10), rpm = 0.2), duration = 2)
-  print (i)
+  play3d( spin3d( axis = c(0, 0, 10), rpm = 1.2), duration = 2)
+#  print (i)
   #save a snapshot
   filename <- paste("pictures/Video_sg2l_Mus_Outlines1_spin", formatC(i, digits = 1, flag = "0"), ".png", sep = "")
   rgl.snapshot(filename)
 }
+
