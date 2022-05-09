@@ -40,14 +40,17 @@ texts3d(77000,92000, 90000, text = "aciculae", col='black', cex = 2)
 texts3d(77000,92000, 86000, text = "chaetae", col='black', cex = 2)
 
 #we define a z clipping plane for the frontal view
-par3d(zoom=0.52)
-nview3d("ventral", extramat=rotationMatrix(0.2, 1, 1, 0))
+par3d(zoom=0.6)
+nview3d("ventral", extramat=rotationMatrix(0.2, 1, 1, 1))
 #z-axis clip
 clipplanes3d(0, 0, -1, 133000)
 #z-axis clip from top
-clipplanes3d(0, 0, 1, -70000)
+clipplanes3d(0, 0, 1, -66000)
 #y-axis clip
-clipplanes3d(1, 0, 0.16, -80700)
+clipplanes3d(1, 0, 0.001, -60000)
+#x-axis clip
+clipplanes3d(0.1, 1, 0, -57000)
+
 par3d(windowRect = c(0, 0, 800, 800)) #resize for frontal view
 
 
