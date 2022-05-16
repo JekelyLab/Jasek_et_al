@@ -23,40 +23,6 @@ acicula_sg2l = nlapply(read.neurons.catmaid("^acicula_sg2l$", pid=11), function(
 chaeta_sg2l = nlapply(read.neurons.catmaid("^chaeta_sg2l$", pid=11), function(x) smooth_neuron(x, sigma=6000))
 
 
-nopen3d() # opens a pannable 3d window
-
-# plot landmarks
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=0.07,
-       col="#E2E2E2")
-plot3d(acicula_sg2l, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=1,
-       col="grey50")
-plot3d(chaeta_sg2l, WithConnectors = F, WithNodes = F, soma=T, lwd=1,
-       rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=1,
-       col="grey80")
-# add text labels for chaetae and aciculae
-texts3d(77000,92000, 90000, text = "aciculae", col='black', cex = 2)
-texts3d(77000,92000, 86000, text = "chaetae", col='black', cex = 2)
-
-#we define a z clipping plane for the frontal view
-par3d(zoom=0.6)
-nview3d("ventral", extramat=rotationMatrix(0.2, 1, 1, 1))
-#z-axis clip
-clipplanes3d(0, 0, -1, 133000)
-#z-axis clip from top
-clipplanes3d(0, 0, 1, -66000)
-#y-axis clip
-clipplanes3d(1, 0, 0.001, -60000)
-#x-axis clip
-clipplanes3d(0.1, 1, 0, -57000)
-
-par3d(windowRect = c(0, 0, 800, 800)) #resize for frontal view
-
-
-# define which muscles to plot
-MUS_list <- c("MUSac-i", "MUSac-neuDx", "MUSac-notP")
-
 # read and plot muscles
 read_and_plot <- function (x, color) {
   xsg2l <- paste(x, "_sg2l", sep = "") # only segment 2 on the left
@@ -85,6 +51,7 @@ txt_pos <- hash(
   "MUSobA-lpp" = c(90000,115000, 80000),
   "MUSobA-trans" = c(11000,110000, 80000),
   "MUSobP-neuD" = c(110000,78000, 107000),
+  "MUSobP-neuDlong" = c(98000,75000, 116000),
   "MUSobP-neuV" = c(98000,120000, 111000),
   "MUSac-neuAV" = c(88000,114000, 90000),
   "MUSac-neure" = c(76000,100000, 87000),
@@ -101,18 +68,61 @@ txt_pos <- hash(
 )
 
 
+# define which muscles to plot
+MUS_groups <- list(c("MUSobP-neuV", "MUSobP-neuDlong"), "MUSac-neuAV", "MUSac-neure", c("MUSac-neuDach", "MUSac-neuPV"), "MUSac-notM", "MUSac-notA", "MUSac-notP", c("MUSac-i", "MUSac-neuDx"))
+
+nopen3d() # opens a pannable 3d window
+
 i = 1
-while (i <= length(Okabe_Ito) && i <= length(MUS_list)) {
-  read_and_plot(MUS_list[i], Okabe_Ito[i])
-  i = i+1
-}
+for (MUS_group in MUS_groups)
+{
+  clear3d()
+  # plot landmarks
+  plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+         rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=0.07,
+         col="#E2E2E2")
+  plot3d(acicula_sg2l, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+         rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=1,
+         col="grey50")
+  plot3d(chaeta_sg2l, WithConnectors = F, WithNodes = F, soma=T, lwd=1,
+         rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=1,
+         col="grey80")
+  
+  # add text labels for chaetae and aciculae
+  texts3d(77000,92000, 90000, text = "aciculae", col='black', cex = 2)
+  texts3d(77000,92000, 86000, text = "chaetae", col='black', cex = 2)
+  
+  #we define a z clipping plane for the frontal view
+  par3d(zoom=0.6)
+  nview3d("ventral", extramat=rotationMatrix(0.2, 1, 1, 1))
+  #z-axis clip
+  clipplanes3d(0, 0, -1, 133000)
+  #z-axis clip from top
+  clipplanes3d(0, 0, 1, -66000)
+  #y-axis clip
+  clipplanes3d(1, 0, 0.001, -60000)
+  #x-axis clip
+  clipplanes3d(0.1, 1, 0, -57000)
+  par3d(windowRect = c(0, 0, 800, 800)) #resize for frontal view
+  for (MUS in MUS_group) {
+    read_and_plot(MUS, Okabe_Ito[i])
 
-#export rotation by frame for video
-for (i in 1:240){
-  play3d( spin3d( axis = c(0, 0, 10), rpm = 1.2), duration = 2)
-#  print (i)
-  #save a snapshot
-  filename <- paste("pictures/Video_sg2l_Mus_Outlines1_spin", formatC(i, digits = 1, flag = "0"), ".png", sep = "")
-  rgl.snapshot(filename)
-}
+    if (i == length(Okabe_Ito)) {
+      i = 1
+    }
+    else {
+      i = i+1
+    }
+  }
 
+  #export rotation by frame for video
+  for (l in 1:33){
+    play3d( spin3d( axis = c(0, 0, 10), rpm = 2), duration =1 )
+    print (l)
+    #save a snapshot
+    filename <- paste("./pictures/Video_sg2l_Mus_Outlines_spin",  formatC(i, digits = 1, flag = "0"), MUS_group[1], "_frame", formatC(l, digits = 1, flag = "0"), ".png", sep = "")
+    #print(filename)
+    rgl.snapshot(filename)
+  }
+
+}
