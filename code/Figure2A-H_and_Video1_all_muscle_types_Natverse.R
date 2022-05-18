@@ -304,4 +304,11 @@ for (j in c(79:89)){    #iterate through the celltype list
   }
 }
 
+#read circular pygidial muscle
+MUSring_pyg = nlapply(read.neurons.catmaid("^celltype_non_neuronal78$", pid=11, 
+                                      fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+plot3d(MUSring_pyg, soma=T, lwd=3, col='#CC79A7', add=T, alpha=1, forceClipregion = TRUE)
+next3d(clear=F)
+plot3d(MUSring_pyg, soma=T, lwd=3, col='#CC79A7', add=T, alpha=1, forceClipregion = TRUE)
+
 rgl.snapshot(paste("MUScelltypes_gut_pharynx_head", i, ".png", sep = ""))
