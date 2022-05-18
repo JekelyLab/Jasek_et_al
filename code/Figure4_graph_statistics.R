@@ -12,15 +12,14 @@ library(igraph)
 library(leiden)
 #https://github.com/TomKellyGenetics/leiden
 library(reticulate)
-wdir <- getwd()
+
 start <- Sys.time()
 library(beepr) #to run beep() after a section finished
-<<<<<<< HEAD
-
-=======
 library(cowplot)
 library(pdftools)
 library(ggplot2)
+library(magick)
+library(pdftools)
 
 #cb friendly color palette
 {
@@ -33,7 +32,7 @@ library(ggplot2)
   display.brewer.all(colorblindFriendly = TRUE)
   brewer12 <- brewer.pal(12, 'Paired')
 }
->>>>>>> f8c31504ff7e5dd031c6767e47e1039051734761
+
 
 
 #read csv exported from gephi as table
@@ -130,13 +129,9 @@ Erdös_graphs_1000 <- lapply(1:1000, function(x)
                      type = "gnm",directed = FALSE,loops = FALSE))
 
 #do the same but assign weights from the desmo graph
-<<<<<<< HEAD
-erdos_graphs_1000_wg <- lapply(1:1000, function(x) {
-  erdos_graph <- erdos.renyi.game(length(V(desmo_conn_graph_largest)), 
-=======
+
 Erdös_graphs_1000_wg <- lapply(1:1000, function(x) {
-  Erdös_graph <- Erdös.renyi.game(length(V(desmo_conn_graph_largest)), 
->>>>>>> f8c31504ff7e5dd031c6767e47e1039051734761
+  Erdös_graph <- erdos.renyi.game(length(V(desmo_conn_graph_largest)), 
                                   length(E(desmo_conn_graph_largest)),
                                   type = "gnm",directed = FALSE,loops = FALSE)
   E(Erdös_graph)$weight <- E(desmo_conn_graph_largest)$weight
@@ -724,8 +719,8 @@ Sys.time()-start
 
 
 
-#############################################
-#create multi-panel figure
+# create multi-panel figure -----------------------------------------------
+
 
 Fig4A <- ggdraw() + draw_image(magick::image_read_pdf("images/Degree_distr.pdf", 
                   density = 300))
@@ -775,7 +770,7 @@ Fig4H <- ggdraw() + draw_image(magick::image_read_pdf("images/Meandistance_value
   draw_label("Erdös", x = 0.6, y = 0.74, fontfamily = "sans", size = 8)
 
 
-{ Fig4 <- plot_grid(Fig4A,Fig4B,Fig4C,Fig4D,Fig4E,Fig4F,Fig4G,Fig4H,
+Fig4 <- plot_grid(Fig4A,Fig4B,Fig4C,Fig4G,Fig4H,Fig4D,Fig4E,Fig4F,
                     ncol=4,
                     rel_heights = c(1, 1,1,1),
                     labels=c("A", "B","C","D","E","F","G","H"),
@@ -783,11 +778,11 @@ Fig4H <- ggdraw() + draw_image(magick::image_read_pdf("images/Meandistance_value
                     label_fontfamily = "sans", label_fontface = "plain") + 
     theme(plot.margin = unit(c(1, 1, 1, 3), units = "pt"))
   
-  ggsave("figures/Figure_4.pdf", limitsize = FALSE, 
+ggsave("figures/Figure_4.pdf", limitsize = FALSE, 
          units = c("px"), Fig4, width = 2600, height = 1400)
-  ggsave("figures/Figure_4.png", limitsize = FALSE, 
+ggsave("figures/Figure_4.png", limitsize = FALSE, 
          units = c("px"), Fig4, width = 2600, height = 1400)
-}
+
 
 
 
