@@ -11,7 +11,7 @@ library(natverse)
 # catmaid connection, needs username, password AND token - weird!
 # can run this in a separate file using source function  source("~/R/conn.R")
 catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
-setwd("/work_directory/")
+
 
 #############################
 #define function to retrieve skids from a neuron list based on one to three annotations
@@ -70,17 +70,27 @@ colnames(n_cells)<-non_neuronal_celltype_names[37:89]
 #initialise new active plotting device
 plot.new()
 #plot heatmap
-heatmaply(n_cells,Rowv=F, Colv=F,
+hm <- heatmaply(n_cells,Rowv=F, Colv=F,
           cellnote=ifelse(n_cells==0, NA, n_cells),
-          cellnote_size=10,
+          cellnote_size=17,
           cellnote_textposition='middle center',
           col=c('white','grey20','#1098CD','red'),
           column_text_angle = 90,
           fontsize_col = 12,fontsize_row = 10)
-
+hm
 #save table
-write.csv(n_cells, file = "Number_of_muscle_cells_per_segment_and_body_side.csv",
+write.csv(n_cells, file = "supplements/Figure2I_source_data_1.csv",
           quote = FALSE,
           eol = "\n", na = "NA",
           fileEncoding = "")
+
+
+#save output of viewer to html using the Export/save as web page drop down menu in the Viewer
+
+#save as html
+webshot2::webshot(url="pictures/Muscle_Celltypes_numbers.html",
+                  file="pictures/Muscle_Celltypes_numbers.png",
+                  cliprect = c(94,0,1415, 530), zoom=5,
+                  vwidth = 1600,
+                  vheight = 744)
 
