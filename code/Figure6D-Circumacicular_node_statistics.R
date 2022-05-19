@@ -18,8 +18,6 @@ cbind_dif <- function(x = list()){
         return(as.data.frame(res))
 }
 
-setwd("/working_directory/")
-
 
 WD_circumacicular <- c(83,51,50,50,48,47,45,43,42,41,40,40,39,39,38,38,36,36,34,34,33,33,31,31,31,30,29,29,29,28,25,23,22,21,21,20,19,19,18,17,17,15,15,15,14,12,12,12,12,10,8,4,3,2)
 WD_MUSchae_notAac <- c(67,60,56,49,40,38,31,31,30,29,27,24,24,23,19,17,17,16,16,15,10,10,9,9)
@@ -97,3 +95,7 @@ D_cbind %>%
         theme(axis.title.y = element_text(size=20))
 ggsave('D_weights_cells.pdf', width=5, height=6)
 ggsave('D_weights_cells.png', width=5, height=6)
+
+#save source data as suppl file
+
+write_csv2(WD_cbind, "supplements/Figure6_source_data1.csv")
