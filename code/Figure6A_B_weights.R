@@ -38,7 +38,6 @@ rownames(desmo_conn_matrix) <- skids
 desmo_conn_graph <- graph_from_adjacency_matrix(desmo_conn_matrix, mode = "undirected", weighted = T,
                                                 diag = TRUE, add.colnames = NULL, add.rownames = NA)
 
-
 ###############################
 #graph analysis
 ##############################
