@@ -1,16 +1,8 @@
 #R code to generate the graph in Figure2 panel I on the segmentaldistributionof muscles in Jasek et al. 2021 Platynereis desmosomal connectome paper
 #Uses Natverse and accesses the data on catmaid
-#Gaspar Jekely March 2021
+#Gaspar Jekely
 
-rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memrory and report the memory usage
-
-# load nat and all associated packages, incl catmaid
-library(natverse)
-
-# catmaid connection, needs username, password AND token - weird!
-# can run this in a separate file using source function  source("~/R/conn.R")
-catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
+source("code/Packages_and_Connection.R")
 
 
 #############################
@@ -79,7 +71,7 @@ hm <- heatmaply(n_cells,Rowv=F, Colv=F,
           fontsize_col = 12,fontsize_row = 10)
 hm
 #save table
-write.csv(n_cells, file = "supplements/Figure2I_source_data_1.csv",
+write.csv(n_cells, file = "source_data/Figure2I_source_data_1.csv",
           quote = FALSE,
           eol = "\n", na = "NA",
           fileEncoding = "")
