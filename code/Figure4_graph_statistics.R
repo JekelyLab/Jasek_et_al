@@ -1,41 +1,16 @@
 #quantification of the modularity of the desmosomal connectome and random scale-free and Erdös graphs of similar statistics
-#code for Figure4 of the Jasek et al 2021 desmosomal connectome paper
-#Gaspar Jekely 2021 March
+#code for Figure4 of the Jasek et al desmosomal connectome paper
+#Gaspar Jekely
 
-rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memrory and report the memory usage.
-Sys.setenv('R_MAX_VSIZE'=8000000000)
+source("code/Packages_and_Connection.R")
 
 # Load packages
-library(igraph)
-#https://rdrr.io/cran/igraph/man/
-library(leiden)
-#https://github.com/TomKellyGenetics/leiden
 library(reticulate)
-
 start <- Sys.time()
-library(beepr) #to run beep() after a section finished
-library(cowplot)
-library(pdftools)
-library(ggplot2)
-library(magick)
-library(pdftools)
-
-#cb friendly color palette
-{
-  #From Color Universal Design (CUD): https://jfly.uni-koeln.de/color/
-  Okabe_Ito <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", 
-                 "#CC79A7", "#000000")
-  Tol_muted <- c('#88CCEE', '#44AA99', '#117733', '#332288', '#DDCC77', '#999933',
-                 '#CC6677', '#882255', '#AA4499', '#DDDDDD')
-  library(RColorBrewer)
-  display.brewer.all(colorblindFriendly = TRUE)
-  brewer12 <- brewer.pal(12, 'Paired')
-}
 
 
+# read csv exported from gephi as table -----------------------------------
 
-#read csv exported from gephi as table
 #this is also in the github page as desmosomal-connectome.csv
 desmo_conn_table <- read.csv('data/adjacency_matrix_desmosomal_connectome_CATMAID.csv', sep = ",", header = T) 
 #desmo_conn_table <- read.csv('data/desmosomal-connectome.csv', sep = ";", header = T) 
@@ -53,11 +28,7 @@ neuro_conn_matrix <- as.matrix(neuro_conn_table[2:1043],nrow=nrow(neuro_conn_tab
 neuro_conn_graph <- graph_from_adjacency_matrix(neuro_conn_matrix, mode = "undirected", weighted = T,
                                                 diag = TRUE, add.colnames = NULL, add.rownames = NA)
 
-
-###############################
-#graph analysis
-##############################
-
+# graph analysis ----------------------------------------------------------
 
 #check connected componenets
 cl <- components(desmo_conn_graph)
@@ -118,9 +89,7 @@ modularity_leiden <- function(graph) {
   modularity(graph,leiden(graph, resolution_parameter = 0.95))
 }
 
-
-#######################################
-#generate and analyse Erdös-Renyi graphs
+# generate and analyse Erdös-Renyi graphs ---------------------------------
 
 #sample 1000 Erdös graphs with same number of nodes and edges as the desmosomal graph 
 Erdös_graphs_1000 <- lapply(1:1000, function(x) 
@@ -171,8 +140,8 @@ beep()
 
 beep()
 
-################################
-#subsample and quantify the desmosomal graph
+
+# subsample and quantify the desmosomal graph -----------------------------
 
 #sample subgraphs from the weighted desmosomal graph
 desmo_subgraphs_1000 <- lapply(1:1000, function(x)
@@ -221,8 +190,7 @@ eigen_centr_desmo <- lapply(desmo_subgraphs_1000, function(x) eigen_centrality(x
 
 beep()
 
-################################
-#subsample and quantify the connectome graph
+# subsample and quantify the connectome graph -----------------------------
 
 #sample subgraphs from the weighted connectome graph
 neuro_conn_subgraphs_1000 <- lapply(1:1000, function(x)
@@ -270,13 +238,9 @@ transitivity_neuro_conn_bi <- lapply(neuro_conn_bi_subgraphs_1000, function(x) t
 #calculate eigen vector centrality 
 eigen_centr_neuro_conn <- lapply(neuro_conn_subgraphs_1000, function(x) eigen_centrality(x, directed = FALSE, weights = NA, scale = TRUE))
 
-
 beep()
 
-
-
-#######################################
-#generate and quantify scale-free graphs
+# generate and quantify scale-free graphs ---------------------------------
 
 #sample 1000 scale-free graphs with same number of edges and nodes as the desmosomal graph and return their modularity score in a list
 sf_graphs_1000 <- lapply(1:1000, function(x) 
@@ -334,8 +298,8 @@ modularity_sf_wg <- lapply(sf_graphs_wg_1000, function(x) modularity_leiden(x))
 eigen_centr_sf <- lapply(sf_graphs_1000, function(x) eigen_centrality(x, directed = FALSE, weights = NA, scale = TRUE))
 
 beep()
-#####################################
-#graphs with preferential attachment
+
+# graphs with preferential attachment -------------------------------------
 
 #sample 1000 preferential attachment graphs with same number of nodes and very similar number of edges as the desmosomal graph
 pa_graphs_1000 <- lapply(1:1000, function(x) x=(sample_pa_age(
@@ -388,11 +352,7 @@ eigen_centr_pa_wg <- lapply(pa_graphs_1000_wg, function(x) eigen_centrality(x, d
 
 beep()
 
-
-#########################
-#PLOTTING
-#########################
-
+# PLOTTING ----------------------------------------------------------------
 
 #############################################
 #plot histograms of modularity scores
