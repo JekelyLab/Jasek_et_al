@@ -1,21 +1,12 @@
-#R code to generate figure panels for Figure 1 figure supplement 2 in Jasek et al. 2021 Platynereis desmosomal connectome paper
+#R code to generate figure panels for Figure 1 figure supplement 2 in Jasek et al. Platynereis desmosomal connectome paper
 #Uses Natverse and accesses the data on catmaid
-#Gaspar Jekely March 2021
+#Gaspar Jekely
 
-rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memrory and report the memory usage.
-Sys.setenv('R_MAX_VSIZE'=8000000000)
-options(timeout = 4000000) 
+source("code/Packages_and_Connection.R")
 
-# load nat and all associated packages, incl catmaid
-library(natverse)
+# retrieve cells and smooth them with sigma 6000 --------------------------
 
-# catmaid connection, needs username, password AND token - weird!
-# can run this in a separate file using source function  source("~/R/conn.R")
-catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
-setwd("/Users/gj274/OneDrive\ -\ University\ of\ Exeter/Paper/Muscles/Figures/Figure1_figure_supplement2_Aciculae_chaetae/")
-
-#retrieve cells and smooth them with sigma 6000
+{
 chaeta = nlapply(read.neurons.catmaid("^celltype_non_neuronal22$", pid=11, 
                                       fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
 
@@ -37,29 +28,13 @@ noER_circumchaetal<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal27$", 
 EC_circumchaetal<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal28$", pid=11, fetch.annotations = T), 
                               function(x) smooth_neuron(x, sigma=6000))	
 
-
-
-
-# exclude neurons with no soma or multiple soma tags - necessary for clustering
-sum = summary(segment_2)
-np = np_raw[rownames(sum[sum$nsoma==1,])]
-np[1:2]
-# print rows of summary table for neurons with no soma or multiple tags
-sum[sum$nsoma!=1,]
-two_soma_skids = as.numeric(rownames(sum[sum$nsoma==2,]))
-two_soma_skids
-
-#load volumes based on catmaid id
 outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"),
                               invertFaces = T, conn = NULL, pid = 11)
 yolk <- catmaid_get_volume(4, rval = c("mesh3d", "catmaidmesh", "raw"),
                            invertFaces = T, conn = NULL, pid = 11)
+}
 
-
-
-#############################################
-#3d plotting of neurons
-#############################################
+# 3d plotting -------------------------------------------------------------
 
 #help to pick some colors
 library(RColorBrewer)
@@ -110,10 +85,9 @@ plot3d(circumacicular, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        col="#FD8D3C")
 
 #make a snapshot to the working directory
-rgl.snapshot("acicula_circumacicular.png")
+rgl.snapshot("pictures/acicula_circumacicular.png")
 
-##################################################
-#plot chaetae with circumchaetal
+# plot chaetae with circumchaetal -----------------------------------------
 
 #help to pick some colors
 brewer.pal(9, 'Set3')
@@ -177,7 +151,7 @@ plot3d(EC_circumchaetal, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
 
 
 #make a snapshot to the working directory
-rgl.snapshot("chaeta_circumchaetal.png")
+rgl.snapshot("pictures/chaeta_circumchaetal.png")
 
 
 #######################################################
@@ -201,7 +175,7 @@ plot3d(acicula, WithConnectors = T, WithNodes = F, soma=T, lwd=2,
 plot3d(circumacicular, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
        col="#FD8D3C")
-rgl.snapshot("acicula_circumacicular_desmosomes_closeup.png")
+rgl.snapshot("pictures/acicula_circumacicular_desmosomes_closeup.png")
 
 clear3d()
 
@@ -231,14 +205,12 @@ plot3d(noER_circumchaetal, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
 plot3d(EC_circumchaetal, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
        col="#FCCDE5")
+rgl.snapshot("pictures/chaeta_circumchaetal_desmosomes_closeup.png")
+close3d()
+close3d()
 
 
-rgl.snapshot("chaeta_circumchaetal_desmosomes_closeup.png")
-
-
-
-###################################################
-#we retrieve and plot the other cell types and basal lamina from the desmosomal connectome that connect to muscles
+# retrieve and plot the other cell types and basal lamina from  --------
 
 annot_desm_non_muscle <- catmaid_get_annotations_for_skeletons('^desmosome_connectome_non_muscle$', pid = 11)
 head(annot_desm_non_muscle)
@@ -265,85 +237,81 @@ par3d(windowRect = c(20, 30, 600, 800)); nview3d("ventral", extramat=rotationMat
 par3d(zoom=0.52)
 rgl.bg(color='white')
 #plot ciliated cells from desmosomal connectome
-{
-  clear3d()
-  #plot meshes and background reference cells
-  plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+clear3d()
+#plot meshes and background reference cells
+plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.02,
        col="#E2E2E2") 
-  plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
        col="#E2E2E2") 
-  plot3d(cilia_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(cilia_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col=hcl.colors(length(cilia_with_desm), 'Reds'))
-  rgl.snapshot("cilia_with_desm.png")
-}
+rgl.snapshot("pictures/cilia_with_desm.png")
+
 
 #plot glia cells from desmosomal connectome
-{
-  clear3d()
-  #plot meshes and background reference cells
-  plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+clear3d()
+#plot meshes and background reference cells
+plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.02,
          col="#E2E2E2") 
-  plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
          col="#E2E2E2") 
-  plot3d(glia_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(glia_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col=hcl.colors(length(glia_with_desm), 'Blues'))
-  rgl.snapshot("glia_with_desm.png")
-}
+rgl.snapshot("pictures/glia_with_desm.png")
+
 
 
 
 #plot EC cells from desmosomal connectome
-{
-  clear3d()
-  #plot meshes and background reference cells
-  plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+clear3d()
+#plot meshes and background reference cells
+plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.02,
          col="#E2E2E2") 
-  plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
          col="#E2E2E2") 
-  plot3d(EC_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(EC_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
          col=hcl.colors(length(EC_with_desm), 'Purples 3'))
-  rgl.snapshot("EC_with_desm.png")
-}
+rgl.snapshot("pictures/EC_with_desm.png")
+
 
 #plot pigment cells from desmosomal connectome
-{
-  clear3d()
-  #plot meshes and background reference cells
-  plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+clear3d()
+#plot meshes and background reference cells
+plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.02,
          col="#E2E2E2") 
-  plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
          col="#E2E2E2") 
-  plot3d(pigment_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(pigment_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
          col=hcl.colors(length(pigment_with_desm), 'Teal'))
-  rgl.snapshot("pigment_with_desm.png")
-}
+rgl.snapshot("pictures/pigment_with_desm.png")
+
 
 
 #plot basal lamina from desmosomal connectome
-{
-  clear3d()
-  #plot meshes and background reference cells
-  plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+clear3d()
+#plot meshes and background reference cells
+plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.02,
          col="#E2E2E2") 
-  plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
          col="#E2E2E2") 
-  plot3d(bl_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(bl_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
          col=hcl.colors(length(bl_with_desm), 'Spectral'))
-  rgl.snapshot("bl_with_desm.png")
-}
+rgl.snapshot("bl_with_desm.png")
+close3d()
+
 
