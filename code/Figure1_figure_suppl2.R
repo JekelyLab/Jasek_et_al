@@ -448,6 +448,6 @@ ggsave("figures/Figure1_figSuppl2.pdf", limitsize = FALSE,
        units = c("px"), Figure1_figSuppl2, width = 3600, height = 2100)
 
 
-ggsave("figures/Figure1.png", limitsize = FALSE, 
-       units = c("px"), Figure1, width = 3600, height = 2100, bg = 'white')
+ggsave("figures/Figure1_figSuppl2.png", limitsize = FALSE, 
+       units = c("px"), Figure1_figSuppl2, width = 3600, height = 2100, bg = 'white')
 
