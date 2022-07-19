@@ -311,7 +311,143 @@ plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
 plot3d(bl_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
          rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
          col=hcl.colors(length(bl_with_desm), 'Spectral'))
-rgl.snapshot("bl_with_desm.png")
+rgl.snapshot("pictures/bl_with_desm.png")
 close3d()
 
+# assemble figure --------------------------------------------------------
+
+panel_acic_circ <- ggdraw() + draw_image(readPNG("pictures/acicula_circumacicular.png")) +  
+  draw_label("aciculae", x = 0.4, y = 0.99, size = 10, hjust = 0) +
+  draw_label("circumacicular", x = 0.4, y = 0.94, size = 10, hjust = 0, color = '#FD8D3C') +
+  geom_segment(aes(x = 0.05,
+                 y = 0.95,
+                 xend = 0.05,
+                 yend = 0.87),
+             arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) +
+  geom_segment(aes(x = 0.05,
+                   y = 0.87,
+                   xend = 0.05,
+                   yend = 0.95),
+               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) + 
+  draw_label("a", x = 0.05, y = 0.98, size = 8) +
+  draw_label("p", x = 0.05, y = 0.84, size = 8) +
+  geom_segment(aes(x = 0.85,
+                   y = 0.95,
+                   xend = 0.93,
+                   yend = 0.95),
+               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) +
+  geom_segment(aes(x = 0.93,
+                   y = 0.95,
+                   xend = 0.85,
+                   yend = 0.95),
+               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) + 
+  draw_label("v", x = 0.82, y = 0.95, size = 8) +
+  draw_label("d", x = 0.96, y = 0.95, size = 8) 
+
+panel_chae_circ <- ggdraw() + 
+  draw_image(readPNG("pictures/chaeta_circumchaetal.png")) + 
+  draw_label("chaetae", x = 0.4, y = 0.99, size = 10, hjust = 0) +
+  draw_label("hemichaetal", x = 0.4, y = 0.95, size = 10, 
+             hjust = 0, color = '#FD8D3C') +
+  draw_label("ER circumchaetal", x = 0.4, y = 0.91, size = 10, 
+             hjust = 0, color = '#80B1D3') +
+  draw_label("noER circumchaetal", x = 0.4, y = 0.87, size = 10, 
+             hjust = 0, color = '#B3DE69') +
+  draw_label("EC circumchaetal", x = 0.4, y = 0.83, size = 10, 
+             hjust = 0, color = '#FCCDE5')  +
+  draw_label("neuropodia", x = 0.54, y = 0.68, size = 10)  +
+  draw_label("notopodia", x = 0.88, y = 0.64, size = 10)  +
+  geom_segment(aes(x = 0.05,
+                   y = 0.95,
+                   xend = 0.05,
+                   yend = 0.87),
+               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) +
+  geom_segment(aes(x = 0.05,
+                   y = 0.87,
+                   xend = 0.05,
+                   yend = 0.95),
+               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) + 
+  draw_label("a", x = 0.05, y = 0.98, size = 8) +
+  draw_label("p", x = 0.05, y = 0.84, size = 8) +
+  geom_segment(aes(x = 0.85,
+                   y = 0.95,
+                   xend = 0.93,
+                   yend = 0.95),
+               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) +
+  geom_segment(aes(x = 0.93,
+                   y = 0.95,
+                   xend = 0.85,
+                   yend = 0.95),
+               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) + 
+  draw_label("v", x = 0.82, y = 0.95, size = 8) +
+  draw_label("d", x = 0.96, y = 0.95, size = 8) +
+  draw_line(x = c(0.53, 0.63), y = c(0.65, 0.62), size = 0.2) +
+  draw_line(x = c(0.53, 0.62), y = c(0.65, 0.5), size = 0.2) +
+  draw_line(x = c(0.53, 0.61), y = c(0.65, 0.3), size = 0.2) +
+  draw_line(x = c(0.87, 0.76), y = c(0.6, 0.62), size = 0.2) +
+  draw_line(x = c(0.87, 0.75), y = c(0.6, 0.5), size = 0.2) +
+  draw_line(x = c(0.87, 0.74), y = c(0.6, 0.3), size = 0.2) +
+  draw_line(x = c(0.2, 0.45, 0.45, 0.2, 0.2), 
+            y = c(0.57, 0.57, 0.41, 0.41, 0.57), size = 0.3, linetype = 2)
+  
+
+
+panel_acic_circ_close <- ggdraw() + 
+  draw_image(readPNG("pictures/acicula_circumacicular_desmosomes_closeup.png")) + 
+  draw_label("aciculae", x = 0.97, y = 0.8, hjust = 1, size = 10) +
+  draw_label("circumacicular", x = 0.97, y = 0.72, size = 10, 
+       hjust = 1, color = '#FD8D3C')  +
+  draw_label("desmosomes", x = 0.97, y = 0.64, size = 10, 
+             hjust = 1, color = '#FFFFFF') 
+panel_chae_circ_close <- ggdraw() + 
+  draw_image(readPNG("pictures/chaeta_circumchaetal_desmosomes_closeup.png")) + 
+  draw_label("aciculae", x = 0.97, y = 0.82, hjust = 1, size = 10) +
+  draw_label("chaetae", x = 0.97, y = 0.74, size = 10, 
+             hjust = 1, color = 'grey40')  +
+  draw_label("desmosomes", x = 0.97, y = 0.66, size = 10, 
+             hjust = 1, color = '#FFFFFF') 
+
+panel_close <- ggdraw(panel_acic_circ_close / panel_chae_circ_close)
+
+panel_cilia <- ggdraw() + 
+  draw_image(readPNG("pictures/cilia_with_desm.png")) + 
+  draw_label("ciliary band cells", x = 0.45, y = 0.99, size = 10) 
+
+panel_glia <- ggdraw() + 
+  draw_image(readPNG("pictures/glia_with_desm.png")) + 
+  draw_label("glia cells", x = 0.45, y = 0.99, size = 10) 
+
+panel_EC <- ggdraw() + 
+  draw_image(readPNG("pictures/EC_with_desm.png")) + 
+  draw_label("epidermal cells", x = 0.45, y = 0.99, size = 10)
+panel_pigment <- ggdraw() + 
+  draw_image(readPNG("pictures/pigment_with_desm.png")) + 
+  draw_label("pigment cells", x = 0.45, y = 0.99, size = 10)
+panel_bl <- ggdraw() + 
+  draw_image(readPNG("pictures/bl_with_desm.png")) + 
+  draw_label("basal lamina fragments", x = 0.45, y = 0.99, size = 10)
+
+
+layout <- "
+AAAAAAABBBBBBBCCCCCC
+AAAAAAABBBBBBBCCCCCC
+EEEEFFFFGGGGHHHHIIII
+"
+
+Figure1_figSuppl2 <- panel_acic_circ + panel_chae_circ + panel_close +
+  panel_cilia +  panel_EC + panel_glia + panel_pigment + panel_bl +
+  plot_layout(design = layout, 
+              guides = 'collect', 
+              tag_level = 'new',
+              heights = c(0.5, 0.5, 1)) +
+  plot_annotation(tag_levels = 'A') & 
+  theme(plot.tag = element_text(size = 12, face='plain'))
+
+
+ggsave("figures/Figure1_figSuppl2.pdf", limitsize = FALSE, 
+       units = c("px"), Figure1_figSuppl2, width = 3600, height = 2100)
+
+
+ggsave("figures/Figure1.png", limitsize = FALSE, 
+       units = c("px"), Figure1, width = 3600, height = 2100, bg = 'white')
 
