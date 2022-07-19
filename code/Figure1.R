@@ -108,7 +108,7 @@ close3d()
 
 
 
-# assembple figure --------------------------------------------------------
+# assemble figure --------------------------------------------------------
 
 panelSEM <- ggdraw() + draw_image(readPNG("pictures/Platynereis_SEM_inverted2.png")) + 
   draw_label("Platynereis", x = 0.3, y = 0.99, size = 10, fontface = "italic") + 
