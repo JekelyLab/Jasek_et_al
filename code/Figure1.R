@@ -105,3 +105,72 @@ rgl.snapshot("pictures/desmosomal_connectome_mus_partners.png")
 close3d()
 }
 
+
+
+
+# assembple figure --------------------------------------------------------
+
+panelSEM <- ggdraw() + draw_image(readPNG("pictures/Platynereis_SEM_inverted2.png")) + 
+  draw_label("Platynereis", x = 0.3, y = 0.99, size = 10, fontface = "italic") + 
+  draw_label("larva", x = 0.55, y = 0.99, size = 10, fontface = "plain")
+
+panel_mus <- ggdraw() + 
+  draw_image(readPNG("pictures/desmosomal_connectome_mus.png")) + 
+  draw_label("all muscles", x = 0.3, y = 0.99, size = 10) +
+  draw_label("aciculae", x = 0.9, y = 0.28, size = 8) +
+  draw_line(
+    x = c(0.58, 0.8, 0.79),
+    y = c(0.14, 0.28, 0.42), size = 0.3) +
+  geom_segment(aes(x = 0.1,
+                   y = 0.9,
+                   xend = 0.1,
+                   yend = 0.82),
+               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) +
+  geom_segment(aes(x = 0.1,
+                   y = 0.82,
+                   xend = 0.1,
+                   yend = 0.9),
+               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) + 
+  draw_label("a", x = 0.1, y = 0.93, size = 8) +
+  draw_label("p", x = 0.1, y = 0.79, size = 8) 
+
+
+panel_des <- ggdraw() + 
+  draw_image(readPNG("pictures/desmosomal_connectome_mus_desmosomes.png")) + 
+  draw_label("all desmosomes", x = 0.4, y = 0.99, size = 10)
+
+panel_des_partners <- ggdraw() + 
+  draw_image(readPNG("pictures/desmosomal_connectome_mus_partners.png")) + 
+  draw_label("desmosomal partners", x = 0.45, y = 0.99, size = 10)
+
+panel_des_conn <- ggdraw() + 
+  draw_image(readPNG("pictures/full-graph2-darker.png")) + 
+  draw_label("desmosomal connectome", x = 0.45, y = 0.99, size = 10) + 
+  draw_label("#desmosomes", x = 0.86, y = 0.92, size = 8) + 
+  draw_label("1", x = 0.84, y = 0.88, size = 8) + 
+  draw_label("83", x = 0.84, y = 0.84, size = 8) +
+  draw_line(x = c(0.88, 0.95), y = c(0.88, 0.88), size = 0.3, color = 'grey') +
+  draw_line(x = c(0.88, 0.95), y = c(0.84, 0.84), size = 0.8, color = 'grey')
+
+panel_desmo_EM <- ggdraw() + 
+  draw_image(readPNG("pictures/desmo_EM_Fig1.png"))
+
+layout <- "
+AAAAAABBBBBBCCCCCCDDDDDD
+EEEEEEEEEEEEEEEEFFFFFFFF
+"
+
+Figure1 <- panelSEM + panel_mus + panel_des + panel_des_partners +
+  panel_desmo_EM + panel_des_conn +
+  plot_layout(design = layout, guides = 'collect', heights = c(1,1)) +
+  plot_annotation(tag_levels = 'A') & 
+  theme(plot.tag = element_text(size = 12, face='plain'))
+
+
+ggsave("figures/Figure1.pdf", limitsize = FALSE, 
+       units = c("px"), Figure1, width = 2600, height = 2000)
+
+
+ggsave("figures/Figure1.png", limitsize = FALSE, 
+       units = c("px"), Figure1, width = 2600, height = 2000, bg = 'white')
+
