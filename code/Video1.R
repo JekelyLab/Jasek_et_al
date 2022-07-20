@@ -233,7 +233,7 @@ plot3d(chaeta, WithConnectors = F, WithNodes = F,
        soma=F, lwd=2, add=T, alpha=0.6, col="black")
 
 #full rotation
-for (i in 100:330){
+for (i in 100:257){
   play3d( spin3d( axis = c(0, 0, 10), rpm = 0.2), duration = 2)
   next3d(clear=F)
   play3d( spin3d( axis = c(0, 0, 10), rpm = 0.2), duration = 2)
@@ -251,5 +251,5 @@ av::av_encode_video(paste('videos/', list.files("videos", '*.png'), sep = ""),
                     output = 'videos/Video1.mp4')
 
 
-#delete individual video frames
 file.remove(paste('videos/', list.files("videos", '*.png'), sep = ""))
+#delete individual video frames
