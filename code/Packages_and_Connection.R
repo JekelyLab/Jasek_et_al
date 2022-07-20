@@ -25,6 +25,11 @@ library(colorspace)   ## hsv colorspace manipulations
 
 library(png)
 library(patchwork)
+
+
+#create directory for R-generated pictures for figure panels (ignored by git)
+dir.create("pictures")
+
 # catmaid connection, needs username, password AND token - weird!
 conn <- source("~/R/conn.R")
 #for larger calls we need to use http/1, see https://www.gitmemory.com/issue/natverse/rcatmaid/158/641537466
