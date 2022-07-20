@@ -110,7 +110,7 @@ close3d()
 
 # assemble figure --------------------------------------------------------
 
-panelSEM <- ggdraw() + draw_image(readPNG("pictures/Platynereis_SEM_inverted2.png")) + 
+panelSEM <- ggdraw() + draw_image(readPNG("images_notR/Platynereis_SEM_inverted2.png")) + 
   draw_label("Platynereis", x = 0.3, y = 0.99, size = 10, fontface = "italic") + 
   draw_label("larva", x = 0.55, y = 0.99, size = 10, fontface = "plain")
 
@@ -153,7 +153,7 @@ panel_des_conn <- ggdraw() +
   draw_line(x = c(0.88, 0.95), y = c(0.84, 0.84), size = 0.8, color = 'grey')
 
 panel_desmo_EM <- ggdraw() + 
-  draw_image(readPNG("pictures/desmo_EM_Fig1.png"))
+  draw_image(readPNG("images_notR/desmo_EM_Fig1.png"))
 
 layout <- "
 AAAAAABBBBBBCCCCCCDDDDDD
