@@ -99,10 +99,6 @@ plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
 #chatetae were only plotted for the chaetal muscle group
 #plot3d(chaeta, WithConnectors = F, WithNodes = F, soma=F, lwd=1,rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.4,col="black")
 
-#add a text label
-texts3d(35000,0, 0, text = "ventral view", col="black", cex = 1.5)
-
-
 #move to next panel in rgl window
 next3d(clear=F)
 #define view
@@ -129,6 +125,8 @@ plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
 #add a text label
 texts3d(135000,100000, 8020, text = "left view", col="black", cex = 1.5)
 next3d(clear=F)
+#add a text label
+texts3d(35000,0, 0, text = "ventral view", col="black", cex = 1.5)
 
 
 #define the lighting
@@ -139,10 +137,6 @@ bg3d("gray100")
 next3d(clear=F)
 rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rgl.light(-60, -30, specular = "gray5")
 
-
-#add cell type text
-next3d(clear=F); 
-#texts3d(95000,0, 6500, text = "all muscles", col="black", cex = 1.5)
 rgl.snapshot("videos/Video1_MUScelltypes_all_background.png"); next3d(clear=F)
 
 #these are the annotation numbers for the different muscle celltypes in catmaid, same in our lists
@@ -153,6 +147,9 @@ rgl.snapshot("videos/Video1_MUScelltypes_all_background.png"); next3d(clear=F)
 #transverse 74 - brown
 #longitudinal 75-77 - Terrain 2
 #digestive-head 78-89 - Warm
+rgl.pop(type = "shapes")
+rgl.pop(type = "shapes")
+next3d(clear=F)
 }
 
 #plot frames with individual muscle types
@@ -179,7 +176,8 @@ for (j in c(37:89)){    #iterate through the celltype list
   cells_smoothed=nlapply(cells, function(x) smooth_neuron(x, sigma=6000))
   #plot cells
   plot3d(cells_smoothed, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-
+  rgl.pop(type = "shapes")
+  
   next3d(clear=F)
   nview3d("right", extramat=rotationMatrix(pi, 0, 1, 1))
   par3d(zoom=0.55)
@@ -196,9 +194,17 @@ for (j in c(37:89)){    #iterate through the celltype list
   print(name1)
   #add a text label
   texts3d(115000,30000, 8020, text = name1, col=color[counter], cex = 1.5)
+  texts3d(135000,100000, 8020, text = "left view", col="black", cex = 1.5)
+  next3d(clear=F)
+  #add a text label
+  texts3d(35000,0, 0, text = "ventral view", col="black", cex = 1.5)
+  next3d(clear=F)
+  
   #make snapshot
   rgl.snapshot(paste("videos/Video1_MUScelltypes_all", j, ".png", sep = ""))
   #removes the last-added node from stack
+  rgl.pop(type = "shapes")
+  rgl.pop(type = "shapes")
   rgl.pop(type = "shapes")
 }
 
@@ -223,15 +229,18 @@ for (i in c(6:-6)){
 
 rgl.pop(type = "shapes")
 
+plot3d(chaeta, WithConnectors = F, WithNodes = F, 
+       soma=F, lwd=2, add=T, alpha=0.6, col="black")
+
 #full rotation
-for (i in 1:185){
+for (i in 100:330){
   play3d( spin3d( axis = c(0, 0, 10), rpm = 0.2), duration = 2)
   next3d(clear=F)
   play3d( spin3d( axis = c(0, 0, 10), rpm = 0.2), duration = 2)
   next3d(clear=F)
   print (i)
   #save a snapshot in the working directory
-  rgl.snapshot(paste("videos/Video1_MUScelltypes_spin", i+100, ".png", sep = ""))
+  rgl.snapshot(paste("videos/Video1_MUScelltypes_spin", i, ".png", sep = ""))
 }
 close3d()
 
