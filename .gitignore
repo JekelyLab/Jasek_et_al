@@ -5,14 +5,10 @@
 # Session Data files
 .RData
 
-#image files and figures
-
-*.png
-*.pdf
-
 #R env file
 /Figure3-figure-supplement1_Renvironment.RData
-
+/pictures
+/figures
 # User-specific files
 .Ruserdata
 
