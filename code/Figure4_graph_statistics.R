@@ -357,7 +357,7 @@ beep()
 #############################################
 #plot histograms of modularity scores
 
-pdf(file='images/modularity_weighted.pdf', width=8, height = 8)
+pdf(file='pictures/modularity_weighted.pdf', width=8, height = 8)
 {
   hist_desmo_subgraphs <- hist(as.numeric(modularity_desmo),
                               plot=FALSE)
@@ -384,7 +384,7 @@ pdf(file='images/modularity_weighted.pdf', width=8, height = 8)
 }
 dev.off()
 
-pdf(file='images/modularity_bi.pdf', width=8, height = 8)
+pdf(file='pictures/modularity_bi.pdf', width=8, height = 8)
 {
   hist_desmo_bi_subgraphs <- hist(as.numeric(modularity_desmo_bi),
                                   plot=FALSE)
@@ -433,7 +433,7 @@ packageVersion("leiden")
 #############################################
 #plot histograms of transitivity scores
 
-pdf(file='images/transitivity.pdf', width=8, height = 8)
+pdf(file='pictures/transitivity.pdf', width=8, height = 8)
 {
   hist_desmo_transitivity <- hist(as.numeric(transitivity_desmo),
                                   plot=FALSE)
@@ -470,7 +470,7 @@ median(as.numeric(transitivity_pa))
 ################################################
 #plot histograms of max clique scores
 
-pdf(file='images/3cliques.pdf', width=8, height = 8)
+pdf(file='pictures/3cliques.pdf', width=8, height = 8)
 {
   hist_desmo_cliques3 <- hist(as.numeric(max_cliques3_desmo),
                              plot=FALSE)
@@ -531,7 +531,7 @@ length(max_cliques(desmo_conn_graph, min=3))
 #########################################
 #plot degree and weight distributions
 
-pdf(file='images/Degree_distr.pdf', width=8, height = 8)
+pdf(file='pictures/Degree_distr.pdf', width=8, height = 8)
 { hist_degree_desmo <- hist(unlist(degree_desmo),
                             breaks=c(0:100), plot=FALSE)
   hist_degree_neuro_conn <- hist(unlist(degree_neuro_conn), breaks=c(0:100),plot=FALSE)
@@ -562,7 +562,7 @@ pdf(file='images/Degree_distr.pdf', width=8, height = 8)
 dev.off()
 
 
-pdf(file='images/Weight_distr.pdf', width=8, height = 8)
+pdf(file='pictures/Weight_distr.pdf', width=8, height = 8)
 {  hist_weight_desmo <- hist(unlist(weights_desmo),
                              breaks=c(0:100), plot=FALSE)
   hist_weight_neuro_conn <- hist(unlist(weights_neuro_conn), 
@@ -597,7 +597,7 @@ dev.off()
 #####################################################
 #eigenvalues
 
-pdf(file='images/Eigenvalues.pdf', width=8, height = 8)
+pdf(file='pictures/Eigenvalues.pdf', width=8, height = 8)
 {
   hist_eigen_desmo <- hist(as.numeric(lapply(eigen_centr_desmo, function(x) x[]$value)), plot=FALSE)
   hist_eigen_neuro_conn <- hist(as.numeric(lapply(eigen_centr_neuro_conn, function(x) x[]$value)), plot=FALSE)
@@ -622,7 +622,7 @@ dev.off()
 #####################################################
 #plot diameter
 
-pdf(file='images/diameter_values.pdf', width=8, height = 8)
+pdf(file='pictures/diameter_values.pdf', width=8, height = 8)
 {
   hist_diameter_desmo <- hist(as.numeric(diameter_desmo),
                               breaks=30, plot=FALSE)
@@ -651,7 +651,7 @@ dev.off()
 #####################################################
 #mean distance values
 
-pdf(file='images/Meandistance_values.pdf', width=8, height = 8)
+pdf(file='pictures/Meandistance_values.pdf', width=8, height = 8)
 {
   hist_meandist_desmo <- hist(as.numeric(meandist_desmo), plot=FALSE)
   hist_meandist_neuro_conn <- hist(as.numeric(meandist_neuro_conn), plot=FALSE)
@@ -682,46 +682,46 @@ Sys.time()-start
 # create multi-panel figure -----------------------------------------------
 
 
-Fig4A <- ggdraw() + draw_image(magick::image_read_pdf("images/Degree_distr.pdf", 
+Fig4A <- ggdraw() + draw_image(magick::image_read_pdf("pictures/Degree_distr.pdf", 
                   density = 300))
-Fig4B <- ggdraw() + draw_image(magick::image_read_pdf("images/Weight_distr.pdf", 
+Fig4B <- ggdraw() + draw_image(magick::image_read_pdf("pictures/Weight_distr.pdf", 
                                                       density = 300))
-Fig4C <- ggdraw() + draw_image(magick::image_read_pdf("images/modularity_weighted.pdf", 
+Fig4C <- ggdraw() + draw_image(magick::image_read_pdf("pictures/modularity_weighted.pdf", 
                                                       density = 300)) +
   draw_label("desmo", x = 0.9, y = 0.67, fontfamily = "sans", size = 8) +
   draw_label("neuro", x = 0.49, y = 0.6, fontfamily = "sans", size = 8) +
   draw_label("sf", x = 0.26, y = 0.5, fontfamily = "sans", size = 8) +
   draw_label("pa", x = 0.76, y = 0.5, fontfamily = "sans", size = 8) +
   draw_label("Erdös", x = 0.38, y = 0.75, fontfamily = "sans", size = 8)
-Fig4D <- ggdraw() + draw_image(magick::image_read_pdf("images/transitivity.pdf", 
+Fig4D <- ggdraw() + draw_image(magick::image_read_pdf("pictures/transitivity.pdf", 
                                                       density = 300)) +
   draw_label("desmo", x = 0.72, y = 0.71, fontfamily = "sans", size = 8) +
   draw_label("neuro", x = 0.91, y = 0.63, fontfamily = "sans", size = 8) +
   draw_label("sf", x = 0.5, y = 0.75, fontfamily = "sans", size = 8) +
   draw_label("pa", x = 0.66, y = 0.5, fontfamily = "sans", size = 8) +
   draw_label("Erdös", x = 0.3, y = 0.49, fontfamily = "sans", size = 8)
-Fig4E <- ggdraw() + draw_image(magick::image_read_pdf("images/3cliques.pdf", 
+Fig4E <- ggdraw() + draw_image(magick::image_read_pdf("pictures/3cliques.pdf", 
                                                       density = 300)) +
   draw_label("desmo", x = 0.76, y = 0.61, fontfamily = "sans", size = 8) +
   draw_label("neuro", x = 0.91, y = 0.8, fontfamily = "sans", size = 8) +
   draw_label("sf", x = 0.48, y = 0.55, fontfamily = "sans", size = 8) +
   draw_label("pa", x = 0.62, y = 0.5, fontfamily = "sans", size = 8) +
   draw_label("Erdös", x = 0.29, y = 0.75, fontfamily = "sans", size = 8)
-Fig4F <- ggdraw() + draw_image(magick::image_read_pdf("images/Eigenvalues.pdf", 
+Fig4F <- ggdraw() + draw_image(magick::image_read_pdf("pictures/Eigenvalues.pdf", 
                                                       density = 300)) +
   draw_label("desmo", x = 0.46, y = 0.71, fontfamily = "sans", size = 8) +
   draw_label("neuro", x = 0.81, y = 0.93, fontfamily = "sans", size = 8) +
   draw_label("sf", x = 0.32, y = 0.83, fontfamily = "sans", size = 8) +
   draw_label("pa", x = 0.26, y = 0.59, fontfamily = "sans", size = 8) +
   draw_label("Erdös", x = 0.22, y = 0.68, fontfamily = "sans", size = 8)
-Fig4G <- ggdraw() + draw_image(magick::image_read_pdf("images/diameter_values.pdf", 
+Fig4G <- ggdraw() + draw_image(magick::image_read_pdf("pictures/diameter_values.pdf", 
                                                       density = 300)) +
   draw_label("desmo", x = 0.88, y = 0.63, fontfamily = "sans", size = 8) +
   draw_label("neuro", x = 0.7, y = 0.55, fontfamily = "sans", size = 8) +
   draw_label("sf", x = 0.24, y = 0.84, fontfamily = "sans", size = 8) +
   draw_label("pa", x = 0.37, y = 0.58, fontfamily = "sans", size = 8) +
   draw_label("Erdös", x = 0.31, y = 0.72, fontfamily = "sans", size = 8)
-Fig4H <- ggdraw() + draw_image(magick::image_read_pdf("images/Meandistance_values.pdf", 
+Fig4H <- ggdraw() + draw_image(magick::image_read_pdf("pictures/Meandistance_values.pdf", 
                                                       density = 300)) +
   draw_label("desmo", x = 0.88, y = 0.64, fontfamily = "sans", size = 8) +
   draw_label("neuro", x = 0.25, y = 0.78, fontfamily = "sans", size = 8) +
