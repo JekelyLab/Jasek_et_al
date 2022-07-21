@@ -1,0 +1,2525 @@
+Id;Label;timeset;type;outline;outline_width;name;unit_id;Weighted Degree;Cluster
+0;137882;;ellipse;"#000000";1;MUSlong_D_sg0r_7;137882;10;0
+1;171166;;ellipse;"#000000";1;akrotroch_r2;171166;3;7
+2;201048;;ellipse;"#000000";1;covercell6clock_ant;201048;1;11
+3;273055;;ellipse;"#000000";1;covercell4clock_ant;273055;11;7
+4;306267;;ellipse;"#000000";1;nuchal_dr1;306267;6;7
+5;433286;;ellipse;"#000000";1;MUSpx;433286;15;7
+6;459705;;ellipse;"#000000";1;Glia pigmented 459705;459705;2;7
+7;502616;;ellipse;"#000000";1;MUSlong_V_sg0l_1;502616;5;5
+8;518390;;ellipse;"#000000";1;EC_V_glila_sg1_1 518391;518390;1;5
+9;518599;;ellipse;"#000000";1;paratroch_I_vl_2;518599;10;5
+10;518764;;ellipse;"#000000";1;MUSlong_V_sg2l_7;518764;17;5
+11;519721;;ellipse;"#000000";1;MUSlong_V_sg2l_11;519721;15;5
+12;519936;;ellipse;"#000000";1;MUSlong_V_sg2l_8;519936;26;5
+13;520167;;ellipse;"#000000";1;EC_V_sg2l 520168;520167;18;5
+14;520593;;ellipse;"#000000";1;MUSlong_V_sg1l_8;520593;6;5
+15;520755;;ellipse;"#000000";1;MUSlong_V_sg1l_6;520755;7;5
+16;521359;;ellipse;"#000000";1;EC_V_sg1l_3 521360;521359;16;6
+17;542612;;ellipse;"#000000";1;akrotroch_r1;542612;5;7
+18;555130;;ellipse;"#000000";1;EC_V_sg2l_4 555131;555130;6;3
+19;555435;;ellipse;"#000000";1;EC_V_sg2l_5 555436;555435;1;5
+20;555503;;ellipse;"#000000";1;EC_V_sg2l_6 555504;555503;5;5
+21;556262;;ellipse;"#000000";1;EC_V_7 5l56263;556262;1;5
+22;556399;;ellipse;"#000000";1;MUSlong_V_sg0l_6;556399;18;5
+23;556693;;ellipse;"#000000";1;paratroch_I_vl_1;556693;3;5
+24;557195;;ellipse;"#000000";1;MUSlong_V_sg1l_4;557195;19;5
+25;557403;;ellipse;"#000000";1;MUSlong_V_sg1l_5;557403;7;5
+26;557877;;ellipse;"#000000";1;MUSchae_neuAVt_sg1l_1;557877;24;6
+27;564048;;ellipse;"#000000";1;flat glia 564048;564048;1;7
+28;565197;;ellipse;"#000000";1;EC_V_sg2l rad glia 565198;565197;8;1
+29;568273;;ellipse;"#000000";1;MUSlong_D_sg0r_4;568273;5;0
+30;568290;;ellipse;"#000000";1;MUSlong_D_sg1r_12;568290;10;0
+31;568702;;ellipse;"#000000";1;MUSlong_D_sg0r_2;568702;12;0
+32;568710;;ellipse;"#000000";1;MUSlong_D_sg0r_3;568710;9;0
+33;573635;;ellipse;"#000000";1;MUSlong_D_sg0r_5;573635;9;0
+34;575119;;ellipse;"#000000";1;MUSlong_D_sg2r_8;575119;12;0
+35;575319;;ellipse;"#000000";1;paratroch_II_dr_1;575319;4;0
+36;575448;;ellipse;"#000000";1;MUSlong_D_sg2r_9;575448;9;0
+37;575787;;ellipse;"#000000";1;paratroch_II_dr_2;575787;8;0
+38;575853;;ellipse;"#000000";1;MUSlong_D_sg2r_7;575853;14;0
+39;577621;;ellipse;"#000000";1;paratroch_III_dr_3;577621;4;0
+40;578783;;ellipse;"#000000";1;paratroch_III_dr_2;578783;5;0
+41;579543;;ellipse;"#000000";1;EC_D_sg3r_1 579544;579543;11;0
+42;579865;;ellipse;"#000000";1;EC_D_sg3r_2 579866;579865;11;0
+43;580213;;ellipse;"#000000";1;MUSlong_D_sg3r_6;580213;21;0
+44;582306;;ellipse;"#000000";1;MUSlong_D_sg3r_5;582306;10;0
+45;583190;;ellipse;"#000000";1;MUSlong_D_sg0r_1;583190;12;0
+46;587391;;ellipse;"#000000";1;MUSlong_V_sg1r_10;587391;10;11
+47;587962;;ellipse;"#000000";1;MUSlong_V_sg1r_9;587962;10;11
+48;592728;;ellipse;"#000000";1;MUSlong_V_sg1r_8;592728;7;11
+49;593488;;ellipse;"#000000";1;MUSlong_V_sg0r_4;593488;13;11
+50;593849;;ellipse;"#000000";1;MUSlong_V_sg1r_12;593849;5;11
+51;594344;;ellipse;"#000000";1;MUSlong_V_sg2r_7;594344;3;11
+52;600071;;ellipse;"#000000";1;MUSlong_V_sg2r_6;600071;6;11
+53;604671;;ellipse;"#000000";1;MUSlong_V_sg1r_11;604671;9;11
+54;607961;;ellipse;"#000000";1;paratroch_I_vr_2;607961;2;11
+55;608173;;ellipse;"#000000";1;paratroch_I_vr_1;608173;7;11
+56;608926;;ellipse;"#000000";1;EC_V_sg1r_1 608927;608926;1;11
+57;609098;;ellipse;"#000000";1;EC_V_sg1r_2 609099;609098;11;11
+58;708532;;ellipse;"#000000";1;EC_V_heald MS2 support cell 708533;708532;3;7
+59;804282;;ellipse;"#000000";1;MUSob-ant_m-pp_sg1r_1;804282;9;4
+60;805516;;ellipse;"#000000";1;EC_V_heard 805517;805516;1;7
+61;826263;;ellipse;"#000000";1;EC_D_sg3r 826264;826263;10;0
+62;844338;;ellipse;"#000000";1;EC_V_sg1l 844339;844338;5;5
+63;851742;;ellipse;"#000000";1;EC_D_headr 851742;851742;2;13
+64;870685;;ellipse;"#000000";1;MUSph r 870686;870685;4;5
+65;888787;;ellipse;"#000000";1;MUSchae_notAac_sg1r_3;888787;40;4
+66;909450;;ellipse;"#000000";1;MUSchae_notAac_sg3r_2;909450;41;0
+67;914153;;ellipse;"#000000";1;EC_V_sg1l_muscle-attachment 914154;914153;17;5
+68;915979;;ellipse;"#000000";1;EC_D_sg3r 915980;915979;11;0
+69;936192;;ellipse;"#000000";1;paratroch_III_dl_2;936192;4;8
+70;939008;;ellipse;"#000000";1;MUSlong_D_sg3l_7;939008;8;8
+71;939698;;ellipse;"#000000";1;EC_D_sg3r_paratrocharea;939698;2;3
+72;940016;;ellipse;"#000000";1;paratroch_II_dl_2;940016;5;3
+73;941766;;ellipse;"#000000";1;MUSlong_D_sg2l_9;941766;21;8
+74;942028;;ellipse;"#000000";1;MUSlong_D_sg0l_9;942028;13;8
+75;942233;;ellipse;"#000000";1;MUSlong_D_sg0l_7;942233;10;8
+76;942898;;ellipse;"#000000";1;MUSlong_D_sg0l_8;942898;14;8
+77;943145;;ellipse;"#000000";1;MUSlong_D_sg1l_12;943145;18;8
+78;943540;;ellipse;"#000000";1;MUSlong_D_sg0l_6;943540;7;8
+79;944377;;ellipse;"#000000";1;MUSlong_D_sg0l_4;944377;10;8
+80;944941;;ellipse;"#000000";1;paratroch_I_dl_1;944941;6;6
+81;945427;;ellipse;"#000000";1;MUSlong_D_sg1l_13;945427;11;8
+82;959690;;ellipse;"#000000";1;MUSant_r_1;959690;6;7
+83;960268;;ellipse;"#000000";1;MUSant_r_2;960268;10;7
+84;979532;;ellipse;"#000000";1;EC_V_sg1l_8 979533;979532;4;6
+85;979707;;ellipse;"#000000";1;MUSob-post_neuDlong_sg1l_4;979707;7;6
+86;992096;;ellipse;"#000000";1;paratroch_III_vl_2;992096;12;5
+87;992125;;ellipse;"#000000";1;paratroch_III_vr_2;992125;3;11
+88;992139;;ellipse;"#000000";1;paratroch_III_vr_1;992139;10;11
+89;992309;;ellipse;"#000000";1;paratroch_III_dr_1;992309;1;0
+90;992318;;ellipse;"#000000";1;paratroch_III_dl_1;992318;5;1
+91;992337;;ellipse;"#000000";1;paratroch_II_vl_4;992337;4;5
+92;992344;;ellipse;"#000000";1;paratroch_II_vl_3;992344;9;5
+93;992355;;ellipse;"#000000";1;paratroch_II_vl_2;992355;5;3
+94;992365;;ellipse;"#000000";1;paratroch_II_vl_1;992365;5;3
+95;992374;;ellipse;"#000000";1;paratroch_II_vr_4;992374;8;2
+96;992383;;ellipse;"#000000";1;paratroch_II_vr_3;992383;11;2
+97;992401;;ellipse;"#000000";1;paratroch_II_vr_1;992401;1;11
+98;992419;;ellipse;"#000000";1;paratroch_II_dr_3;992419;3;0
+99;992429;;ellipse;"#000000";1;paratroch_II_dl_3;992429;6;8
+100;992438;;ellipse;"#000000";1;paratroch_I_dr_2;992438;22;4
+101;992446;;ellipse;"#000000";1;paratroch_I_dr_1;992446;6;4
+102;992455;;ellipse;"#000000";1;paratroch_I_dl_2;992455;3;6
+103;1027864;;ellipse;"#000000";1;MUSlong_V_sg2l_1;1027864;8;5
+104;1027911;;ellipse;"#000000";1;MUSlong_V_sg2l_3;1027911;27;5
+105;1027917;;ellipse;"#000000";1;MUSlong_V_sg3l_3;1027917;12;5
+106;1027923;;ellipse;"#000000";1;MUSlong_V_sg2l_4;1027923;6;5
+107;1027959;;ellipse;"#000000";1;MUSlong_V_sg3l_6;1027959;19;5
+108;1027978;;ellipse;"#000000";1;MUSac_neuPV_sg2l_3;1027978;17;5
+109;1028364;;ellipse;"#000000";1;MUSlong_V_sg2r_3;1028364;1;2
+110;1028383;;ellipse;"#000000";1;MUSlong_V_sg2r_5;1028383;5;11
+111;1028389;;ellipse;"#000000";1;MUSlong_V_sg3r_5;1028389;9;11
+112;1028395;;ellipse;"#000000";1;MUSlong_V_sg3r_6;1028395;3;11
+113;1028401;;ellipse;"#000000";1;MUSlong_V_sg3r_7;1028401;5;11
+114;1028407;;ellipse;"#000000";1;MUSac_neuAV_sg3r_1;1028407;13;11
+115;1028616;;ellipse;"#000000";1;MUSac_neuPV_sg2l_2;1028616;8;5
+116;1028750;;ellipse;"#000000";1;MUSac_neuPV_sg2l_1;1028750;16;3
+117;1029097;;ellipse;"#000000";1;MUSchae_neuAVt_sg2l_1;1029097;11;3
+118;1029530;;ellipse;"#000000";1;MUSchae_neuVob_sg2l_2;1029530;4;3
+119;1031618;;ellipse;"#000000";1;MUSlong_V_sg2r_8;1031618;2;11
+120;1032061;;ellipse;"#000000";1;MUSac_neuPV_sg2r_1;1032061;19;2
+121;1033010;;ellipse;"#000000";1;MUSac_neuPV_sg2r_3;1033010;3;2
+122;1050298;;ellipse;"#000000";1;acicula_neuro_sg3r;1050298;40;10
+123;1050377;;ellipse;"#000000";1;acicula_neuro_sg2l;1050377;33;3
+124;1050419;;ellipse;"#000000";1;acicula_neuro_sg1l;1050419;24;6
+125;1050989;;ellipse;"#000000";1;acicula_neuro_sg1r;1050989;10;4
+126;1051076;;ellipse;"#000000";1;MUSac_neuPV_sg2r_2;1051076;15;2
+127;1051916;;ellipse;"#000000";1;MUSac_neuPV_sg3r_1;1051916;17;11
+128;1051922;;ellipse;"#000000";1;MUSac_neuPV_sg3r_2;1051922;18;11
+129;1051929;;ellipse;"#000000";1;MUSac_neuAV_sg3r_2;1051929;14;11
+130;1057387;;ellipse;"#000000";1;MUSlong_V_sg2l_9;1057387;21;5
+131;1059857;;ellipse;"#000000";1;acicula_neuro_sg3l;1059857;20;1
+132;1076839;;ellipse;"#000000";1;akrotroch_l1;1076839;3;7
+133;1113608;;ellipse;"#000000";1;metatroch_vr_3;1113608;3;7
+134;1114055;;ellipse;"#000000";1;metatroch_vr_2;1114055;1;7
+135;1136703;;ellipse;"#000000";1;MUSac_neuAV_sg1r_1;1136703;11;11
+136;1137108;;ellipse;"#000000";1;MUSac_neuPV_sg1r_1;1137108;5;9
+137;1137595;;ellipse;"#000000";1;MUSac_neuPV_sg1r_2;1137595;17;11
+138;1145279;;ellipse;"#000000";1;MUSac_neuAV_sg1r_2;1145279;13;11
+139;1150049;;ellipse;"#000000";1;ciliatedGland_r1;1150049;1;7
+140;1179299;;ellipse;"#000000";1;acicula_noto_sg1l;1179299;13;6
+141;1179702;;ellipse;"#000000";1;acicula_noto_sg1r;1179702;9;4
+142;1179725;;ellipse;"#000000";1;acicula_noto_sg2r;1179725;42;2
+143;1180354;;ellipse;"#000000";1;acicula_noto_sg3l;1180354;28;1
+144;1199282;;ellipse;"#000000";1;MUSac_neuAV_sg3r_3;1199282;2;11
+145;1203965;;ellipse;"#000000";1;metatroch_vr_1;1203965;1;7
+146;1204373;;ellipse;"#000000";1;metatroch_vr_4;1204373;5;11
+147;1204562;;ellipse;"#000000";1;akrotroch_l2;1204562;2;7
+148;1204576;;ellipse;"#000000";1;metatroch_vl_1;1204576;2;7
+149;1204752;;ellipse;"#000000";1;MUSll_sg0r_4;1204752;2;7
+150;1230301;;ellipse;"#000000";1;MUSac_neuAV_sg2r_1;1230301;14;2
+151;1231018;;ellipse;"#000000";1;MUSac_neuAV_sg2r_3;1231018;23;2
+152;1238488;;ellipse;"#000000";1;MUSlong_V_sg1l_7;1238488;8;5
+153;1238904;;ellipse;"#000000";1;MUSac_neure_sg1r_1;1238904;13;4
+154;1273303;;ellipse;"#000000";1;CB_pigment_sg1 1273304;1273303;2;7
+155;1273836;;ellipse;"#000000";1;ectoderm 1273837;1273836;2;8
+156;1273900;;ellipse;"#000000";1;pigment_cell_AEl6;1273900;2;7
+157;1274024;;ellipse;"#000000";1;pygidial_pigment_cell 1274025;1274024;1;11
+158;1275010;;ellipse;"#000000";1;MUSchae_neuAVt_sg3l_1;1275010;11;1
+159;1276376;;ellipse;"#000000";1;MUSlong_V_sg2l_5;1276376;2;5
+160;1276831;;ellipse;"#000000";1;MUSlong_V_sg1l_3;1276831;14;5
+161;1277115;;ellipse;"#000000";1;MUSlong_V_sg1l_2;1277115;23;5
+162;1277150;;ellipse;"#000000";1;MUSlong_V_sg0l_3;1277150;30;5
+163;1277257;;ellipse;"#000000";1;MUSph r 1277258;1277257;1;5
+164;1278649;;ellipse;"#000000";1;vacuolar_cell_head1;1278649;12;11
+165;1278748;;ellipse;"#000000";1;ECl_pyg 1278749;1278748;2;1
+166;1279612;;ellipse;"#000000";1;MUSob-post_neuV_sg3r_2;1279612;12;10
+167;1282806;;ellipse;"#000000";1;Glia pigmented 1282807;1282806;1;7
+168;1294947;;ellipse;"#000000";1;akrotroch_r4;1294947;3;7
+169;1294978;;ellipse;"#000000";1;covercell7clock_ant;1294978;1;7
+170;1297905;;ellipse;"#000000";1;EC_V_sg1l rad glia 1297906;1297905;1;9
+171;1298402;;ellipse;"#000000";1;paratroch_II_dl_1;1298402;10;3
+172;1299789;;ellipse;"#000000";1;paratroch_II_vr_2;1299789;5;2
+173;1303054;;ellipse;"#000000";1;covercell2clock_ant;1303054;3;8
+174;1305955;;ellipse;"#000000";1;MUSac_neuDach_sg1l_1;1305955;27;6
+175;1306699;;ellipse;"#000000";1;EC_D_heard_nuchal 1306700;1306699;6;0
+176;1308387;;ellipse;"#000000";1;EC_V_sg0rr 1308388;1308387;13;11
+177;1314620;;ellipse;"#000000";1;MUSlong_V_sg2l_2;1314620;18;5
+178;1315028;;ellipse;"#000000";1;MUSac_notA_sg3r_1;1315028;27;0
+179;1322371;;ellipse;"#000000";1;EC_D_heard 1322371;1322371;16;7
+180;1323988;;ellipse;"#000000";1;EC_V_sg3r rad glia 1323989;1323988;2;1
+181;1328001;;ellipse;"#000000";1;paratroch_III_vr_3;1328001;1;10
+182;1331741;;ellipse;"#000000";1;CB_pigment 1331742;1331741;2;7
+183;1334352;;ellipse;"#000000";1;CB_pigment_sg2 1334353;1334352;6;5
+184;1335104;;ellipse;"#000000";1;CB_pigment 1335105;1335104;3;5
+185;1339215;;ellipse;"#000000";1;EC_D_sg1l 1339216;1339215;1;6
+186;1339663;;ellipse;"#000000";1;MUSlong_D_sg0l_10;1339663;5;8
+187;1339675;;ellipse;"#000000";1;MUSant_r_4;1339675;3;7
+188;1339705;;ellipse;"#000000";1;putMUS 1339706;1339705;7;8
+189;1339712;;ellipse;"#000000";1;MUSlong_D_sg0l_11;1339712;7;8
+190;1339741;;ellipse;"#000000";1;MUStrans_sg1l_5;1339741;5;6
+191;1339753;;ellipse;"#000000";1;MUSob-ant_l-pp_sg1l_1;1339753;17;6
+192;1340166;;ellipse;"#000000";1;ecto fragment 1340167;1340166;1;3
+193;1343040;;ellipse;"#000000";1;MUSob-post_neuV_sg3l_3;1343040;8;1
+194;1345883;;ellipse;"#000000";1;EC_D_sg3 back cell 1;1345883;10;8
+195;1345899;;ellipse;"#000000";1;EC_D_sg3l back middle;1345899;3;8
+196;1345907;;ellipse;"#000000";1;EC_D_sg3 back cell 4;1345907;9;0
+197;1345915;;ellipse;"#000000";1;CB_pigment_sg3 1345916;1345915;7;8
+198;1347179;;ellipse;"#000000";1;EC_V_pygl 1347180;1347179;2;1
+199;1348077;;ellipse;"#000000";1;EC_V_sg1l chaetal sac 1348078;1348077;2;6
+200;1348569;;ellipse;"#000000";1;MUSlong_D_sg0l_5;1348569;9;8
+201;1348581;;ellipse;"#000000";1;MUSlong_D_sg2l_6;1348581;21;8
+202;1352396;;ellipse;"#000000";1;MUSob-post_sg0l_1;1352396;17;5
+203;1352604;;ellipse;"#000000";1;MUSob-post_sg0l_2;1352604;5;5
+204;1356116;;ellipse;"#000000";1;MUSant_l_4;1356116;6;7
+205;1356793;;ellipse;"#000000";1;MUSlong_D_sg2l_7;1356793;15;8
+206;1356912;;ellipse;"#000000";1;MUSlong_V_headr3;1356912;23;11
+207;1357352;;ellipse;"#000000";1;hemichaetal_sg1l_noto-3_1;1357352;4;6
+208;1357861;;ellipse;"#000000";1;MUSlong_V_sg2r_2;1357861;11;11
+209;1357867;;ellipse;"#000000";1;MUSlong_V_sg1r_4;1357867;13;11
+210;1358976;;ellipse;"#000000";1;MUSpr-vt;1358976;14;7
+211;1363832;;ellipse;"#000000";1;circumacicular_sg1l_neuro_4;1363832;40;6
+212;1364724;;ellipse;"#000000";1;chaeta_sg2l_noto-9;1364724;17;3
+213;1364742;;ellipse;"#000000";1;chaeta_sg2l_noto-8;1364742;23;3
+214;1364762;;ellipse;"#000000";1;chaeta_sg2l_noto-7;1364762;17;8
+215;1364782;;ellipse;"#000000";1;chaeta_sg2l_noto-6;1364782;25;3
+216;1364818;;ellipse;"#000000";1;chaeta_sg2l_noto-1;1364818;2;3
+217;1364846;;ellipse;"#000000";1;chaeta_sg2l_noto-4;1364846;16;3
+218;1364858;;ellipse;"#000000";1;chaeta_sg2l_noto-3;1364858;12;3
+219;1366261;;ellipse;"#000000";1;EC_D_sg2r 1366262;1366261;1;0
+220;1367987;;ellipse;"#000000";1;MUSlong_V_sg3r_4;1367987;6;11
+221;1367992;;ellipse;"#000000";1;MUSlong_V_sg3r_3;1367992;10;11
+222;1368008;;ellipse;"#000000";1;MUSlong_V_headr2;1368008;42;11
+223;1368019;;ellipse;"#000000";1;MUSlong_V_sg3l_4;1368019;21;5
+224;1368025;;ellipse;"#000000";1;MUSlong_V_pygl;1368025;6;1
+225;1368030;;ellipse;"#000000";1;MUSlong_V_sg3l_5;1368030;16;5
+226;1368040;;ellipse;"#000000";1;MUSlong_D_sg0l_1;1368040;3;8
+227;1368417;;ellipse;"#000000";1;MUSlong_V_sg2l_10;1368417;6;5
+228;1368881;;ellipse;"#000000";1;MUSant_l_1;1368881;3;7
+229;1372508;;ellipse;"#000000";1;nuchal_dl3;1372508;5;8
+230;1372518;;ellipse;"#000000";1;nuchal_dl2;1372518;9;8
+231;1372528;;ellipse;"#000000";1;nuchal_dl1;1372528;1;8
+232;1374103;;ellipse;"#000000";1;CB_pigment 1374104;1374103;1;7
+233;1374210;;ellipse;"#000000";1;EC_V_heald 1374211;1374210;1;7
+234;1377355;;ellipse;"#000000";1;chaeta_sg2l_neuro-6;1377355;12;3
+235;1377364;;ellipse;"#000000";1;chaeta_sg2l_neuro-4;1377364;10;3
+236;1377371;;ellipse;"#000000";1;chaeta_sg2l_neuro-7;1377371;10;3
+237;1377380;;ellipse;"#000000";1;chaeta_sg2l_neuro-10;1377380;15;9
+238;1377405;;ellipse;"#000000";1;chaeta_sg2l_neuro-5;1377405;10;3
+239;1377410;;ellipse;"#000000";1;chaeta_sg2l_neuro-3;1377410;9;3
+240;1377420;;ellipse;"#000000";1;chaeta_sg2l_noto-5;1377420;11;3
+241;1377794;;ellipse;"#000000";1;chaeta_sg2l_neuro-1;1377794;8;3
+242;1377800;;ellipse;"#000000";1;chaeta_sg2l_neuro-2;1377800;17;3
+243;1378941;;ellipse;"#000000";1;MUSob-post_neuV_sg2r_1;1378941;6;2
+244;1380795;;ellipse;"#000000";1;MUSob-ant_m-pp_sg3r_2;1380795;8;0
+245;1380806;;ellipse;"#000000";1;MUSob-ant_re_sg3r_7;1380806;24;10
+246;1380817;;ellipse;"#000000";1;MUSax_sg2r_1;1380817;9;1
+247;1380835;;ellipse;"#000000";1;MUSob-ant_m-pp_sg3r_1;1380835;19;0
+248;1380843;;ellipse;"#000000";1;MUSax_sg1r_4;1380843;9;9
+249;1380855;;ellipse;"#000000";1;MUSob-ant_re_sg3l_8;1380855;21;1
+250;1380874;;ellipse;"#000000";1;MUSax_sg3l_1;1380874;12;1
+251;1380884;;ellipse;"#000000";1;MUSax_sg3r_1;1380884;10;1
+252;1381077;;ellipse;"#000000";1;MUSob-post_notV_sg2r_2;1381077;4;2
+253;1381112;;ellipse;"#000000";1;MUSob-post_noty_sg2r_1;1381112;17;2
+254;1381121;;ellipse;"#000000";1;meso 1381122;1381121;3;2
+255;1381871;;ellipse;"#000000";1;MUSob-ant_m-pp_sg3l_2;1381871;9;1
+256;1381884;;ellipse;"#000000";1;MUSac_neuDach_sg3l_1;1381884;23;1
+257;1381896;;ellipse;"#000000";1;MUSob-ant_m-pp_sg3l_1;1381896;14;1
+258;1381906;;ellipse;"#000000";1;MUSax_sg1l_4;1381906;9;9
+259;1381916;;ellipse;"#000000";1;MUSax_sg1l_3;1381916;6;7
+260;1381926;;ellipse;"#000000";1;MUSob-ant_m-pp_sg1l_1;1381926;19;6
+261;1381937;;ellipse;"#000000";1;MUSob-ant_re_sg1l_6;1381937;25;6
+262;1381952;;ellipse;"#000000";1;MUSob-post_notV_sg2r_1;1381952;1;2
+263;1381967;;ellipse;"#000000";1;MUSob-post_notV_sg2r_3;1381967;7;2
+264;1381977;;ellipse;"#000000";1;MUSob-post_neuV_sg2r_7;1381977;3;2
+265;1381985;;ellipse;"#000000";1;MUSob-post_neuV_sg2r_3;1381985;9;2
+266;1382011;;ellipse;"#000000";1;MUSob-post_neuDprox_sg2r_3;1382011;20;0
+267;1382022;;ellipse;"#000000";1;MUSob-post_neuDlong_sg2r_4;1382022;16;2
+268;1382545;;ellipse;"#000000";1;MUSob-ant_trans_sg3l_1;1382545;2;3
+269;1382622;;ellipse;"#000000";1;MUSob-ant_m-pp_sg3l_3;1382622;6;1
+270;1383560;;ellipse;"#000000";1;EC_D_heald 1383561;1383560;4;7
+271;1385530;;ellipse;"#000000";1;EC_V_pygl 1385531;1385530;5;1
+272;1385536;;ellipse;"#000000";1;pygidial_pigment_cell  1385537;1385536;2;1
+273;1387747;;ellipse;"#000000";1;ectoderm 1387748;1387747;1;5
+274;1388881;;ellipse;"#000000";1;MUSly_r_1;1388881;2;5
+275;1391139;;ellipse;"#000000";1;MUSlong_V_sg3l_7;1391139;15;5
+276;1391745;;ellipse;"#000000";1;MUSax_sg1l_2;1391745;5;7
+277;1391754;;ellipse;"#000000";1;MUSob-ant_m-pp_sg2l_1;1391754;14;3
+278;1392036;;ellipse;"#000000";1;MUSob-post_notV_sg3r_2;1392036;4;0
+279;1392050;;ellipse;"#000000";1;MUSob-post_neuV_sg3r_3;1392050;3;10
+280;1392132;;ellipse;"#000000";1;MUSob-post_noty_sg3l_1;1392132;15;1
+281;1392152;;ellipse;"#000000";1;MUSob-post_notV_sg3l_1;1392152;3;1
+282;1392209;;ellipse;"#000000";1;MUSob-post_neuV_sg3l_1;1392209;3;1
+283;1392216;;ellipse;"#000000";1;MUStrans_pygl_1;1392216;8;1
+284;1392222;;ellipse;"#000000";1;MUStrans_pygl_2;1392222;13;1
+285;1392567;;ellipse;"#000000";1;MUSob-post_neuV_sg3l_2;1392567;9;1
+286;1392730;;ellipse;"#000000";1;imMUSchae_neuVob_sg3l1;1392730;2;5
+287;1393284;;ellipse;"#000000";1;MUSob-ant_re_sg3r_5;1393284;17;10
+288;1393309;;ellipse;"#000000";1;MUSchae_neuDac_sg3r_4;1393309;36;10
+289;1393334;;ellipse;"#000000";1;MUSchae_neuDac_sg3r_2;1393334;38;10
+290;1393903;;ellipse;"#000000";1;MUSlong_V_sg3r_1;1393903;4;11
+291;1393960;;ellipse;"#000000";1;MUSob-ant_re_sg3r_6;1393960;9;10
+292;1394518;;ellipse;"#000000";1;MUSob-post_neuV_sg2l_7;1394518;8;3
+293;1394755;;ellipse;"#000000";1;EC_circumchaetal_sg2l_neuro-3_5;1394755;7;3
+294;1394977;;ellipse;"#000000";1;EC_V_sg1r with long process 1394978;1394977;1;11
+295;1395614;;ellipse;"#000000";1;MUSob-ant_arc_sg2r_2;1395614;7;9
+296;1395664;;ellipse;"#000000";1;MUSlong_V_sg1r_2;1395664;11;11
+297;1395670;;ellipse;"#000000";1;MUSlong_V_sg1r_1;1395670;9;11
+298;1395692;;ellipse;"#000000";1;MUSlong_V_sg1r_3;1395692;19;11
+299;1395717;;ellipse;"#000000";1;MUSlong_V_sg1r_6;1395717;17;11
+300;1395731;;ellipse;"#000000";1;MUSlong_V_sg1r_7;1395731;11;11
+301;1396714;;ellipse;"#000000";1;MUSob-post_neuV_sg1l_2;1396714;14;6
+302;1396739;;ellipse;"#000000";1;MUSob-post_neuV_sg1l_5;1396739;8;6
+303;1396762;;ellipse;"#000000";1;MUSob-post_neuV_sg1l_4;1396762;5;6
+304;1396899;;ellipse;"#000000";1;MUSob-post_noty_sg3r_1;1396899;18;1
+305;1396918;;ellipse;"#000000";1;MUSob-post_notV_sg3r_1;1396918;5;0
+306;1397746;;ellipse;"#000000";1;MUSob-ant_arc_sg2l_3;1397746;14;9
+307;1397762;;ellipse;"#000000";1;MUSob-ant_arc_sg2l_4;1397762;15;9
+308;1397815;;ellipse;"#000000";1;MUSac_notM_sg1l_2;1397815;28;6
+309;1398380;;ellipse;"#000000";1;MUSpl_r_1;1398380;19;7
+310;1398407;;ellipse;"#000000";1;pigment_cell_AEr3;1398407;1;7
+311;1398775;;ellipse;"#000000";1;MUSac_neuDach_sg2l_1;1398775;22;3
+312;1399532;;ellipse;"#000000";1;EC_V_sg2l_armpit 1399533;1399532;37;3
+313;1399726;;ellipse;"#000000";1;EC_D_sg2l 1399727;1399726;6;8
+314;1399974;;ellipse;"#000000";1;MUSob-ant_l-pp_sg2l_2;1399974;5;5
+315;1400420;;ellipse;"#000000";1;chaeta_sg3r_noto-8;1400420;5;0
+316;1400441;;ellipse;"#000000";1;chaeta_sg3r_noto-7;1400441;21;0
+317;1400447;;ellipse;"#000000";1;chaeta_sg3r_noto-4;1400447;16;0
+318;1400452;;ellipse;"#000000";1;chaeta_sg3r_noto-5;1400452;21;0
+319;1400458;;ellipse;"#000000";1;chaeta_sg3r_noto-1;1400458;12;0
+320;1400463;;ellipse;"#000000";1;chaeta_sg3r_noto-3;1400463;16;0
+321;1400469;;ellipse;"#000000";1;chaeta_sg3r_noto-2;1400469;7;0
+322;1400474;;ellipse;"#000000";1;acicula_noto_sg3r;1400474;15;0
+323;1403019;;ellipse;"#000000";1;MUSchae_neuDac_sg3r_5;1403019;6;10
+324;1403034;;ellipse;"#000000";1;MUSchae_neuDac_sg3r_1;1403034;21;10
+325;1403048;;ellipse;"#000000";1;MUSchae_neuDac_sg3r_3;1403048;9;10
+326;1403059;;ellipse;"#000000";1;MUSac_neuDy_sg3r_1;1403059;12;10
+327;1403075;;ellipse;"#000000";1;MUSob-post_neuDdist_sg3rc1;1403075;8;10
+328;1403084;;ellipse;"#000000";1;MUSob-post_neuDlong_sg3r_4;1403084;16;10
+329;1403093;;ellipse;"#000000";1;MUSob-post_neuV_sg3r_1;1403093;5;10
+330;1403105;;ellipse;"#000000";1;MUSob-ant_m-pp_sg3r_3;1403105;4;1
+331;1403114;;ellipse;"#000000";1;MUSob-ant_re_sg3r_3;1403114;23;10
+332;1403298;;ellipse;"#000000";1;MUSob-ant_arc_sg3r_3;1403298;14;10
+333;1403308;;ellipse;"#000000";1;MUSob-ant_re_sg3r_4;1403308;9;10
+334;1403316;;ellipse;"#000000";1;MUSob-ant_re_sg3r_1;1403316;5;10
+335;1403325;;ellipse;"#000000";1;MUSchae_Are_sg3r_1;1403325;6;10
+336;1403336;;ellipse;"#000000";1;MUSob-post_neuV_sg2r_2;1403336;5;2
+337;1403353;;ellipse;"#000000";1;MUSob-post_neuDlong_sg2r_5;1403353;5;2
+338;1404314;;ellipse;"#000000";1;MUSob-post_sg0r_1;1404314;20;6
+339;1404341;;ellipse;"#000000";1;MUStrans_sg0r_4;1404341;6;7
+340;1404358;;ellipse;"#000000";1;MUSax_sg1r_2;1404358;9;7
+341;1404388;;ellipse;"#000000";1;MUSax_sg1r_3;1404388;9;7
+342;1404400;;ellipse;"#000000";1;MUSax_sg1r_1;1404400;12;7
+343;1404405;;ellipse;"#000000";1;MUSax_sg1l_1;1404405;7;7
+344;1405120;;ellipse;"#000000";1;mouth 1405121;1405120;1;5
+345;1405233;;ellipse;"#000000";1;MUSch_l_2;1405233;3;7
+346;1405261;;ellipse;"#000000";1;MUStrans_sg0l_1;1405261;17;7
+347;1405336;;ellipse;"#000000";1;MUSlong_V_sg0l_2;1405336;18;5
+348;1405464;;ellipse;"#000000";1;MUSlong_V_headl6;1405464;8;7
+349;1406273;;ellipse;"#000000";1;EC_V_heard 1406274;1406273;11;7
+350;1406310;;ellipse;"#000000";1;EC_V_headr 1406311;1406310;1;7
+351;1407366;;ellipse;"#000000";1;EC_V_sg2r rad glia 1407367;1407366;3;1
+352;1407695;;ellipse;"#000000";1;EC_D_heald 1407696;1407695;4;13
+353;1407718;;ellipse;"#000000";1;EC_D_heard 1407719;1407718;8;13
+354;1408570;;ellipse;"#000000";1;MUStrans_pygr_1;1408570;7;0
+355;1408621;;ellipse;"#000000";1;EC_V_heald 1408622;1408621;2;5
+356;1408946;;ellipse;"#000000";1;ER_circumchaetal_sg3r_noto-1_3;1408946;8;0
+357;1408956;;ellipse;"#000000";1;MUSchae_notAac_sg3r_3;1408956;13;0
+358;1409107;;ellipse;"#000000";1;EC_V_heald 1409108;1409107;1;7
+359;1409122;;ellipse;"#000000";1;EC_V_head 1409123;1409122;3;5
+360;1409133;;ellipse;"#000000";1;EC_V_headr 1409134;1409133;2;5
+361;1409181;;ellipse;"#000000";1;MUSlong_V_headr6;1409181;16;7
+362;1409196;;ellipse;"#000000";1;MUStrans_sg0r_4;1409196;13;7
+363;1409275;;ellipse;"#000000";1;EC_V_heald 1409276;1409275;1;5
+364;1409943;;ellipse;"#000000";1;EC_V_heard 1409944;1409943;1;5
+365;1410714;;ellipse;"#000000";1;EC_V_heard_ middle_muscleanchored;1410714;9;11
+366;1410921;;ellipse;"#000000";1;EC_D_heard 1410922;1410921;11;7
+367;1411919;;ellipse;"#000000";1;EC_V_heald 1411920;1411919;6;5
+368;1413524;;ellipse;"#000000";1;flat glia 1413525;1413524;2;1
+369;1414358;;ellipse;"#000000";1;MUSob-ant_arc_sg3l_2;1414358;9;1
+370;1414384;;ellipse;"#000000";1;MUSob-ant_arc_sg3l_1;1414384;5;1
+371;1415385;;ellipse;"#000000";1;MUSchae_neuAVo_sg3l_3;1415385;8;1
+372;1416066;;ellipse;"#000000";1;vacuolar_cell_head3;1416066;20;5
+373;1416162;;ellipse;"#000000";1;MUSlong_D_sg0r_8;1416162;14;0
+374;1416180;;ellipse;"#000000";1;MUSlong_D_sg1r_8;1416180;20;0
+375;1416192;;ellipse;"#000000";1;EC 1416193;1416192;1;7
+376;1416198;;ellipse;"#000000";1;MUSlong_D_sg2r_5;1416198;21;0
+377;1416207;;ellipse;"#000000";1;MUSlong_D_sg3r_4;1416207;15;0
+378;1416244;;ellipse;"#000000";1;MUSlong_D_sg2r_2;1416244;13;0
+379;1416278;;ellipse;"#000000";1;MUSlong_D_sg1r_6;1416278;35;0
+380;1416299;;ellipse;"#000000";1;MUSlong_D_sg1l_10;1416299;28;8
+381;1416309;;ellipse;"#000000";1;MUSlong_D_sg1l_8;1416309;21;8
+382;1416342;;ellipse;"#000000";1;MUSob-post_neuDlong_sg1r_4;1416342;16;4
+383;1416388;;ellipse;"#000000";1;MUSac_neuDach_sg2r_1;1416388;10;2
+384;1416399;;ellipse;"#000000";1;MUSob-ant_m-pp_sg2r_1;1416399;14;2
+385;1416416;;ellipse;"#000000";1;MUSob-ant_arc_sg1r_2;1416416;6;4
+386;1416450;;ellipse;"#000000";1;MUSob-ant_arc_sg1r_1;1416450;8;4
+387;1416465;;ellipse;"#000000";1;MUSob-post_noty_sg1r_1;1416465;10;9
+388;1416476;;ellipse;"#000000";1;MUSob-post_notV_sg1r_3;1416476;5;9
+389;1416546;;ellipse;"#000000";1;MUSac_notP_sg1r_1;1416546;21;4
+390;1416559;;ellipse;"#000000";1;MUSac_notM_sg2r_1;1416559;33;2
+391;1416569;;ellipse;"#000000";1;MUSchae_notA_sg2r_1;1416569;23;2
+392;1416695;;ellipse;"#000000";1;MUSlong_V_headl4;1416695;14;7
+393;1418943;;ellipse;"#000000";1;CB_pigment_sg2 1418944;1418943;8;5
+394;1419083;;ellipse;"#000000";1;MUSob-ant_arc_sg3r_2;1419083;9;10
+395;1419586;;ellipse;"#000000";1;EC_V_heald 1419587;1419586;4;5
+396;1420342;;ellipse;"#000000";1;MUSob-ant_arc_sg3l_3;1420342;12;1
+397;1420356;;ellipse;"#000000";1;MUSob-ant_re_sg3l_2;1420356;5;1
+398;1420398;;ellipse;"#000000";1;MUSlong_V_headr5;1420398;10;11
+399;1420440;;ellipse;"#000000";1;MUSlong_V_sg3l_1;1420440;13;5
+400;1420457;;ellipse;"#000000";1;MUSac_notA_sg3l_1;1420457;25;1
+401;1420472;;ellipse;"#000000";1;MUSlong_D_sg3l_4;1420472;12;8
+402;1420496;;ellipse;"#000000";1;MUSlong_D_sg2l_4;1420496;16;8
+403;1420504;;ellipse;"#000000";1;MUSlong_D_sg2l_5;1420504;10;8
+404;1420510;;ellipse;"#000000";1;MUSlong_D_sg3l_3;1420510;15;8
+405;1420523;;ellipse;"#000000";1;MUSlong_D_sg2l_3;1420523;11;8
+406;1420530;;ellipse;"#000000";1;MUSlong_D_sg2r_3;1420530;23;0
+407;1420539;;ellipse;"#000000";1;MUSlong_D_sg2r_6;1420539;20;0
+408;1420612;;ellipse;"#000000";1;MUSlong_V_sg2r_4;1420612;10;11
+409;1421448;;ellipse;"#000000";1;MUSob-post_notV_sg1l_3;1421448;5;9
+410;1421687;;ellipse;"#000000";1;MUSob-ant_arc_sg3r_1;1421687;5;10
+411;1421700;;ellipse;"#000000";1;EC_V_sg3r 1421701;1421700;18;10
+412;1423327;;ellipse;"#000000";1;MUSlong_D_sg3r_3;1423327;9;0
+413;1423994;;ellipse;"#000000";1;EClm_sg3 1423995;1423994;4;1
+414;1427440;;ellipse;"#000000";1;EC_V_sg3l 1427441;1427440;1;5
+415;1427708;;ellipse;"#000000";1;EC_V_sg3r rad glia 1427709;1427708;2;1
+416;1427985;;ellipse;"#000000";1;MUSob-ant_re_sg3l_7;1427985;20;1
+417;1433052;;ellipse;"#000000";1;EC_V_sg3r 1433053;1433052;3;11
+418;1434751;;ellipse;"#000000";1;MUStrans_pygl_3;1434751;3;14
+419;1434782;;ellipse;"#000000";1;MUSob-post_neuV_sg3l_7;1434782;5;5
+420;1435271;;ellipse;"#000000";1;MUSob-ant_l-pp_sg3r_1;1435271;2;0
+421;1435436;;ellipse;"#000000";1;MUSob-ant_re_sg3l_3;1435436;19;1
+422;1435458;;ellipse;"#000000";1;MUSob-ant_re_sg3l_4;1435458;25;1
+423;1436266;;ellipse;"#000000";1;MUStrans_sg2r_1;1436266;7;4
+424;1436321;;ellipse;"#000000";1;MUSob-ant_arc_sg2l_2;1436321;12;9
+425;1436707;;ellipse;"#000000";1;MUSob-ant_l-pp_sg3l_1;1436707;1;1
+426;1441527;;ellipse;"#000000";1;MUSchae_neuVob_sg3r_1;1441527;6;10
+427;1441731;;ellipse;"#000000";1;MUSob-post_neuV_sg2r_6;1441731;8;1
+428;1441826;;ellipse;"#000000";1;CB_pigment_sg3 1441827;1441826;1;10
+429;1441872;;ellipse;"#000000";1;MUSlong_D_sg1r_11;1441872;29;0
+430;1443798;;ellipse;"#000000";1;MUStrans_sg3l_8;1443798;8;1
+431;1443976;;ellipse;"#000000";1;MUSob-ant_trans_sg3l_2;1443976;5;5
+432;1444039;;ellipse;"#000000";1;MUSob-post_notV_sg2l_1;1444039;13;3
+433;1444070;;ellipse;"#000000";1;MUSob-post_notV_sg2l_2;1444070;3;2
+434;1444493;;ellipse;"#000000";1;EC_D_sg0r 1444494;1444493;28;0
+435;1446384;;ellipse;"#000000";1;flat glia 1446385;1446384;1;1
+436;1448388;;ellipse;"#000000";1;EC_D_heald 1448389;1448388;4;7
+437;1448906;;ellipse;"#000000";1;EC_chaetal_sac_sg3l_neuro_2;1448906;2;1
+438;1450345;;ellipse;"#000000";1;MUSac_notP_sg3r_1;1450345;26;0
+439;1450492;;ellipse;"#000000";1;MUSac_neuDx_sg3r_2;1450492;9;0
+440;1453718;;ellipse;"#000000";1;EC_V_sg2r 1453719;1453718;4;11
+441;1453826;;ellipse;"#000000";1;support cell 1453827;1453826;2;5
+442;1453924;;ellipse;"#000000";1;MUSant_r_3;1453924;7;7
+443;1454290;;ellipse;"#000000";1;MUSlong_D_sg0r_9;1454290;2;0
+444;1454540;;ellipse;"#000000";1;MUSlong_D_sg1r_1;1454540;8;0
+445;1454752;;ellipse;"#000000";1;MUSob-post_neuV_sg2l_2;1454752;6;3
+446;1455006;;ellipse;"#000000";1;EC_pygCell_rv 1455007;1455006;3;11
+447;1455427;;ellipse;"#000000";1;MUSob-post_neuV_sg2l_1;1455427;8;3
+448;1455464;;ellipse;"#000000";1;MUSob-post_notV_sg2l_3;1455464;5;3
+449;1455507;;ellipse;"#000000";1;MUSob-post_noty_sg2l_1;1455507;23;3
+450;1455565;;ellipse;"#000000";1;MUSob-post_neuDlong_sg2l_5;1455565;3;8
+451;1456159;;ellipse;"#000000";1;EC_D_sg3r_armpit 1456160;1456159;7;0
+452;1457128;;ellipse;"#000000";1;CB_pigment_sg3 1457129;1457128;4;10
+453;1457288;;ellipse;"#000000";1;EC_V_heald 1457288;1457288;1;5
+454;1459514;;ellipse;"#000000";1;MUSob-post_neuDprox_sg3l_1;1459514;3;1
+455;1460107;;ellipse;"#000000";1;MUSob-post_neuV_sg2r_5;1460107;1;1
+456;1460810;;ellipse;"#000000";1;MUSob-post_neuDprox_sg2l_1;1460810;16;8
+457;1460910;;ellipse;"#000000";1;MUSob-post_neuDprox_sg2l_2;1460910;22;3
+458;1461015;;ellipse;"#000000";1;EC_D_sg2l 1461016;1461015;13;3
+459;1461417;;ellipse;"#000000";1;MUSob-post_neuV_sg2l_3;1461417;16;3
+460;1462261;;ellipse;"#000000";1;paratroch_III_dl_3;1462261;4;8
+461;1462664;;ellipse;"#000000";1;EC_V_sg2r rad glia 1462665;1462664;3;1
+462;1463798;;ellipse;"#000000";1;EC_V_sg3l 1463799;1463798;1;5
+463;1463843;;ellipse;"#000000";1;MUSlong_D_sg2l_10;1463843;13;8
+464;1463859;;ellipse;"#000000";1;MUSlong_D_sg3l_6;1463859;8;8
+465;1463866;;ellipse;"#000000";1;MUSlong_D_sg3l_5;1463866;21;8
+466;1464491;;ellipse;"#000000";1;EC_V_sg3l 1464492;1464491;3;5
+467;1464822;;ellipse;"#000000";1;MUSob-post_neuDlong_sg2l_4;1464822;21;8
+468;1465269;;ellipse;"#000000";1;MUSob-ant_re_sg3r_2;1465269;9;10
+469;1470678;;ellipse;"#000000";1;CB_pigment_sg2 1470679;1470678;7;0
+470;1473394;;ellipse;"#000000";1;EC_V_heard 1473395;1473394;18;11
+471;1474339;;ellipse;"#000000";1;MUSring_pyg;1474339;27;1
+472;1474367;;ellipse;"#000000";1;MUStrans_pygl_4;1474367;9;1
+473;1477335;;ellipse;"#000000";1;MUSob-ant_re_sg3l_5;1477335;21;1
+474;1479575;;ellipse;"#000000";1;MUSant_l_2;1479575;6;7
+475;1484753;;ellipse;"#000000";1;MUSlong_D_sg3l_2;1484753;7;8
+476;1484840;;ellipse;"#000000";1;MUSlong_D_sg1l_9;1484840;20;8
+477;1484878;;ellipse;"#000000";1;MUSlong_D_sg0l_2;1484878;25;8
+478;1484968;;ellipse;"#000000";1;MUSchae_neuVob_sg2l_3;1484968;10;9
+479;1484986;;ellipse;"#000000";1;MUSchae_neuVob_sg2l_1;1484986;1;9
+480;1485047;;ellipse;"#000000";1;MUSchae_neuAVo_sg2l_2;1485047;9;9
+481;1485123;;ellipse;"#000000";1;MUSlong_D_sg1l_7;1485123;10;8
+482;1485154;;ellipse;"#000000";1;MUSlong_D_sg0l_3;1485154;11;8
+483;1485960;;ellipse;"#000000";1;MUSlong_D_sg2l_8;1485960;23;8
+484;1485984;;ellipse;"#000000";1;MUSlong_D_sg1l_11;1485984;11;8
+485;1486039;;ellipse;"#000000";1;MUSlong_D_sg1l_4;1486039;9;8
+486;1486065;;ellipse;"#000000";1;meso 1486066;1486065;1;8
+487;1486072;;ellipse;"#000000";1;putMYOsat 1486073;1486072;2;8
+488;1486083;;ellipse;"#000000";1;MUSlong_D_sg3l_1;1486083;5;8
+489;1486416;;ellipse;"#000000";1;MUSob-post_notD_sg3l_3;1486416;27;8
+490;1486497;;ellipse;"#000000";1;MUSob-post_notD_sg3l_5;1486497;13;8
+491;1486527;;ellipse;"#000000";1;MUSob-post_neuDlong_sg3l_4;1486527;16;1
+492;1486591;;ellipse;"#000000";1;MUSac_notP_sg3l_2;1486591;9;1
+493;1486628;;ellipse;"#000000";1;MUSac_notM_sg3l_1;1486628;41;1
+494;1486647;;ellipse;"#000000";1;MUSac_notP_sg3l_1;1486647;20;1
+495;1486688;;ellipse;"#000000";1;MUSac_neuPD_sg3l_1;1486688;12;1
+496;1486712;;ellipse;"#000000";1;MUSac_neuPD_sg3l_3;1486712;7;1
+497;1486748;;ellipse;"#000000";1;MUSchae_notAac_sg1l_2;1486748;19;6
+498;1486784;;ellipse;"#000000";1;MUSchae_notAac_sg1l_1;1486784;24;6
+499;1486810;;ellipse;"#000000";1;MUSchae_notAac_sg1l_4;1486810;68;6
+500;1488331;;ellipse;"#000000";1;EC_D_sg1r 1488332;1488331;6;0
+501;1491761;;ellipse;"#000000";1;EC_V_sg2l rad glia 1491762;1491761;5;9
+502;1497876;;ellipse;"#000000";1;EC_V_sg2r 1497877;1497876;1;11
+503;1501795;;ellipse;"#000000";1;MUSlong_D_sg1l_3;1501795;9;8
+504;1501807;;ellipse;"#000000";1;MUSlong_D_sg1l_2;1501807;3;8
+505;1501820;;ellipse;"#000000";1;MUSlong_D_sg1r_2;1501820;33;0
+506;1501849;;ellipse;"#000000";1;MUSlong_D_sg0r_6;1501849;5;0
+507;1501871;;ellipse;"#000000";1;MUSlong_D_sg1r_9;1501871;23;0
+508;1501887;;ellipse;"#000000";1;MUSlong_D_sg2r_4;1501887;3;0
+509;1501899;;ellipse;"#000000";1;MUSlong_D_sg2r_1;1501899;4;0
+510;1502044;;ellipse;"#000000";1;MUSlong_D_sg1r_10;1502044;17;0
+511;1502079;;ellipse;"#000000";1;MUSlong_D_sg1r_7;1502079;5;0
+512;1502254;;ellipse;"#000000";1;MUSlong_D_sg3r_1;1502254;4;0
+513;1502460;;ellipse;"#000000";1;EC_V_heald 1502461;1502460;2;7
+514;1502646;;ellipse;"#000000";1;MUSlong_D_sg1l_1;1502646;7;8
+515;1502686;;ellipse;"#000000";1;EC_V_sg2r_armpit 1502687;1502686;28;2
+516;1504312;;ellipse;"#000000";1;MUSlong_D_sg2l_2;1504312;2;8
+517;1504346;;ellipse;"#000000";1;MUSob-post_notD_sg2r_3;1504346;21;0
+518;1504375;;ellipse;"#000000";1;MUSob-post_notD_sg2r_4;1504375;39;0
+519;1504468;;ellipse;"#000000";1;MUSob-post_notD_sg2r_5;1504468;24;0
+520;1504478;;ellipse;"#000000";1;MUSchae_notDob_sg2r_1;1504478;16;2
+521;1504488;;ellipse;"#000000";1;MUSac_notP_sg2r_2;1504488;9;2
+522;1504505;;ellipse;"#000000";1;MUSac_notP_sg2r_1;1504505;21;2
+523;1504548;;ellipse;"#000000";1;MUSac_i_sg2r;1504548;18;2
+524;1504562;;ellipse;"#000000";1;MUSac_notM_sg3r_1;1504562;58;0
+525;1504572;;ellipse;"#000000";1;MUSac_i_sg3r;1504572;5;11
+526;1504587;;ellipse;"#000000";1;MUSac_neuDach_sg3r_1;1504587;24;10
+527;1504601;;ellipse;"#000000";1;MUSac_neuPD_sg3r_3;1504601;12;10
+528;1504628;;ellipse;"#000000";1;MUSac_neuPD_sg3r_1;1504628;8;10
+529;1504638;;ellipse;"#000000";1;MUSac_neuPD_sg3r_2;1504638;8;10
+530;1507382;;ellipse;"#000000";1;MUSac_neuDx_sg3r_1;1507382;8;0
+531;1507391;;ellipse;"#000000";1;MUSac_notM_sg3r_2;1507391;8;0
+532;1507453;;ellipse;"#000000";1;MUSob-post_neuV_sg3r_5;1507453;2;10
+533;1515109;;ellipse;"#000000";1;EC_V_sg2l lateral tonofilaments 1515110;1515109;6;5
+534;1519682;;ellipse;"#000000";1;chaeta_sg3l_noto-2;1519682;18;1
+535;1519689;;ellipse;"#000000";1;hemichaetal_sg3l_noto-2_2;1519689;12;1
+536;1524397;;ellipse;"#000000";1;EC_V_sg3r 1524398;1524397;7;11
+537;1527987;;ellipse;"#000000";1;MUSlong_V_headl9;1527987;2;7
+538;1530414;;ellipse;"#000000";1;EC_V_sg3r 1530415;1530414;8;11
+539;1530471;;ellipse;"#000000";1;MUSchae_notAre_sg3r_1;1530471;13;0
+540;1530521;;ellipse;"#000000";1;EC_head 1530522;1530521;5;7
+541;1544834;;ellipse;"#000000";1;MUSlong_V_sg1l_1;1544834;11;5
+542;1544863;;ellipse;"#000000";1;MUSob-ant_re_sg2l_7;1544863;12;9
+543;1544994;;ellipse;"#000000";1;MUSchae_notAac_sg2r_3;1544994;16;2
+544;1545004;;ellipse;"#000000";1;MUSchae_notAac_sg2r_2;1545004;27;2
+545;1545016;;ellipse;"#000000";1;MUSchae_notAac_sg2r_1;1545016;17;2
+546;1545266;;ellipse;"#000000";1;MUSchae_notAac_sg2r_4;1545266;31;2
+547;1545285;;ellipse;"#000000";1;MUSchae_notAre_sg2r_1;1545285;10;2
+548;1545294;;ellipse;"#000000";1;MUSac_neure_sg2r_2;1545294;19;2
+549;1545339;;ellipse;"#000000";1;MUSob-ant_re_sg2r_5;1545339;22;9
+550;1545362;;ellipse;"#000000";1;MUSob-ant_re_sg2r_3;1545362;18;9
+551;1545455;;ellipse;"#000000";1;MUSob-ant_re_sg2r_7;1545455;23;9
+552;1545549;;ellipse;"#000000";1;MUSob-ant_re_sg2r_4;1545549;7;9
+553;1545578;;ellipse;"#000000";1;MUSob-ant_re_sg2r_8;1545578;11;9
+554;1545589;;ellipse;"#000000";1;MUSchae_Are_sg2r_1;1545589;22;9
+555;1545603;;ellipse;"#000000";1;MUSob-ant_re_sg2r_1;1545603;12;9
+556;1545615;;ellipse;"#000000";1;MUSlong_V_sg1r_5;1545615;3;11
+557;1545643;;ellipse;"#000000";1;MUSob-ant_m-pp_sg2r_2;1545643;6;2
+558;1545668;;ellipse;"#000000";1;MUSac_neuPD_sg1r_3;1545668;19;4
+559;1545678;;ellipse;"#000000";1;MUSac_notA_sg1r_2;1545678;6;0
+560;1545686;;ellipse;"#000000";1;MUSac_notA_sg1r_1;1545686;6;4
+561;1546352;;ellipse;"#000000";1;MUSlong_V_sg0l_4;1546352;50;5
+562;1546380;;ellipse;"#000000";1;MUSlong_V_sg0l_7;1546380;6;5
+563;1546397;;ellipse;"#000000";1;MUSob-post_i_sg1r_1;1546397;8;9
+564;1546413;;ellipse;"#000000";1;MUSob-post_notV_sg1r_2;1546413;4;9
+565;1546428;;ellipse;"#000000";1;MUSob-post_neuV_sg1r_2;1546428;7;9
+566;1547023;;ellipse;"#000000";1;EC_V_sg0l_muscle-attachment 1547024;1547023;29;8
+567;1547886;;ellipse;"#000000";1;MUSob-ant_l-pp_sg1r_1;1547886;25;4
+568;1547921;;ellipse;"#000000";1;MUSob-ant_arc_sg1l_1;1547921;6;6
+569;1547950;;ellipse;"#000000";1;MUSac_notP_sg1l_1;1547950;34;6
+570;1548201;;ellipse;"#000000";1;MUSac_neuPD_sg1l_3;1548201;11;6
+571;1548257;;ellipse;"#000000";1;MUSac_neure_sg1l_1;1548257;14;6
+572;1548268;;ellipse;"#000000";1;MUSac_neuPD_sg1l_1;1548268;15;6
+573;1548290;;ellipse;"#000000";1;MUSchae_neuDac_sg1l_4;1548290;20;6
+574;1548310;;ellipse;"#000000";1;MUSac_neuPD_sg1r_1;1548310;11;4
+575;1549338;;ellipse;"#000000";1;EC_V_sg0r 1549339;1549338;2;7
+576;1549657;;ellipse;"#000000";1;MUSob-post_neuDdist_sg1rc3;1549657;7;4
+577;1549684;;ellipse;"#000000";1;MUSob-post_neuDdist_sg1rc2;1549684;11;4
+578;1551660;;ellipse;"#000000";1;EC_V_sg0l 1551661;1551660;4;7
+579;1559104;;ellipse;"#000000";1;MUStrans_sg1l_1;1559104;10;8
+580;1559695;;ellipse;"#000000";1;EC_D_sg1r 1559696;1559695;9;0
+581;1559897;;ellipse;"#000000";1;MUSac_notA_sg2r_2;1559897;34;2
+582;1559905;;ellipse;"#000000";1;MUSac_neuDx_sg2r_1;1559905;21;2
+583;1559953;;ellipse;"#000000";1;MUSchae_neuDac_sg1r_4;1559953;8;4
+584;1560009;;ellipse;"#000000";1;MUSob-post_notV_sg1r_1;1560009;9;9
+585;1563606;;ellipse;"#000000";1;EC_V_sg2r 1563607;1563606;2;2
+586;1564350;;ellipse;"#000000";1;MUSob-post_i_sg2r_1;1564350;7;2
+587;1564364;;ellipse;"#000000";1;MUSac_neuDy_sg2r_1;1564364;13;2
+588;1566972;;ellipse;"#000000";1;MUSac_neuDx_sg2r_2;1566972;5;2
+589;1567002;;ellipse;"#000000";1;MUSac_neuDach_sg2r_2;1567002;8;2
+590;1567142;;ellipse;"#000000";1;EC_chaetal_sac_sg3r_neuro 1567143;1567142;3;2
+591;1567156;;ellipse;"#000000";1;MUSac_neuPD_sg2r_1;1567156;7;2
+592;1567204;;ellipse;"#000000";1;MUSchae_neuDac_sg2r_3;1567204;21;2
+593;1567266;;ellipse;"#000000";1;MUSchae_neuDac_sg2r_4;1567266;5;2
+594;1567278;;ellipse;"#000000";1;circumchaetal_sg2r_neuro-5_2;1567278;10;2
+595;1567283;;ellipse;"#000000";1;MUSchae_neuDac_sg2r_1;1567283;38;2
+596;1568395;;ellipse;"#000000";1;MUSchae_notDob_sg1r_1;1568395;4;4
+597;1568469;;ellipse;"#000000";1;MUStrans_sg1r_1;1568469;5;7
+598;1568505;;ellipse;"#000000";1;MUSll_sg0r_5;1568505;2;7
+599;1568526;;ellipse;"#000000";1;MUSlong_V_headr4;1568526;16;11
+600;1568536;;ellipse;"#000000";1;MUSob-ant_trans_sg1r_1;1568536;2;4
+601;1568544;;ellipse;"#000000";1;MUSob-ant_re_sg1r_5;1568544;14;4
+602;1568555;;ellipse;"#000000";1;MUSob-post_sg0r_2;1568555;6;6
+603;1568562;;ellipse;"#000000";1;MUSob-ant_re_sg1l_4;1568562;13;6
+604;1568571;;ellipse;"#000000";1;MUSob-ant_re_sg1l_5;1568571;18;6
+605;1568596;;ellipse;"#000000";1;MUSob-ant_re_sg1l_3;1568596;12;6
+606;1568623;;ellipse;"#000000";1;MUSob-ant_re_sg1r_2;1568623;7;4
+607;1568781;;ellipse;"#000000";1;MUSob-ant_re_sg1r_4;1568781;9;4
+608;1568802;;ellipse;"#000000";1;MUSob-ant_re_sg1l_2;1568802;18;6
+609;1568812;;ellipse;"#000000";1;MUSob-ant_re_sg1l_1;1568812;7;6
+610;1568821;;ellipse;"#000000";1;MUSob-ant_arc_sg1l_2;1568821;7;6
+611;1568903;;ellipse;"#000000";1;MUSlong_V_headl1;1568903;29;5
+612;1568912;;ellipse;"#000000";1;MUSlong_V_headl3;1568912;17;5
+613;1568924;;ellipse;"#000000";1;MUSlong_V_headl5;1568924;10;7
+614;1568990;;ellipse;"#000000";1;MUSob-post_neuDprox_sg3l_2;1568990;8;8
+615;1569020;;ellipse;"#000000";1;MUSob-post_neuDprox_sg3l_3;1569020;9;1
+616;1569029;;ellipse;"#000000";1;MUSob-post_notD_sg3l_4;1569029;8;8
+617;1569036;;ellipse;"#000000";1;MUSob-post_notD_sg3l_2;1569036;12;8
+618;1569080;;ellipse;"#000000";1;MUSchae_notAac_sg3l_3;1569080;31;1
+619;1569091;;ellipse;"#000000";1;MUSchae_notAac_sg3l_2;1569091;16;1
+620;1569102;;ellipse;"#000000";1;MUSchae_notAac_sg3l_4;1569102;49;1
+621;1569125;;ellipse;"#000000";1;MUSchae_notAre_sg3l_1;1569125;13;1
+622;1569142;;ellipse;"#000000";1;MUSac_neure_sg3l_1;1569142;13;1
+623;1569151;;ellipse;"#000000";1;MUSac_neuDach_sg3l_3;1569151;13;1
+624;1570324;;ellipse;"#000000";1;MUSob-post_neuDprox_sg1l_2;1570324;1;6
+625;1570363;;ellipse;"#000000";1;MUSob-post_notV_sg1l_2;1570363;6;9
+626;1570688;;ellipse;"#000000";1;MUSob-ant_re_sg1r_1;1570688;4;4
+627;1570700;;ellipse;"#000000";1;MUSob-post_noty_sg1l_1;1570700;25;9
+628;1570711;;ellipse;"#000000";1;MUSchae_neuDac_sg1l_5;1570711;31;6
+629;1570729;;ellipse;"#000000";1;MUSac_notP_sg1l_2;1570729;22;6
+630;1570739;;ellipse;"#000000";1;MUSac_notA_sg1l_1;1570739;28;6
+631;1570759;;ellipse;"#000000";1;MUSchae_notDob_sg1l_1;1570759;9;6
+632;1570773;;ellipse;"#000000";1;MUSac_notA_sg2r_1;1570773;31;4
+633;1570785;;ellipse;"#000000";1;MUSchae_neuDac_sg3l_1;1570785;41;1
+634;1570796;;ellipse;"#000000";1;MUStrans_pygr_2;1570796;18;0
+635;1570814;;ellipse;"#000000";1;MUSchae_neuDac_sg3l_2;1570814;34;1
+636;1570821;;ellipse;"#000000";1;MUSob-post_neuDlong_sg3l_5;1570821;8;1
+637;1570834;;ellipse;"#000000";1;MUSchae_neuDac_sg3l_4;1570834;36;1
+638;1570845;;ellipse;"#000000";1;MUSob-ant_re_sg3l_1;1570845;9;1
+639;1570863;;ellipse;"#000000";1;MUSob-post_neuDdist_sg3lc1;1570863;6;1
+640;1570873;;ellipse;"#000000";1;MUSob-post_neuDdist_sg3lc2;1570873;6;1
+641;1570885;;ellipse;"#000000";1;MUSob-post_notV_sg3l_3;1570885;2;1
+642;1574311;;ellipse;"#000000";1;MUSchae_neuDac_sg3l_3;1574311;14;1
+643;1574345;;ellipse;"#000000";1;MUSob-post_i_sg3r_1;1574345;3;0
+644;1574360;;ellipse;"#000000";1;MUSob-post_neuDdist_sg3r_5;1574360;5;10
+645;1574394;;ellipse;"#000000";1;MUSac_notP_sg3r_2;1574394;12;0
+646;1574536;;ellipse;"#000000";1;MUSac_neure_sg3r_1;1574536;18;10
+647;1574549;;ellipse;"#000000";1;MUSac_neuDach_sg3r_2;1574549;10;10
+648;1574558;;ellipse;"#000000";1;MUSac_neuDach_sg3r_3;1574558;27;10
+649;1575990;;ellipse;"#000000";1;MUSob-post_neuDdist_sg3lc3;1575990;12;1
+650;1576014;;ellipse;"#000000";1;MUSob-post_i_sg3l_1;1576014;9;1
+651;1576025;;ellipse;"#000000";1;MUSchae_notDob_sg3l_3;1576025;5;1
+652;1576034;;ellipse;"#000000";1;MUSchae_notDob_sg3l_1;1576034;4;8
+653;1576044;;ellipse;"#000000";1;MUSchae_notD_sg3l_1;1576044;24;1
+654;1576054;;ellipse;"#000000";1;MUSac_notA_sg3l_2;1576054;8;1
+655;1576083;;ellipse;"#000000";1;MUSchae_notDob_sg3l_2;1576083;8;8
+656;1576091;;ellipse;"#000000";1;meso 1576092;1576091;2;8
+657;1576108;;ellipse;"#000000";1;MUSchae_notA_sg3l_1;1576108;13;1
+658;1576118;;ellipse;"#000000";1;MUSchae_notDn_sg3l_1;1576118;3;1
+659;1576129;;ellipse;"#000000";1;MUSchae_notAac_sg3l_1;1576129;24;1
+660;1576450;;ellipse;"#000000";1;MUSchae_neuVob_sg3l_2;1576450;3;1
+661;1576459;;ellipse;"#000000";1;MUSchae_neuVob_sg3l_1;1576459;8;1
+662;1576508;;ellipse;"#000000";1;MUSac_neuDy_sg3l_1;1576508;19;1
+663;1576621;;ellipse;"#000000";1;MUSac_neuDx_sg3l_1;1576621;6;1
+664;1583036;;ellipse;"#000000";1;MUSac_neuPD_sg3l_2;1583036;7;5
+665;1583047;;ellipse;"#000000";1;MUStrans_sg3l_1;1583047;7;3
+666;1583124;;ellipse;"#000000";1;MUStrans_sg3l_2;1583124;11;3
+667;1583199;;ellipse;"#000000";1;MUSac_notDo_sg2l;1583199;7;8
+668;1583324;;ellipse;"#000000";1;MUSob_sg0_l;1583324;15;7
+669;1583499;;ellipse;"#000000";1;MUStrans_sg0l_2;1583499;17;7
+670;1583644;;ellipse;"#000000";1;MUStrans_sg0l_3;1583644;5;7
+671;1583738;;ellipse;"#000000";1;MUSll_sg0r_3;1583738;16;7
+672;1583795;;ellipse;"#000000";1;MUSll_sg0l_3;1583795;21;7
+673;1583844;;ellipse;"#000000";1;MUSll_sg0l_4;1583844;6;7
+674;1583898;;ellipse;"#000000";1;MUStrans_sg0l_4;1583898;4;5
+675;1584011;;ellipse;"#000000";1;MUSob-post_neuV_sg2l_5;1584011;7;3
+676;1584240;;ellipse;"#000000";1;MUStrans_sg1l_2;1584240;9;8
+677;1584331;;ellipse;"#000000";1;MUSchae_neuVob_sg1r_2;1584331;4;4
+678;1584400;;ellipse;"#000000";1;MUSob-ant_re_sg1r_3;1584400;7;4
+679;1584667;;ellipse;"#000000";1;MUSchae_neuVob_sg1r_1;1584667;4;4
+680;1584716;;ellipse;"#000000";1;MUSchae_neuAVt_sg1r_1;1584716;5;11
+681;1584762;;ellipse;"#000000";1;MUSchae_neuDac_sg1r_3;1584762;18;4
+682;1584845;;ellipse;"#000000";1;MUSob-post_neuV_sg1r_5;1584845;5;9
+683;1585014;;ellipse;"#000000";1;MUSac_notP_sg1r_2;1585014;27;4
+684;1585043;;ellipse;"#000000";1;MUSac_i_sg1r;1585043;8;4
+685;1585310;;ellipse;"#000000";1;MUSchae_notA_sg1r_1;1585310;17;4
+686;1585339;;ellipse;"#000000";1;MUSchae_neuDac_sg1r_6;1585339;18;4
+687;1585394;;ellipse;"#000000";1;MUSchae_neuDac_sg1r_5;1585394;19;4
+688;1585474;;ellipse;"#000000";1;MUSac_neuDach_sg1r_3;1585474;12;4
+689;1585542;;ellipse;"#000000";1;MUSchae_notAac_sg1r_1;1585542;23;4
+690;1585802;;ellipse;"#000000";1;MUSac_neuPD_sg1r_2;1585802;11;4
+691;1585890;;ellipse;"#000000";1;MUSac_notM_sg1r_1;1585890;29;4
+692;1586199;;ellipse;"#000000";1;MUSob-post_notD_sg1r_1;1586199;20;4
+693;1586304;;ellipse;"#000000";1;MUSob-post_notD_sg1r_2;1586304;14;4
+694;1586381;;ellipse;"#000000";1;MUSob-post_notD_sg1r_3;1586381;9;4
+695;1586429;;ellipse;"#000000";1;MUSob-post_notD_sg1r_4;1586429;10;4
+696;1586533;;ellipse;"#000000";1;MUSchae_notDob_sg1r_3;1586533;6;4
+697;1586605;;ellipse;"#000000";1;MUSchae_notDob_sg1r_2;1586605;7;4
+698;1586690;;ellipse;"#000000";1;MUSchae_notD_sg1r_1;1586690;15;4
+699;1586770;;ellipse;"#000000";1;MUSchae_neuAVo_sg1r_2;1586770;5;4
+700;1586837;;ellipse;"#000000";1;MUSob-post_neuDdist_sg1rc1;1586837;5;4
+701;1586923;;ellipse;"#000000";1;MUSob-post_neuDprox_sg1r_1;1586923;8;4
+702;1587010;;ellipse;"#000000";1;EC_chaetal_sac_sg2_noto 1587011;1587010;5;3
+703;1587020;;ellipse;"#000000";1;MUSob-post_neuDprox_sg1r_3;1587020;8;4
+704;1587188;;ellipse;"#000000";1;MUSob-post_neuV_sg1r_1;1587188;9;9
+705;1587509;;ellipse;"#000000";1;MUStrans_sg2r_4;1587509;8;4
+706;1587735;;ellipse;"#000000";1;MUStrans_sg2r_2;1587735;9;4
+707;1587898;;ellipse;"#000000";1;MUSac_neuPD_sg2r_3;1587898;7;2
+708;1587938;;ellipse;"#000000";1;MUSac_neuPD_sg2r_2;1587938;14;2
+709;1588012;;ellipse;"#000000";1;MUSob-post_notD_sg2r_1;1588012;9;0
+710;1588107;;ellipse;"#000000";1;MUSchae_notDob_sg2r_3;1588107;13;2
+711;1588269;;ellipse;"#000000";1;MUSob-post_notD_sg2r_2;1588269;16;0
+712;1589082;;ellipse;"#000000";1;MUSlong_V_headl2;1589082;24;5
+713;1589825;;ellipse;"#000000";1;MUSchae_notD_sg2r_1;1589825;24;2
+714;1589904;;ellipse;"#000000";1;MUSchae_notDn_sg2r_1;1589904;12;2
+715;1589925;;ellipse;"#000000";1;MUSob-post_neuDprox_sg2r_2;1589925;7;0
+716;1590216;;ellipse;"#000000";1;MUStrans_sg3r_5;1590216;7;0
+717;1590351;;ellipse;"#000000";1;MUSlong_D_sg3r_7;1590351;12;0
+718;1590476;;ellipse;"#000000";1;MUSchae_notAac_sg3r_1;1590476;20;0
+719;1590497;;ellipse;"#000000";1;MUSchae_notA_sg3r_1;1590497;16;0
+720;1590675;;ellipse;"#000000";1;MUSchae_notAac_sg3r_4;1590675;67;0
+721;1590815;;ellipse;"#000000";1;MUSob-post_neuDdist_sg3rc2;1590815;4;10
+722;1590846;;ellipse;"#000000";1;MUSob-post_notD_sg3r_3;1590846;22;0
+723;1590872;;ellipse;"#000000";1;MUSob-post_notD_sg3r_4;1590872;9;0
+724;1590910;;ellipse;"#000000";1;MUSob-post_notD_sg3r_2;1590910;23;0
+725;1590954;;ellipse;"#000000";1;MUSac_notA_sg3r_2;1590954;20;0
+726;1590972;;ellipse;"#000000";1;MUSchae_notDob_sg3r_1;1590972;16;0
+727;1591008;;ellipse;"#000000";1;MUSchae_notDob_sg3r_2;1591008;8;0
+728;1591064;;ellipse;"#000000";1;MUSob-post_notD_sg3r_1;1591064;8;0
+729;1591098;;ellipse;"#000000";1;MUSchae_notDob_sg3r_3;1591098;7;0
+730;1591154;;ellipse;"#000000";1;MUSchae_notD_sg3r_1;1591154;14;0
+731;1591239;;ellipse;"#000000";1;MUSob-post_neuDprox_sg3r_1;1591239;9;0
+732;1591278;;ellipse;"#000000";1;MUSob-post_notD_sg3r_5;1591278;5;0
+733;1591321;;ellipse;"#000000";1;MUSob-post_notV_sg3r_3;1591321;3;10
+734;1591667;;ellipse;"#000000";1;MUSob-post_notD_sg3l_1;1591667;5;1
+735;1591797;;ellipse;"#000000";1;MUSchae_neuAVo_sg3l_1;1591797;8;12
+736;1591915;;ellipse;"#000000";1;MUSchae_neuAVo_sg3l_2;1591915;3;1
+737;1592006;;ellipse;"#000000";1;EC_V_sg2l 1592007;1592006;6;9
+738;1592240;;ellipse;"#000000";1;neuron fragment 1592241;1592240;3;6
+739;1592405;;ellipse;"#000000";1;MUSob-post_i_sg1l_1;1592405;9;6
+740;1592462;;ellipse;"#000000";1;MUSac_neuPD_sg1l_2;1592462;7;6
+741;1592648;;ellipse;"#000000";1;MUStrans_sg1l_4;1592648;8;6
+742;1592784;;ellipse;"#000000";1;MUSac_notM_sg1r_2;1592784;4;4
+743;1592834;;ellipse;"#000000";1;MUStrans_sg1r_4;1592834;7;6
+744;1592906;;ellipse;"#000000";1;MUSchae_notAac_sg1r_4;1592906;29;4
+745;1592945;;ellipse;"#000000";1;MUSchae_notAac_sg1r_2;1592945;9;4
+746;1593030;;ellipse;"#000000";1;MUSac_neuDach_sg1r_1;1593030;6;4
+747;1593058;;ellipse;"#000000";1;MUSlong_V_sg0r_2;1593058;10;11
+748;1593111;;ellipse;"#000000";1;MUStrans_sg1l_3;1593111;2;8
+749;1593200;;ellipse;"#000000";1;MUSpl_l_1;1593200;6;7
+750;1593242;;ellipse;"#000000";1;MUSmed_head_l;1593242;12;13
+751;1593671;;ellipse;"#000000";1;MUStrans_sg0r_2;1593671;12;7
+752;1593894;;ellipse;"#000000";1;MUStrans_sg0r_1;1593894;11;7
+753;1594110;;ellipse;"#000000";1;MUSpl_r_2;1594110;9;7
+754;1594186;;ellipse;"#000000";1;MUSlong_V_headr1;1594186;24;11
+755;1594382;;ellipse;"#000000";1;MUSll_sg0r_2;1594382;12;7
+756;1594456;;ellipse;"#000000";1;MUSll_sg0l_2;1594456;24;7
+757;1594523;;ellipse;"#000000";1;MUSll_sg0r_1;1594523;17;7
+758;1594570;;ellipse;"#000000";1;MUSll_sg0l_1;1594570;15;7
+759;1594643;;ellipse;"#000000";1;MUSob_sg0_r;1594643;9;7
+760;1594720;;ellipse;"#000000";1;MUSlong_V_headr7;1594720;4;7
+761;1594980;;ellipse;"#000000";1;EC_V_sg2l 1594981;1594980;4;3
+762;1595117;;ellipse;"#000000";1;MUSob-post_neuDdist_sg2lc3;1595117;4;3
+763;1595638;;ellipse;"#000000";1;CB_pigment_sg2l 1595639;1595638;1;5
+764;1595786;;ellipse;"#000000";1;MUStrans_sg0r_3;1595786;8;7
+765;1595882;;ellipse;"#000000";1;MUSll_sg0l_5;1595882;2;8
+766;1595978;;ellipse;"#000000";1;MUSmed_head_r;1595978;15;13
+767;1597391;;ellipse;"#000000";1;MUSchae_notDn_sg3r_1;1597391;4;0
+768;1597400;;ellipse;"#000000";1;MUSob-post_neuV_sg3r_4;1597400;13;10
+769;1597410;;ellipse;"#000000";1;MUSob-post_neuV_sg3r_6;1597410;5;10
+770;1597419;;ellipse;"#000000";1;MUSlong_V_sg3r_2;1597419;2;11
+771;1597423;;ellipse;"#000000";1;MUSlong_V_pygr;1597423;7;11
+772;1601265;;ellipse;"#000000";1;support cell 1601266;1601265;1;9
+773;1601839;;ellipse;"#000000";1;MUSac_notM_sg2l_2;1601839;35;3
+774;1603906;;ellipse;"#000000";1;MUStrans_sg1r_2;1603906;4;7
+775;1603943;;ellipse;"#000000";1;MUStrans_sg1r_3;1603943;4;7
+776;1605349;;ellipse;"#000000";1;MUSob-ant_arc_sg2r_3;1605349;7;9
+777;1605372;;ellipse;"#000000";1;MUSob-ant_arc_sg2r_4;1605372;10;9
+778;1606096;;ellipse;"#000000";1;EC_V_sg1r rad glia 1606097;1606096;1;7
+779;1606125;;ellipse;"#000000";1;ciliatedGland_l9;1606125;4;7
+780;1607477;;ellipse;"#000000";1;MUSchae_neuVob_sg2r_2;1607477;9;2
+781;1613320;;ellipse;"#000000";1;EC_D_sg3r 1613321;1613320;5;10
+782;1614229;;ellipse;"#000000";1;EC_V_sg3l 1614230;1614229;5;5
+783;1614245;;ellipse;"#000000";1;EC_V_sg3l 1614246;1614245;1;3
+784;1616478;;ellipse;"#000000";1;ecto fragment 1616479;1616478;2;11
+785;1617457;;ellipse;"#000000";1;EC_V_sg3r 1617458;1617457;4;10
+786;1617475;;ellipse;"#000000";1;EC_V_sg3r 1617476;1617475;25;10
+787;1617521;;ellipse;"#000000";1;meso 1617522;1617521;1;1
+788;1617535;;ellipse;"#000000";1;EC_V_sg3l 1617536;1617535;19;5
+789;1617616;;ellipse;"#000000";1;EC_V_sg3l 1617617;1617616;1;18
+790;1617669;;ellipse;"#000000";1;MUSchae_neuDac_sg2r_2;1617669;48;9
+791;1618144;;ellipse;"#000000";1;EC_D_sg3r 1618145;1618144;12;0
+792;1618565;;ellipse;"#000000";1;EC_V_pygl 1618566;1618565;1;1
+793;1618811;;ellipse;"#000000";1;EC_V_pygr 1618812;1618811;2;1
+794;1619925;;ellipse;"#000000";1;pygidial_pigment_cell  1619926;1619925;4;1
+795;1619960;;ellipse;"#000000";1;pygidial_pigment_cell 1619961;1619960;2;1
+796;1619979;;ellipse;"#000000";1;pygidial_pigment_cell  1619980;1619979;1;1
+797;1620045;;ellipse;"#000000";1;pygidial_pigment_cell 1620046;1620045;1;0
+798;1620444;;ellipse;"#000000";1;MUSchae_Are_sg3l_1;1620444;11;1
+799;1620646;;ellipse;"#000000";1;chaeta_sg2r_noto-8;1620646;14;2
+800;1620651;;ellipse;"#000000";1;chaeta_sg2r_noto-9;1620651;23;2
+801;1620655;;ellipse;"#000000";1;chaeta_sg2r_noto-5;1620655;19;2
+802;1621079;;ellipse;"#000000";1;MUSly_l_1;1621079;4;5
+803;1621126;;ellipse;"#000000";1;MUSlong_V_headr8;1621126;6;11
+804;1621176;;ellipse;"#000000";1;EC_V_pygl 1621177;1621176;1;1
+805;1621186;;ellipse;"#000000";1;chaeta_sg2r_noto-10;1621186;19;2
+806;1621202;;ellipse;"#000000";1;MUStri_r;1621202;3;7
+807;1621314;;ellipse;"#000000";1;chaeta_sg2r_noto-7;1621314;5;2
+808;1621330;;ellipse;"#000000";1;chaeta_sg2r_noto-6;1621330;16;2
+809;1621549;;ellipse;"#000000";1;MUSchae_neuAVt_sg3r_1;1621549;11;10
+810;1621573;;ellipse;"#000000";1;chaeta_sg2r_noto-4;1621573;34;2
+811;1621596;;ellipse;"#000000";1;MUSob-post_neuV_sg3r_7;1621596;1;16
+812;1621708;;ellipse;"#000000";1;MUSchae_neuAVo_sg3r_2;1621708;11;10
+813;1621757;;ellipse;"#000000";1;MUSchae_neuVob_sg3r_2;1621757;4;10
+814;1621822;;ellipse;"#000000";1;MUSchae_neuAVo_sg3r_1;1621822;9;10
+815;1621852;;ellipse;"#000000";1;MUSob-ant_l-pp_sg3r_2;1621852;2;0
+816;1621880;;ellipse;"#000000";1;chaeta_sg1l_noto-2;1621880;22;6
+817;1621894;;ellipse;"#000000";1;MUStrans_sg3r_8;1621894;4;0
+818;1621926;;ellipse;"#000000";1;MUStrans_sg3r_7;1621926;2;0
+819;1621972;;ellipse;"#000000";1;EC_D_sg3l 1621973;1621972;1;1
+820;1621978;;ellipse;"#000000";1;chaeta_sg1l_noto-5;1621978;21;6
+821;1621996;;ellipse;"#000000";1;MUSob-ant_ml-pp_sg3r_1;1621996;1;0
+822;1622045;;ellipse;"#000000";1;circumchaetal_sg1l_noto-1_2;1622045;2;6
+823;1622103;;ellipse;"#000000";1;EC_D_sg3l 1622104;1622103;2;1
+824;1622116;;ellipse;"#000000";1;EC_D_sg3l 1622117;1622116;4;1
+825;1622221;;ellipse;"#000000";1;chaeta_sg1l_noto-6;1622221;8;6
+826;1622228;;ellipse;"#000000";1;chaeta_sg1l_noto-8;1622228;4;6
+827;1622232;;ellipse;"#000000";1;EC_D_pygl 1622233;1622232;1;1
+828;1622250;;ellipse;"#000000";1;EC_V_pygl 1622251;1622250;5;1
+829;1622259;;ellipse;"#000000";1;EC_D_pygl_armpit 1622260;1622259;1;1
+830;1622274;;ellipse;"#000000";1;EC_V_sg3l_armpit 1622275;1622274;15;1
+831;1622288;;ellipse;"#000000";1;EC_V_sg3l 1622289;1622288;1;1
+832;1622319;;ellipse;"#000000";1;MUSchae_neuAVo_sg3r_3;1622319;8;10
+833;1622335;;ellipse;"#000000";1;EC_V_pygl 1622336;1622335;1;1
+834;1622375;;ellipse;"#000000";1;EC_V_sg3l 1622376;1622375;2;1
+835;1622418;;ellipse;"#000000";1;chaeta_sg1l_noto-7;1622418;8;6
+836;1622511;;ellipse;"#000000";1;MUSob-ant_trans_sg3r_2;1622511;2;0
+837;1622704;;ellipse;"#000000";1;EC_V_pygl 1622705;1622704;0;19
+838;1622860;;ellipse;"#000000";1;CB_pigment_sg3 1622861;1622860;2;1
+839;1622869;;ellipse;"#000000";1;EC_V_pygl 1622870;1622869;2;5
+840;1623138;;ellipse;"#000000";1;MUSac_neuDx_sg3l_2;1623138;6;1
+841;1623150;;ellipse;"#000000";1;EC_V_pygl 1623151;1623150;1;1
+842;1623208;;ellipse;"#000000";1;MUSac_notM_sg3l_2;1623208;6;1
+843;1623227;;ellipse;"#000000";1;MUSac_neuDach_sg3l_2;1623227;12;1
+844;1623277;;ellipse;"#000000";1;MUSac_neuAV_sg3l_2;1623277;26;5
+845;1623389;;ellipse;"#000000";1;MUSob-ant_l-pp_sg3l_2;1623389;2;1
+846;1623440;;ellipse;"#000000";1;MUSob-ant_ml-pp_sg3l_2;1623440;2;5
+847;1623477;;ellipse;"#000000";1;MUStrans_sg3l_5;1623477;7;5
+848;1623504;;ellipse;"#000000";1;EC_D_pygl 1623505;1623504;2;1
+849;1623583;;ellipse;"#000000";1;MUStrans_sg3l_6;1623583;3;5
+850;1624011;;ellipse;"#000000";1;EC_V_pygr 1624012;1624011;1;1
+851;1625257;;ellipse;"#000000";1;EC_D_pygl 1625258;1625257;7;1
+852;1625586;;ellipse;"#000000";1;MUSac_notP_sg2l_1;1625586;59;3
+853;1625858;;ellipse;"#000000";1;EC_circumchaetal_sg3l_noto-4_5;1625858;4;1
+854;1625868;;ellipse;"#000000";1;chaeta_sg1l_noto-3;1625868;7;6
+855;1625884;;ellipse;"#000000";1;MUSac_notP_sg2l_2;1625884;17;3
+856;1625998;;ellipse;"#000000";1;EC_D_sg3l 1625999;1625998;2;1
+857;1626051;;ellipse;"#000000";1;MUSac_notA_sg2l_1;1626051;19;3
+858;1626075;;ellipse;"#000000";1;EC_D_pygr 1626076;1626075;2;0
+859;1626083;;ellipse;"#000000";1;MUStrans_sg2l_7;1626083;5;9
+860;1626129;;ellipse;"#000000";1;EC_D_pygr 1626130;1626129;2;0
+861;1626193;;ellipse;"#000000";1;EC_D_pygr 1626194;1626193;1;8
+862;1626208;;ellipse;"#000000";1;chaeta_sg1l_noto-4;1626208;26;6
+863;1626309;;ellipse;"#000000";1;MUStrans_sg2l_2;1626309;2;6
+864;1626318;;ellipse;"#000000";1;EC_D_pygr 1626319;1626318;3;0
+865;1626402;;ellipse;"#000000";1;MUStrans_sg2l_3;1626402;3;8
+866;1626413;;ellipse;"#000000";1;chaeta_sg1l_neuro-7;1626413;8;6
+867;1626422;;ellipse;"#000000";1;MUSob-post_notV_sg1l_1;1626422;3;9
+868;1626472;;ellipse;"#000000";1;MUSob-post_neuDdist_sg1lc3;1626472;6;6
+869;1626498;;ellipse;"#000000";1;EC_D_pygr 1626499;1626498;1;0
+870;1626536;;ellipse;"#000000";1;chaeta_sg1l_neuro-3;1626536;6;6
+871;1626554;;ellipse;"#000000";1;EC_D_pygr 1626555;1626554;4;0
+872;1626558;;ellipse;"#000000";1;MUSob-post_neuDdist_sg1lc2;1626558;9;6
+873;1626582;;ellipse;"#000000";1;MUSchae_notAac_sg1l_3;1626582;9;6
+874;1626602;;ellipse;"#000000";1;EC_D_sg3r 1626603;1626602;2;10
+875;1626606;;ellipse;"#000000";1;CB_pigment 1626607;1626606;4;0
+876;1626621;;ellipse;"#000000";1;EC_D_sg3r 1626622;1626621;4;0
+877;1626626;;ellipse;"#000000";1;MUSob-post_notD_sg1l_2;1626626;27;8
+878;1626672;;ellipse;"#000000";1;EC_D_sg3r 1626673;1626672;10;0
+879;1626686;;ellipse;"#000000";1;MUSob-post_notD_sg1l_3;1626686;19;8
+880;1626691;;ellipse;"#000000";1;chaeta_sg1l_neuro-5;1626691;27;15
+881;1626701;;ellipse;"#000000";1;EC_D_sg3r 1626702;1626701;7;0
+882;1626705;;ellipse;"#000000";1;chaeta_sg1l_neuro-2;1626705;9;5
+883;1626709;;ellipse;"#000000";1;MUSob-post_notD_sg1l_4;1626709;12;8
+884;1626721;;ellipse;"#000000";1;EC_V_sg33r 1626722;1626721;1;0
+885;1626756;;ellipse;"#000000";1;MUSob-post_notD_sg1l_1;1626756;23;8
+886;1626760;;ellipse;"#000000";1;hemichaetal_sg1r_noto-5_1;1626760;1;4
+887;1626773;;ellipse;"#000000";1;EC_V_sg3r 1626774;1626773;2;10
+888;1626788;;ellipse;"#000000";1;EC_V_pygr 1626789;1626788;2;0
+889;1626831;;ellipse;"#000000";1;MUSlong_D_sg1l_6;1626831;4;8
+890;1626871;;ellipse;"#000000";1;MUSlong_D_sg1l_5;1626871;22;8
+891;1626922;;ellipse;"#000000";1;MUSchae_notA_sg1l_1;1626922;34;6
+892;1626932;;ellipse;"#000000";1;chaeta_sg1r_neuro-4;1626932;10;4
+893;1626947;;ellipse;"#000000";1;EC_D_pygl 1626948;1626947;3;14
+894;1627068;;ellipse;"#000000";1;MUSchae_notD_sg1l_1;1627068;7;6
+895;1627104;;ellipse;"#000000";1;EC_V_pygr 1627105;1627104;1;1
+896;1627309;;ellipse;"#000000";1;MUSob-post_neuV_sg1l_1;1627309;4;9
+897;1627358;;ellipse;"#000000";1;MUStrans_sg2l_1;1627358;5;6
+898;1627561;;ellipse;"#000000";1;MUStrans_sg2l_6;1627561;3;8
+899;1627867;;ellipse;"#000000";1;MUSob-post_neuDprox_sg1l_1;1627867;4;6
+900;1627911;;ellipse;"#000000";1;chaeta_sg1r_noto-1;1627911;10;4
+901;1627921;;ellipse;"#000000";1;MUSob-post_neuDprox_sg1l_3;1627921;8;6
+902;1627987;;ellipse;"#000000";1;chaeta_sg1r_noto-5;1627987;1;4
+903;1628061;;ellipse;"#000000";1;chaeta_sg1r_neuro-5;1628061;14;4
+904;1628116;;ellipse;"#000000";1;EC_V_sg3r 1628117;1628116;1;0
+905;1628235;;ellipse;"#000000";1;MUSob-post_neuDdist_sg1lc1;1628235;4;6
+906;1628320;;ellipse;"#000000";1;chaeta_sg2r_noto-2;1628320;18;2
+907;1628605;;ellipse;"#000000";1;MUSob-ant_re_sg2l_4;1628605;13;9
+908;1628716;;ellipse;"#000000";1;MUSob-ant_re_sg2l_5;1628716;24;9
+909;1628748;;ellipse;"#000000";1;MUSob-ant_re_sg2l_8;1628748;14;9
+910;1628777;;ellipse;"#000000";1;EC_V_sg3r 1628778;1628777;5;10
+911;1628857;;ellipse;"#000000";1;EC_V_sg3r 1628858;1628857;19;10
+912;1628861;;ellipse;"#000000";1;MUSob-ant_m-pp_sg2l_2;1628861;8;3
+913;1629097;;ellipse;"#000000";1;MUStrans_sg2l_4;1629097;5;8
+914;1629188;;ellipse;"#000000";1;MUSchae_notDob_sg2l_1;1629188;7;8
+915;1629613;;ellipse;"#000000";1;MUSac_notM_sg2l_1;1629613;6;3
+916;1629808;;ellipse;"#000000";1;MUSob-ant_l-pp_sg2l_1;1629808;7;3
+917;1629909;;ellipse;"#000000";1;MUSob-ant_re_sg2l_1;1629909;10;9
+918;1629968;;ellipse;"#000000";1;MUSchae_Are_sg2l_1;1629968;8;9
+919;1630022;;ellipse;"#000000";1;MUSob-ant_re_sg2l_3;1630022;16;9
+920;1630112;;ellipse;"#000000";1;MUSac_neuAV_sg2l_2;1630112;7;3
+921;1630186;;ellipse;"#000000";1;MUSac_neuAV_sg2l_1;1630186;22;5
+922;1630368;;ellipse;"#000000";1;EC_V_sg3l 1630369;1630368;7;3
+923;1630553;;ellipse;"#000000";1;MUSchae_notDob_sg2l_2;1630553;13;8
+924;1630704;;ellipse;"#000000";1;EC_D_sg3r 1630705;1630704;4;0
+925;1630751;;ellipse;"#000000";1;EC_D_sg3r 1630752;1630751;6;0
+926;1630844;;ellipse;"#000000";1;EC_D_sg3l 1630845;1630844;7;8
+927;1630857;;ellipse;"#000000";1;EC_D_sg3l 1630858;1630857;28;3
+928;1630874;;ellipse;"#000000";1;chaeta_sg1r_neuro-1;1630874;5;4
+929;1630892;;ellipse;"#000000";1;EC_D_sg3l 1630893;1630892;13;3
+930;1630897;;ellipse;"#000000";1;EC_D_sg2l 1630898;1630897;8;3
+931;1630931;;ellipse;"#000000";1;EC_V_sg3r 1630932;1630931;41;0
+932;1630952;;ellipse;"#000000";1;pygidial_pigment_cell 1630953;1630952;4;1
+933;1631021;;ellipse;"#000000";1;chaeta_sg1r_noto-2;1631021;1;4
+934;1631033;;ellipse;"#000000";1;circumacicular_sg3l_neuro_5;1631033;14;1
+935;1631037;;ellipse;"#000000";1;chaeta_sg1r_neuro-6;1631037;3;4
+936;1631047;;ellipse;"#000000";1;EC_V_pygl 1631048;1631047;1;14
+937;1631067;;ellipse;"#000000";1;hemichaetal_sg1r_noto-6_2;1631067;4;4
+938;1631071;;ellipse;"#000000";1;EC_D_sg3l 1631072;1631071;4;8
+939;1631082;;ellipse;"#000000";1;EC_D_pygl 1631083;1631082;1;1
+940;1631093;;ellipse;"#000000";1;EC_D_pygl 1631094;1631093;5;1
+941;1631103;;ellipse;"#000000";1;EC_D_pygr 1631104;1631103;2;0
+942;1631578;;ellipse;"#000000";1;MUSchae_notAre_sg2l_1;1631578;10;3
+943;1631633;;ellipse;"#000000";1;MUSchae_notA_sg2l_1;1631633;14;3
+944;1631685;;ellipse;"#000000";1;MUSob-ant_arc_sg2l_1;1631685;20;9
+945;1631773;;ellipse;"#000000";1;MUSob-ant_re_sg2r_2;1631773;7;9
+946;1631808;;ellipse;"#000000";1;MUSob-ant_trans_sg2r_1;1631808;2;9
+947;1631975;;ellipse;"#000000";1;MUSob-ant_arc_sg2r_1;1631975;8;9
+948;1632012;;ellipse;"#000000";1;MUSchae_neuVob_sg2r_3;1632012;16;2
+949;1632050;;ellipse;"#000000";1;MUSac_neuDach_sg2r_3;1632050;16;2
+950;1632088;;ellipse;"#000000";1;EC_V_pygr 1632089;1632088;1;11
+951;1632110;;ellipse;"#000000";1;pygidial_pigment_cell 1632111;1632110;4;1
+952;1632121;;ellipse;"#000000";1;MUSchae_neuVob_sg2r_1;1632121;3;9
+953;1632171;;ellipse;"#000000";1;MUSac_neuAV_sg2r_2;1632171;12;2
+954;1632286;;ellipse;"#000000";1;MUSob-ant_l-pp_sg2r_2;1632286;2;2
+955;1632319;;ellipse;"#000000";1;MUSob-ant_l-pp_sg2r_1;1632319;7;11
+956;1632358;;ellipse;"#000000";1;MUSac_notM_sg2r_2;1632358;18;2
+957;1632379;;ellipse;"#000000";1;EC_V_sg3l 1632380;1632379;5;1
+958;1632461;;ellipse;"#000000";1;EC_V_sg3l 1632462;1632461;35;1
+959;1632525;;ellipse;"#000000";1;EC_D_sg3l 1632526;1632525;6;1
+960;1632536;;ellipse;"#000000";1;MUSchae_neuDac_sg2l_3;1632536;34;3
+961;1632546;;ellipse;"#000000";1;EC_D_sg3l 1632547;1632546;12;8
+962;1632556;;ellipse;"#000000";1;EC_D_sg3l 1632557;1632556;20;8
+963;1632599;;ellipse;"#000000";1;support cell 1632600;1632599;1;0
+964;1632624;;ellipse;"#000000";1;EC_D_sg3r 1632625;1632624;16;0
+965;1632917;;ellipse;"#000000";1;EC_V_sg3l 1632918;1632917;6;1
+966;1632941;;ellipse;"#000000";1;EC_circumchaetal_sg3l_neuro-4_1;1632941;5;1
+967;1632956;;ellipse;"#000000";1;EC_V_sg3l 1632957;1632956;13;1
+968;1633010;;ellipse;"#000000";1;EC_V_pygr 1633011;1633010;1;10
+969;1633029;;ellipse;"#000000";1;EC_V_pygr 1633030;1633029;1;11
+970;1633251;;ellipse;"#000000";1;MUSchae_notDob_sg2l_3;1633251;7;3
+971;1633270;;ellipse;"#000000";1;EC_circumchaetal_sg3l_neuro-2_1;1633270;14;1
+972;1633288;;ellipse;"#000000";1;MUSob-post_notD_sg2l_3;1633288;16;8
+973;1633300;;ellipse;"#000000";1;EC_V_sg3l 1633301;1633300;11;1
+974;1633323;;ellipse;"#000000";1;EC_D_sg3l 1633324;1633323;14;1
+975;1633478;;ellipse;"#000000";1;MUSchae_notD_sg2l_1;1633478;7;3
+976;1633486;;ellipse;"#000000";1;EC_D_sg3l 1633487;1633486;5;8
+977;1633500;;ellipse;"#000000";1;CB_pigment_sg3 1633501;1633500;3;1
+978;1633532;;ellipse;"#000000";1;MUSchae_notAac_sg2l_3;1633532;30;3
+979;1633569;;ellipse;"#000000";1;MUSchae_notAac_sg2l_4;1633569;56;3
+980;1633835;;ellipse;"#000000";1;chaeta_sg2r_neuro-10;1633835;22;9
+981;1633864;;ellipse;"#000000";1;chaeta_sg2r_neuro-7;1633864;19;9
+982;1633890;;ellipse;"#000000";1;MUSchae_notAac_sg2l_2;1633890;10;3
+983;1633900;;ellipse;"#000000";1;chaeta_sg2r_neuro-4;1633900;14;2
+984;1633923;;ellipse;"#000000";1;chaeta_sg2r_neuro-5;1633923;9;2
+985;1633938;;ellipse;"#000000";1;MUSchae_notAac_sg2l_1;1633938;16;3
+986;1633963;;ellipse;"#000000";1;MUSac_neuPD_sg2l_3;1633963;16;3
+987;1633987;;ellipse;"#000000";1;MUSac_neuPD_sg2l_1;1633987;12;3
+988;1634001;;ellipse;"#000000";1;MUSac_neuPD_sg2l_2;1634001;14;3
+989;1634022;;ellipse;"#000000";1;MUSob-post_neuDprox_sg2l_3;1634022;13;3
+990;1634037;;ellipse;"#000000";1;chaeta_sg2r_neuro-1;1634037;17;2
+991;1634043;;ellipse;"#000000";1;MUSob-post_neuDdist_sg2lc2;1634043;16;3
+992;1634069;;ellipse;"#000000";1;MUSob-post_neuDdist_sg2lc1;1634069;8;9
+993;1634106;;ellipse;"#000000";1;MUSob-post_i_sg2l_1;1634106;8;3
+994;1635096;;ellipse;"#000000";1;EC_D_sg3l 1635097;1635096;4;8
+995;1635144;;ellipse;"#000000";1;hemichaetal_sg3r_noto-7_2;1635144;6;0
+996;1635195;;ellipse;"#000000";1;hemichaetal_sg3r_noto-5_2;1635195;2;0
+997;1635214;;ellipse;"#000000";1;hemichaetal_sg3r_noto-2_2;1635214;2;0
+998;1635491;;ellipse;"#000000";1;MUStrans_sg3l_4;1635491;1;5
+999;1635500;;ellipse;"#000000";1;MUStrans_sg3l_3;1635500;7;3
+1000;1635512;;ellipse;"#000000";1;MUSac_neuPV_sg3l_1;1635512;19;5
+1001;1635534;;ellipse;"#000000";1;MUSob-post_neuV_sg3l_6;1635534;4;5
+1002;1635545;;ellipse;"#000000";1;MUSac_neuPV_sg3l_2;1635545;14;5
+1003;1635567;;ellipse;"#000000";1;chaeta_sg2r_neuro-3;1635567;5;2
+1004;1635582;;ellipse;"#000000";1;chaeta_sg2r_neuro-6;1635582;14;9
+1005;1635589;;ellipse;"#000000";1;chaeta_sg2r_neuro-8;1635589;4;2
+1006;1635596;;ellipse;"#000000";1;chaeta_sg2r_neuro-9;1635596;7;9
+1007;1635603;;ellipse;"#000000";1;chaeta_sg1l_neuro-6;1635603;14;6
+1008;1636390;;ellipse;"#000000";1;chaeta_sg3l_noto-7;1636390;8;1
+1009;1636409;;ellipse;"#000000";1;hemichaetal_sg3l_noto-7_1;1636409;6;1
+1010;1636420;;ellipse;"#000000";1;chaeta_sg3l_noto-9;1636420;2;1
+1011;1636431;;ellipse;"#000000";1;hemichaetal_sg3l_noto-2_1;1636431;2;1
+1012;1636442;;ellipse;"#000000";1;hemichaetal_sg3l_noto-5_1;1636442;1;1
+1013;1636453;;ellipse;"#000000";1;hemichaetal_sg3l_noto-3_2;1636453;1;1
+1014;1636753;;ellipse;"#000000";1;circumacicular_sg3l_neuro_1;1636753;34;1
+1015;1636793;;ellipse;"#000000";1;circumchaetal_sg3r_noto-3_1;1636793;12;0
+1016;1636803;;ellipse;"#000000";1;hemichaetal_sg3r_noto-1_2;1636803;4;0
+1017;1636813;;ellipse;"#000000";1;hemichaetal_sg3r_noto-8_1;1636813;2;0
+1018;1636825;;ellipse;"#000000";1;hemichaetal_sg3r_noto-4_1;1636825;8;0
+1019;1636835;;ellipse;"#000000";1;hemichaetal_sg3r_noto-5_1;1636835;16;0
+1020;1638906;;ellipse;"#000000";1;EC_V_sg1r 1638907;1638906;11;11
+1021;1638931;;ellipse;"#000000";1;EC_V_sg1r 1638932;1638931;8;11
+1022;1645907;;ellipse;"#000000";1;MUSac_neuDx_sg2l_1;1645907;12;3
+1023;1645931;;ellipse;"#000000";1;MUSac_neuDx_sg2l_2;1645931;9;3
+1024;1645973;;ellipse;"#000000";1;MUSac_neuDy_sg2l_1;1645973;17;3
+1025;1646067;;ellipse;"#000000";1;EC_D_sg0l 1646068;1646067;3;6
+1026;1646257;;ellipse;"#000000";1;MUSob-ant_re_sg2l_2;1646257;6;9
+1027;1646318;;ellipse;"#000000";1;MUSac_neuDach_sg2l_2;1646318;8;3
+1028;1646429;;ellipse;"#000000";1;MUSchae_notDob_sg1l_3;1646429;16;6
+1029;1646441;;ellipse;"#000000";1;EC_circumchaetal_sg3r_noto-1_5;1646441;8;0
+1030;1646462;;ellipse;"#000000";1;circumacicular_sg3r_noto_4;1646462;30;0
+1031;1646504;;ellipse;"#000000";1;MUSchae_notDob_sg1l_2;1646504;8;6
+1032;1646528;;ellipse;"#000000";1;EC_D_sg3l 1646529;1646528;5;1
+1033;1646547;;ellipse;"#000000";1;EC_circumchaetal_sg3l_noto-1_1;1646547;4;1
+1034;1646592;;ellipse;"#000000";1;MUSac_notA_sg1l_2;1646592;17;6
+1035;1646603;;ellipse;"#000000";1;devMUS 1646604;1646603;2;10
+1036;1646634;;ellipse;"#000000";1;CB_pigment_sg3 1646635;1646634;32;0
+1037;1646655;;ellipse;"#000000";1;EC_D_sg3r 1646656;1646655;14;0
+1038;1646725;;ellipse;"#000000";1;MUSob-post_notD_sg2l_2;1646725;24;8
+1039;1646776;;ellipse;"#000000";1;EC_D_sg1r 1646777;1646776;7;4
+1040;1646780;;ellipse;"#000000";1;MUSob-post_notD_sg2l_1;1646780;11;8
+1041;1646818;;ellipse;"#000000";1;EC_D_sg1r 1646819;1646818;1;4
+1042;1646847;;ellipse;"#000000";1;MUSob-post_notD_sg2l_4;1646847;24;8
+1043;1646869;;ellipse;"#000000";1;EC_D_sg1l 1646870;1646869;10;8
+1044;1647016;;ellipse;"#000000";1;EC_D_sg2l 1647017;1647016;10;8
+1045;1647048;;ellipse;"#000000";1;EC_D_sg2l 1647049;1647048;15;3
+1046;1647148;;ellipse;"#000000";1;EC_V_sg2l 1647149;1647148;5;9
+1047;1647156;;ellipse;"#000000";1;EC_V_sg2l 1647157;1647156;8;9
+1048;1647206;;ellipse;"#000000";1;MUSac_neuAV_sg2l_3;1647206;8;3
+1049;1647258;;ellipse;"#000000";1;MUSchae_neuAVo_sg2l_3;1647258;2;9
+1050;1647303;;ellipse;"#000000";1;MUSchae_neuAVo_sg2l_1;1647303;6;9
+1051;1647512;;ellipse;"#000000";1;MUSac_notA_sg2l_2;1647512;16;3
+1052;1647635;;ellipse;"#000000";1;MUSac_i_sg2l;1647635;13;3
+1053;1647763;;ellipse;"#000000";1;MUSac_neuAV_sg1l_1;1647763;28;5
+1054;1648349;;ellipse;"#000000";1;MUSac_neuAV_sg3l_3;1648349;8;5
+1055;1648424;;ellipse;"#000000";1;MUSac_i_sg3l;1648424;14;1
+1056;1648444;;ellipse;"#000000";1;MUSac_neuAV_sg3l_1;1648444;21;5
+1057;1648599;;ellipse;"#000000";1;MUSob-post_notD_sg2l_5;1648599;10;8
+1058;1648685;;ellipse;"#000000";1;MUSac_neure_sg2l_2;1648685;8;3
+1059;1648927;;ellipse;"#000000";1;MUSchae_neuDac_sg2l_2;1648927;26;3
+1060;1648958;;ellipse;"#000000";1;MUSchae_neuDac_sg2l_5;1648958;22;3
+1061;1648970;;ellipse;"#000000";1;EC_V_sg3l 1648971;1648970;11;1
+1062;1649045;;ellipse;"#000000";1;MUSchae_neuDac_sg2l_1;1649045;8;3
+1063;1649126;;ellipse;"#000000";1;MUSchae_neuDac_sg2l_4;1649126;14;3
+1064;1649133;;ellipse;"#000000";1;circumacicular_sg3l_noto_4;1649133;19;1
+1065;1649152;;ellipse;"#000000";1;noER_circumchaetal_sg3l_noto-3_4;1649152;3;1
+1066;1649186;;ellipse;"#000000";1;EC_circumchaetal_sg3l_noto-3_1;1649186;8;1
+1067;1649230;;ellipse;"#000000";1;EC_V_sg3l 1649231;1649230;4;1
+1068;1649265;;ellipse;"#000000";1;MUSac_neuDach_sg2l_3;1649265;16;3
+1069;1649321;;ellipse;"#000000";1;EC_circumchaetal_sg3l_neuro-3_1;1649321;15;1
+1070;1649386;;ellipse;"#000000";1;MUSac_neuAV_sg1l_2;1649386;15;5
+1071;1649437;;ellipse;"#000000";1;MUSac_neuPV_sg1l_2;1649437;21;5
+1072;1649555;;ellipse;"#000000";1;MUSac_neuPV_sg1l_1;1649555;11;5
+1073;1649621;;ellipse;"#000000";1;devMUS 1649622;1649621;2;5
+1074;1649643;;ellipse;"#000000";1;hemichaetal_sg1r_neuro-3_1;1649643;3;4
+1075;1649676;;ellipse;"#000000";1;MUSlong_V_sg0r_1;1649676;4;11
+1076;1650043;;ellipse;"#000000";1;MUSph r 1650044;1650043;1;5
+1077;1650226;;ellipse;"#000000";1;EC_D_sg0l 1650227;1650226;7;6
+1078;1650251;;ellipse;"#000000";1;EC_D_sg0l 1650252;1650251;18;6
+1079;1650778;;ellipse;"#000000";1;MUSph r 1650779;1650778;2;5
+1080;1650954;;ellipse;"#000000";1;hemichaetal_sg3r_neuro-3_2;1650954;16;10
+1081;1650965;;ellipse;"#000000";1;circumchaetal_sg3r_neuro-1_1;1650965;20;10
+1082;1650996;;ellipse;"#000000";1;ER_circumchaetal_sg3r_neuro-5_1;1650996;19;10
+1083;1651017;;ellipse;"#000000";1;hemichaetal_sg3r_neuro-4_1;1651017;3;10
+1084;1651033;;ellipse;"#000000";1;hemichaetal_sg3r_neuro-4_2;1651033;14;10
+1085;1651066;;ellipse;"#000000";1;hemichaetal_sg3r_neuro-6_2;1651066;4;10
+1086;1651078;;ellipse;"#000000";1;hemichaetal_sg3r_neuro-7_1;1651078;6;10
+1087;1651090;;ellipse;"#000000";1;hemichaetal_sg3r_neuro-8_2;1651090;3;10
+1088;1651101;;ellipse;"#000000";1;ER_circumchaetal_sg3r_neuro-6_3;1651101;1;10
+1089;1651127;;ellipse;"#000000";1;hemichaetal_sg3r_neuro-8_1;1651127;1;10
+1090;1651142;;ellipse;"#000000";1;hemichaetal_sg3r_neuro-2_1;1651142;20;10
+1091;1651184;;ellipse;"#000000";1;ER_circumchaetal_sg3r_neuro-8_3;1651184;1;10
+1092;1651197;;ellipse;"#000000";1;circumchaetal_sg3r_neuro-7_3;1651197;3;10
+1093;1651211;;ellipse;"#000000";1;chaeta_sg3l_neuro-4;1651211;15;1
+1094;1651359;;ellipse;"#000000";1;circumacicular_sg3l_neuro_2;1651359;39;5
+1095;1651387;;ellipse;"#000000";1;hemichaetal_sg3l_neuro-5_1;1651387;1;1
+1096;1651461;;ellipse;"#000000";1;hemichaetal_sg3r_noto-7_1;1651461;5;0
+1097;1651536;;ellipse;"#000000";1;hemichaetal_sg1r_neuro-5_1;1651536;1;4
+1098;1651560;;ellipse;"#000000";1;hemichaetal_sg1r_neuro-6_1;1651560;2;4
+1099;1651649;;ellipse;"#000000";1;hemichaetal_sg1r_noto-8_2;1651649;7;4
+1100;1651668;;ellipse;"#000000";1;EC_V_sg1r 1651669;1651668;2;0
+1101;1651723;;ellipse;"#000000";1;chaeta_sg1r_noto-7;1651723;3;4
+1102;1651754;;ellipse;"#000000";1;hemichaetal_sg1r_noto-8_1;1651754;1;4
+1103;1651771;;ellipse;"#000000";1;circumchaetal_sg1r_neuro-1_2;1651771;2;4
+1104;1651790;;ellipse;"#000000";1;MUSph l 1651791;1651790;1;5
+1105;1651809;;ellipse;"#000000";1;chaeta_sg1r_neuro-7;1651809;5;4
+1106;1651816;;ellipse;"#000000";1;ER_circumchaetal_sg1r_neuro-6_3;1651816;1;4
+1107;1651833;;ellipse;"#000000";1;hemichaetal_sg1r_neuro-6_2;1651833;2;4
+1108;1651853;;ellipse;"#000000";1;MUSph r 1651854;1651853;2;5
+1109;1652042;;ellipse;"#000000";1;EC_V_sg1l rad glia 1652043;1652042;4;7
+1110;1652079;;ellipse;"#000000";1;MUSph r 1652080;1652079;1;5
+1111;1652260;;ellipse;"#000000";1;MUSob-ant_trans_sg1l_1;1652260;3;5
+1112;1652978;;ellipse;"#000000";1;chaeta_sg3l_neuro-2;1652978;8;1
+1113;1653009;;ellipse;"#000000";1;chaeta_sg3l_neuro-5;1653009;12;1
+1114;1653030;;ellipse;"#000000";1;hemichaetal_sg3l_neuro-5_2;1653030;15;1
+1115;1653088;;ellipse;"#000000";1;chaeta_sg3l_neuro-9;1653088;5;12
+1116;1653103;;ellipse;"#000000";1;chaeta_sg3l_neuro-8;1653103;9;12
+1117;1653120;;ellipse;"#000000";1;chaeta_sg3l_neuro-1;1653120;14;1
+1118;1653319;;ellipse;"#000000";1;EC_circumchaetal_sg3l_neuro-1_1;1653319;15;1
+1119;1654320;;ellipse;"#000000";1;MUStri_l;1654320;6;7
+1120;1654336;;ellipse;"#000000";1;MUSly_l_3;1654336;3;17
+1121;1654367;;ellipse;"#000000";1;EC_V_sg0r 1654368;1654367;3;0
+1122;1654454;;ellipse;"#000000";1;MUStrans_sg3r_4;1654454;4;0
+1123;1654460;;ellipse;"#000000";1;MUStrans_sg3r_3;1654460;9;2
+1124;1654515;;ellipse;"#000000";1;MUStrans_sg3r_1;1654515;4;2
+1125;1654526;;ellipse;"#000000";1;MUStrans_sg3r_2;1654526;15;2
+1126;1654595;;ellipse;"#000000";1;MUSob-post_neuDprox_sg2r_1;1654595;8;0
+1127;1654696;;ellipse;"#000000";1;MUSob-post_neuDdist_sg2rc2;1654696;3;9
+1128;1654721;;ellipse;"#000000";1;MUSob-post_neuDdist_sg2rc1;1654721;6;2
+1129;1654738;;ellipse;"#000000";1;MUSob-post_neuDdist_sg2rc3;1654738;3;2
+1130;1655183;;ellipse;"#000000";1;MUSci_r_2;1655183;11;7
+1131;1655193;;ellipse;"#000000";1;MUSci_r_1;1655193;4;7
+1132;1655856;;ellipse;"#000000";1;EC_V_sg1r 1655857;1655856;13;4
+1133;1657254;;ellipse;"#000000";1;EC mouth 1657255;1657254;5;7
+1134;1657858;;ellipse;"#000000";1;EC_D_heard 1657859;1657858;1;7
+1135;1660595;;ellipse;"#000000";1;EC_D_heald 1660596;1660595;2;7
+1136;1661173;;ellipse;"#000000";1;MUSlong_D_sg1r_5;1661173;9;0
+1137;1661189;;ellipse;"#000000";1;MUSob-post_neuV_sg1r_4;1661189;5;4
+1138;1661238;;ellipse;"#000000";1;MUSob-post_neuV_sg1l_3;1661238;7;6
+1139;1661279;;ellipse;"#000000";1;MUSchae_neuAVo_sg1l_1;1661279;6;6
+1140;1661296;;ellipse;"#000000";1;MUSchae_neuAVo_sg1l_2;1661296;10;6
+1141;1662183;;ellipse;"#000000";1;EC_V_sg1r 1662184;1662183;4;9
+1142;1662365;;ellipse;"#000000";1;MUSac_i_sg1l;1662365;13;6
+1143;1662404;;ellipse;"#000000";1;MUSchae_neuVob_sg1l_2;1662404;7;6
+1144;1662415;;ellipse;"#000000";1;MUSchae_neuVob_sg1l_1;1662415;5;6
+1145;1662424;;ellipse;"#000000";1;MUSchae_Are_sg1l_1;1662424;5;6
+1146;1662448;;ellipse;"#000000";1;MUSac_neuDach_sg1l_3;1662448;24;6
+1147;1662465;;ellipse;"#000000";1;MUSac_neuDach_sg1l_2;1662465;13;6
+1148;1662503;;ellipse;"#000000";1;MUSchae_neuDac_sg1l_6;1662503;12;6
+1149;1663484;;ellipse;"#000000";1;EC_V_sg1r 1663485;1663484;7;4
+1150;1663923;;ellipse;"#000000";1;EC_D_sg1l 1663924;1663923;11;8
+1151;1665084;;ellipse;"#000000";1;hemichaetal_sg1r_noto-3_1;1665084;4;4
+1152;1665189;;ellipse;"#000000";1;hemichaetal_sg1r_noto-2_1;1665189;2;4
+1153;1667898;;ellipse;"#000000";1;MUSchae_neuDac_sg3l_5;1667898;4;1
+1154;1668901;;ellipse;"#000000";1;EC_D_sg3r 1668902;1668901;1;0
+1155;1669077;;ellipse;"#000000";1;EC_V_sg3l 1669078;1669077;3;1
+1156;1669096;;ellipse;"#000000";1;circumchaetal_sg3l_neuro-8_3;1669096;5;12
+1157;1669116;;ellipse;"#000000";1;MUStrans_sg2l_5;1669116;9;8
+1158;1669121;;ellipse;"#000000";1;EC_V_sg3l 1669122;1669121;7;1
+1159;1669134;;ellipse;"#000000";1;ER_circumchaetal_sg3l_noto-7_3;1669134;6;1
+1160;1669198;;ellipse;"#000000";1;MUStrans_sg2l_8;1669198;1;3
+1161;1669206;;ellipse;"#000000";1;EC_V_sg3l lateral tonofilaments 1669207;1669206;2;5
+1162;1669233;;ellipse;"#000000";1;EC_D_sg3l 1669234;1669233;27;8
+1163;1669245;;ellipse;"#000000";1;EC_D_sg3l 1669246;1669245;5;8
+1164;1669421;;ellipse;"#000000";1;MUSchae_notDn_sg1r_1;1669421;4;4
+1165;1669782;;ellipse;"#000000";1;MUSly_l_2;1669782;5;5
+1166;1669887;;ellipse;"#000000";1;EC pigmented 1669888;1669887;7;7
+1167;1670385;;ellipse;"#000000";1;support cell 1670386;1670385;2;1
+1168;1670405;;ellipse;"#000000";1;chaeta_sg3l_noto-4;1670405;9;1
+1169;1670429;;ellipse;"#000000";1;paratroch_III_vl_1;1670429;5;5
+1170;1670599;;ellipse;"#000000";1;MUSob-post_neuV_sg2l_4;1670599;14;3
+1171;1670630;;ellipse;"#000000";1;MUSob-post_neuV_sg2l_6;1670630;7;3
+1172;1670927;;ellipse;"#000000";1;MUSchae_Are_sg1r_1;1670927;15;4
+1173;1671047;;ellipse;"#000000";1;circumchaetal_sg1r_neuro-2_3;1671047;3;4
+1174;1671212;;ellipse;"#000000";1;circumchaetal_sg1r_neuro-3_3;1671212;4;4
+1175;1671231;;ellipse;"#000000";1;noER_circumchaetal_sg1r_neuro-1_4;1671231;2;4
+1176;1671363;;ellipse;"#000000";1;EC_circumchaetal_sg3l_noto-2_5;1671363;2;1
+1177;1671374;;ellipse;"#000000";1;circumchaetal_sg3l_noto-3_3;1671374;16;1
+1178;1671383;;ellipse;"#000000";1;noER_circumchaetal_sg3l_noto-2_4;1671383;4;1
+1179;1671394;;ellipse;"#000000";1;EC_circumchaetal_sg3l_noto-5_5;1671394;3;1
+1180;1671417;;ellipse;"#000000";1;noER_circumchaetal_sg3l_noto-4_4;1671417;1;1
+1181;1671428;;ellipse;"#000000";1;EC_chaetal_sac_sg3l_noto_3;1671428;10;1
+1182;1671477;;ellipse;"#000000";1;EC_V_pygr 1671478;1671477;4;0
+1183;1671510;;ellipse;"#000000";1;EC_V_sg3l 1671511;1671510;7;5
+1184;1671576;;ellipse;"#000000";1;EC_D_sg2r 1671577;1671576;10;2
+1185;1671653;;ellipse;"#000000";1;MUStrans_sg3r_6;1671653;7;0
+1186;1671691;;ellipse;"#000000";1;EC_V_sg3l lateral tonofilaments 1671692;1671691;1;5
+1187;1672954;;ellipse;"#000000";1;MUSci_l_1;1672954;11;5
+1188;1673425;;ellipse;"#000000";1;MUSob-ant_trans_sg2l_2;1673425;4;5
+1189;1673505;;ellipse;"#000000";1;MUStrans_sg2r_3;1673505;5;4
+1190;1675509;;ellipse;"#000000";1;MUSac_notM_sg1l_1;1675509;11;6
+1191;1675528;;ellipse;"#000000";1;MUSchae_neuAVo_sg1r_1;1675528;11;4
+1192;1675551;;ellipse;"#000000";1;MUSac_neuDach_sg1r_2;1675551;6;4
+1193;1676522;;ellipse;"#000000";1;MUSlong_V_sg2r_1;1676522;2;11
+1194;1676620;;ellipse;"#000000";1;ECvl_sg2 rad glia 1676621;1676620;5;11
+1195;1677402;;ellipse;"#000000";1;MUStrans_sg2r_8;1677402;8;2
+1196;1677618;;ellipse;"#000000";1;MUSob-post_neuDprox_sg1r_2;1677618;4;4
+1197;1678053;;ellipse;"#000000";1;EC_V_sg2l 1678054;1678053;1;9
+1198;1681120;;ellipse;"#000000";1;EC_V_sg1r 1681121;1681120;4;11
+1199;1681219;;ellipse;"#000000";1;MUSlong_D_sg0r_14;1681219;7;0
+1200;1681253;;ellipse;"#000000";1;EC_D_sg0r 1681254;1681253;2;0
+1201;1683137;;ellipse;"#000000";1;EC_V_headr 1683138;1683137;1;7
+1202;1684795;;ellipse;"#000000";1;connective_tissue_cell 1684796;1684795;3;7
+1203;1685248;;ellipse;"#000000";1;EC_V_sg2r 1685249;1685248;2;1
+1204;1685451;;ellipse;"#000000";1;MUSchae_neuAVo_sg2r_2;1685451;5;2
+1205;1685478;;ellipse;"#000000";1;MUSchae_neuAVo_sg2r_3;1685478;7;2
+1206;1685512;;ellipse;"#000000";1;MUSchae_neuAVo_sg2r_1;1685512;6;9
+1207;1686008;;ellipse;"#000000";1;MUSob-post_neuV_sg3l_4;1686008;6;5
+1208;1686030;;ellipse;"#000000";1;EC_V_sg3r_armpit 1686031;1686030;16;1
+1209;1686144;;ellipse;"#000000";1;EC_D_sg1r 1686145;1686144;3;0
+1210;1687223;;ellipse;"#000000";1;EC_V_sg1r rad glia 1687224;1687223;2;9
+1211;1688455;;ellipse;"#000000";1;flat glia GliaCR_sg1r1;1688455;1;7
+1212;1690176;;ellipse;"#000000";1;CB_pigment_sg2 1690177;1690176;5;2
+1213;1690770;;ellipse;"#000000";1;EC_V_sg2l 1690771;1690770;14;5
+1214;1691866;;ellipse;"#000000";1;circumchaetal_sg3l_neuro-3_2;1691866;17;1
+1215;1692299;;ellipse;"#000000";1;EC_circumchaetal_sg3l_neuro-5_5;1692299;4;1
+1216;1692450;;ellipse;"#000000";1;circumchaetal_sg3l_noto-4_3;1692450;8;1
+1217;1693663;;ellipse;"#000000";1;MUSchae_neuDac_sg1l_3;1693663;26;6
+1218;1693686;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-1_2;1693686;14;6
+1219;1693690;;ellipse;"#000000";1;chaeta_sg1l_neuro-1;1693690;8;6
+1220;1694402;;ellipse;"#000000";1;MUSlong_D_sg2r_10;1694402;3;0
+1221;1694422;;ellipse;"#000000";1;MUSlong_D_sg0r_12;1694422;7;0
+1222;1694438;;ellipse;"#000000";1;MUStrans_sg1r_5;1694438;4;4
+1223;1695759;;ellipse;"#000000";1;MUSob-post_neuDprox_sg3r_3;1695759;8;0
+1224;1695768;;ellipse;"#000000";1;MUSob-post_neuDprox_sg3r_2;1695768;7;0
+1225;1695782;;ellipse;"#000000";1;MUSob-post_neuDdist_sg3rc3;1695782;5;10
+1226;1701343;;ellipse;"#000000";1;acicula_neuro_sg2r;1701343;25;2
+1227;1703174;;ellipse;"#000000";1;chaeta_sg2r_noto-3;1703174;3;2
+1228;1703390;;ellipse;"#000000";1;MUStrans_sg2r_6;1703390;8;0
+1229;1703455;;ellipse;"#000000";1;MUStrans_sg2r_5;1703455;3;4
+1230;1703468;;ellipse;"#000000";1;MUStrans_sg2r_7;1703468;6;2
+1231;1703574;;ellipse;"#000000";1;MUSlong_D_sg1r_4;1703574;21;0
+1232;1705944;;ellipse;"#000000";1;fragment MN 1705945;1705944;1;8
+1233;1708880;;ellipse;"#000000";1;circumacicular_sg2l_neuro_2;1708880;41;3
+1234;1710101;;ellipse;"#000000";1;MUSci_l_2;1710101;9;5
+1235;1711652;;ellipse;"#000000";1;MUSant_l_3;1711652;3;7
+1236;1712615;;ellipse;"#000000";1;myoblast 1712616;1712615;1;11
+1237;1715298;;ellipse;"#000000";1;EC_V_heard 1715299;1715298;5;7
+1238;1718172;;ellipse;"#000000";1;meso 1718173;1718172;3;0
+1239;1718383;;ellipse;"#000000";1;MUStrans_sg3r_9;1718383;2;11
+1240;1718492;;ellipse;"#000000";1;ectoderm 1718493;1718492;2;5
+1241;1719433;;ellipse;"#000000";1;EC_V_heald 1719434;1719433;4;7
+1242;1719443;;ellipse;"#000000";1;MUSpl_l_2;1719443;17;7
+1243;1721097;;ellipse;"#000000";1;MUSac_neure_sg2r_1;1721097;7;2
+1244;1721558;;ellipse;"#000000";1;putMUSant_l_5;1721558;1;7
+1245;1721644;;ellipse;"#000000";1;EC_D_heald 1721645;1721644;2;7
+1246;1723571;;ellipse;"#000000";1;EC_V_sg1r 1723572;1723571;5;9
+1247;1723583;;ellipse;"#000000";1;EC_V_sg2r 1723584;1723583;1;9
+1248;1727000;;ellipse;"#000000";1;EC_D_sg2r 1727001;1727000;1;4
+1249;1728847;;ellipse;"#000000";1;MUSlong_V_sg2l_6;1728847;29;5
+1250;1728870;;ellipse;"#000000";1;MUSchae_neuAVt_sg2r_1;1728870;13;2
+1251;1729206;;ellipse;"#000000";1;Glia pigmented 1729207;1729206;3;7
+1252;1729609;;ellipse;"#000000";1;MUSac_neure_sg2l_1;1729609;29;3
+1253;1731962;;ellipse;"#000000";1;MUSob-ant_trans_sg2r_2;1731962;4;9
+1254;1732185;;ellipse;"#000000";1;MUSob-post_neuV_sg2r_4;1732185;5;1
+1255;1732571;;ellipse;"#000000";1;EC_D_sg0l 1732572;1732571;4;5
+1256;1733546;;ellipse;"#000000";1;MUSlong_D_sg2l_1;1733546;2;8
+1257;1733592;;ellipse;"#000000";1;MUSchae_notDn_sg2l_1;1733592;14;3
+1258;1733848;;ellipse;"#000000";1;MUSchae_notDob_sg2r_2;1733848;7;2
+1259;1734210;;ellipse;"#000000";1;chaeta_sg3r_neuro-3;1734210;24;10
+1260;1734276;;ellipse;"#000000";1;chaeta_sg3r_neuro-8;1734276;4;10
+1261;1734288;;ellipse;"#000000";1;chaeta_sg3r_neuro-6;1734288;7;10
+1262;1734296;;ellipse;"#000000";1;chaeta_sg3r_neuro-4;1734296;22;10
+1263;1734307;;ellipse;"#000000";1;chaeta_sg3r_neuro-1;1734307;11;10
+1264;1734322;;ellipse;"#000000";1;chaeta_sg3r_neuro-7;1734322;8;10
+1265;1734330;;ellipse;"#000000";1;chaeta_sg3r_neuro-5;1734330;14;10
+1266;1734339;;ellipse;"#000000";1;circumacicular_sg3r_neuro_1;1734339;3;11
+1267;1734348;;ellipse;"#000000";1;chaeta_sg3r_neuro-2;1734348;23;10
+1268;1735044;;ellipse;"#000000";1;chaeta_sg3l_neuro-3;1735044;10;1
+1269;1735053;;ellipse;"#000000";1;chaeta_sg3l_noto-3;1735053;27;1
+1270;1735062;;ellipse;"#000000";1;chaeta_sg3l_noto-8;1735062;27;1
+1271;1735070;;ellipse;"#000000";1;chaeta_sg3l_noto-5;1735070;10;1
+1272;1735079;;ellipse;"#000000";1;chaeta_sg3l_noto-1;1735079;11;1
+1273;1735094;;ellipse;"#000000";1;chaeta_sg2r_neuro-2;1735094;12;9
+1274;1735161;;ellipse;"#000000";1;chaeta_sg1r_noto-3;1735161;1;4
+1275;1736582;;ellipse;"#000000";1;MUSob-ant_trans_sg3r_1;1736582;2;1
+1276;1739965;;ellipse;"#000000";1;MUStrans_pygr_3;1739965;3;0
+1277;1741040;;ellipse;"#000000";1;EC_V_sg0l 1741041;1741040;6;7
+1278;1742177;;ellipse;"#000000";1;EC_V_sg2l 1742178;1742177;2;9
+1279;1742908;;ellipse;"#000000";1;EC_D_sg0l 1742909;1742908;13;6
+1280;1742992;;ellipse;"#000000";1;EC_V_sg1l 1742993;1742992;35;6
+1281;1743238;;ellipse;"#000000";1;EC_V_sg3l 1743239;1743238;5;1
+1282;1743295;;ellipse;"#000000";1;hemichaetal_sg3l_neuro-9_2;1743295;3;12
+1283;1743305;;ellipse;"#000000";1;EC_V_sg3l 1743306;1743305;10;1
+1284;1743317;;ellipse;"#000000";1;hemichaetal_sg3l_neuro-9_1;1743317;2;12
+1285;1743328;;ellipse;"#000000";1;ER_circumchaetal_sg3l_neuro-5_3;1743328;11;1
+1286;1743435;;ellipse;"#000000";1;EC_D_heald 1743436;1743435;1;7
+1287;1743506;;ellipse;"#000000";1;EC_V_heald 1743507;1743506;3;5
+1288;1744487;;ellipse;"#000000";1;EC_D_heald 1744488;1744487;1;7
+1289;1745949;;ellipse;"#000000";1;EC_D_heard 1745950;1745949;1;7
+1290;1746385;;ellipse;"#000000";1;mouth 1746386;1746385;3;5
+1291;1748515;;ellipse;"#000000";1;CB_pigment_sg0 1748516;1748515;6;7
+1292;1752378;;ellipse;"#000000";1;putMUS 1752379;1752378;1;10
+1293;1756206;;ellipse;"#000000";1;EC_D_sg2l 1756207;1756206;15;8
+1294;1757666;;ellipse;"#000000";1;ecto frag 1757667;1757666;1;9
+1295;1758939;;ellipse;"#000000";1;ecto frag 1758940;1758939;1;9
+1296;1762815;;ellipse;"#000000";1;EC_V_sg3r_armpit 1762816;1762815;17;2
+1297;1762991;;ellipse;"#000000";1;mouth 1762992;1762991;3;7
+1298;1762999;;ellipse;"#000000";1;EC mouth 1763000;1762999;13;7
+1299;1763010;;ellipse;"#000000";1;EC_V_sg0r 1763011;1763010;5;7
+1300;1763117;;ellipse;"#000000";1;MUStrans_sg2r_9;1763117;4;2
+1301;1763135;;ellipse;"#000000";1;support cell 1763136;1763135;1;3
+1302;1764323;;ellipse;"#000000";1;circumacicular_sg2r_noto_4;1764323;21;2
+1303;1769545;;ellipse;"#000000";1;CB_pigment_sg1 1769546;1769545;3;11
+1304;1770472;;ellipse;"#000000";1;ectoderm 1770473;1770472;1;6
+1305;1770683;;ellipse;"#000000";1;EC_V_sg0l 1770684;1770683;1;7
+1306;1770695;;ellipse;"#000000";1;EC_V_sg0l 1770696;1770695;7;7
+1307;1771545;;ellipse;"#000000";1;EC_D_heard 1771546;1771545;1;7
+1308;1772606;;ellipse;"#000000";1;EC_D_sg2r 1772607;1772606;1;2
+1309;1772641;;ellipse;"#000000";1;MUSchae_neuDac_sg2r_5;1772641;14;2
+1310;1774232;;ellipse;"#000000";1;EC_V_heard 1774233;1774232;2;11
+1311;1777429;;ellipse;"#000000";1;ecto fragment 1777430;1777429;1;9
+1312;1777727;;ellipse;"#000000";1;EC_D_sg1r 1777728;1777727;2;4
+1313;1777975;;ellipse;"#000000";1;EC_D_headl 1777976;1777975;1;8
+1314;1779447;;ellipse;"#000000";1;EC_D_sg0l 1779448;1779447;1;5
+1315;1782262;;ellipse;"#000000";1;EC_V_sg1l 1782263;1782262;2;5
+1316;1782275;;ellipse;"#000000";1;EC_V_sg1l 1782276;1782275;9;5
+1317;1782523;;ellipse;"#000000";1;EC_V_sg1l 1782524;1782523;8;6
+1318;1782822;;ellipse;"#000000";1;EC_V_sg1r 1782823;1782822;2;11
+1319;1782846;;ellipse;"#000000";1;EC_V_sg1r 1782847;1782846;10;11
+1320;1783653;;ellipse;"#000000";1;chaeta_sg2r_noto-1;1783653;18;2
+1321;1783830;;ellipse;"#000000";1;EC_V_sg1r 1783831;1783830;12;11
+1322;1783866;;ellipse;"#000000";1;EC_V_sg1r 1783867;1783866;4;11
+1323;1784085;;ellipse;"#000000";1;chaeta_sg2l_noto-10;1784085;6;3
+1324;1784092;;ellipse;"#000000";1;EC_V_sg1r rad glia 1784093;1784092;1;9
+1325;1784327;;ellipse;"#000000";1;circumacicular_sg3r_noto_1;1784327;45;0
+1326;1784341;;ellipse;"#000000";1;circumacicular_sg3l_neuro_4;1784341;34;1
+1327;1786644;;ellipse;"#000000";1;MUSlong_V_sg0l;1786644;3;5
+1328;1786686;;ellipse;"#000000";1;meso 1786687;1786686;1;5
+1329;1786889;;ellipse;"#000000";1;circumchaetal_sg2r_noto-2_3;1786889;12;2
+1330;1786901;;ellipse;"#000000";1;noER_circumchaetal_sg2r_noto-10_4;1786901;1;2
+1331;1788648;;ellipse;"#000000";1;putMUS 1788649;1788648;1;8
+1332;1789296;;ellipse;"#000000";1;MUSlong_D_sg0r_15;1789296;5;0
+1333;1792497;;ellipse;"#000000";1;EC_V_sg2l 1792498;1792497;10;3
+1334;1792754;;ellipse;"#000000";1;EC_V_sg2r 1792755;1792754;10;4
+1335;1793579;;ellipse;"#000000";1;EC_D_sg2r 1793580;1793579;15;0
+1336;1793820;;ellipse;"#000000";1;EC_D_sg2l 1793821;1793820;11;3
+1337;1795850;;ellipse;"#000000";1;EC_V_sg3l 1795851;1795850;44;1
+1338;1799062;;ellipse;"#000000";1;EC_V_sg1r 1799063;1799062;6;9
+1339;1799604;;ellipse;"#000000";1;MUSlong_D_sg1r_14;1799604;2;0
+1340;1799639;;ellipse;"#000000";1;MUSlong_D_sg1r_13;1799639;2;0
+1341;1799658;;ellipse;"#000000";1;MUSlong_D_sg1r_15;1799658;2;8
+1342;1800092;;ellipse;"#000000";1;MUSlong_V_head_mid;1800092;21;5
+1343;1803068;;ellipse;"#000000";1;putMUS 1803069;1803068;6;8
+1344;1803177;;ellipse;"#000000";1;meso 1803178;1803177;1;5
+1345;1803613;;ellipse;"#000000";1;EC_V_sg1r rad glia 1803614;1803613;5;2
+1346;1803923;;ellipse;"#000000";1;EC_V_sg1l rad glia 1803924;1803923;5;6
+1347;1803983;;ellipse;"#000000";1;EC_V_sg1r rad glia 1803984;1803983;4;4
+1348;1804029;;ellipse;"#000000";1;EC_V_sg1l rad glia 1804030;1804029;6;6
+1349;1806237;;ellipse;"#000000";1;ecto fragment 1806238;1806237;1;7
+1350;1809303;;ellipse;"#000000";1;hemichaetal_sg3l_neuro-4_1;1809303;7;1
+1351;1809511;;ellipse;"#000000";1;EC_V_sg2l 1809512;1809511;4;8
+1352;1809524;;ellipse;"#000000";1;EC_V_sg2l 1809525;1809524;1;3
+1353;1810572;;ellipse;"#000000";1;meso 1810573;1810572;1;2
+1354;1811761;;ellipse;"#000000";1;circumchaetal_sg3l_neuro-3_1;1811761;22;1
+1355;1813061;;ellipse;"#000000";1;EC_D_sg3r 1813062;1813061;4;0
+1356;1815658;;ellipse;"#000000";1;ER_circumchaetal_sg2r_neuro-10_3;1815658;20;9
+1357;1815671;;ellipse;"#000000";1;ER_circumchaetal_sg2r_neuro-9_3;1815671;1;9
+1358;1815691;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-9_2;1815691;5;9
+1359;1816093;;ellipse;"#000000";1;blanket 1816094;1816093;2;2
+1360;1816775;;ellipse;"#000000";1;EC_D_sg2r 1816776;1816775;9;8
+1361;1817201;;ellipse;"#000000";1;circumacicular_sg1r_neuro_3;1817201;10;4
+1362;1818324;;ellipse;"#000000";1;meso 1818325;1818324;2;5
+1363;1818608;;ellipse;"#000000";1;EC_circumchaetal_sg1r_noto-4_5;1818608;4;4
+1364;1819905;;ellipse;"#000000";1;EC_D_sg2r 1819906;1819905;7;0
+1365;1819927;;ellipse;"#000000";1;EC_D_sg3r 1819928;1819927;15;0
+1366;1820053;;ellipse;"#000000";1;EC_D_sg2r 1820054;1820053;5;2
+1367;1820335;;ellipse;"#000000";1;EC_V_sg2r 1820336;1820335;3;2
+1368;1820672;;ellipse;"#000000";1;meso 1820673;1820672;1;5
+1369;1821534;;ellipse;"#000000";1;EC_D_sg3l 1457768;1821534;5;1
+1370;1821629;;ellipse;"#000000";1;MUSph r;1821629;2;7
+1371;1821645;;ellipse;"#000000";1;meso 1821646;1821645;1;7
+1372;1822223;;ellipse;"#000000";1;chaeta_sg1l_neuro-4;1822223;16;6
+1373;1822236;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-3_1;1822236;1;6
+1374;1822248;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-1_1;1822248;5;6
+1375;1823451;;ellipse;"#000000";1;EC_chaetal_sac_sg3r_neuro_1;1823451;17;10
+1376;1825661;;ellipse;"#000000";1;circumacicular_sg3r_noto_3;1825661;32;0
+1377;1826526;;ellipse;"#000000";1;noER_circumchaetal_sg2l_noto-2_4;1826526;3;3
+1378;1826567;;ellipse;"#000000";1;EC_circumchaetal_sg2r_neuro-8_5;1826567;1;2
+1379;1828171;;ellipse;"#000000";1;devMUSac_sg3vl_neuro-postv3;1828171;1;5
+1380;1828867;;ellipse;"#000000";1;EC_D_heald 1828868;1828867;1;7
+1381;1829785;;ellipse;"#000000";1;EC_V_pygr 1829786;1829785;2;11
+1382;1830053;;ellipse;"#000000";1;meso 1830054;1830053;1;1
+1383;1830716;;ellipse;"#000000";1;circumchaetal_sg3r_neuro-5_2;1830716;15;10
+1384;1833227;;ellipse;"#000000";1;bright_droplets_parapodial_sg1r;1833227;1;4
+1385;1833680;;ellipse;"#000000";1;circumchaetal_sg1r_noto-6_4;1833680;6;4
+1386;1833693;;ellipse;"#000000";1;circumchaetal_sg1r_noto-6_3;1833693;8;4
+1387;1833705;;ellipse;"#000000";1;EC_circumchaetal_sg1r_noto-6_5;1833705;3;4
+1388;1833730;;ellipse;"#000000";1;circumchaetal_sg1r_noto-5_3;1833730;5;4
+1389;1833749;;ellipse;"#000000";1;ER_circumchaetal_sg1r_noto-4_3;1833749;5;4
+1390;1833761;;ellipse;"#000000";1;circumchaetal_sg1r_noto-3_3;1833761;3;4
+1391;1833773;;ellipse;"#000000";1;EC_D_sg1r 1833774;1833773;9;0
+1392;1833784;;ellipse;"#000000";1;EC_D_sg1r 1833785;1833784;9;4
+1393;1833929;;ellipse;"#000000";1;EC_D_sg1l 1833930;1833929;15;8
+1394;1834069;;ellipse;"#000000";1;EC_D_sg1l 1834070;1834069;6;8
+1395;1834904;;ellipse;"#000000";1;CB_pigment_sg1 1834905;1834904;13;4
+1396;1834913;;ellipse;"#000000";1;EC_D_sg1r 1834914;1834913;13;4
+1397;1835023;;ellipse;"#000000";1;EC_V_sg2r 1835024;1835023;2;2
+1398;1835036;;ellipse;"#000000";1;EC_V_sg2r 1835037;1835036;4;2
+1399;1835211;;ellipse;"#000000";1;CB_pigment_sg2 1835212;1835211;3;3
+1400;1835290;;ellipse;"#000000";1;EC_D_sg2l 1835291;1835290;15;8
+1401;1835311;;ellipse;"#000000";1;EC_D_sg2l 1835312;1835311;1;8
+1402;1835338;;ellipse;"#000000";1;EC_D_sg2l 1835339;1835338;14;8
+1403;1836036;;ellipse;"#000000";1;EC_V_sg0l_l 1836037;1836036;1;5
+1404;1836877;;ellipse;"#000000";1;circumacicular_sg1l_noto_3;1836877;17;6
+1405;1837085;;ellipse;"#000000";1;basal lamina;1837085;2;11
+1406;1837104;;ellipse;"#000000";1;EC_V_sg2r 1837105;1837104;3;6
+1407;1837946;;ellipse;"#000000";1;hemichaetal_sg3r_noto-4_2;1837946;1;0
+1408;1837957;;ellipse;"#000000";1;EC_D_sg2r 1837958;1837957;3;0
+1409;1838129;;ellipse;"#000000";1;EC_circumchaetal_sg2r_neuro-5_5;1838129;12;9
+1410;1838139;;ellipse;"#000000";1;circumacicular_sg2r_neuro_5;1838139;12;2
+1411;1838159;;ellipse;"#000000";1;EC_V_sg2r 1838160;1838159;5;2
+1412;1838588;;ellipse;"#000000";1;microvillarCell_support_sg2r2;1838588;1;9
+1413;1839720;;ellipse;"#000000";1;basal lamina;1839720;4;5
+1414;1839764;;ellipse;"#000000";1;basal lamina;1839764;3;5
+1415;1839791;;ellipse;"#000000";1;basal lamina;1839791;2;11
+1416;1839951;;ellipse;"#000000";1;basal lamina;1839951;3;7
+1417;1840066;;ellipse;"#000000";1;ecto fragment 1840067;1840066;1;7
+1418;1840101;;ellipse;"#000000";1;basal lamina;1840101;12;7
+1419;1840153;;ellipse;"#000000";1;basal lamina;1840153;3;7
+1420;1840188;;ellipse;"#000000";1;basal lamina;1840188;2;11
+1421;1840253;;ellipse;"#000000";1;basal lamina;1840253;3;5
+1422;1840323;;ellipse;"#000000";1;basal lamina;1840323;3;5
+1423;1840340;;ellipse;"#000000";1;basal lamina;1840340;3;7
+1424;1840369;;ellipse;"#000000";1;basal lamina;1840369;16;5
+1425;1840489;;ellipse;"#000000";1;EC_V_sg2l 1840490;1840489;4;9
+1426;1840524;;ellipse;"#000000";1;circumacicular_sg2l_neuro_4;1840524;40;3
+1427;1840535;;ellipse;"#000000";1;EC_circumchaetal_sg2l_neuro-5_5;1840535;1;3
+1428;1840551;;ellipse;"#000000";1;circumacicular_sg2l_neuro_5;1840551;18;3
+1429;1840889;;ellipse;"#000000";1;basal lamina;1840889;5;11
+1430;1840900;;ellipse;"#000000";1;basal lamina;1840900;2;11
+1431;1840934;;ellipse;"#000000";1;basal lamina;1840934;3;7
+1432;1841053;;ellipse;"#000000";1;basal lamina;1841053;2;7
+1433;1841071;;ellipse;"#000000";1;basal lamina;1841071;2;5
+1434;1841078;;ellipse;"#000000";1;basal lamina;1841078;7;5
+1435;1841095;;ellipse;"#000000";1;basal lamina;1841095;4;11
+1436;1841185;;ellipse;"#000000";1;basal lamina;1841185;4;5
+1437;1841192;;ellipse;"#000000";1;basal lamina;1841192;5;11
+1438;1841508;;ellipse;"#000000";1;EC_V_sg0l 1841509;1841508;9;5
+1439;1841991;;ellipse;"#000000";1;basal lamina;1841991;8;7
+1440;1842011;;ellipse;"#000000";1;EC_D_heard 1842012;1842011;2;7
+1441;1842049;;ellipse;"#000000";1;EC_V_sg0r 1842050;1842049;5;7
+1442;1842331;;ellipse;"#000000";1;ecto fragment 1842332;1842331;1;7
+1443;1842463;;ellipse;"#000000";1;basal lamina;1842463;2;5
+1444;1842615;;ellipse;"#000000";1;basal lamina;1842615;3;5
+1445;1842633;;ellipse;"#000000";1;basal lamina;1842633;2;5
+1446;1842837;;ellipse;"#000000";1;basal lamina;1842837;8;7
+1447;1842892;;ellipse;"#000000";1;basal lamina;1842892;7;5
+1448;1843025;;ellipse;"#000000";1;EC_circumchaetal_sg2l_neuro-2_5;1843025;15;3
+1449;1843242;;ellipse;"#000000";1;basal lamina;1843242;15;3
+1450;1843289;;ellipse;"#000000";1;basal lamina;1843289;3;3
+1451;1843421;;ellipse;"#000000";1;basal lamina;1843421;12;9
+1452;1843474;;ellipse;"#000000";1;ER_circumchaetal_sg2r_neuro-7_3;1843474;8;9
+1453;1843484;;ellipse;"#000000";1;circumchaetal_sg2r_neuro-4_3;1843484;5;2
+1454;1843510;;ellipse;"#000000";1;EC_V_sg2l 1843511;1843510;4;7
+1455;1843516;;ellipse;"#000000";1;basal lamina;1843516;2;7
+1456;1843603;;ellipse;"#000000";1;basal lamina;1843603;2;11
+1457;1843638;;ellipse;"#000000";1;basal lamina;1843638;4;7
+1458;1843659;;ellipse;"#000000";1;ecto fragment 1843660;1843659;4;5
+1459;1843721;;ellipse;"#000000";1;basal lamina;1843721;4;11
+1460;1843728;;ellipse;"#000000";1;basal lamina;1843728;3;11
+1461;1843771;;ellipse;"#000000";1;basal lamina;1843771;2;7
+1462;1843840;;ellipse;"#000000";1;meso 1843841;1843840;2;7
+1463;1843845;;ellipse;"#000000";1;meso 1843846;1843845;1;7
+1464;1843881;;ellipse;"#000000";1;basal lamina;1843881;10;7
+1465;1843894;;ellipse;"#000000";1;basal lamina;1843894;4;7
+1466;1843901;;ellipse;"#000000";1;basal lamina;1843901;3;5
+1467;1843925;;ellipse;"#000000";1;basal lamina;1843925;5;7
+1468;1843938;;ellipse;"#000000";1;basal lamina;1843938;22;7
+1469;1844033;;ellipse;"#000000";1;EC_V_sg0l 1844034;1844033;7;7
+1470;1844074;;ellipse;"#000000";1;basal lamina;1844074;3;7
+1471;1844094;;ellipse;"#000000";1;EC_D_sg0r 1844095;1844094;5;7
+1472;1844121;;ellipse;"#000000";1;basal lamina;1844121;3;11
+1473;1844135;;ellipse;"#000000";1;basal lamina;1844135;2;11
+1474;1844176;;ellipse;"#000000";1;EC_V_perlistomium 1844177;1844176;7;7
+1475;1844259;;ellipse;"#000000";1;basal lamina;1844259;51;5
+1476;1844297;;ellipse;"#000000";1;EC_V_sg2l 1844298;1844297;8;5
+1477;1844371;;ellipse;"#000000";1;EC_V_sg2l 1844372;1844371;5;3
+1478;1844467;;ellipse;"#000000";1;EC_V_sg2l 1844468;1844467;3;3
+1479;1844480;;ellipse;"#000000";1;EC_D_sg2l 1844481;1844480;9;3
+1480;1844513;;ellipse;"#000000";1;EC_D_sg2l 1844514;1844513;11;3
+1481;1844524;;ellipse;"#000000";1;EC_V_sg2l 1844525;1844524;7;3
+1482;1844557;;ellipse;"#000000";1;EC_D_sg2l 1844558;1844557;3;3
+1483;1844570;;ellipse;"#000000";1;EC_D_sg2l 1844571;1844570;6;3
+1484;1844596;;ellipse;"#000000";1;CB_pigment_sg2 1844597;1844596;7;3
+1485;1844629;;ellipse;"#000000";1;EC_circumchaetal_sg2l_noto-3_5;1844629;9;3
+1486;1844635;;ellipse;"#000000";1;EC_D_sg2l 1844636;1844635;11;3
+1487;1844655;;ellipse;"#000000";1;EC_D_sg2l 1844656;1844655;31;9
+1488;1844692;;ellipse;"#000000";1;CB_pigment_sg2 1844693;1844692;6;8
+1489;1844723;;ellipse;"#000000";1;EC_D_sg2l 1844724;1844723;10;8
+1490;1844758;;ellipse;"#000000";1;EC_D_sg2l 1844759;1844758;13;3
+1491;1844870;;ellipse;"#000000";1;CB_pigment_sg2 1844871;1844870;2;8
+1492;1844890;;ellipse;"#000000";1;EC_circumchaetal_sg2l_noto-9_5;1844890;8;3
+1493;1844915;;ellipse;"#000000";1;EC_D_sg2l 1844916;1844915;3;3
+1494;1847342;;ellipse;"#000000";1;EC_V_sg2l 1847343;1847342;19;9
+1495;1847446;;ellipse;"#000000";1;EC_V_sg2l 1847447;1847446;7;5
+1496;1848152;;ellipse;"#000000";1;EC_D_sg3r 1848153;1848152;9;2
+1497;1848205;;ellipse;"#000000";1;basal lamina;1848205;3;7
+1498;1848690;;ellipse;"#000000";1;ecto fragment 1848691;1848690;1;7
+1499;1849438;;ellipse;"#000000";1;EC_V_sg3l 1849439;1849438;24;3
+1500;1850382;;ellipse;"#000000";1;EC_V_sg0r 1850383;1850382;8;11
+1501;1850945;;ellipse;"#000000";1;EC_D_heald 1719338;1850945;4;7
+1502;1851029;;ellipse;"#000000";1;basal lamina;1851029;6;7
+1503;1851097;;ellipse;"#000000";1;basal lamina;1851097;5;7
+1504;1851169;;ellipse;"#000000";1;EC_V_sg2r 1851170;1851169;4;7
+1505;1851228;;ellipse;"#000000";1;basal lamina;1851228;16;5
+1506;1851280;;ellipse;"#000000";1;basal lamina;1851280;13;11
+1507;1851309;;ellipse;"#000000";1;CB_pigment_sg2 1851310;1851309;9;7
+1508;1851700;;ellipse;"#000000";1;basal lamina;1851700;2;7
+1509;1851832;;ellipse;"#000000";1;basal lamina;1851832;2;7
+1510;1851859;;ellipse;"#000000";1;basal lamina;1851859;2;8
+1511;1852084;;ellipse;"#000000";1;EC_circumchaetal_sg1r_noto-2_3;1852084;12;4
+1512;1852112;;ellipse;"#000000";1;EC_V_sg2r 1852113;1852112;1;4
+1513;1852121;;ellipse;"#000000";1;EC_V_sg2r 1852122;1852121;21;4
+1514;1852340;;ellipse;"#000000";1;basal lamina;1852340;2;7
+1515;1852382;;ellipse;"#000000";1;EC_V_sg0r 1852383;1852382;7;7
+1516;1852410;;ellipse;"#000000";1;basal lamina;1852410;6;8
+1517;1852506;;ellipse;"#000000";1;EC_D_sg2r 1852507;1852506;16;6
+1518;1852518;;ellipse;"#000000";1;EC_V_sg0r 1852519;1852518;19;4
+1519;1852544;;ellipse;"#000000";1;basal lamina;1852544;2;4
+1520;1852575;;ellipse;"#000000";1;basal lamina;1852575;4;11
+1521;1852588;;ellipse;"#000000";1;basal lamina;1852588;3;7
+1522;1852634;;ellipse;"#000000";1;basal lamina;1852634;3;8
+1523;1852654;;ellipse;"#000000";1;EC_V_sg2l 1852655;1852654;3;5
+1524;1852659;;ellipse;"#000000";1;basal lamina;1852659;5;5
+1525;1852750;;ellipse;"#000000";1;basal lamina;1852750;3;8
+1526;1852757;;ellipse;"#000000";1;basal lamina;1852757;2;8
+1527;1852781;;ellipse;"#000000";1;EC_D_sg0l 1852782;1852781;3;5
+1528;1852871;;ellipse;"#000000";1;EC_V_sg1r 1852872;1852871;22;4
+1529;1852885;;ellipse;"#000000";1;EC_V_sg1l 1852886;1852885;4;5
+1530;1852911;;ellipse;"#000000";1;EC_V_sg1l_muscle-attachment;1852911;48;6
+1531;1853099;;ellipse;"#000000";1;basal lamina;1853099;18;5
+1532;1853212;;ellipse;"#000000";1;EC_D_sg0r 1853213;1853212;6;4
+1533;1853244;;ellipse;"#000000";1;basal lamina;1853244;5;4
+1534;1853271;;ellipse;"#000000";1;EC_V_sg1r 1853272;1853271;1;6
+1535;1853289;;ellipse;"#000000";1;EC_V_sg1l 1853290;1853289;1;5
+1536;1853461;;ellipse;"#000000";1;basal lamina;1853461;15;8
+1537;1853556;;ellipse;"#000000";1;basal lamina;1853556;4;8
+1538;1853563;;ellipse;"#000000";1;basal lamina;1853563;2;8
+1539;1853643;;ellipse;"#000000";1;basal lamina;1853643;14;7
+1540;1853759;;ellipse;"#000000";1;basal lamina;1853759;12;8
+1541;1853803;;ellipse;"#000000";1;basal lamina;1853803;20;0
+1542;1853912;;ellipse;"#000000";1;basal lamina;1853912;2;0
+1543;1853938;;ellipse;"#000000";1;basal lamina;1853938;3;0
+1544;1854005;;ellipse;"#000000";1;EC_V_sg1r 1854006;1854005;11;4
+1545;1854031;;ellipse;"#000000";1;EC_V_sg1r 1854032;1854031;4;4
+1546;1854042;;ellipse;"#000000";1;basal lamina;1854042;4;4
+1547;1854162;;ellipse;"#000000";1;EC_V_sg l1854163;1854162;1;6
+1548;1854202;;ellipse;"#000000";1;basal lamina;1854202;2;8
+1549;1854209;;ellipse;"#000000";1;EC_D_heald 1854210;1854209;5;8
+1550;1854225;;ellipse;"#000000";1;basal lamina;1854225;3;8
+1551;1854232;;ellipse;"#000000";1;ecto fragment 1854233;1854232;1;0
+1552;1854238;;ellipse;"#000000";1;basal lamina;1854238;2;0
+1553;1854297;;ellipse;"#000000";1;basal lamina;1854297;4;0
+1554;1854320;;ellipse;"#000000";1;meso 1854321;1854320;2;6
+1555;1855239;;ellipse;"#000000";1;basal lamina;1855239;4;6
+1556;1855431;;ellipse;"#000000";1;EC_D_heald 1855432;1855431;1;8
+1557;1855441;;ellipse;"#000000";1;meso frag 1855442;1855441;2;8
+1558;1855718;;ellipse;"#000000";1;basal lamina;1855718;3;8
+1559;1855765;;ellipse;"#000000";1;basal lamina;1855765;3;6
+1560;1855825;;ellipse;"#000000";1;basal lamina;1855825;2;5
+1561;1856065;;ellipse;"#000000";1;EC_V_sg2l 1844980;1856065;1;3
+1562;1856186;;ellipse;"#000000";1;basal lamina;1856186;3;0
+1563;1856211;;ellipse;"#000000";1;basal lamina;1856211;2;0
+1564;1856224;;ellipse;"#000000";1;basal lamina;1856224;11;0
+1565;1856260;;ellipse;"#000000";1;EC_D_sg1r 1856261;1856260;11;4
+1566;1856367;;ellipse;"#000000";1;basal lamina;1856367;6;4
+1567;1856384;;ellipse;"#000000";1;EC_circumchaetal_sg1r_neuro-1_5;1856384;9;4
+1568;1856418;;ellipse;"#000000";1;basal lamina;1856418;2;4
+1569;1856432;;ellipse;"#000000";1;basal lamina;1856432;3;4
+1570;1856439;;ellipse;"#000000";1;basal lamina;1856439;2;4
+1571;1856643;;ellipse;"#000000";1;basal lamina;1856643;2;6
+1572;1856655;;ellipse;"#000000";1;basal lamina;1856655;2;6
+1573;1856791;;ellipse;"#000000";1;circumacicular_sg1r_noto_4;1856791;12;4
+1574;1856829;;ellipse;"#000000";1;basal lamina;1856829;24;5
+1575;1856854;;ellipse;"#000000";1;basal lamina;1856854;3;8
+1576;1856863;;ellipse;"#000000";1;basal lamina;1856863;6;6
+1577;1856900;;ellipse;"#000000";1;basal lamina;1856900;6;6
+1578;1856944;;ellipse;"#000000";1;EC_V_sg1l 1856945;1856944;19;6
+1579;1857042;;ellipse;"#000000";1;basal lamina;1857042;6;4
+1580;1857051;;ellipse;"#000000";1;EC_circumchaetal_sg1r_neuro-3_5;1857051;7;4
+1581;1857070;;ellipse;"#000000";1;EC_V_sg1r 1857071;1857070;6;9
+1582;1857093;;ellipse;"#000000";1;EC_circumchaetal_sg1r_noto-3_5;1857093;1;4
+1583;1857272;;ellipse;"#000000";1;basal lamina;1857272;3;6
+1584;1857292;;ellipse;"#000000";1;EC_D_sg1l 1857293;1857292;9;6
+1585;1857309;;ellipse;"#000000";1;EC_D_sg1l 1857310;1857309;14;6
+1586;1857334;;ellipse;"#000000";1;circumchaetal_sg1l_neuro-3_3;1857334;15;6
+1587;1857356;;ellipse;"#000000";1;EC_V_sg1l 1857357;1857356;23;5
+1588;1857406;;ellipse;"#000000";1;basal lamina;1857406;21;11
+1589;1857438;;ellipse;"#000000";1;EC_V_sg1r 1857439;1857438;4;4
+1590;1857450;;ellipse;"#000000";1;EC_V_sg1r 1857451;1857450;13;4
+1591;1857727;;ellipse;"#000000";1;EC_V_sg1r 1857728;1857727;5;9
+1592;1860345;;ellipse;"#000000";1;EC_V_sg3r 1860346;1860345;4;10
+1593;1860378;;ellipse;"#000000";1;EC_V_sg3r 1860379;1860378;1;10
+1594;1860450;;ellipse;"#000000";1;EC_V_sg3r 1860451;1860450;6;10
+1595;1914429;;ellipse;"#000000";1;EC_D_sg0l 1914430;1914429;2;8
+1596;1914488;;ellipse;"#000000";1;meso 1914489;1914488;5;6
+1597;1914516;;ellipse;"#000000";1;EC_V_sg1l 1914517;1914516;4;5
+1598;1914545;;ellipse;"#000000";1;EC_circumchaetal_sg1l_neuro-6_5;1914545;3;6
+1599;1914557;;ellipse;"#000000";1;basal lamina;1914557;3;6
+1600;1914564;;ellipse;"#000000";1;EC_circumchaetal_sg1l_neuro-3_5;1914564;8;6
+1601;1914612;;ellipse;"#000000";1;basal lamina;1914612;3;6
+1602;1914641;;ellipse;"#000000";1;chaetal sac fragment 1914642;1914641;1;6
+1603;1914664;;ellipse;"#000000";1;basal lamina;1914664;3;6
+1604;1914711;;ellipse;"#000000";1;ecto fragment 1914712;1914711;1;11
+1605;1914834;;ellipse;"#000000";1;EC_D_sg1r 1914835;1914834;12;0
+1606;1914924;;ellipse;"#000000";1;hemichaetal_sg3l_neuro-4_2;1914924;1;1
+1607;1914982;;ellipse;"#000000";1;basal lamina;1914982;3;4
+1608;1915013;;ellipse;"#000000";1;basal lamina;1915013;8;8
+1609;1915065;;ellipse;"#000000";1;EC_V_sg3l 1915066;1915065;3;5
+1610;1915109;;ellipse;"#000000";1;EC_V_sg3l 1915110;1915109;6;3
+1611;1915226;;ellipse;"#000000";1;circumacicular_sg1r_neuro_5;1915226;8;4
+1612;1915295;;ellipse;"#000000";1;EC_D_sg1r 1915296;1915295;1;9
+1613;1915364;;ellipse;"#000000";1;basal lamina;1915364;2;0
+1614;1915371;;ellipse;"#000000";1;basal lamina;1915371;2;8
+1615;1915378;;ellipse;"#000000";1;basal lamina;1915378;10;8
+1616;1915418;;ellipse;"#000000";1;EC_D_sg1l 1915419;1915418;4;6
+1617;1915437;;ellipse;"#000000";1;noER_circumchaetal_sg1l_noto-1_4;1915437;2;6
+1618;1915450;;ellipse;"#000000";1;circumchaetal_sg1l_noto-6_3;1915450;17;6
+1619;1915471;;ellipse;"#000000";1;hemichaetal_sg1l_noto-6_1;1915471;18;6
+1620;1915494;;ellipse;"#000000";1;circumchaetal_sg1l_neuro-7_3;1915494;13;6
+1621;1915807;;ellipse;"#000000";1;ecto fragment 1915808;1915807;1;7
+1622;1915976;;ellipse;"#000000";1;basal lamina;1915976;8;4
+1623;1916010;;ellipse;"#000000";1;circumacicular_sg1l_neuro_3;1916010;28;6
+1624;1916028;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-7_2;1916028;10;6
+1625;1916409;;ellipse;"#000000";1;basal lamina;1916409;2;4
+1626;1916462;;ellipse;"#000000";1;EC_circumchaetal_sg1l_neuro-1_5;1916462;16;6
+1627;1916487;;ellipse;"#000000";1;EC_circumchaetal_sg1l_noto-7_5;1916487;6;6
+1628;1916522;;ellipse;"#000000";1;EC_circumchaetal_sg1l_noto-2_5;1916522;2;6
+1629;1916542;;ellipse;"#000000";1;basal lamina;1916542;26;8
+1630;1916554;;ellipse;"#000000";1;MUSchae_notDn_sg1l_1;1916554;8;8
+1631;1916580;;ellipse;"#000000";1;EC_D_sg1l 1916581;1916580;7;8
+1632;1917024;;ellipse;"#000000";1;EC_D_sg2r_muscle-attachment 1917025;1917024;24;0
+1633;1917392;;ellipse;"#000000";1;CB_pigment_sg2 1917393;1917392;1;0
+1634;1917570;;ellipse;"#000000";1;EC_V_sg1l 1917571;1917570;1;6
+1635;1917588;;ellipse;"#000000";1;EC_D_sg1l_muscle-attachment 1917589;1917588;22;8
+1636;1917652;;ellipse;"#000000";1;basal lamina;1917652;3;11
+1637;1917681;;ellipse;"#000000";1;EC_D_sg1l_muscle-attachment 1917682;1917681;23;8
+1638;1917765;;ellipse;"#000000";1;basal lamina;1917765;2;6
+1639;1917861;;ellipse;"#000000";1;basal lamina;1917861;3;4
+1640;1917884;;ellipse;"#000000";1;basal lamina;1917884;3;4
+1641;1917900;;ellipse;"#000000";1;EC_V_sg1l 1917901;1917900;2;9
+1642;1918014;;ellipse;"#000000";1;basal lamina;1918014;6;6
+1643;1918047;;ellipse;"#000000";1;EC_V_sg1l_muscle-attachment 1918048;1918047;29;6
+1644;1918124;;ellipse;"#000000";1;EC_V_sg1r 1918125;1918124;3;9
+1645;1918135;;ellipse;"#000000";1;EC_V_sg2r 1918136;1918135;14;4
+1646;1918193;;ellipse;"#000000";1;EC_D_sg2r 1918194;1918193;5;4
+1647;1918220;;ellipse;"#000000";1;EC_D_sg2r_muscle-attachment 1918221;1918220;10;4
+1648;1918282;;ellipse;"#000000";1;basal lamina;1918282;17;9
+1649;1918413;;ellipse;"#000000";1;basal lamina;1918413;21;6
+1650;1918439;;ellipse;"#000000";1;EC_D_sg1l 1918440;1918439;3;6
+1651;1918468;;ellipse;"#000000";1;EC_D_sg1l 1918469;1918468;14;6
+1652;1918478;;ellipse;"#000000";1;basal lamina;1918478;2;6
+1653;1918487;;ellipse;"#000000";1;EC_chaetal_sac_sg1l_noto2;1918487;3;6
+1654;1918504;;ellipse;"#000000";1;CB_pigment_sg1 1918505;1918504;7;6
+1655;1918596;;ellipse;"#000000";1;basal lamina;1918596;16;4
+1656;1918618;;ellipse;"#000000";1;basal lamina;1918618;2;0
+1657;1918627;;ellipse;"#000000";1;basal lamina;1918627;3;0
+1658;1918638;;ellipse;"#000000";1;basal lamina;1918638;4;0
+1659;1918654;;ellipse;"#000000";1;basal lamina;1918654;9;0
+1660;1918673;;ellipse;"#000000";1;basal lamina;1918673;2;4
+1661;1918732;;ellipse;"#000000";1;basal lamina;1918732;3;4
+1662;1918754;;ellipse;"#000000";1;EC_V_sg2r 1918755;1918754;1;11
+1663;1918820;;ellipse;"#000000";1;basal lamina;1918820;26;5
+1664;1918953;;ellipse;"#000000";1;EC_D_sg1l 1918954;1918953;4;6
+1665;1918978;;ellipse;"#000000";1;EC_D_sg1l 1918979;1918978;5;8
+1666;1919001;;ellipse;"#000000";1;EC_D_sg2l 1919002;1919001;10;8
+1667;1919068;;ellipse;"#000000";1;meso 1919069;1919068;1;6
+1668;1919213;;ellipse;"#000000";1;EC_circumchaetal_sg1l_noto-3_3;1919213;3;6
+1669;1919227;;ellipse;"#000000";1;circumacicular_sg1l_noto_4;1919227;15;6
+1670;1919255;;ellipse;"#000000";1;basal lamina;1919255;4;8
+1671;1919294;;ellipse;"#000000";1;EC_D_sg1l 1919295;1919294;3;6
+1672;1919302;;ellipse;"#000000";1;basal lamina;1919302;5;6
+1673;1919324;;ellipse;"#000000";1;basal lamina;1919324;6;6
+1674;1919571;;ellipse;"#000000";1;ectoderm 1919572;1919571;1;3
+1675;1919641;;ellipse;"#000000";1;basal lamina;1919641;3;8
+1676;1919950;;ellipse;"#000000";1;basal lamina;1919950;16;0
+1677;1919982;;ellipse;"#000000";1;basal lamina;1919982;6;2
+1678;1920008;;ellipse;"#000000";1;EC_V_sg2l 1920009;1920008;6;5
+1679;1920083;;ellipse;"#000000";1;basal lamina;1920083;23;11
+1680;1920138;;ellipse;"#000000";1;EC_V_sg2r 1920139;1920138;12;4
+1681;1920166;;ellipse;"#000000";1;basal lamina;1920166;3;4
+1682;1920235;;ellipse;"#000000";1;EC_D_sg1l 1920236;1920235;3;8
+1683;1920301;;ellipse;"#000000";1;EC_V_sg2l lateral tonofilaments 1920302;1920301;8;5
+1684;1920338;;ellipse;"#000000";1;EC_V_sg2l 1920339;1920338;4;5
+1685;1920355;;ellipse;"#000000";1;basal lamina;1920355;33;11
+1686;1920368;;ellipse;"#000000";1;EC_V_sg2r 1920369;1920368;2;11
+1687;1920390;;ellipse;"#000000";1;EC_V_sg2r 1920391;1920390;2;11
+1688;1920424;;ellipse;"#000000";1;basal lamina;1920424;9;0
+1689;1920498;;ellipse;"#000000";1;EC_V_sg2l 1920499;1920498;2;5
+1690;1920508;;ellipse;"#000000";1;EC_V_sg2ll;1920508;3;5
+1691;1920537;;ellipse;"#000000";1;basal lamina;1920537;3;9
+1692;1920782;;ellipse;"#000000";1;basal lamina;1920782;38;8
+1693;1920810;;ellipse;"#000000";1;EC_D_sg1l 1920811;1920810;4;8
+1694;1920856;;ellipse;"#000000";1;basal lamina;1920856;9;3
+1695;1920863;;ellipse;"#000000";1;basal lamina;1920863;36;5
+1696;1920877;;ellipse;"#000000";1;EC_V_sg2r 1920878;1920877;1;2
+1697;1924260;;ellipse;"#000000";1;EC_V_sg0l 1924261;1924260;1;5
+1698;1924411;;ellipse;"#000000";1;EC_V_sg0l 1924412;1924411;3;5
+1699;1924565;;ellipse;"#000000";1;EC_V_sg2l 1924566;1924565;12;9
+1700;1924577;;ellipse;"#000000";1;EC_V_sg2l 1924578;1924577;2;3
+1701;1924703;;ellipse;"#000000";1;basal lamina;1924703;2;3
+1702;1924728;;ellipse;"#000000";1;EC_V_sg2r 1924729;1924728;4;11
+1703;1924768;;ellipse;"#000000";1;MUSlong_D_sg0r_13;1924768;5;7
+1704;1924940;;ellipse;"#000000";1;EC_V_sg0r 1924941;1924940;2;7
+1705;1925196;;ellipse;"#000000";1;basal lamina;1925196;7;2
+1706;1925292;;ellipse;"#000000";1;basal lamina;1925292;13;2
+1707;1926946;;ellipse;"#000000";1;basal lamina;1926946;4;9
+1708;1926977;;ellipse;"#000000";1;basal lamina;1926977;2;3
+1709;1927027;;ellipse;"#000000";1;ER_circumchaetal_sg2l_noto-7_3;1927027;6;8
+1710;1927049;;ellipse;"#000000";1;ER_circumchaetal_sg2l_noto-5_3;1927049;9;3
+1711;1927081;;ellipse;"#000000";1;basal lamina;1927081;12;9
+1712;1927121;;ellipse;"#000000";1;basal lamina;1927121;9;2
+1713;1927142;;ellipse;"#000000";1;EC_V_sg2r 1927143;1927142;6;9
+1714;1927968;;ellipse;"#000000";1;EC_V_sg2r 1927969;1927968;5;11
+1715;1928239;;ellipse;"#000000";1;EC_D_sg2r_muscle-attachment 1928240;1928239;26;0
+1716;1928264;;ellipse;"#000000";1;EC_D_sg2r 1928265;1928264;7;2
+1717;1928431;;ellipse;"#000000";1;EC_V_sg2r 1928432;1928431;7;9
+1718;1931494;;ellipse;"#000000";1;EC_V_sg2r 1931495;1931494;8;2
+1719;1931618;;ellipse;"#000000";1;basal lamina;1931618;3;8
+1720;1931676;;ellipse;"#000000";1;EC_D_sg2l 1931677;1931676;2;3
+1721;1932111;;ellipse;"#000000";1;EC_V_sg2l 1932112;1932111;29;9
+1722;1932123;;ellipse;"#000000";1;EC_V_sg2l 1932124;1932123;5;9
+1723;1932146;;ellipse;"#000000";1;basal lamina;1932146;2;9
+1724;1932204;;ellipse;"#000000";1;EC_V_sg2r 1932205;1932204;1;11
+1725;1932255;;ellipse;"#000000";1;circumchaetal_sg2r_neuro-2_3;1932255;26;9
+1726;1933210;;ellipse;"#000000";1;ER_circumchaetal_sg2r_neuro-6_3;1933210;14;9
+1727;1933235;;ellipse;"#000000";1;EC_V_sg2r 1933236;1933235;15;9
+1728;1933585;;ellipse;"#000000";1;EC_V_sg3r 1933586;1933585;5;10
+1729;1934009;;ellipse;"#000000";1;EC_circumchaetal_sg3r_neuro-4_5;1934009;2;10
+1730;1934020;;ellipse;"#000000";1;EC_circumchaetal_sg3r_neuro-5_5;1934020;12;10
+1731;1934032;;ellipse;"#000000";1;EC_circumchaetal_sg3r_neuro-3_5;1934032;15;10
+1732;1934072;;ellipse;"#000000";1;noER_circumchaetal_sg3r_neuro-4_4;1934072;3;10
+1733;1934084;;ellipse;"#000000";1;circumacicular_sg3r_neuro_4;1934084;32;10
+1734;1934094;;ellipse;"#000000";1;EC_chaetal_sac_sg3r_neuro_1;1934094;7;10
+1735;1934130;;ellipse;"#000000";1;EC_V_sg3r 1934131;1934130;1;10
+1736;1934151;;ellipse;"#000000";1;ectoderm 1934152;1934151;1;16
+1737;1934302;;ellipse;"#000000";1;basal lamina;1934302;4;3
+1738;1934311;;ellipse;"#000000";1;basal lamina;1934311;4;9
+1739;1934327;;ellipse;"#000000";1;EC_V_sg2l 1934328;1934327;5;3
+1740;1934339;;ellipse;"#000000";1;basal lamina;1934339;2;3
+1741;1934475;;ellipse;"#000000";1;EC_V_sg2r 1934476;1934475;11;2
+1742;1934754;;ellipse;"#000000";1;CB_pigment 1934755;1934754;3;7
+1743;1934769;;ellipse;"#000000";1;ectoderm 1934770;1934769;3;7
+1744;1934793;;ellipse;"#000000";1;EC_V_sg1r 1934794;1934793;2;7
+1745;1934922;;ellipse;"#000000";1;MUSlong_V_sg0r_3;1934922;5;11
+1746;1934999;;ellipse;"#000000";1;ectoderm 1935000;1934999;1;7
+1747;1937532;;ellipse;"#000000";1;circumchaetal_sg2l_neuro-4_3;1937532;9;3
+1748;1937576;;ellipse;"#000000";1;circumchaetal_sg2r_noto-7_1;1937576;13;2
+1749;1937630;;ellipse;"#000000";1;EC_D_sg2r_muscle-atttachment 1937631;1937630;26;0
+1750;1937654;;ellipse;"#000000";1;ER_circumchaetal_sg2r_noto-8_3;1937654;17;2
+1751;1937667;;ellipse;"#000000";1;ER_circumchaetal_sg2r_noto-10_3;1937667;11;2
+1752;1937742;;ellipse;"#000000";1;EC_V_sg2r 1937743;1937742;8;2
+1753;1937760;;ellipse;"#000000";1;EC_V_sg2r 1937761;1937760;1;11
+1754;1937777;;ellipse;"#000000";1;EC_V_sg2r 1937778;1937777;4;11
+1755;1937797;;ellipse;"#000000";1;basal lamina;1937797;13;1
+1756;1937858;;ellipse;"#000000";1;EC_circumchaetal_sg2l_noto-2_5;1937858;5;3
+1757;1937873;;ellipse;"#000000";1;EC_circumchaetal_sg2l_noto-1_4;1937873;5;3
+1758;1937920;;ellipse;"#000000";1;EC_D_sg2l 1937921;1937920;19;8
+1759;1937990;;ellipse;"#000000";1;EC_V_sg2r 1937991;1937990;6;11
+1760;1938105;;ellipse;"#000000";1;basal lamina;1938105;2;3
+1761;1938115;;ellipse;"#000000";1;EC_circumchaetal_sg2l_neuro-6_5;1938115;5;9
+1762;1938169;;ellipse;"#000000";1;EC_circumchaetal_sg2l_noto-7_5;1938169;3;8
+1763;1938287;;ellipse;"#000000";1;basal lamina;1938287;3;2
+1764;1938324;;ellipse;"#000000";1;basal lamina;1938324;5;2
+1765;1938429;;ellipse;"#000000";1;basal lamina;1938429;2;8
+1766;1938630;;ellipse;"#000000";1;basal lamina;1938630;21;11
+1767;1938651;;ellipse;"#000000";1;EC_V_sg2r 1938652;1938651;9;9
+1768;1938691;;ellipse;"#000000";1;basal lamina;1938691;28;0
+1769;1938730;;ellipse;"#000000";1;basal lamina;1938730;3;0
+1770;1938791;;ellipse;"#000000";1;basal lamina;1938791;2;3
+1771;1938805;;ellipse;"#000000";1;basal lamina;1938805;8;3
+1772;1938812;;ellipse;"#000000";1;basal lamina;1938812;6;3
+1773;1938830;;ellipse;"#000000";1;basal lamina;1938830;3;3
+1774;1938856;;ellipse;"#000000";1;basal lamina;1938856;26;8
+1775;1938905;;ellipse;"#000000";1;EC_circumchaetal_sg2r_neuro-7_5;1938905;1;2
+1776;1938915;;ellipse;"#000000";1;basal lamina;1938915;3;2
+1777;1938936;;ellipse;"#000000";1;EC_circumchaetal_sg2r_neuro-1_5;1938936;29;9
+1778;1939120;;ellipse;"#000000";1;basal lamina;1939120;3;0
+1779;1939144;;ellipse;"#000000";1;basal lamina;1939144;15;0
+1780;1939182;;ellipse;"#000000";1;EC_V_sg3r 1939183;1939182;3;2
+1781;1940051;;ellipse;"#000000";1;ER_circumchaetal_sg3r_neuro-4_1;1940051;9;10
+1782;1940065;;ellipse;"#000000";1;ER_circumchaetal_sg3r_neuro-3_3;1940065;26;10
+1783;1940088;;ellipse;"#000000";1;EC_circumchaetal_sg3r_neuro-7_5;1940088;1;10
+1784;1940113;;ellipse;"#000000";1;circumchaetal_sg3r_neuro-5_3;1940113;1;10
+1785;1940141;;ellipse;"#000000";1;EC_V_sg3r 1940142;1940141;4;2
+1786;1940174;;ellipse;"#000000";1;EC_chaetal_cell_cell_sg2r_neuro_3;1940174;9;2
+1787;1940669;;ellipse;"#000000";1;basal lamina;1940669;5;3
+1788;1940678;;ellipse;"#000000";1;basal lamina;1940678;5;8
+1789;1940900;;ellipse;"#000000";1;basal lamina;1940900;3;0
+1790;1940988;;ellipse;"#000000";1;basal lamina;1940988;5;1
+1791;1941047;;ellipse;"#000000";1;basal lamina;1941047;9;0
+1792;1941112;;ellipse;"#000000";1;EC_D_sg3l 1941113;1941112;6;1
+1793;1941130;;ellipse;"#000000";1;EC_V_sg3l 1941131;1941130;7;5
+1794;1941139;;ellipse;"#000000";1;EC_D_sg3l 1941140;1941139;8;8
+1795;1941240;;ellipse;"#000000";1;meso 1941241;1941240;2;3
+1796;1941267;;ellipse;"#000000";1;basal lamina;1941267;6;0
+1797;1941491;;ellipse;"#000000";1;basal lamina;1941491;6;1
+1798;1941525;;ellipse;"#000000";1;EC_D_sg3r 1941526;1941525;24;0
+1799;1941551;;ellipse;"#000000";1;EC_D_sg3r 1941552;1941551;6;0
+1800;1941622;;ellipse;"#000000";1;EC_V_sg3l 1941623;1941622;19;5
+1801;1941636;;ellipse;"#000000";1;EC_V_sg3l 1941637;1941636;22;5
+1802;1941698;;ellipse;"#000000";1;basal lamina;1941698;3;10
+1803;1941807;;ellipse;"#000000";1;basal lamina;1941807;6;0
+1804;1941826;;ellipse;"#000000";1;basal lamina;1941826;2;8
+1805;1941841;;ellipse;"#000000";1;basal lamina;1941841;2;1
+1806;1941947;;ellipse;"#000000";1;EC_V_sg3l 1941948;1941947;7;1
+1807;1942065;;ellipse;"#000000";1;basal lamina;1942065;33;11
+1808;1942104;;ellipse;"#000000";1;noER_circumchaetal_sg3r_noto-3_3;1942104;7;0
+1809;1942316;;ellipse;"#000000";1;EC_circumchaetal_sg3r_neuro-6_5;1942316;2;10
+1810;1943251;;ellipse;"#000000";1;EC_chaetal_sac_sg3l_neuro_1;1943251;5;1
+1811;1943358;;ellipse;"#000000";1;EC_V_sg3r 1943359;1943358;24;10
+1812;1943425;;ellipse;"#000000";1;basal lamina;1943425;18;1
+1813;1943457;;ellipse;"#000000";1;EC_D_pygr armpit 1943458;1943457;1;0
+1814;1943469;;ellipse;"#000000";1;EC_D_sg3r_armpit 1943470;1943469;8;0
+1815;1943492;;ellipse;"#000000";1;basal lamina;1943492;5;0
+1816;1943529;;ellipse;"#000000";1;EC_circumchaetal_sg3r_noto-2_5;1943529;14;0
+1817;1943545;;ellipse;"#000000";1;basal lamina;1943545;5;0
+1818;1943617;;ellipse;"#000000";1;basal lamina;1943617;4;1
+1819;1944083;;ellipse;"#000000";1;basal lamina;1944083;3;8
+1820;1944286;;ellipse;"#000000";1;EC_chaetal_sac_sg3l_noto_1;1944286;2;1
+1821;1944322;;ellipse;"#000000";1;basal lamina;1944322;4;1
+1822;1944498;;ellipse;"#000000";1;circumacicular_sg2r_noto_2;1944498;83;2
+1823;1944514;;ellipse;"#000000";1;EC_D_sg2r 1944515;1944514;3;2
+1824;1944619;;ellipse;"#000000";1;EC_circumchaetal_sg2l_noto-6_5;1944619;6;8
+1825;1944652;;ellipse;"#000000";1;EC_circumchaetal_sg2l_neuro-4_5;1944652;15;9
+1826;1945071;;ellipse;"#000000";1;basal lamina;1945071;2;8
+1827;1945107;;ellipse;"#000000";1;basal lamina;1945107;2;9
+1828;1945156;;ellipse;"#000000";1;EC_V_sg2r 1945157;1945156;8;2
+1829;1945180;;ellipse;"#000000";1;EC_circumchaetal_sg2r_noto-1_5;1945180;1;2
+1830;1945218;;ellipse;"#000000";1;EC_circumchaetal_sg2r_noto-8_5;1945218;10;0
+1831;1945385;;ellipse;"#000000";1;basal lamina;1945385;5;3
+1832;1945419;;ellipse;"#000000";1;basal lamina;1945419;2;8
+1833;1945437;;ellipse;"#000000";1;EC_D_sg3r_armpit 1945438;1945437;13;2
+1834;1945470;;ellipse;"#000000";1;EC_D_sg2r_armpit 1945471;1945470;7;0
+1835;1945483;;ellipse;"#000000";1;basal lamina;1945483;3;2
+1836;1945529;;ellipse;"#000000";1;noER_circumchaetal_sg2r_neuro-1_4;1945529;7;9
+1837;1945555;;ellipse;"#000000";1;EC_circumchaetal_sg2r_neuro-2_5;1945555;6;9
+1838;1945618;;ellipse;"#000000";1;circumacicular_sg2r_neuro_3;1945618;41;2
+1839;1945775;;ellipse;"#000000";1;basal lamina;1945775;29;5
+1840;1945780;;ellipse;"#000000";1;EC_V_sg2l lateral tonofilaments 1945781;1945780;1;5
+1841;1945932;;ellipse;"#000000";1;EC_V_sg2l 1945933;1945932;9;3
+1842;1946040;;ellipse;"#000000";1;basal lamina;1946040;16;0
+1843;1946090;;ellipse;"#000000";1;basal lamina;1946090;3;8
+1844;1946124;;ellipse;"#000000";1;basal lamina;1946124;35;5
+1845;1946208;;ellipse;"#000000";1;EC_V_sg3r 1946209;1946208;3;2
+1846;1946217;;ellipse;"#000000";1;EC_D_sg3r_armpit 1946218;1946217;15;2
+1847;1946341;;ellipse;"#000000";1;basal lamina;1946341;2;0
+1848;1946349;;ellipse;"#000000";1;EC_V_sg3r 1946350;1946349;1;11
+1849;1946360;;ellipse;"#000000";1;EC_D_sg2r 1946361;1946360;3;2
+1850;1946386;;ellipse;"#000000";1;EC_circumchaetal_sg2r_noto-2_5;1946386;2;2
+1851;1946466;;ellipse;"#000000";1;basal lamina;1946466;3;2
+1852;1946518;;ellipse;"#000000";1;basal lamina;1946518;16;8
+1853;1946529;;ellipse;"#000000";1;basal lamina;1946529;5;8
+1854;1946632;;ellipse;"#000000";1;basal lamina;1946632;21;11
+1855;1946906;;ellipse;"#000000";1;basal lamina;1946906;4;11
+1856;1946914;;ellipse;"#000000";1;EC_V_sg3r 1946915;1946914;10;0
+1857;1946941;;ellipse;"#000000";1;basal lamina;1946941;16;0
+1858;1947056;;ellipse;"#000000";1;basal lamina;1947056;2;0
+1859;1947073;;ellipse;"#000000";1;basal lamina;1947073;5;0
+1860;1947175;;ellipse;"#000000";1;circumacicular_sg3r_neuro_3;1947175;31;10
+1861;1947305;;ellipse;"#000000";1;circumacicular_sg3r_noto_2;1947305;45;0
+1862;1947377;;ellipse;"#000000";1;EC_V_sg3l 1947378;1947377;9;5
+1863;1947448;;ellipse;"#000000";1;EC_V_sg3r 1947449;1947448;5;10
+1864;1947619;;ellipse;"#000000";1;EC_V_sg3l 1947620;1947619;4;1
+1865;1947734;;ellipse;"#000000";1;basal lamina;1947734;13;1
+1866;1947796;;ellipse;"#000000";1;ER_circumchaetal_sg3r_neuro-2_3;1947796;17;10
+1867;1948145;;ellipse;"#000000";1;circumchaetal_sg3r_noto-2_3;1948145;13;0
+1868;1948163;;ellipse;"#000000";1;ER_circumchaetal_sg3r_noto-4_3;1948163;11;0
+1869;1948259;;ellipse;"#000000";1;basal lamina;1948259;2;1
+1870;1948530;;ellipse;"#000000";1;circumacicular_sg3l_noto_2;1948530;51;1
+1871;1948546;;ellipse;"#000000";1;circumacicular_sg3l_neuro_3;1948546;38;1
+1872;1948575;;ellipse;"#000000";1;basal lamina;1948575;14;5
+1873;1948700;;ellipse;"#000000";1;hemichaetal_sg3l_noto-8_1;1948700;12;1
+1874;1948715;;ellipse;"#000000";1;ER_circumchaetal_sg3l_noto-8_3;1948715;19;1
+1875;1948738;;ellipse;"#000000";1;hemichaetal_sg3l_noto-5_2;1948738;11;1
+1876;1948773;;ellipse;"#000000";1;hemichaetal_sg3l_neuro-2_2;1948773;19;1
+1877;1948836;;ellipse;"#000000";1;chaetal_sac_cell_sg2r_noto-1;1948836;1;2
+1878;1948847;;ellipse;"#000000";1;circumchaetal_sg2r_noto-5_3;1948847;12;2
+1879;1948859;;ellipse;"#000000";1;ER_circumchaetal_sg2r_noto-9_3;1948859;13;2
+1880;1948871;;ellipse;"#000000";1;noER_circumchaetal_sg2r_noto-8_4;1948871;1;2
+1881;1949256;;ellipse;"#000000";1;EC_circumchaetal_sg3l_noto-8_5;1949256;7;1
+1882;1949271;;ellipse;"#000000";1;circumacicular_sg3l_noto_3;1949271;29;1
+1883;1949305;;ellipse;"#000000";1;circumchaetal_sg3l_noto-1_1;1949305;13;1
+1884;1949384;;ellipse;"#000000";1;basal lamina;1949384;13;0
+1885;1949453;;ellipse;"#000000";1;basal lamina;1949453;11;5
+1886;1949681;;ellipse;"#000000";1;meso 1949682;1949681;4;0
+1887;1950007;;ellipse;"#000000";1;basal lamina;1950007;3;0
+1888;1950103;;ellipse;"#000000";1;EC_V_sg3r 1950104;1950103;4;10
+1889;1950726;;ellipse;"#000000";1;circumacicular_sg1l_neuro_2;1950726;15;5
+1890;1950749;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-2_2;1950749;3;5
+1891;1950763;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-4_1;1950763;16;6
+1892;1950842;;ellipse;"#000000";1;circumacicular_sg1r_neuro_2;1950842;4;4
+1893;1950884;;ellipse;"#000000";1;EC_D_sg1l 1950885;1950884;6;6
+1894;1950906;;ellipse;"#000000";1;circumacicular_sg1r_neuro_4;1950906;21;4
+1895;1951026;;ellipse;"#000000";1;chaetal sac fragment 1951027;1951026;11;6
+1896;1951064;;ellipse;"#000000";1;hemichaetal_sg1l_noto-7_1;1951064;10;6
+1897;1951275;;ellipse;"#000000";1;circumacicular_sg2r_noto_3;1951275;37;2
+1898;1951444;;ellipse;"#000000";1;circumacicular_sg1r_noto_2;1951444;17;4
+1899;1951464;;ellipse;"#000000";1;circumacicular_sg1r_noto_3;1951464;20;4
+1900;1951626;;ellipse;"#000000";1;EC_circumchaetal_sg1r_neuro-2_5;1951626;4;4
+1901;1951760;;ellipse;"#000000";1;circumacicular_sg2r_neuro_2;1951760;42;2
+1902;1951842;;ellipse;"#000000";1;circumacicular_sg2r_neuro_4;1951842;28;2
+1903;1951961;;ellipse;"#000000";1;basal lamina;1951961;9;2
+1904;1952051;;ellipse;"#000000";1;circumacicular_sg3r_neuro_2;1952051;33;11
+1905;1952077;;ellipse;"#000000";1;circumacicular_sg3r_neuro_5;1952077;16;10
+1906;1952428;;ellipse;"#000000";1;ER_circumchaetal_sg1l_neuro-6_3;1952428;7;6
+1907;1952439;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-6_1;1952439;6;6
+1908;1952460;;ellipse;"#000000";1;circumchaetal_sg1l_noto-1_3;1952460;13;6
+1909;1952590;;ellipse;"#000000";1;acicula_noto_sg2l;1952590;30;3
+1910;1952617;;ellipse;"#000000";1;circumacicular_sg2l_noto_2;1952617;29;3
+1911;1952642;;ellipse;"#000000";1;circumacicular_sg2l_noto_3;1952642;39;3
+1912;1952651;;ellipse;"#000000";1;circumacicular_sg2l_noto_4;1952651;12;3
+1913;1952670;;ellipse;"#000000";1;circumacicular_sg2l_neuro_3;1952670;25;3
+1914;1953536;;ellipse;"#000000";1;circumchaetal_sg2l_neuro-2_1;1953536;13;3
+1915;1953790;;ellipse;"#000000";1;chaetal sac fragment 1953791;1953790;1;3
+1916;1953807;;ellipse;"#000000";1;circumchaetal_sg2l_neuro-1_1;1953807;13;3
+1917;1953820;;ellipse;"#000000";1;circumchaetal_sg2l_neuro-2_2;1953820;12;3
+1918;1953831;;ellipse;"#000000";1;EC_chaetal_sac_cell_sg2l_noto-1;1953831;1;3
+1919;1953838;;ellipse;"#000000";1;EC_circumchaetal_sg2l_noto-8_5;1953838;4;8
+1920;1953853;;ellipse;"#000000";1;hemichaetal_sg2l_neuro-3_2;1953853;7;3
+1921;1953883;;ellipse;"#000000";1;ER_circumchaetal_sg2l_neuro-7_3;1953883;8;3
+1922;1954273;;ellipse;"#000000";1;basal lamina;1954273;5;7
+1923;1955380;;ellipse;"#000000";1;meso;1955380;1;0
+1924;1956753;;ellipse;"#000000";1;basal lamina;1956753;2;7
+1925;1956955;;ellipse;"#000000";1;meso 1956956;1956955;3;1
+1926;1959415;;ellipse;"#000000";1;ecto fragment 1959416;1959415;1;5
+1927;1959477;;ellipse;"#000000";1;EC_V_pygr 1959478;1959477;2;0
+1928;1964327;;ellipse;"#000000";1;basal lamina;1964327;5;5
+1929;1964485;;ellipse;"#000000";1;EC_D_sg1l 1964486;1964485;1;6
+1930;1964590;;ellipse;"#000000";1;ecto fragment 1964591;1964590;1;0
+1931;1964663;;ellipse;"#000000";1;basal lamina;1964663;3;0
+1932;1964695;;ellipse;"#000000";1;basal lamina;1964695;3;1
+1933;1964723;;ellipse;"#000000";1;basal lamina;1964723;2;2
+1934;1964768;;ellipse;"#000000";1;EC_V_sg2r 1964769;1964768;5;9
+1935;1964837;;ellipse;"#000000";1;basal lamina;1964837;5;2
+1936;1964924;;ellipse;"#000000";1;basal lamina;1964924;3;14
+1937;1964937;;ellipse;"#000000";1;basal lamina;1964937;5;8
+1938;1965161;;ellipse;"#000000";1;EC_V_sg1l 1965162;1965161;1;8
+1939;1965177;;ellipse;"#000000";1;basal lamina;1965177;3;8
+1940;1965248;;ellipse;"#000000";1;EC_D_sg2l 1965249;1965248;4;3
+1941;1965267;;ellipse;"#000000";1;basal lamina;1965267;2;3
+1942;1965782;;ellipse;"#000000";1;EC_V_sg1l 1965783;1965782;1;5
+1943;1965805;;ellipse;"#000000";1;EC_chaetal_sac_sg1l_noto1;1965805;10;6
+1944;1965933;;ellipse;"#000000";1;EC_V_sg2l 1965934;1965933;2;9
+1945;1966012;;ellipse;"#000000";1;basal lamina;1966012;3;4
+1946;1966253;;ellipse;"#000000";1;EC_V_sg3r 1966254;1966253;3;0
+1947;1966276;;ellipse;"#000000";1;basal lamina;1966276;3;10
+1948;1966308;;ellipse;"#000000";1;EC_chaetal_sac_sg3r_noto_2;1966308;7;0
+1949;1966331;;ellipse;"#000000";1;basal lamina;1966331;10;4
+1950;1966361;;ellipse;"#000000";1;EC_V_sg3r 1966362;1966361;4;10
+1951;1966400;;ellipse;"#000000";1;EC_D_sg3r_armpit 1966401;1966400;6;0
+1952;1966419;;ellipse;"#000000";1;EC_D_sg2r 1966420;1966419;3;2
+1953;1966446;;ellipse;"#000000";1;EC_V_sg2r 1966447;1966446;18;9
+1954;1966494;;ellipse;"#000000";1;EC_circumchaetal_sg2r_neuro-4_5;1966494;8;2
+1955;1966544;;ellipse;"#000000";1;basal lamina;1966544;4;10
+1956;1966586;;ellipse;"#000000";1;EC_D_sg3r 1966587;1966586;1;0
+1957;1966619;;ellipse;"#000000";1;basal lamina;1966619;3;0
+1958;1966833;;ellipse;"#000000";1;EC_V_sg2r 1966834;1966833;6;2
+1959;1966848;;ellipse;"#000000";1;basal lamina;1966848;10;2
+1960;1967064;;ellipse;"#000000";1;basal lamina;1967064;2;4
+1961;1967073;;ellipse;"#000000";1;basal lamina;1967073;5;4
+1962;1967129;;ellipse;"#000000";1;EC_V_sg1l 1967130;1967129;2;9
+1963;1967194;;ellipse;"#000000";1;basal lamina;1967194;2;1
+1964;1967254;;ellipse;"#000000";1;basal lamina;1967254;10;6
+1965;1967263;;ellipse;"#000000";1;basal lamina;1967263;4;3
+1966;1967299;;ellipse;"#000000";1;basal lamina;1967299;5;3
+1967;1967442;;ellipse;"#000000";1;ecto fragment 1967443;1967442;1;1
+1968;1967458;;ellipse;"#000000";1;EC_circumchaetal_sg3l_noto-7_5;1967458;2;1
+1969;1967604;;ellipse;"#000000";1;basal lamina;1967604;2;11
+1970;1967625;;ellipse;"#000000";1;meso 1967626;1967625;2;11
+1971;1967714;;ellipse;"#000000";1;basal lamina;1967714;7;10
+1972;1967802;;ellipse;"#000000";1;basal lamina;1967802;3;0
+1973;1967827;;ellipse;"#000000";1;basal lamina;1967827;4;7
+1974;1968173;;ellipse;"#000000";1;basal lamina;1968173;29;0
+1975;1968297;;ellipse;"#000000";1;basal lamina;1968297;2;11
+1976;1968487;;ellipse;"#000000";1;EC_V_sg0l 1968488;1968487;4;5
+1977;1968609;;ellipse;"#000000";1;basal lamina;1968609;3;8
+1978;1968633;;ellipse;"#000000";1;basal lamina;1968633;1;8
+1979;1969009;;ellipse;"#000000";1;basal lamina;1969009;6;5
+1980;1969040;;ellipse;"#000000";1;EC_V_sg2l 1969041;1969040;5;5
+1981;1969835;;ellipse;"#000000";1;EC_V_sg1l 1969836;1969835;1;9
+1982;1969925;;ellipse;"#000000";1;EC_D_sg1l 1969926;1969925;2;8
+1983;1970012;;ellipse;"#000000";1;EC_V_sg3r 1970013;1970012;2;2
+1984;1970021;;ellipse;"#000000";1;EC_chaetal_sac_cell_neuro_4;1970021;2;2
+1985;1970735;;ellipse;"#000000";1;noER_circumchaetal_sg3l_noto-1_1;1970735;4;1
+1986;1970909;;ellipse;"#000000";1;EC_V_sg1r 1970909;1970909;1;7
+1987;1970923;;ellipse;"#000000";1;EC_V_sg1r 1970924;1970923;2;7
+1988;1971004;;ellipse;"#000000";1;CB_pigment 1971005;1971004;2;5
+1989;1972063;;ellipse;"#000000";1;basal lamina;1972063;10;4
+1990;1972070;;ellipse;"#000000";1;EC_D_sg1r_muscle-attachment 1972071;1972070;12;4
+1991;1972114;;ellipse;"#000000";1;basal lamina;1972114;4;1
+1992;1972143;;ellipse;"#000000";1;protonephridium_hr2;1972143;1;11
+1993;1972235;;ellipse;"#000000";1;basal lamina;1972235;8;3
+1994;1972256;;ellipse;"#000000";1;basal lamina;1972256;4;3
+1995;1972270;;ellipse;"#000000";1;basal lamina;1972270;4;3
+1996;1972393;;ellipse;"#000000";1;EC_circumchaetal_sg2r_noto-7_4;1972393;10;2
+1997;1972475;;ellipse;"#000000";1;EC_circumchaetal_sg1l_neuro-2_5;1972475;4;6
+1998;1972591;;ellipse;"#000000";1;ecto fragment 1972592;1972591;1;5
+1999;1972693;;ellipse;"#000000";1;basal lamina;1972693;3;1
+2000;1972889;;ellipse;"#000000";1;basal lamina;1972889;4;10
+2001;1972979;;ellipse;"#000000";1;basal lamina;1972979;3;9
+2002;1972998;;ellipse;"#000000";1;EC_circumchaetal_sg2l_neuro-10_5;1972998;6;9
+2003;1973245;;ellipse;"#000000";1;EC_V_sg2l 1973246;1973245;1;3
+2004;1973397;;ellipse;"#000000";1;basal lamina;1973397;11;5
+2005;1973646;;ellipse;"#000000";1;basal lamina;1973646;2;2
+2006;1973736;;ellipse;"#000000";1;EC_V_sg3r 1973737;1973736;3;10
+2007;1973759;;ellipse;"#000000";1;EC_V_sg3r_chae 1973760;1973759;3;10
+2008;1974189;;ellipse;"#000000";1;EC_V_sg1r 1974190;1974189;8;9
+2009;1974566;;ellipse;"#000000";1;basal lamina;1974566;3;2
+2010;1974610;;ellipse;"#000000";1;basal lamina;1974610;3;1
+2011;1974617;;ellipse;"#000000";1;basal lamina;1974617;3;8
+2012;1974637;;ellipse;"#000000";1;noER_circumchaetal_sg3r_neuro-3_4;1974637;4;10
+2013;1974648;;ellipse;"#000000";1;EC_circumchaetal_sg3r_neuro-2_5;1974648;4;10
+2014;1974663;;ellipse;"#000000";1;noER_circumchaetal_sg3r_neuro-2_4;1974663;1;10
+2015;1974691;;ellipse;"#000000";1;basal lamina;1974691;4;0
+2016;1974706;;ellipse;"#000000";1;EC_circumchaetal_sg3r_noto-7_5;1974706;6;0
+2017;1974736;;ellipse;"#000000";1;circumchaetal_sg1r_neuro-7_3;1974736;11;4
+2018;1974746;;ellipse;"#000000";1;EC_chaetal_sac_sg3r_noto_1;1974746;1;0
+2019;1974769;;ellipse;"#000000";1;basal lamina;1974769;5;0
+2020;1974817;;ellipse;"#000000";1;circumchaetal_sg3l_neuro-1_1;1974817;27;1
+2021;1974986;;ellipse;"#000000";1;basal lamina;1974986;2;10
+2022;1975004;;ellipse;"#000000";1;basal lamina;1975004;3;10
+2023;1975013;;ellipse;"#000000";1;EC_circumchaetal_sg3r_neuro-8_5;1975013;2;10
+2024;1975041;;ellipse;"#000000";1;basal lamina;1975041;9;1
+2025;1975134;;ellipse;"#000000";1;CB_pigment_sg1 1975135;1975134;15;8
+2026;1975177;;ellipse;"#000000";1;EC_V_sg1l chaetal sac 1975178;1975177;9;6
+2027;1975263;;ellipse;"#000000";1;basal lamina;1975263;9;0
+2028;1975270;;ellipse;"#000000";1;ER_circumchaetal_sg3r_noto-7_3;1975270;16;0
+2029;1975310;;ellipse;"#000000";1;noER_circumchaetal_sg3r_noto-4_4;1975310;3;0
+2030;1975504;;ellipse;"#000000";1;basal lamina;1975504;5;5
+2031;1975519;;ellipse;"#000000";1;basal lamina;1975519;6;5
+2032;1975535;;ellipse;"#000000";1;basal lamina;1975535;2;5
+2033;1975545;;ellipse;"#000000";1;basal lamina;1975545;2;7
+2034;1975673;;ellipse;"#000000";1;basal lamina;1975673;11;7
+2035;1975691;;ellipse;"#000000";1;basal lamina;1975691;3;7
+2036;1975824;;ellipse;"#000000";1;EC_D_heard 1975825;1975824;5;7
+2037;1975830;;ellipse;"#000000";1;basal lamina;1975830;2;7
+2038;1975916;;ellipse;"#000000";1;basal lamina;1975916;4;7
+2039;1976140;;ellipse;"#000000";1;basal lamina;1976140;2;7
+2040;1976162;;ellipse;"#000000";1;meso 1976163;1976162;1;7
+2041;1976278;;ellipse;"#000000";1;basal lamina;1976278;4;7
+2042;1976300;;ellipse;"#000000";1;basal lamina;1976300;6;7
+2043;1976414;;ellipse;"#000000";1;basal lamina;1976414;20;13
+2044;1976569;;ellipse;"#000000";1;basal lamina;1976569;11;7
+2045;1976611;;ellipse;"#000000";1;basal lamina;1976611;3;5
+2046;1976621;;ellipse;"#000000";1;meso 1976622;1976621;2;5
+2047;1976626;;ellipse;"#000000";1;basal lamina;1976626;3;5
+2048;1976718;;ellipse;"#000000";1;basal lamina;1976718;7;7
+2049;1976756;;ellipse;"#000000";1;basal lamina;1976756;6;7
+2050;1976777;;ellipse;"#000000";1;basal lamina;1976777;6;5
+2051;1976800;;ellipse;"#000000";1;basal lamina;1976800;4;7
+2052;1976831;;ellipse;"#000000";1;basal lamina;1976831;30;0
+2053;1976882;;ellipse;"#000000";1;basal lamina;1976882;3;0
+2054;1976954;;ellipse;"#000000";1;basal lamina;1976954;2;0
+2055;1977187;;ellipse;"#000000";1;EC_circumchaetal_sg2l_neuro-1_4;1977187;12;9
+2056;1977223;;ellipse;"#000000";1;noER_circumchaetal_sg2l_neuro-7_4;1977223;3;9
+2057;1977258;;ellipse;"#000000";1;ER_circumchaetal_sg2l_neuro-10_3;1977258;15;9
+2058;1977301;;ellipse;"#000000";1;basal lamina;1977301;2;1
+2059;1977338;;ellipse;"#000000";1;hemichaetal_sg2r_noto-8_2;1977338;12;2
+2060;1977417;;ellipse;"#000000";1;EC_circumchaetal_sg1r_noto-8_5;1977417;2;4
+2061;1977434;;ellipse;"#000000";1;EC_V_sg1r 1977435;1977434;5;4
+2062;1977449;;ellipse;"#000000";1;EC_circumchaetal_sg1r_noto-5_5;1977449;6;4
+2063;1977459;;ellipse;"#000000";1;basal lamina;1977459;2;4
+2064;1977468;;ellipse;"#000000";1;noER_circumchaetal_sg1r_noto-5_4;1977468;1;4
+2065;1977484;;ellipse;"#000000";1;noER_circumchaetal_sg1r_noto-4_4;1977484;1;4
+2066;1977552;;ellipse;"#000000";1;basal lamina;1977552;2;9
+2067;1977603;;ellipse;"#000000";1;EC_circumchaetal_sg2r_neuro-10_5;1977603;1;9
+2068;1977644;;ellipse;"#000000";1;basal lamina;1977644;2;9
+2069;1977651;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-9_1;1977651;2;9
+2070;1977667;;ellipse;"#000000";1;basal lamina;1977667;4;8
+2071;1977676;;ellipse;"#000000";1;basal lamina;1977676;1;8
+2072;1977717;;ellipse;"#000000";1;ER_circumchaetal_sg1r_neuro-4_3;1977717;6;4
+2073;1977788;;ellipse;"#000000";1;EC_circumchaetal_sg3r_neuro-9_5;1977788;2;10
+2074;1977828;;ellipse;"#000000";1;circumchaetal_sg1r_neuro-1_3;1977828;10;4
+2075;1977844;;ellipse;"#000000";1;hemichaetal_sg1r_neuro-2_1;1977844;3;4
+2076;1977853;;ellipse;"#000000";1;chaeta_sg1r_neuro-2;1977853;5;4
+2077;1977871;;ellipse;"#000000";1;chaeta_sg1r_neuro-3;1977871;4;4
+2078;1977947;;ellipse;"#000000";1;chaetal sac fragment 1977948;1977947;2;4
+2079;1977980;;ellipse;"#000000";1;noER_circumchaetal_sg1r_neuro-3_4;1977980;1;4
+2080;1978050;;ellipse;"#000000";1;basal lamina;1978050;2;10
+2081;1978061;;ellipse;"#000000";1;basal lamina;1978061;7;0
+2082;1978099;;ellipse;"#000000";1;basal lamina;1978099;7;0
+2083;1978119;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-3_2;1978119;8;6
+2084;1978135;;ellipse;"#000000";1;ER_circumchaetal_sg1l_neuro-1_3;1978135;7;6
+2085;1978190;;ellipse;"#000000";1;circumchaetal_sg1l_neuro-2_3;1978190;5;5
+2086;1978321;;ellipse;"#000000";1;hemichaetal_sg2l_neuro-6_1;1978321;11;3
+2087;1978332;;ellipse;"#000000";1;hemichaetal_sg2l_neuro-10_1;1978332;6;9
+2088;1978371;;ellipse;"#000000";1;basal lamina;1978371;3;9
+2089;1978452;;ellipse;"#000000";1;EC_circumchaetal_sg3l_neuro-9_1;1978452;2;12
+2090;1978469;;ellipse;"#000000";1;basal lamina;1978469;2;12
+2091;1978476;;ellipse;"#000000";1;hemichaetal_sg3l_neuro-8_1;1978476;6;12
+2092;1978512;;ellipse;"#000000";1;EC_D_sg2r 1978513;1978512;5;2
+2093;1978599;;ellipse;"#000000";1;basal lamina;1978599;2;2
+2094;1978613;;ellipse;"#000000";1;basal lamina;1978613;2;2
+2095;1978634;;ellipse;"#000000";1;basal lamina;1978634;2;2
+2096;1979704;;ellipse;"#000000";1;EC_V_sg0r 1979705;1979704;10;11
+2097;1979709;;ellipse;"#000000";1;EC_V_sg0r 1979710;1979709;3;7
+2098;1980258;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-7_2;1980258;11;9
+2099;1980283;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-4_2;1980283;11;2
+2100;1980296;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-1_2;1980296;21;2
+2101;1980333;;ellipse;"#000000";1;circumchaetal_sg2r_neuro-5_1;1980333;13;2
+2102;1980361;;ellipse;"#000000";1;ER_circumchaetal_sg2r_neuro-8_3;1980361;2;2
+2103;1980376;;ellipse;"#000000";1;circumchaetal_sg2r_neuro-3_1;1980376;5;2
+2104;1980382;;ellipse;"#000000";1;basal lamina;1980382;4;2
+2105;1980394;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-7_1;1980394;1;9
+2106;1980406;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-6_1;1980406;2;9
+2107;1980853;;ellipse;"#000000";1;hemichaetal_sg1l_noto-2_1;1980853;4;6
+2108;1980902;;ellipse;"#000000";1;hemichaetal_sg1l_noto-4_2;1980902;1;6
+2109;1980914;;ellipse;"#000000";1;ER_circumchaetal_sg1l_noto-5_3;1980914;10;6
+2110;1980926;;ellipse;"#000000";1;hemichaetal_sg1l_noto-4_1;1980926;11;6
+2111;1980943;;ellipse;"#000000";1;circumacicular_sg1l_noto_2;1980943;19;6
+2112;1980967;;ellipse;"#000000";1;circumchaetal_sg1l_noto-4_3;1980967;12;6
+2113;1980990;;ellipse;"#000000";1;circumchaetal_sg1l_noto-2_3;1980990;4;6
+2114;1981017;;ellipse;"#000000";1;hemichaetal_sg1l_noto-1_1;1981017;10;6
+2115;1981074;;ellipse;"#000000";1;circumchaetal_sg1l_noto-3_2;1981074;7;6
+2116;1981086;;ellipse;"#000000";1;circumchaetal_sg1l_noto-7_3;1981086;5;6
+2117;1981189;;ellipse;"#000000";1;circumchaetal_sg1l_noto-8_2;1981189;6;6
+2118;1981221;;ellipse;"#000000";1;EC_circumchaetal_sg1l_noto-8_3;1981221;4;6
+2119;1981249;;ellipse;"#000000";1;EC_circumchaetal_sg1l_noto-5_5;1981249;6;8
+2120;1981275;;ellipse;"#000000";1;EC_circumchaetal_sg1l_noto-6_5;1981275;3;6
+2121;1981304;;ellipse;"#000000";1;EC_circumchaetal_sg1l_noto-1_5;1981304;1;6
+2122;1981748;;ellipse;"#000000";1;basal lamina;1981748;2;1
+2123;1981762;;ellipse;"#000000";1;basal lamina;1981762;10;1
+2124;1982053;;ellipse;"#000000";1;chaeta_sg1l_noto-1;1982053;9;6
+2125;1982081;;ellipse;"#000000";1;hemichaetal_sg1l_noto-7_2;1982081;1;6
+2126;1982182;;ellipse;"#000000";1;hemichaetal_sg1l_noto-2_2;1982182;15;6
+2127;1982383;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-7_1;1982383;4;6
+2128;1982391;;ellipse;"#000000";1;basal lamina;1982391;5;6
+2129;1982442;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-6_2;1982442;7;6
+2130;1982447;;ellipse;"#000000";1;basal lamina;1982447;2;6
+2131;1982474;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-4_2;1982474;7;6
+2132;1982489;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-5_2;1982489;5;15
+2133;1982518;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-5_1;1982518;17;15
+2134;1982576;;ellipse;"#000000";1;ER_circumchaetal_sg1l_neuro-5_1;1982576;6;15
+2135;1982759;;ellipse;"#000000";1;circumchaetal_sg1r_noto-1_2;1982759;19;4
+2136;1982776;;ellipse;"#000000";1;noER_circumchaetal_sg1r_noto-2_2;1982776;4;4
+2137;1982842;;ellipse;"#000000";1;basal lamina;1982842;4;3
+2138;1982889;;ellipse;"#000000";1;hemichaetal_sg2l_noto-8_2;1982889;27;3
+2139;1982923;;ellipse;"#000000";1;hemichaetal_sg2l_noto-7_1;1982923;13;8
+2140;1982969;;ellipse;"#000000";1;basal lamina;1982969;4;6
+2141;1982979;;ellipse;"#000000";1;basal lamina;1982979;2;6
+2142;1982986;;ellipse;"#000000";1;basal lamina;1982986;2;9
+2143;1983036;;ellipse;"#000000";1;basal lamina;1983036;3;6
+2144;1983045;;ellipse;"#000000";1;basal lamina;1983045;2;6
+2145;1983059;;ellipse;"#000000";1;EC_circumchaetal_sg1l_neuro-4_5;1983059;3;6
+2146;1983073;;ellipse;"#000000";1;basal lamina;1983073;2;6
+2147;1983083;;ellipse;"#000000";1;basal lamina;1983083;4;2
+2148;1983166;;ellipse;"#000000";1;basal lamina;1983166;3;2
+2149;1983218;;ellipse;"#000000";1;EC_circumchaetal_sg2r_neuro-3_4;1983218;10;9
+2150;1983300;;ellipse;"#000000";1;chaetal_sac_cell_sg2r_noto_1;1983300;1;4
+2151;1983327;;ellipse;"#000000";1;chaeta_sg1r_noto-8;1983327;4;4
+2152;1983416;;ellipse;"#000000";1;hemichaetal_sg2r_noto-5_1;1983416;2;2
+2153;1983448;;ellipse;"#000000";1;basal lamina;1983448;3;7
+2154;1983459;;ellipse;"#000000";1;basal lamina;1983459;2;7
+2155;1983465;;ellipse;"#000000";1;CB_pigment_head pigmented 1983466;1983465;5;7
+2156;1983514;;ellipse;"#000000";1;hemichaetal_sg1r_noto-4_2;1983514;6;4
+2157;1983555;;ellipse;"#000000";1;hemichaetal_sg1r_noto-5_2;1983555;7;4
+2158;1983582;;ellipse;"#000000";1;chaeta_sg1r_noto-4;1983582;7;4
+2159;1983595;;ellipse;"#000000";1;hemichaetal_sg1r_noto-7_1;1983595;2;4
+2160;1983623;;ellipse;"#000000";1;circumchaetal_sg1r_noto-8_3;1983623;3;4
+2161;1983641;;ellipse;"#000000";1;noER_circumchaetal_sg1r_noto-8_4;1983641;1;4
+2162;1983657;;ellipse;"#000000";1;hemichaetal_sg1r_noto-6_1;1983657;3;4
+2163;1983664;;ellipse;"#000000";1;basal lamina;1983664;2;4
+2164;1983689;;ellipse;"#000000";1;chaeta_sg1r_noto-6;1983689;10;4
+2165;1983813;;ellipse;"#000000";1;hemichaetal_sg1r_neuro-3_2;1983813;14;4
+2166;1983869;;ellipse;"#000000";1;circumchaetal_sg1r_noto-7_3;1983869;2;4
+2167;1983920;;ellipse;"#000000";1;hemichaetal_sg1r_noto-4_1;1983920;7;4
+2168;1984018;;ellipse;"#000000";1;noER_circumchaetal_sg1r_noto-3_4;1984018;1;4
+2169;1984043;;ellipse;"#000000";1;EC_chaetal_sac_sg1r_noto_4;1984043;3;4
+2170;1984202;;ellipse;"#000000";1;basal lamina;1984202;2;4
+2171;1984226;;ellipse;"#000000";1;hemichaetal_sg1r_neuro-4_1;1984226;4;4
+2172;1984241;;ellipse;"#000000";1;hemichaetal_sg1r_neuro-7_2;1984241;7;4
+2173;1984306;;ellipse;"#000000";1;hemichaetal_sg1l_neuro-2_2;1984306;3;5
+2174;1984356;;ellipse;"#000000";1;basal lamina;1984356;2;6
+2175;1984461;;ellipse;"#000000";1;ER_circumchaetal_sg1l_neuro-4_3;1984461;3;6
+2176;1984541;;ellipse;"#000000";1;EC_circumchaetal_sg1l_neuro-7_5;1984541;6;6
+2177;1984580;;ellipse;"#000000";1;basal lamina;1984580;2;6
+2178;1984590;;ellipse;"#000000";1;circumacicular_sg1l_neuro_5;1984590;2;6
+2179;1984765;;ellipse;"#000000";1;hemichaetal_sg1l_noto-5_1;1984765;14;6
+2180;1984826;;ellipse;"#000000";1;hemichaetal_sg1l_noto-5_2;1984826;4;6
+2181;1984941;;ellipse;"#000000";1;basal lamina;1984941;3;6
+2182;1984948;;ellipse;"#000000";1;basal lamina;1984948;2;6
+2183;1985093;;ellipse;"#000000";1;circumchaetal_sg1r_neuro-5_3;1985093;9;4
+2184;1985287;;ellipse;"#000000";1;ecto fragment 1985288;1985287;1;3
+2185;1985695;;ellipse;"#000000";1;noER_circumchaetal_sg1r_neuro-5_4;1985695;2;4
+2186;1985712;;ellipse;"#000000";1;hemichaetal_sg1r_neuro-2_2;1985712;3;4
+2187;1985739;;ellipse;"#000000";1;basal lamina;1985739;5;10
+2188;1985772;;ellipse;"#000000";1;ER_circumchaetal_sg3l_neuro-4_1;1985772;11;1
+2189;1985800;;ellipse;"#000000";1;circumchaetal_sg3l_neuro-1_1;1985800;17;1
+2190;1985859;;ellipse;"#000000";1;basal lamina;1985859;2;10
+2191;1985866;;ellipse;"#000000";1;basal lamina;1985866;2;10
+2192;1985873;;ellipse;"#000000";1;EC_V_sg3r 1985874;1985873;1;10
+2193;1986009;;ellipse;"#000000";1;basal lamina;1986009;39;8
+2194;1986046;;ellipse;"#000000";1;basal lamina;1986046;4;8
+2195;1986619;;ellipse;"#000000";1;ecto fragment 1986620;1986619;1;5
+2196;1986737;;ellipse;"#000000";1;EC_V_sg0r 1986738;1986737;1;7
+2197;1986749;;ellipse;"#000000";1;EC_V_sg0r 1986750;1986749;1;7
+2198;1986770;;ellipse;"#000000";1;EC_V_sg0r 1986771;1986770;1;7
+2199;1986881;;ellipse;"#000000";1;meso 1986882;1986881;1;5
+2200;1986946;;ellipse;"#000000";1;EC_D_sg1l 1986947;1986946;1;6
+2201;1987127;;ellipse;"#000000";1;circumchaetal_sg1r_neuro-4_4;1987127;1;4
+2202;1987234;;ellipse;"#000000";1;EC_circumchaetal_sg1r_neuro-7_5;1987234;5;4
+2203;1987274;;ellipse;"#000000";1;EC_circumchaetal_sg1r_neuro-5_5;1987274;2;4
+2204;1987285;;ellipse;"#000000";1;EC_circumchaetal_sg1r_neuro-4_5;1987285;1;4
+2205;1987328;;ellipse;"#000000";1;EC_chaetal_sac_cell_sg1r_neuro-2;1987328;1;4
+2206;1987403;;ellipse;"#000000";1;basal lamina;1987403;5;4
+2207;1987438;;ellipse;"#000000";1;chaetal sac frag 1987439;1987438;1;3
+2208;1987444;;ellipse;"#000000";1;fragment hemichaetal_sg2l_noto-1_1;1987444;4;3
+2209;1987466;;ellipse;"#000000";1;chaetal sac fragment 1987467;1987466;1;3
+2210;1987478;;ellipse;"#000000";1;circumchaetal_sg2l_noto-3_3;1987478;7;3
+2211;1987490;;ellipse;"#000000";1;chaetal sac fragment 1987491;1987490;5;3
+2212;1987598;;ellipse;"#000000";1;fragment circumchaetal_sg2r_noto-1_3;1987598;12;2
+2213;1987779;;ellipse;"#000000";1;circumchaetal_sg2l_noto-4_3;1987779;5;3
+2214;1987796;;ellipse;"#000000";1;hemichaetal_sg2l_noto-4_2;1987796;11;3
+2215;1987824;;ellipse;"#000000";1;hemichaetal_sg2l_noto-5_1;1987824;3;3
+2216;1987837;;ellipse;"#000000";1;hemichaetal_sg2l_noto-5_2;1987837;4;3
+2217;1987843;;ellipse;"#000000";1;basal lamina;1987843;3;3
+2218;1987856;;ellipse;"#000000";1;circumchaetal_sg2l_noto-6_3;1987856;10;3
+2219;1987879;;ellipse;"#000000";1;hemichaetal_sg2l_noto-6_2;1987879;15;3
+2220;1987886;;ellipse;"#000000";1;basal lamina;1987886;2;3
+2221;1987894;;ellipse;"#000000";1;hemichaetal_sg2l_noto-9_2;1987894;28;3
+2222;1987922;;ellipse;"#000000";1;circumchaetal_sg2l_noto-9_3;1987922;18;3
+2223;1987951;;ellipse;"#000000";1;hemichaetal_sg2l_noto-10_1;1987951;14;3
+2224;1987978;;ellipse;"#000000";1;hemichaetal_sg2l_noto-6_1;1987978;2;3
+2225;1988010;;ellipse;"#000000";1;hemichaetal_sg2l_noto-7_2;1988010;2;8
+2226;1988029;;ellipse;"#000000";1;ER_circumchaetal_sg2l_noto-8_3;1988029;13;3
+2227;1988085;;ellipse;"#000000";1;hemichaetal_sg2l_noto-8_1;1988085;4;3
+2228;1988103;;ellipse;"#000000";1;basal lamina;1988103;2;3
+2229;1988110;;ellipse;"#000000";1;basal lamina;1988110;2;3
+2230;1988165;;ellipse;"#000000";1;circumchaetal_sg2l_noto-10_3;1988165;5;3
+2231;1988225;;ellipse;"#000000";1;hemichaetal_sg2l_noto-4_1;1988225;4;3
+2232;1988265;;ellipse;"#000000";1;circumchaetal_sg2l_neuro-1_2;1988265;5;3
+2233;1988349;;ellipse;"#000000";1;circumchaetal_sg2l_neuro-3_3;1988349;8;3
+2234;1988393;;ellipse;"#000000";1;hemichaetal_sg2l_neuro-4_1;1988393;13;3
+2235;1988424;;ellipse;"#000000";1;ER_circumchaetal_sg2l_neuro-5_3;1988424;7;3
+2236;1988444;;ellipse;"#000000";1;hemichaetal_sg2l_neuro-5_2;1988444;2;3
+2237;1988465;;ellipse;"#000000";1;hemichaetal_sg2l_neuro-5_1;1988465;2;3
+2238;1988596;;ellipse;"#000000";1;EC_V_sg3l 1988597;1988596;1;5
+2239;1988911;;ellipse;"#000000";1;ER_circumchaetal_sg2l_neuro-6_3;1988911;5;3
+2240;1988935;;ellipse;"#000000";1;hemichaetal_sg2l_neuro-6_2;1988935;2;3
+2241;1988966;;ellipse;"#000000";1;EC_circumchaetal_sg2l_neuro-7_5;1988966;5;9
+2242;1988984;;ellipse;"#000000";1;basal lamina;1988984;3;9
+2243;1988999;;ellipse;"#000000";1;basal lamina;1988999;3;9
+2244;1989037;;ellipse;"#000000";1;hemichaetal_sg2l_neuro-7_4;1989037;11;3
+2245;1989157;;ellipse;"#000000";1;basal lamina;1989157;3;9
+2246;1989260;;ellipse;"#000000";1;hemichaetal_sg2l_neuro-7_1;1989260;6;3
+2247;1989279;;ellipse;"#000000";1;hemichaetal_sg2l_neuro-4_2;1989279;4;3
+2248;1989285;;ellipse;"#000000";1;basal lamina;1989285;4;3
+2249;1989394;;ellipse;"#000000";1;hemichaetal_sg2l_neuro-3_1;1989394;1;3
+2250;1989451;;ellipse;"#000000";1;EC_chaetal_sac_sg2l_neuro-1;1989451;3;3
+2251;1989478;;ellipse;"#000000";1;hemichaetal_sg2l_noto-9_2;1989478;3;3
+2252;1989493;;ellipse;"#000000";1;circumacicular_sg2l_noto_1;1989493;52;3
+2253;1989538;;ellipse;"#000000";1;hemichaetal_sg2l_noto-2_1;1989538;1;3
+2254;1989552;;ellipse;"#000000";1;hemichaetal_sg2l_noto-3_2;1989552;1;3
+2255;1989591;;ellipse;"#000000";1;EC_circumchaetal_sg2l_noto-10_5;1989591;2;3
+2256;1989619;;ellipse;"#000000";1;EC_circumchaetal_sg2l_noto-4_5;1989619;3;3
+2257;1989730;;ellipse;"#000000";1;hemichaetal_sg2l_noto-3_1;1989730;2;3
+2258;1989736;;ellipse;"#000000";1;basal lamina;1989736;5;3
+2259;1989780;;ellipse;"#000000";1;EC_chaetal_ sac_sg2_noto 1989781;1989780;3;3
+2260;1989825;;ellipse;"#000000";1;EC_circumchaetal_sg2l_noto-5_5;1989825;2;9
+2261;1989959;;ellipse;"#000000";1;hemichaetal_sg2r_noto-1_1;1989959;5;2
+2262;1989965;;ellipse;"#000000";1;meso 1989966;1989965;1;2
+2263;1989986;;ellipse;"#000000";1;hemichaetal_sg2r_noto-1_2;1989986;8;2
+2264;1990020;;ellipse;"#000000";1;hemichaetal_sg2r_noto-2_1;1990020;2;2
+2265;1990036;;ellipse;"#000000";1;EC_circumchaetal_sg2r_noto-3_4;1990036;1;2
+2266;1990051;;ellipse;"#000000";1;circumchaetal_sg2r_noto-3_2;1990051;5;2
+2267;1990097;;ellipse;"#000000";1;fragment circumchaetal_sg2r_noto-3_3;1990097;6;2
+2268;1990191;;ellipse;"#000000";1;EC_circumchaetal_sg2r_noto-4_5;1990191;2;2
+2269;1990218;;ellipse;"#000000";1;circumchaetal_sg2r_noto-4_3;1990218;14;2
+2270;1990240;;ellipse;"#000000";1;basal lamina;1990240;3;2
+2271;1990271;;ellipse;"#000000";1;hemichaetal_sg2r_noto-4_2;1990271;18;2
+2272;1990308;;ellipse;"#000000";1;EC_circumchaetal_sg2r_noto-5_5;1990308;3;0
+2273;1990331;;ellipse;"#000000";1;hemichaetal_sg2r_noto-5_2;1990331;8;2
+2274;1990363;;ellipse;"#000000";1;hemichaetal_sg2r_noto-4_1;1990363;9;2
+2275;1990390;;ellipse;"#000000";1;chaetal sac fragment 1990391;1990390;1;2
+2276;1990405;;ellipse;"#000000";1;fragment circumchaetal_sg2r_noto-6_2;1990405;12;2
+2277;1990433;;ellipse;"#000000";1;basal lamina;1990433;5;2
+2278;1990449;;ellipse;"#000000";1;noER_circumchaetal_sg2r_noto-7_3;1990449;5;2
+2279;1990454;;ellipse;"#000000";1;basal lamina;1990454;2;2
+2280;1990477;;ellipse;"#000000";1;circumchaetal_sg2r_noto-7_2;1990477;7;2
+2281;1990575;;ellipse;"#000000";1;hemichaetal_sg2r_noto-8_1;1990575;3;2
+2282;1990601;;ellipse;"#000000";1;EC_circumchaetal_sg2r_noto-9_5;1990601;2;9
+2283;1990679;;ellipse;"#000000";1;hemichaetal_sg2r_noto-9_2;1990679;9;2
+2284;1990704;;ellipse;"#000000";1;hemichaetal_sg2r_noto-9_1;1990704;4;2
+2285;1990757;;ellipse;"#000000";1;hemichaetal_sg2r_noto-10_2;1990757;13;2
+2286;1990794;;ellipse;"#000000";1;hemichaetal_sg2r_noto-10_1;1990794;2;2
+2287;1990846;;ellipse;"#000000";1;circumchaetal_sg2r_noto-6_1;1990846;12;2
+2288;1990928;;ellipse;"#000000";1;hemichaetal_sg2r_noto-2_2;1990928;9;2
+2289;1990975;;ellipse;"#000000";1;basal lamina;1990975;5;2
+2290;1991038;;ellipse;"#000000";1;EC_chaetal_sac_sg2r_noto-2;1991038;2;2
+2291;1991058;;ellipse;"#000000";1;chaetal_sac_cell_sg2r_noto-4;1991058;2;9
+2292;1991159;;ellipse;"#000000";1;EC_chaetal_sac_sg2r_noto-3;1991159;6;2
+2293;1991204;;ellipse;"#000000";1;circumchaetal_sg2r_neuro-3_2;1991204;15;2
+2294;1991248;;ellipse;"#000000";1;circumchaetal_sg2r_neuro-1_3;1991248;12;2
+2295;1991346;;ellipse;"#000000";1;EC_V_sg2r 1991347;1991346;1;2
+2296;1991429;;ellipse;"#000000";1;basal lamina;1991429;5;2
+2297;1991456;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-2_1;1991456;2;9
+2298;1991471;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-10_2;1991471;14;9
+2299;1991540;;ellipse;"#000000";1;noER_circumchaetal_sg2r_neuro-3_3;1991540;3;9
+2300;1991615;;ellipse;"#000000";1;noER_circumchaetal_sg2r_neuro-4_4;1991615;1;2
+2301;1991620;;ellipse;"#000000";1;basal lamina;1991620;2;2
+2302;1991714;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-6_2;1991714;9;9
+2303;1991797;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-8_1;1991797;1;2
+2304;1991811;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-8_2;1991811;2;2
+2305;1991875;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-10_1;1991875;1;9
+2306;1991934;;ellipse;"#000000";1;hemichaetal_sg2r_neuro-4_1;1991934;2;2
+2307;1992051;;ellipse;"#000000";1;noER_circumchaetal_sg3r_noto-1_4;1992051;4;0
+2308;1992114;;ellipse;"#000000";1;basal lamina;1992114;2;0
+2309;1992141;;ellipse;"#000000";1;hemichaetal_sg3r_noto-2_1;1992141;8;0
+2310;1992178;;ellipse;"#000000";1;hemichaetal_sg3r_noto-1_1;1992178;9;0
+2311;1992224;;ellipse;"#000000";1;noER_circumchaetal_sg3r_noto-2_4;1992224;2;0
+2312;1992242;;ellipse;"#000000";1;EC_circumchaetal_sg3r_noto-3_4;1992242;2;0
+2313;1992313;;ellipse;"#000000";1;circumchaetal_sg3r_noto-3_2;1992313;27;0
+2314;1992407;;ellipse;"#000000";1;basal lamina;1992407;2;0
+2315;1992417;;ellipse;"#000000";1;EC_circumchaetal_sg3r_noto-5_5;1992417;3;0
+2316;1992448;;ellipse;"#000000";1;basal lamina;1992448;11;0
+2317;1992455;;ellipse;"#000000";1;ER_circumchaetal_sg3r_noto-5_3;1992455;15;0
+2318;1992486;;ellipse;"#000000";1;EC_circumchaetal_sg3r_noto-6_5;1992486;1;0
+2319;1992544;;ellipse;"#000000";1;noER_circumchaetal_sg3r_noto-7_4;1992544;2;0
+2320;1992601;;ellipse;"#000000";1;circumchaetal_sg3r_noto-8_3;1992601;2;0
+2321;1992619;;ellipse;"#000000";1;hemichaetal_sg3r_noto-8_2;1992619;2;0
+2322;1992636;;ellipse;"#000000";1;EC_circumchaetal_sg3r_noto-9_5;1992636;2;0
+2323;1992746;;ellipse;"#000000";1;ER_circumchaetal_sg3r_noto-9_3;1992746;2;0
+2324;1992795;;ellipse;"#000000";1;hemichaetal_sg3r_neuro-2_2;1992795;2;10
+2325;1992886;;ellipse;"#000000";1;EC_circumchaetal_sg3r_neuro-1_4;1992886;14;10
+2326;1992969;;ellipse;"#000000";1;hemichaetal_sg3r_neuro-3_1;1992969;1;10
+2327;1992981;;ellipse;"#000000";1;circumchaetal_sg3r_neuro-1_2;1992981;13;10
+2328;1992985;;ellipse;"#000000";1;noER_circumchaetal_sg3r_neuro-1_3;1992985;2;10
+2329;1993335;;ellipse;"#000000";1;hemichaetal_sg3r_neuro-6_1;1993335;6;10
+2330;1993568;;ellipse;"#000000";1;circumchaetal_sg3l_neuro-2_3;1993568;13;1
+2331;1993573;;ellipse;"#000000";1;basal lamina;1993573;4;1
+2332;1993595;;ellipse;"#000000";1;basal lamina;1993595;5;1
+2333;1993765;;ellipse;"#000000";1;noER_circumchaetal_sg3l_neuro-4_1;1993765;2;1
+2334;1993819;;ellipse;"#000000";1;noER_circumchaetal_sg3l_neuro-5_4;1993819;1;1
+2335;1993972;;ellipse;"#000000";1;hemichaetal_sg3l_neuro-8_2;1993972;2;12
+2336;1994005;;ellipse;"#000000";1;noER_circumchaetal_sg3l_neuro-9_4;1994005;1;1
+2337;1994017;;ellipse;"#000000";1;ER_circumchaetal_sg3l_neuro-9_3;1994017;1;12
+2338;1994089;;ellipse;"#000000";1;hemichaetal_sg3l_neuro-2_1;1994089;1;1
+2339;1994162;;ellipse;"#000000";1;circumchaetal_sg3l_noto-1_1;1994162;12;1
+2340;1994173;;ellipse;"#000000";1;circumchaetal_sg3l_noto-5_3;1994173;19;1
+2341;1994228;;ellipse;"#000000";1;hemichaetal_sg3l_noto-3_1;1994228;21;1
+2342;1994262;;ellipse;"#000000";1;circumchaetal_sg3l_noto-2_3;1994262;8;1
+2343;1994402;;ellipse;"#000000";1;hemichaetal_sg3l_noto-4_1;1994402;4;1
+2344;1994423;;ellipse;"#000000";1;hemichaetal_sg3l_noto-4_2;1994423;2;1
+2345;1994460;;ellipse;"#000000";1;noER_circumchaetal_sg3l_noto-5_4;1994460;1;1
+2346;1994569;;ellipse;"#000000";1;EC_chaetal_sac_sg3l_noto_2;1994569;4;1
+2347;1994598;;ellipse;"#000000";1;hemichaetal_sg3l_noto-7_1;1994598;4;1
+2348;1994626;;ellipse;"#000000";1;ecto fragment 1994627;1994626;1;1
+2349;1994689;;ellipse;"#000000";1;hemichaetal_sg3l_noto-8_2;1994689;2;1
+2350;1994709;;ellipse;"#000000";1;EC_circumchaetal_sg3l_noto-9_5;1994709;3;1
+2351;1994745;;ellipse;"#000000";1;ER_circumchaetal_sg3l_noto-9_3;1994745;2;1
+2352;1994764;;ellipse;"#000000";1;hemichaetal_sg3l_noto-9_2;1994764;1;1
+2353;1994894;;ellipse;"#000000";1;basal lamina;1994894;7;10
+2354;1995167;;ellipse;"#000000";1;basal lamina;1995167;2;6
+2355;1995221;;ellipse;"#000000";1;circumacicular_sg1l_neuro_1;1995221;39;6
+2356;1995250;;ellipse;"#000000";1;circumacicular_sg1r_neuro_1;1995250;31;4
+2357;1995570;;ellipse;"#000000";1;circumacicular_sg1l_noto_1;1995570;51;6
+2358;1995586;;ellipse;"#000000";1;circumacicular_sg1r_noto_1;1995586;12;4
+2359;1995624;;ellipse;"#000000";1;circumacicular_sg2l_neuro_1;1995624;23;3
+2360;1995697;;ellipse;"#000000";1;circumacicular_sg2r_noto_1;1995697;34;2
+2361;1995821;;ellipse;"#000000";1;basal lamina;1995821;3;1
+2362;1995832;;ellipse;"#000000";1;basal lamina;1995832;3;1
+2363;1995852;;ellipse;"#000000";1;circumacicular_sg3l_noto_1;1995852;49;1
+2364;1996731;;ellipse;"#000000";1;circumacicular_sg2r_neuro_1;1996731;48;2
+2365;1997057;;ellipse;"#000000";1;basal lamina;1997057;5;8
+2366;1997310;;ellipse;"#000000";1;ecto frag 1997311;1997310;1;1
+2367;1997421;;ellipse;"#000000";1;EC_V_sg3r 1997422;1997421;1;11
+2368;1997612;;ellipse;"#000000";1;pygidial_pigment_cell 1997613;1997612;2;1
+2369;1997982;;ellipse;"#000000";1;EC_V_sg3r 1997983;1997982;1;11
+2370;1998262;;ellipse;"#000000";1;basal lamina;1998262;6;0
+2371;1999563;;ellipse;"#000000";1;basal lamina;1999563;5;3
+2372;1999857;;ellipse;"#000000";1;basal lamina;1999857;3;10
+2373;1999901;;ellipse;"#000000";1;basal lamina;1999901;6;10
+2374;1999943;;ellipse;"#000000";1;EC_V_sg1r 1568128;1999943;9;4
+2375;2000533;;ellipse;"#000000";1;hemichaetal_sg1r_neuro-4_2;2000533;3;4
+2376;2000575;;ellipse;"#000000";1;hemichaetal_sg1r_neuro-5_1;2000575;6;4
+2377;2000584;;ellipse;"#000000";1;basal lamina;2000584;3;4
+2378;2000687;;ellipse;"#000000";1;EC_circumchaetal_sg1r_neuro-6_5;2000687;2;4
+2379;2001807;;ellipse;"#000000";1;EC_V_pygr 2001808;2001807;1;10
+2380;2001966;;ellipse;"#000000";1;spinGlandSheet_sg3l2;2001966;4;1
+2381;2002047;;ellipse;"#000000";1;basal lamina;2002047;6;5
+2382;2002212;;ellipse;"#000000";1;noER_circumchaetal_sg1l_neuro-2_4;2002212;4;6
+2383;2002403;;ellipse;"#000000";1;hemichaetal_sg1l_noto-6_2;2002403;2;6
+2384;2002472;;ellipse;"#000000";1;basal lamina;2002472;2;6
+2385;2002553;;ellipse;"#000000";1;fragment 2002554;2002553;1;9
+2386;2003955;;ellipse;"#000000";1;fragment circumchaetal_sg2l_neuro-1_2;2003955;4;3
+2387;2004168;;ellipse;"#000000";1;basal lamina;2004168;3;0
+2388;2005791;;ellipse;"#000000";1;noER_circumchaetal_sg1l_noto-4_4;2005791;6;6
+2389;2008501;;ellipse;"#000000";1;neuron fragment 2008502;2008501;1;3
+2390;2009728;;ellipse;"#000000";1;basal lamina;2009728;2;1
+2391;2009763;;ellipse;"#000000";1;basal lamina;2009763;2;1
+2392;2009867;;ellipse;"#000000";1;EC_D_sg1r 2009868;2009867;4;4
+2393;2010379;;ellipse;"#000000";1;EC_V_sg1r 2010380;2010379;1;4
+2394;2011079;;ellipse;"#000000";1;EC_V_sg1r 2011080;2011079;7;4
+2395;2011168;;ellipse;"#000000";1;EC_V_sg3r 2011169;2011168;5;10
+2396;2011436;;ellipse;"#000000";1;EC_D_sg1r 2011437;2011436;7;4
+2397;2012939;;ellipse;"#000000";1;basal lamina;2012939;3;17
+2398;2014423;;ellipse;"#000000";1;basal lamina;2014423;3;1
+2399;2014458;;ellipse;"#000000";1;basal lamina;2014458;8;3
+2400;2014508;;ellipse;"#000000";1;ecto fragment 2014509;2014508;1;2
+2401;2028024;;ellipse;"#000000";1;basal lamina;2028024;5;5
+2402;2028064;;ellipse;"#000000";1;EC_V_sg2r 2028065;2028064;7;2
+2403;2029536;;ellipse;"#000000";1;EC_V_sg2r 2029537;2029536;1;11
+2404;2033873;;ellipse;"#000000";1;basal lamina;2033873;3;5
+2405;2034268;;ellipse;"#000000";1;EC_V_sg3r 2034269;2034268;1;1
+2406;2045799;;ellipse;"#000000";1;EC_V_sg2l 2045800;2045799;2;9
+2407;2100601;;ellipse;"#000000";1;EC_V_sg3l 2100602;2100601;1;1
+2408;2112212;;ellipse;"#000000";1;EC_chaetal_sac_sg2l_neuro-1;2112212;8;9
+2409;2141679;;ellipse;"#000000";1;basal lamina;2141679;8;6
+2410;2141686;;ellipse;"#000000";1;basal lamina;2141686;36;6
+2411;2141697;;ellipse;"#000000";1;basal lamina;2141697;13;7
+2412;2141702;;ellipse;"#000000";1;basal lamina;2141702;53;9
+2413;2141707;;ellipse;"#000000";1;basal lamina;2141707;29;9
+2414;2141714;;ellipse;"#000000";1;basal lamina;2141714;14;9
+2415;2141719;;ellipse;"#000000";1;basal lamina;2141719;17;9
+2416;2141776;;ellipse;"#000000";1;ecto fragment;2141776;1;1
+2417;2141784;;ellipse;"#000000";1;basal lamina;2141784;19;2
+2418;2141801;;ellipse;"#000000";1;basal lamina;2141801;47;1
+2419;2141806;;ellipse;"#000000";1;basal lamina;2141806;29;1
+2420;2141830;;ellipse;"#000000";1;basal lamina;2141830;17;1
+2421;2141863;;ellipse;"#000000";1;basal lamina;2141863;23;1
+2422;2141871;;ellipse;"#000000";1;basal lamina;2141871;28;5
+2423;2141953;;ellipse;"#000000";1;basal lamina;2141953;7;2
+2424;2141970;;ellipse;"#000000";1;basal lamina;2141970;25;5
+2425;2141981;;ellipse;"#000000";1;basal lamina;2141981;19;5
+2426;2141991;;ellipse;"#000000";1;basal lamina;2141991;11;11
+2427;2142091;;ellipse;"#000000";1;basal lamina;2142091;16;5
+2428;2142109;;ellipse;"#000000";1;basal lamina;2142109;7;11
+2429;2142138;;ellipse;"#000000";1;basal lamina;2142138;10;11
+2430;2142183;;ellipse;"#000000";1;basal lamina;2142183;5;7
+2431;2142195;;ellipse;"#000000";1;basal lamina;2142195;5;7
+2432;2144126;;ellipse;"#000000";1;basal lamina;2144126;4;1
+2433;2144261;;ellipse;"#000000";1;basal lamina;2144261;2;0
+2434;2144275;;ellipse;"#000000";1;basal lamina;2144275;6;10
+2435;2144299;;ellipse;"#000000";1;basal lamina;2144299;3;10
+2436;2144318;;ellipse;"#000000";1;basal lamina;2144318;2;1
+2437;2144341;;ellipse;"#000000";1;basal lamina;2144341;5;10
+2438;2144356;;ellipse;"#000000";1;basal lamina;2144356;2;10
+2439;2144444;;ellipse;"#000000";1;basal lamina;2144444;4;2
+2440;2144462;;ellipse;"#000000";1;basal lamina;2144462;7;2
+2441;2144527;;ellipse;"#000000";1;basal lamina;2144527;20;8
+2442;2144532;;ellipse;"#000000";1;basal lamina;2144532;21;8
+2443;2144537;;ellipse;"#000000";1;basal lamina;2144537;37;8
+2444;2144550;;ellipse;"#000000";1;basal lamina;2144550;3;8
+2445;2144612;;ellipse;"#000000";1;basal lamina;2144612;18;5
+2446;2144644;;ellipse;"#000000";1;basal lamina;2144644;25;11
+2447;2144703;;ellipse;"#000000";1;basal lamina;2144703;20;8
+2448;2144742;;ellipse;"#000000";1;basal lamina;2144742;11;0
+2449;2144773;;ellipse;"#000000";1;basal lamina;2144773;25;0
+2450;2144780;;ellipse;"#000000";1;basal lamina;2144780;10;0
+2451;2144803;;ellipse;"#000000";1;basal lamina;2144803;2;4
+2452;2144873;;ellipse;"#000000";1;basal lamina;2144873;8;6
+2453;2145002;;ellipse;"#000000";1;basal lamina;2145002;2;4
+2454;2145046;;ellipse;"#000000";1;basal lamina;2145046;4;4
+2455;2145754;;ellipse;"#000000";1;basal lamina;2145754;2;2
+2456;2145964;;ellipse;"#000000";1;basal lamina;2145964;14;3
+2457;2145995;;ellipse;"#000000";1;EC_V_sg2r;2145995;1;2
+2458;2146101;;ellipse;"#000000";1;basal lamina;2146101;2;2
+2459;2146133;;ellipse;"#000000";1;basal lamina;2146133;4;2
+2460;2146164;;ellipse;"#000000";1;basal lamina;2146164;4;3
+2461;2146190;;ellipse;"#000000";1;basal lamina;2146190;4;3
+2462;2146336;;ellipse;"#000000";1;basal lamina;2146336;5;3
+2463;2146358;;ellipse;"#000000";1;basal lamina;2146358;3;3
+2464;2146510;;ellipse;"#000000";1;basal lamina;2146510;4;9
+2465;2146563;;ellipse;"#000000";1;basal lamina;2146563;7;3
+2466;2147577;;ellipse;"#000000";1;basal lamina;2147577;13;1
+2467;2148306;;ellipse;"#000000";1;basal lamina;2148306;5;3
+2468;2148367;;ellipse;"#000000";1;basal lamina;2148367;9;1
+2469;2148403;;ellipse;"#000000";1;basal lamina;2148403;4;0
+2470;2148656;;ellipse;"#000000";1;basal lamina;2148656;5;10
+2471;2148797;;ellipse;"#000000";1;basal lamina;2148797;3;3
+2472;2148951;;ellipse;"#000000";1;basal lamina;2148951;2;0
+2473;2149226;;ellipse;"#000000";1;basal lamina;2149226;6;0
+2474;2149308;;ellipse;"#000000";1;basal lamina;2149308;4;1
+2475;2149318;;ellipse;"#000000";1;EC_V_sg3l;2149318;1;1
+2476;2149456;;ellipse;"#000000";1;basal lamina;2149456;3;1
+2477;2149565;;ellipse;"#000000";1;basal lamina;2149565;2;1
+2478;2149745;;ellipse;"#000000";1;basal lamina;2149745;4;10
+2479;2149760;;ellipse;"#000000";1;basal lamina;2149760;3;8
+2480;2149830;;ellipse;"#000000";1;basal lamina;2149830;3;8
+2481;2156802;;ellipse;"#000000";1;basal lamina;2156802;3;8
+2482;2156927;;ellipse;"#000000";1;basal lamina;2156927;2;7
+2483;2159812;;ellipse;"#000000";1;basal lamina;2159812;2;7
+2484;2159892;;ellipse;"#000000";1;EC_D_sg1r;2159892;3;0
+2485;2159945;;ellipse;"#000000";1;basal lamina;2159945;3;2
+2486;2159959;;ellipse;"#000000";1;basal lamina;2159959;5;2
+2487;2160086;;ellipse;"#000000";1;basal lamina;2160086;6;7
+2488;2160215;;ellipse;"#000000";1;basal lamina;2160215;2;7
+2489;2166046;;ellipse;"#000000";1;basal lamina;2166046;1;11
+2490;2166058;;ellipse;"#000000";1;basal lamina;2166058;2;7
+2491;2184018;;ellipse;"#000000";1;EC_V_pygr 2184019;2184018;1;11
+2492;2202235;;ellipse;"#000000";1;basal lamina;2202235;4;7
+2493;2212076;;ellipse;"#000000";1;basal lamina;2212076;6;7
+2494;2234132;;ellipse;"#000000";1;ecto frag 2234133;2234132;2;7
+2495;2234174;;ellipse;"#000000";1;basal lamina;2234174;3;8
+2496;2234563;;ellipse;"#000000";1;basal lamina;2234563;4;2
+2497;2234752;;ellipse;"#000000";1;basal lamina;2234752;3;8
+2498;2234840;;ellipse;"#000000";1;basal lamina;2234840;2;6
+2499;2235861;;ellipse;"#000000";1;basal lamina;2235861;4;0
+2500;2235903;;ellipse;"#000000";1;basal lamina;2235903;18;1
+2501;2235963;;ellipse;"#000000";1;basal lamina;2235963;2;1
+2502;2236109;;ellipse;"#000000";1;EC_D_headr 2236110;2236109;1;13
+2503;2236389;;ellipse;"#000000";1;basal lamina;2236389;6;10
+2504;2236430;;ellipse;"#000000";1;basal lamina;2236430;7;0
+2505;2236455;;ellipse;"#000000";1;basal lamina;2236455;3;4
+2506;2236733;;ellipse;"#000000";1;basal lamina;2236733;5;2
+2507;2236971;;ellipse;"#000000";1;basal lamina;2236971;3;0
+2508;2236992;;ellipse;"#000000";1;basal lamina;2236992;5;9
+2509;2237037;;ellipse;"#000000";1;basal lamina;2237037;4;0
+2510;2237059;;ellipse;"#000000";1;basal lamina;2237059;5;5
+2511;2237264;;ellipse;"#000000";1;basal lamina;2237264;5;0
+2512;2237288;;ellipse;"#000000";1;basal lamina;2237288;3;10
+2513;2237335;;ellipse;"#000000";1;basal lamina;2237335;3;9
+2514;2237446;;ellipse;"#000000";1;basal lamina;2237446;17;8
+2515;2237460;;ellipse;"#000000";1;basal lamina;2237460;14;0
+2516;2237488;;ellipse;"#000000";1;basal lamina;2237488;22;9
+2517;2237504;;ellipse;"#000000";1;basal lamina;2237504;11;1
+2518;2237517;;ellipse;"#000000";1;basal lamina;2237517;17;0
+2519;2237530;;ellipse;"#000000";1;basal lamina;2237530;8;0
+2520;2237579;;ellipse;"#000000";1;basal lamina;2237579;17;5
+2521;2237633;;ellipse;"#000000";1;basal lamina;2237633;17;0
+2522;2242572;;ellipse;"#000000";1;EC_V_sg1l 2242573;2242572;5;5
+2523;2254041;;ellipse;"#000000";1;basal lamina;2254041;1;18
