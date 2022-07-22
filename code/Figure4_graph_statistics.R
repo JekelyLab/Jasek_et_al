@@ -738,9 +738,9 @@ Fig4 <- plot_grid(Fig4A,Fig4B,Fig4C,Fig4G,Fig4H,Fig4D,Fig4E,Fig4F,
                     label_fontfamily = "sans", label_fontface = "plain") + 
     theme(plot.margin = unit(c(1, 1, 1, 3), units = "pt"))
   
-ggsave("figures/Figure_4.pdf", limitsize = FALSE, 
+ggsave("figures/Figure_4b.pdf", limitsize = FALSE, 
          units = c("px"), Fig4, width = 2600, height = 1400)
-ggsave("figures/Figure_4.png", limitsize = FALSE, 
+ggsave("figures/Figure_4b.png", limitsize = FALSE, 
          units = c("px"), Fig4, width = 2600, height = 1400)
 
 
