@@ -1,3 +1,49 @@
+library(natverse)
+
+source("~/R/conn.R")
+
+
+# get info about all desmo connectors in the Naomi project
+all_desmo_connectors <- catmaid_fetch(path = "11/connectors/", body = list(relation_type="desmosome_with", with_partners="true"))
+
+# extract ids of desmo connectors
+all_desmo_ids <- sapply(all_desmo_connectors$connectors, "[[", 1)
+
+# find skids connected to the desmosomes
+partners1 <- as.data.frame(sapply(all_desmo_connectors$partners, "[[", 1))
+partners1 <- as.vector(sapply(partners1, "[[", 3))
+
+partners2 <- as.data.frame(sapply(all_desmo_connectors$partners, "[[", 1))
+partners2 <- as.vector(sapply(partners2, "[[", 3))
+
+all_skids <- unique(c(partners1, partners2))
+
+
+df <- data.frame(matrix(ncol = 3, nrow = 0))
+col_labels <- c("skid1", "skid2", "weight")
+colnames(df) <- col_labels
+
+for (i in (1:(length(all_desmo_conenctors_partners))) {
+  skid1 <- all_desmo_connectors$partners[[i]][[1]][[3]]
+  skid2 <- all_desmo_connectors$partners[[i]][[2]][[3]]
+  same_row <- df[df$skid1 == skid1 & df$skid2 == skid2, "weight" ]
+  also_same_row <- df[df$skid1 == skid2 & df$skid2 == skid1, "weight"]
+  if (length(same_row) != 0) {
+    new_weight <- same_row+1
+    df <- within(df, weight[skid1 == skid1 & skid2 == skid2] <- new_weight )
+  }
+  else if (length(also_same_row) != 0) {
+    new_weight <- also_same_row+1
+    df <- within(df, weight[skid1 == skid2 & skid2 == skid1] <- new_weight )
+  }
+  else {
+    df[nrow(df) + 1,] = c(skid1,skid2,1)
+  }
+}
+df
+
+
+
 skids_from_connector <- function(connector_id, pid) {
   # TODO: make this work for synapses with multiple post synaptic partners
   # but I don't care about synapses right now
