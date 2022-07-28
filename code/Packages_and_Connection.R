@@ -25,7 +25,9 @@ library(colorspace)   ## hsv colorspace manipulations
 
 library(png)
 library(patchwork)
-
+library(tidygraph)
+library(rgexf)
+library(RColorBrewer)
 
 #create directory for R-generated pictures for figure panels (ignored by git)
 dir.create("pictures")
