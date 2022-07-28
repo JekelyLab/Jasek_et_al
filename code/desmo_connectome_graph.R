@@ -54,7 +54,7 @@ E(desmo_conn_graph)
 
 #clustering with Leiden algorithm
 partition <- leiden(desmo_conn_graph, weights = E(desmo_conn_graph)$weight, 
-                    partition_type = "RBConfigurationVertexPartition",
+                    partition_type = "ModularityVertexPartition",
                     resolution_parameter = 1,
                     n_iterations = -1, seed = 42)
 max(partition)
@@ -170,8 +170,6 @@ for(i in seq_along(skids)){
 }
 
 
-desmo_conn_graph.tb %>%
-  select(name, partition, group, color, skid)
 
 #add type of cell to node$group (can be used for visualisation)
 desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
@@ -181,4 +179,74 @@ desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
   mutate(name = unlist(cell_names)) %>%
   mutate(segment = unlist(segment_of_cell)) %>%
   mutate(side = unlist(side_of_cell))
+
+
+# VisNetwork conversion ---------------------------------------------------
+
+{
+  #convert to visNetwork graph
+  conn_graph.visn <- toVisNetworkData(as.igraph(desmo_conn_graph.tb))  
+  
+  ## copy column "weight" to new column "value" in list "edges"
+  conn_graph.visn$edges$value <- conn_graph.visn$edges$weight
+  
+  #color will be assigned by group (type of cell)
+  #visGroups - $nodes$color takes precedence
+  
+  #save vis graph with annotations as R data file and txt file printed with dput() to get an exact copy
+  saveRDS(conn_graph.visn, "supplements/desmo_connectome_graph.rds")
+  writeLines(capture.output(dput(conn_graph.visn)), "supplements/desmo_connectome_graph.txt")
+}
+
+# plot graph with coordinates from gephi ----------------------------------
+
+{
+  coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
+  
+  visNet2 <- visNetwork(conn_graph.visn$nodes,conn_graph.visn$edges) %>% 
+    visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
+    visEdges(smooth = list(type = 'curvedCW', roundness=0),
+             scaling=list(min=1, max=25),
+             color = list(inherit=TRUE, opacity=0.7),
+             arrows = list(to = list(enabled = TRUE, 
+                                     scaleFactor = 0.5, type = 'arrow'))) %>%
+    visNodes(borderWidth=0.3, 
+             color = list(border='black'),
+             opacity = 1, 
+             font = list(size = 20)) %>%
+    visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
+                                       algorithm = 'hierarchical',labelOnly=FALSE), 
+               width = 500, height = 500, autoResize = FALSE) %>%
+    visInteraction(dragNodes = TRUE, dragView = TRUE,
+                   zoomView = TRUE, hover=TRUE,
+                   multiselect=TRUE) %>%
+    addFontAwesome() %>%
+    visEvents(selectNode  = "function(e){
+            var label_info = this.body.data.nodes.get({
+            fields: ['label', 'label_long'],
+            filter: function (item) {
+            return item.id === e.node
+            },
+            returnType :'Array'
+            });
+            this.body.data.nodes.update({id: e.node, label : label_info[0].label_long, label_long : label_info[0].label});
+            }") %>% 
+    visEvents(blurNode  = "function(e){
+            var label_info = this.body.data.nodes.get({
+            fields: ['label', 'label_long'],
+            filter: function (item) {
+            return item.id === e.node
+            },
+            returnType :'Array'
+            });
+            this.body.data.nodes.update({id: e.node, label : label_info[0].label_long, label_long : label_info[0].label});
+  }")
+  
+  #save as html
+  saveNetwork(visNet2, "pictures/Full_desmo_connectome_modules.html", selfcontained = TRUE)
+  webshot2::webshot(url="pictures/Full_desmo_connectome_modules.html",
+                    file="pictures/Full_desmo_connectome_modules_webshot.png",
+                    vwidth = 550, vheight = 550, #define the size of the browser window
+                    cliprect = c(50, 60, 480, 480), zoom=8, delay = 5)
+}
 
