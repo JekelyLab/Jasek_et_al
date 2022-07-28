@@ -28,6 +28,7 @@ library(patchwork)
 library(tidygraph)
 library(rgexf)
 library(RColorBrewer)
+library(visNetwork)
 
 #create directory for R-generated pictures for figure panels (ignored by git)
 dir.create("pictures")
