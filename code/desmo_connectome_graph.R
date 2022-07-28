@@ -35,21 +35,42 @@ V(g)$name
 #list edges
 E(g)
 
-#convert back to igraph to reduce redundancy (too complicated in tidygraph)
-g <- as.igraph(g)
+# check connected components  ---------------------------
+cl <- components(g)
+#the largest subnetwork is membership 1
+length(which(cl$membership == 1))
+
+#create a new graph only from the largest connected component
+g.largest = induced_subgraph(g, which(cl$membership == 1))
 
 #assign weight of 1 to each edge
-E(g)$weight = 1
+E(g.largest)$weight = 1
 
 #sum edges between the same nodes with simplify
-desmo_conn_graph <- igraph::simplify(g, remove.loops = FALSE,
+desmo_conn_graph <- igraph::simplify(g.largest, remove.loops = FALSE,
             edge.attr.comb = list(weight = "sum", function(x) length(x)) )
 
 E(desmo_conn_graph)
 
+#clustering with Leiden algorithm
+partition <- leiden(desmo_conn_graph, weights = E(desmo_conn_graph)$weight, 
+                    partition_type = "RBConfigurationVertexPartition",
+                    resolution_parameter = 1,
+                    n_iterations = -1, seed = 42)
+max(partition)
+
+#define colors
+blues <- brewer.pal(9, 'Blues')
+col=c(brewer.pal(12, 'Paired'), sample(blues, (max(partition)-12), replace=TRUE))
+
+#assign partition value and color to nodes
+# If vertices are in the same cluster/partition, give them the same colour
 #convert to tidy graph
 desmo_conn_graph.tb <- desmo_conn_graph %>%
-  as_tbl_graph()
+  as_tbl_graph() %>%
+  activate(nodes) %>%
+  mutate(partition = partition) %>%
+  mutate(color = col[partition])
 
 
 # export graph for gephi to do force field layout -------------------------
@@ -59,14 +80,13 @@ gexf_data <- rgexf::igraph.to.gexf(desmo_conn_graph.tb)
 # Write the network into a gexf (Gephi) file
 write.gexf(gexf_data, output = "data/full_desmo_connectome_graph.gexf")
 
-
 # read gexf file ----------------------------------------------------------
 
 #read the gephi connectome file with nodes positioned by force field clustering 
 #at gexf export, positions were normalised (0,1)
 
 #import gephi file (will be an undirected graph)
-conn_gexf <- rgexf::read.gexf("data/full_connectome_force_layout.gexf")
+conn_gexf <- rgexf::read.gexf("data/full_desmo_connectome_force_layout.gexf")
 
 #get coordinates from imported gephi file
 coords <- as_tibble(x = conn_gexf$nodesVizAtt$position$x) %>%
@@ -104,7 +124,7 @@ length(cell_names)
 #iterate through skid list, get annotations for the first skid in every cell type
 #check for the presence of the annotations and add the annotation to the type_of_cell list
 type_of_cell <- list()
-annot_to_search <- c("muscle", "epidermnal_cell", "basal lamina", 
+annot_to_search <- c("muscle", "epithelia_cell", "basal lamina", 
                      "ciliated cell", "glia cell")
 for(i in seq_along(skids)){
   annot <- catmaid_get_annotations_for_skeletons(skids=skids[i], pid = 11)
