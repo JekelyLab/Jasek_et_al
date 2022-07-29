@@ -55,7 +55,7 @@ E(desmo_conn_graph)$weight
 #clustering with Leiden algorithm
 partition <- leiden(desmo_conn_graph, weights = E(desmo_conn_graph)$weight, 
                     partition_type = "RBConfigurationVertexPartition",
-                    resolution_parameter = 0.25,
+                    resolution_parameter = 0.27,
                     n_iterations = -1, seed = 42)
 max(partition)
 
