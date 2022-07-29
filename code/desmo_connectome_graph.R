@@ -208,3 +208,51 @@ writeLines(capture.output(dput(conn_graph.visn)), "supplements/desmo_connectome_
 #read the saved visNetwork file from supplements/
 conn_graph.visn <- readRDS("supplements/desmo_connectome_graph.rds")
 
+
+# plot graph with coordinates from gephi ----------------------------------
+
+#overwrite group value (partition) with side value or other value (for colouring)
+#conn_graph.visn$nodes$group <-  as.character(conn_graph.visn$nodes$side)
+
+#for plotting with different colors, remove colour info (which takes precedence over group colour)
+#conn_graph.visn$nodes$color <- c()
+
+{
+  coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
+  
+  visNet <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
+    visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
+    visEdges(smooth = list(type = 'curvedCW', roundness=0),
+             scaling=list(min=1, max=25),
+             color = list(inherit=TRUE, opacity=0.7),
+             arrows = list(to = list(enabled = TRUE, 
+                                     scaleFactor = 0.5, type = 'arrow'))) %>%
+    visNodes(borderWidth=0.3, 
+             color = list(border='black'),
+             opacity = 1, 
+             font = list(size = 20)) %>%
+    visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
+                                       algorithm = 'hierarchical',
+                                       labelOnly=FALSE), 
+               width = 1500, height = 1500, autoResize = FALSE) %>%
+    visInteraction(dragNodes = TRUE, dragView = TRUE,
+                   zoomView = TRUE, hover=TRUE,
+                   multiselect=TRUE) 
+#the visGroups option can be used to define color and shape based 
+#on annotations under $nodes$group e.g.
+#        %>%
+#    visGroups(groupname = "left_side", color="black", shape = "dot", 
+#              opacity=1) %>%
+#    visGroups(groupname = "right_side", shape = "diamond", 
+#              opacity=0.5, color="red")
+
+visNet
+  
+#save as html
+saveNetwork(visNet, "pictures/Full_desmo_connectome_modules.html", selfcontained = TRUE)
+#create png snapshot
+webshot2::webshot(url="pictures/Full_desmo_connectome_modules.html",
+                    file="pictures/Full_desmo_connectome_modules_webshot.png",
+                    vwidth = 1500, vheight = 1500, #define the size of the browser window
+                    cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
+}
