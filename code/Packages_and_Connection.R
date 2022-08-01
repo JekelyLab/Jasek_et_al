@@ -1,7 +1,7 @@
 #packages to source and details of CATMAID connection
 
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memrory and report the memory usage.
+gc() #free up memory and report the memory usage.
 Sys.setenv('R_MAX_VSIZE'=8000000000)
 
 # load nat and all associated packages, incl catmaid
@@ -29,6 +29,7 @@ library(tidygraph)
 library(rgexf)
 library(RColorBrewer)
 library(visNetwork)
+library(plotly)
 
 #create directory for R-generated pictures for figure panels (ignored by git)
 dir.create("pictures")
