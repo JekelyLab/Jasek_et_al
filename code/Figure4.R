@@ -67,7 +67,7 @@ modularity_leiden <- function(graph) {
 
 #sample 1000 Erdös graphs with same number of nodes and edges as the desmosomal graph 
 #assign weights from the desmo graph
-Erdös_graphs_1000_wg <- lapply(1:20, function(x) {
+Erdös_graphs_1000_wg <- lapply(1:1000, function(x) {
   Erdös_graph <- erdos.renyi.game(length(V(desmo_conn_graph_largest)), 
                                   length(E(desmo_conn_graph_largest)),
                                   type = "gnm",directed = FALSE,loops = FALSE)
@@ -106,7 +106,7 @@ assort_centr_erdos <- lapply(Erdös_graphs_1000_wg, function(x)
 
 
 #sample subgraphs from the weighted desmosomal graph
-desmo_subgraphs_1000 <- lapply(1:20, function(x)
+desmo_subgraphs_1000 <- lapply(1:1000, function(x)
 {vids <- sample(V(desmo_conn_graph_largest),length(V(desmo_conn_graph_largest))-100)
 x <- induced_subgraph(desmo_conn_graph_largest, vids, impl = "auto")}
 )
@@ -145,8 +145,9 @@ assort_centr_desmo <- lapply(desmo_subgraphs_1000, function(x)
 
 # subsample and quantify the connectome graph -----------------------------
 
+{
 #sample subgraphs from the weighted connectome graph
-neuro_conn_subgraphs_1000 <- lapply(1:20, function(x)
+neuro_conn_subgraphs_1000 <- lapply(1:1000, function(x)
 {vids <- sample(V(neuro_conn_graph_largest),length(V(neuro_conn_graph_largest))-100)
 x <- induced_subgraph(neuro_conn_graph_largest, vids, impl = "auto")}
 )
@@ -184,12 +185,13 @@ assort_centr_neuro_conn <- lapply(neuro_conn_subgraphs_1000, function(x)
 
 #calculate modularity score
 modularity_neuro_conn <- lapply(neuro_conn_subgraphs_1000, function(x) modularity_leiden(x))
+}
 
 # generate and quantify scale-free graphs ---------------------------------
-
+{
 #sample 1000 scale-free graphs with same number of edges and nodes as the desmosomal graph and return their modularity score in a list
 #assign weights from the desmo graph
-sf_graphs_wg_1000 <- lapply(1:20, function(x) {
+sf_graphs_wg_1000 <- lapply(1:1000, function(x) {
   sf_graph <- sample_fitness_pl(
     length(V(desmo_conn_graph_largest)),
     length(E(desmo_conn_graph_largest)),
@@ -227,12 +229,12 @@ transitivity_centr_sf <- lapply(sf_graphs_wg_1000,
 #calculate assortativity 
 assort_centr_sf <- lapply(sf_graphs_wg_1000, function(x) 
   assortativity(x, directed = FALSE, types1 = V(x), types2 = NULL))
-
+}
 # graphs with preferential attachment -------------------------------------
-
+{
 #sample 1000 preferential attachment graphs with same number of nodes and very similar number of edges as the desmosomal graph
 #assign weights from a random sample of the desmosomal graph
-pa_graphs_1000_wg <- lapply(1:20, function(x) {pa_graph <- sample_pa_age(
+pa_graphs_1000_wg <- lapply(1:1000, function(x) {pa_graph <- sample_pa_age(
   length(V(desmo_conn_graph)),  pa.exp=1,aging.exp=-2,
   m = 2, aging.bin = 300,  out.dist = NULL,out.seq = NULL,
   out.pref = FALSE,directed = F,  zero.deg.appeal = 1,zero.age.appeal = 0,
@@ -267,40 +269,14 @@ transitivity_centr_pa <- lapply(pa_graphs_1000_wg,
 #calculate assortativity 
 assort_centr_pa <- lapply(pa_graphs_1000_wg, function(x) 
   assortativity(x, directed = FALSE, types1 = V(x), types2 = NULL))
-
-
-{
-  #calculate node weights
-  weights_desmo <- strength(desmo_conn_graph_largest, vids = V(desmo_conn_graph_largest),
-                            loops = TRUE, mode = 'all')
-  
-  #other network parameters
-  mean(weights_desmo)
-  diameter(desmo_conn_graph_largest)
-  mean_distance(desmo_conn_graph)
-  length(which((coreness(desmo_conn_graph,mode='all'))==5))
-  max(weights_desmo)
-  sort(degree(desmo_conn_graph), decreasing=T)
-  count_motifs(desmo_conn_graph, 4)
-  max(count_triangles(desmo_conn_graph))
-  (triangles(desmo_conn_graph))
-  
-  #triangles
-  max(count_triangles(desmo_conn_graph))
-  count_triangles(desmo_conn_graph, vids=V(desmo_conn_graph)[223])
-  V(desmo_conn_graph)[223]
-  
-  #cliques
-  length(largest_cliques(desmo_conn_graph))
-  clique_num(desmo_conn_graph)
-  length(max_cliques(desmo_conn_graph, min=3))
 }
 
+beep()
 # tidy the data ----------------------------------------------------------------
 
 {
-  #tidy the data for the graphs
-  neuro_graphs_tb <- as_tibble(1:20) %>%
+#tidy the data for the graphs
+neuro_graphs_tb <- as_tibble(1:1000) %>%
     rename('graph_number'=value) %>%
     mutate(modularity = unlist(modularity_neuro_conn)) %>%
     mutate(diameter = unlist(diameter_neuro_conn)) %>%
@@ -310,7 +286,7 @@ assort_centr_pa <- lapply(pa_graphs_1000_wg, function(x)
     mutate(assortativity = unlist(assort_centr_neuro_conn)) %>%
     mutate(graph_type = 'neuro')
   
-  desmo_graphs_tb <- as_tibble(1:20) %>%
+desmo_graphs_tb <- as_tibble(1:1000) %>%
     rename('graph_number'=value) %>%
     mutate(modularity = unlist(modularity_desmo)) %>%
     mutate(diameter = unlist(diameter_desmo)) %>%
@@ -320,7 +296,7 @@ assort_centr_pa <- lapply(pa_graphs_1000_wg, function(x)
     mutate(assortativity = unlist(assort_centr_desmo)) %>%
     mutate(graph_type = 'desmo')
   
-  sf_graphs_tb <- as_tibble(1:20) %>%
+sf_graphs_tb <- as_tibble(1:1000) %>%
     rename('graph_number'=value) %>%
     mutate(modularity = unlist(modularity_sf)) %>%
     mutate(diameter = unlist(diameter_sf)) %>%
@@ -330,7 +306,7 @@ assort_centr_pa <- lapply(pa_graphs_1000_wg, function(x)
     mutate(assortativity = unlist(assort_centr_sf)) %>%
     mutate(graph_type = 'sf')
   
-  pa_graphs_tb <- as_tibble(1:20) %>%
+pa_graphs_tb <- as_tibble(1:1000) %>%
     rename('graph_number'=value) %>%
     mutate(modularity = unlist(modularity_pa)) %>%
     mutate(diameter = unlist(diameter_pa)) %>%
@@ -340,7 +316,7 @@ assort_centr_pa <- lapply(pa_graphs_1000_wg, function(x)
     mutate(assortativity = unlist(assort_centr_pa)) %>%
     mutate(graph_type = 'pa')
   
-  erdos_graphs_tb <- as_tibble(1:20) %>%
+erdos_graphs_tb <- as_tibble(1:1000) %>%
     rename('graph_number'=value) %>%
     mutate(modularity = unlist(modularity_erdos)) %>%
     mutate(diameter = unlist(diameter_erdos)) %>%
@@ -351,163 +327,134 @@ assort_centr_pa <- lapply(pa_graphs_1000_wg, function(x)
     mutate(graph_type = 'erdos')
   
   
-  #join all graphs to a single tibble
-  neuro_desmo_graphs_tb <- full_join(neuro_graphs_tb, desmo_graphs_tb)
-  neuro_desmo_sf_graphs_tb <- full_join(neuro_desmo_graphs_tb, sf_graphs_tb)
-  neuro_desmo_sf_pa_graphs_tb <- full_join(neuro_desmo_sf_graphs_tb, pa_graphs_tb)
-  all_graphs_tb <- full_join(neuro_desmo_sf_pa_graphs_tb, erdos_graphs_tb)
-  
-  weights_desmo_tb <- as_tibble(lapply(weights_desmo, function(x) x), .name_repair = "unique") %>%
+#join all graphs to a single tibble
+neuro_desmo_graphs_tb <- full_join(neuro_graphs_tb, desmo_graphs_tb)
+neuro_desmo_sf_graphs_tb <- full_join(neuro_desmo_graphs_tb, sf_graphs_tb)
+neuro_desmo_sf_pa_graphs_tb <- full_join(neuro_desmo_sf_graphs_tb, pa_graphs_tb)
+all_graphs_tb <- full_join(neuro_desmo_sf_pa_graphs_tb, erdos_graphs_tb)
+
+weights_desmo_tb <- as_tibble(lapply(weights_desmo, function(x) x), .name_repair = "unique") %>%
     mutate(graph_type = 'desmo') %>%
     pivot_longer(cols = starts_with("..."), names_to = "replicate",
                  values_to = "weights")
-  
-  weights_neuro_conn_tb <- as_tibble(lapply(weights_neuro_conn, function(x) x), .name_repair = "unique") %>%
+
+weights_neuro_conn_tb <- as_tibble(lapply(weights_neuro_conn, function(x) x), .name_repair = "unique") %>%
     mutate(graph_type = 'neuro') %>%
     pivot_longer(cols = starts_with("..."), names_to = "replicate",
                  values_to = "weights")
   
-  weights_sf_tb <- as_tibble(lapply(weights_sf, function(x) x), .name_repair = "unique") %>%
+weights_sf_tb <- as_tibble(lapply(weights_sf, function(x) x), .name_repair = "unique") %>%
     mutate(graph_type = 'sf') %>%
     pivot_longer(cols = starts_with("..."), names_to = "replicate",
                  values_to = "weights")
   
-  weights_pa_tb <- as_tibble(lapply(weights_pa, function(x) x), .name_repair = "unique") %>%
+weights_pa_tb <- as_tibble(lapply(weights_pa, function(x) x), .name_repair = "unique") %>%
     mutate(graph_type = 'pa') %>%
     pivot_longer(cols = starts_with("..."), names_to = "replicate",
                  values_to = "weights")
   
-  weights_erdos_tb <- as_tibble(lapply(weights_erdos, function(x) x), .name_repair = "unique") %>%
+weights_erdos_tb <- as_tibble(lapply(weights_erdos, function(x) x), .name_repair = "unique") %>%
     mutate(graph_type = 'erdos') %>%
     pivot_longer(cols = starts_with("..."), names_to = "replicate",
                  values_to = "weights")
   
-  weights_desmo_neuro_tb <- full_join(weights_desmo_tb, weights_neuro_conn_tb)
-  weights_desmo_neuro_sf_tb <- full_join(weights_desmo_neuro_tb, weights_sf_tb)
-  weights_desmo_neuro_sf_pa_tb <- full_join(weights_desmo_neuro_sf_tb, weights_pa_tb)
-  weights_all_tb <- full_join(weights_desmo_neuro_sf_pa_tb, weights_erdos_tb)
+weights_desmo_neuro_tb <- full_join(weights_desmo_tb, weights_neuro_conn_tb)
+weights_desmo_neuro_sf_tb <- full_join(weights_desmo_neuro_tb, weights_sf_tb)
+weights_desmo_neuro_sf_pa_tb <- full_join(weights_desmo_neuro_sf_tb, weights_pa_tb)
+weights_all_tb <- full_join(weights_desmo_neuro_sf_pa_tb, weights_erdos_tb)
   
   
-  degree_desmo_tb <- as_tibble(lapply(degree_desmo, function(x) x), .name_repair = "unique") %>%
+degree_desmo_tb <- as_tibble(lapply(degree_desmo, function(x) x), .name_repair = "unique") %>%
     mutate(graph_type = 'desmo') %>%
     pivot_longer(cols = starts_with("..."), names_to = "replicate",
                  values_to = "degree")
   
-  degree_neuro_tb <- as_tibble(lapply(degree_neuro_conn, function(x) x), .name_repair = "unique") %>%
+degree_neuro_tb <- as_tibble(lapply(degree_neuro_conn, function(x) x), .name_repair = "unique") %>%
     mutate(graph_type = 'neuro') %>%
     pivot_longer(cols = starts_with("..."), names_to = "replicate",
                  values_to = "degree")
   
-  degree_sf_tb <- as_tibble(lapply(degree_sf, function(x) x), .name_repair = "unique") %>%
+degree_sf_tb <- as_tibble(lapply(degree_sf, function(x) x), .name_repair = "unique") %>%
     mutate(graph_type = 'sf') %>%
     pivot_longer(cols = starts_with("..."), names_to = "replicate",
                  values_to = "degree")
   
-  degree_pa_tb <- as_tibble(lapply(degree_pa, function(x) x), .name_repair = "unique") %>%
+degree_pa_tb <- as_tibble(lapply(degree_pa, function(x) x), .name_repair = "unique") %>%
     mutate(graph_type = 'pa') %>%
     pivot_longer(cols = starts_with("..."), names_to = "replicate",
                  values_to = "degree")
   
   
-  degree_erdos_tb <- as_tibble(lapply(degree_erdos, function(x) x), .name_repair = "unique") %>%
+degree_erdos_tb <- as_tibble(lapply(degree_erdos, function(x) x), .name_repair = "unique") %>%
     mutate(graph_type = 'erdos') %>%
     pivot_longer(cols = starts_with("..."), names_to = "replicate",
                  values_to = "degree")
   
-  degree_desmo_neuro_tb <- full_join(degree_desmo_tb, degree_neuro_tb)
-  degree_desmo_neuro_sf_tb <- full_join(degree_desmo_neuro_tb, degree_sf_tb)
-  degree_desmo_neuro_sf_pa_tb <- full_join(degree_desmo_neuro_sf_tb, degree_pa_tb)
-  degree_all_tb <- full_join(degree_desmo_neuro_sf_pa_tb, degree_erdos_tb)
+degree_desmo_neuro_tb <- full_join(degree_desmo_tb, degree_neuro_tb)
+degree_desmo_neuro_sf_tb <- full_join(degree_desmo_neuro_tb, degree_sf_tb)
+degree_desmo_neuro_sf_pa_tb <- full_join(degree_desmo_neuro_sf_tb, degree_pa_tb)
+degree_all_tb <- full_join(degree_desmo_neuro_sf_pa_tb, degree_erdos_tb)
 }
 
-# plot degree distributions ------------------------------------
+# plot edge weight and node degree distributions ------------------------------------
 
 {
-  
-  weights_all_tb %>%
-    ggplot() +
-    geom_freqpoly(aes(x = weights, after_stat(density), 
-                      color = graph_type, alpha = replicate), 
-                  binwidth = 0.2) +
-    scale_x_log10() +
-    theme_minimal() +
-    xlab('degree') +
-    theme()
-  
-  
-  degree_all_tb %>%
+  degree_plot <- degree_all_tb %>%
     ggplot() +
     geom_freqpoly(aes(x = degree, after_stat(density), 
                       color = graph_type, alpha = replicate), 
-                  binwidth = 0.2) +
-    scale_x_log10() +
+                  binwidth = 0.21) +
+    scale_x_sqrt(breaks = c(1, 5, 10, 50, 100)) +
     theme_minimal() +
-    xlab('degree') +
-    theme()  
+    labs(x = 'node degree', color = 'graph type') +
+    theme_minimal() +
+    scale_color_manual(values = c('#0072B2', '#D55E00', '#E69F00',
+                                  'grey70', '#000000'),
+                       breaks = c('desmo', 'erdos', 'neuro', 
+                                  'pa', 'sf')) +
+    scale_linetype_manual(values = c(1, 2, 3,
+                                     4, 5),
+                          breaks = c('desmo', 'erdos', 'neuro', 
+                                     'pa', 'sf')) +
+    scale_alpha_manual(values = c(5:25)/80) +
+    guides(color = "none", alpha = "none")
   
-  ggplot() +
-    geom_freqpoly(data = as_tibble(unlist(degree_desmo)),
-                  aes(x = value, after_stat(density)), binwidth = 0.2, 
-                  color = "#0072B2", 
-                  alpha = 0.6,  size = 1, linetype = 2) +
-    geom_freqpoly(data = as_tibble(unlist(degree_neuro_conn)),
-                  aes(x = value, after_stat(density)), binwidth = 0.2, 
-                  color = "#E69F00", 
-                  alpha = 0.7, size = 1, linetype = 1) +
-    geom_freqpoly(data = as_tibble(unlist(degree_sf)),
-                  aes(x = value, after_stat(density)), binwidth = 0.2, 
-                  color = "#000000", 
-                  alpha = 0.6, size = 1, linetype = 1) +
-    geom_freqpoly(data = as_tibble(unlist(degree_pa)),
-                  aes(x = value, after_stat(density)), binwidth = 0.2, 
-                  color = "grey90", 
-                  alpha = 1, size = 2, linetype = 4) +
-    geom_freqpoly(data = as_tibble(unlist(degree_erdos)),
-                  aes(x = value, after_stat(density)), binwidth = 0.2, color = "#D55E00", 
-                  alpha = 0.8, size = 1, linetype = 5)  +
-    scale_x_log10() +
-    theme_minimal() +
-    xlab('degree') +
-    theme(legend.position = c(0.2, .8))
-  ggsave('pictures/degree.png', limitsize = FALSE, 
+degree_plot  
+  
+ggsave('pictures/degree.png', degree_plot, limitsize = FALSE, 
          units = c("px"), width = 800, height = 800, bg = 'white')
+  
+weights_plot <- weights_all_tb %>%
+    ggplot() +
+    geom_freqpoly(aes(x = weights, after_stat(density), 
+                      color = graph_type, alpha = replicate), 
+                  binwidth = 0.21) +
+    scale_x_sqrt(breaks = c(2, 10, 100, 400)) +
+    theme_minimal() +
+    labs(x = 'edge weight', color = 'graph type') +
+    theme_minimal() +
+    scale_color_manual(values = c('#0072B2', '#D55E00', '#E69F00',
+                                 'grey70', '#000000'),
+                      breaks = c('desmo', 'erdos', 'neuro', 
+                                 'pa', 'sf')) +
+    scale_linetype_manual(values = c(1, 2, 3,
+                                     4, 5),
+                          breaks = c('desmo', 'erdos', 'neuro', 
+                                     'pa', 'sf')) +
+    scale_alpha_manual(values = c(5:25)/80) +
+    guides(alpha = "none")
+weights_plot
+
+ggsave('pictures/weights.png', weights_plot, limitsize = FALSE, 
+       units = c("px"), width = 1100, height = 800, bg = 'white')
+
 }
 
-# plot weights --------------------------------------------------------
-
-weights_all_tb
-{
-  ggplot() +
-    geom_freqpoly(data = as_tibble(unlist(weights_desmo)),
-                  aes(x = value, after_stat(density)), binwidth = 0.2, 
-                  color = "#0072B2", 
-                  alpha = 0.6,  size = 1, linetype = 2) +
-    geom_freqpoly(data = as_tibble(unlist(weights_neuro_conn)),
-                  aes(x = value, after_stat(density)), binwidth = 0.2, 
-                  color = "#E69F00", 
-                  alpha = 0.7, size = 1, linetype = 1) +
-    geom_freqpoly(data = as_tibble(unlist(weights_sf)),
-                  aes(x = value, after_stat(density)), binwidth = 0.2, 
-                  color = "#000000", 
-                  alpha = 0.6, size = 1, linetype = 1) +
-    geom_freqpoly(data = as_tibble(unlist(weights_pa)),
-                  aes(x = value, after_stat(density)), binwidth = 0.2, 
-                  color = "grey90", 
-                  alpha = 1, size = 2, linetype = 4) +
-    geom_freqpoly(data = as_tibble(unlist(weights_erdos)),
-                  aes(x = value, after_stat(density)), binwidth = 0.2, color = "#D55E00", 
-                  alpha = 0.8, size = 1, linetype = 5)  +
-    scale_x_log10() +
-    theme_minimal() +
-    xlab('weight')
-  ggsave('pictures/weights.png', limitsize = FALSE, 
-         units = c("px"), width = 800, height = 800, bg = 'white')
-}
 
 # plot modularity ------------------------------------
 
 {
-  modul_plot <- all_graphs_tb %>%
+modul_plot <- all_graphs_tb %>%
     ggplot() +
     geom_histogram(aes(x = modularity, fill = graph_type), 
                    binwidth = 0.01, 
@@ -518,16 +465,17 @@ weights_all_tb
                                  'grey90', '#000000'),
                       breaks = c('desmo', 'erdos', 'neuro', 
                                  'pa', 'sf')) +
-    guides(fill = guide_legend(title = "graph type"))
-  
-  ggsave('pictures/modularity.png', limitsize = FALSE, 
+    guides(fill = "none")
+
+modul_plot  
+ggsave('pictures/modularity.png', modul_plot, limitsize = FALSE, 
          units = c("px"), width = 800, height = 800, bg = 'white')
 }
 
 # plot histograms of max clique scores ------------------------------------
 
 {
-  max3_plot <- all_graphs_tb %>%
+max3_plot <- all_graphs_tb %>%
     ggplot() +
     geom_histogram(aes(x = three_cliques, fill = graph_type), 
                    binwidth = 0.1, 
@@ -538,17 +486,18 @@ weights_all_tb
                                  'grey90', '#000000'),
                       breaks = c('desmo', 'erdos', 'neuro', 
                                  'pa', 'sf')) +
-    guides(fill = guide_legend(title = "graph type")) +
-    xlab('# of 3-cliques')
+    guides(fill = "none") +
+    xlab('# of 3-cliques') 
   
-  ggsave('pictures/3cliques.png', limitsize = FALSE, 
+max3_plot
+ggsave('pictures/3cliques.png', max3_plot, limitsize = FALSE, 
          units = c("px"), width = 800, height = 800, bg = 'white')
 }
 
 # plot transitivity --------------------------------------------------------
 
 {
-  trans_plot <- all_graphs_tb %>%
+trans_plot <- all_graphs_tb %>%
     ggplot() +
     geom_histogram(aes(x = transitivity, fill = graph_type), 
                    binwidth = 0.1, 
@@ -559,17 +508,18 @@ weights_all_tb
                                  'grey90', '#000000'),
                       breaks = c('desmo', 'erdos', 'neuro', 
                                  'pa', 'sf')) +
-    guides(fill = guide_legend(title = "graph type")) +
+    guides(fill = "none") +
     xlab('transitivity')
   
-  ggsave('pictures/transitivity.png', limitsize = FALSE, 
+trans_plot
+ggsave('pictures/transitivity.png', trans_plot, limitsize = FALSE, 
          units = c("px"), width = 800, height = 800, bg = 'white')
 }
 
 # plot assortativity --------------------------------------------------------
 
 {
-  assort_plot <- all_graphs_tb %>%
+assort_plot <- all_graphs_tb %>%
     ggplot() +
     geom_histogram(aes(x = assortativity, fill = graph_type), 
                    binwidth = 0.1, 
@@ -582,15 +532,15 @@ weights_all_tb
     guides(fill = guide_legend(title = "graph type")) +
     xlab('assortativity')
   
-  
-  ggsave('pictures/assortativity.png', limitsize = FALSE, 
-         units = c("px"), width = 800, height = 800, bg = 'white')
+assort_plot
+ggsave('pictures/assortativity.png', assort_plot, limitsize = FALSE, 
+         units = c("px"), width = 1100, height = 800, bg = 'white')
 }
 
 # plot diameter --------------------------------------------------------
 
 {
-  diameter_plot <- all_graphs_tb %>%
+diameter_plot <- all_graphs_tb %>%
     ggplot() +
     geom_histogram(aes(x = diameter, fill = graph_type), 
                    binwidth = 0.01, 
@@ -601,17 +551,18 @@ weights_all_tb
                                  'grey90', '#000000'),
                       breaks = c('desmo', 'erdos', 'neuro', 
                                  'pa', 'sf')) +
-    guides(fill = guide_legend(title = "graph type")) +
+    guides(fill = "none") +
     xlab('diameter')
   
-  ggsave('pictures/diameter.png', limitsize = FALSE, 
+diameter_plot
+ggsave('pictures/diameter.png', limitsize = FALSE, 
          units = c("px"), width = 800, height = 800, bg = 'white')
 }
 
 # plot meandist --------------------------------------------------------
 
 {
-  meandist_plot <- all_graphs_tb %>%
+meandist_plot <- all_graphs_tb %>%
     ggplot() +
     geom_histogram(aes(x = meandist, fill = graph_type), 
                    binwidth = 0.01, 
@@ -622,86 +573,46 @@ weights_all_tb
                                  'grey90', '#000000'),
                       breaks = c('desmo', 'erdos', 'neuro', 
                                  'pa', 'sf')) +
-    guides(fill = guide_legend(title = "graph type")) +
+    guides(fill = "none") +
     xlab('meandist')
   
-  ggsave('pictures/meandist.png', limitsize = FALSE, 
+meandist_plot
+ggsave('pictures/meandist.png', meandist_plot, limitsize = FALSE, 
          units = c("px"), width = 800, height = 800, bg = 'white')
 }
 
 # create multi-panel figure -----------------------------------------------
 {
-  Fig4_degree <- ggdraw() + draw_image(readPNG("pictures/degree.png"))
-  
-  Fig4_weights <- ggdraw() + draw_image(readPNG("pictures/weights.png"))
-  
-  Fig4_trans <- ggdraw() + draw_image(readPNG("pictures/transitivity.png")) +
-    draw_label("desmo", x = 0.72, y = 0.71, fontfamily = "sans", size = 8) +
-    draw_label("neuro", x = 0.91, y = 0.63, fontfamily = "sans", size = 8) +
-    draw_label("sf", x = 0.5, y = 0.75, fontfamily = "sans", size = 8) +
-    draw_label("pa", x = 0.66, y = 0.5, fontfamily = "sans", size = 8) +
-    draw_label("Erdös", x = 0.3, y = 0.49, fontfamily = "sans", size = 8)
-  
-  Fig4_diameter <- ggdraw() + draw_image(readPNG("pictures/diameter.png")) +
-    draw_label("desmo", x = 0.88, y = 0.63, fontfamily = "sans", size = 8) +
-    draw_label("neuro", x = 0.7, y = 0.55, fontfamily = "sans", size = 8) +
-    draw_label("sf", x = 0.24, y = 0.84, fontfamily = "sans", size = 8) +
-    draw_label("pa", x = 0.37, y = 0.58, fontfamily = "sans", size = 8) +
-    draw_label("Erdös", x = 0.31, y = 0.72, fontfamily = "sans", size = 8)
-  
-  Fig4_meandist <- ggdraw() + draw_image(readPNG("pictures/meandist.png")) +
-    draw_label("desmo", x = 0.88, y = 0.64, fontfamily = "sans", size = 8) +
-    draw_label("neuro", x = 0.25, y = 0.78, fontfamily = "sans", size = 8) +
-    draw_label("sf", x = 0.545, y = 0.64, fontfamily = "sans", size = 8) +
-    draw_label("pa", x = 0.72, y = 0.48, fontfamily = "sans", size = 8) +
-    draw_label("Erdös", x = 0.6, y = 0.74, fontfamily = "sans", size = 8)
-  
-  Fig4_3cl <- ggdraw() + draw_image(readPNG("pictures/3cliques.png")) +
-    draw_label("desmo", x = 0.76, y = 0.61, fontfamily = "sans", size = 8) +
-    draw_label("neuro", x = 0.91, y = 0.8, fontfamily = "sans", size = 8) +
-    draw_label("sf", x = 0.48, y = 0.55, fontfamily = "sans", size = 8) +
-    draw_label("pa", x = 0.62, y = 0.5, fontfamily = "sans", size = 8) +
-    draw_label("Erdös", x = 0.29, y = 0.75, fontfamily = "sans", size = 8)
-  
-  Fig4_modul <- ggdraw() + draw_image(readPNG("pictures/modularity.png")) +
-    draw_label("desmo", x = 0.9, y = 0.67, fontfamily = "sans", size = 8) +
-    draw_label("neuro", x = 0.49, y = 0.6, fontfamily = "sans", size = 8) +
-    draw_label("sf", x = 0.26, y = 0.5, fontfamily = "sans", size = 8) +
-    draw_label("pa", x = 0.76, y = 0.5, fontfamily = "sans", size = 8) +
-    draw_label("Erdös", x = 0.38, y = 0.75, fontfamily = "sans", size = 8)
-  
-  Fig4_assort <- ggdraw() + draw_image(readPNG("pictures/assortativity.png")) +
-    draw_label("desmo", x = 0.24, y = 0.84, fontfamily = "sans", size = 8) +
-    draw_label("neuro", x = 0.6, y = 0.55, fontfamily = "sans", size = 8) +
-    draw_label("sf", x = 0.46, y = 0.64, fontfamily = "sans", size = 8) +
-    draw_label("pa", x = 0.88, y = 0.63, fontfamily = "sans", size = 8) +
-    draw_label("Erdös", x = 0.41, y = 0.72, fontfamily = "sans", size = 8)
-  
-  layout <- "
-ABCD
-EFGH"
-  
-  Fig4 <- Fig4_degree + Fig4_weights + modul_plot + diameter_plot + 
-    meandist_plot + trans_plot + max3_plot + assort_plot +
+#combine degree and weight plot with patchwork and convert to panel with ggdraw, shared label
+degree_weight <- ggdraw(degree_plot + weights_plot +
+plot_layout(guides = 'collect') +
+  plot_annotation(tag_levels = 'A') & 
+  theme(plot.tag = element_text(size = 12, face='plain')))
+
+modul_diameter <- ggdraw(modul_plot + diameter_plot +
+                          plot_layout(guides = 'collect') +
+                          plot_annotation(tag_levels = list(c('C', 'D'))) & 
+                          theme(plot.tag = element_text(size = 12, face='plain')))
+layout = "ABCD"
+mean_trans_3_ass <- ggdraw(meandist_plot + trans_plot + max3_plot + assort_plot +
+                           plot_layout(design = layout, guides = 'collect') +
+                           plot_annotation(tag_levels = list(c('E', 'F', 'G', 'H'))) & 
+                           theme(plot.tag = element_text(size = 12, face='plain')))
+
+layout <- "
+AAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBB
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+
+Fig4 <- degree_weight + modul_diameter + mean_trans_3_ass +
     plot_layout(design = layout, heights = c(1, 1),
-                guides = 'collect') +
-    plot_annotation(tag_levels = 'A') & 
-    theme(plot.tag = element_text(size = 12, face='plain'))
-  
-  Fig4 <- plot_grid(Fig4_degree, Fig4_weights, Fig4_modul, Fig4_diameter,
-                    Fig4_meandist, Fig4_trans, Fig4_3cl, Fig4_assort,
-                    ncol=4,
-                    rel_heights = c(1, 1,1,1),
-                    labels=c("A", "B","C","D","E","F","G","H"),
-                    label_size = 12, label_y = 1, label_x = -0.04,
-                    label_fontfamily = "sans", label_fontface = "plain") + 
-    theme(plot.margin = unit(c(1, 1, 1, 3), units = "pt"))
-  
-  ggsave("figures/Figure_4.pdf", limitsize = FALSE, 
-         units = c("px"), Fig4, width = 2600, height = 1400)
+                guides = 'collect')
+
+ggsave("figures/Figure_4.pdf", limitsize = FALSE, 
+         units = c("px"), Fig4, width = 2800, height = 1400)
 }
+
 ggsave("figures/Figure_4.png", limitsize = FALSE, 
-       units = c("px"), Fig4, width = 2600, height = 1400)
+       units = c("px"), Fig4, width = 2800, height = 1400)
 
 
 
