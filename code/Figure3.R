@@ -234,7 +234,7 @@ plot_modules <- as_tibble(desmo_conn_graph.tb) %>%
                                  "ciliated cell", "EC")  ) +
     scale_x_continuous(limits = c(0,13), breaks = c(1,2,3,4,5,6,7,8,9,10,11,12)) +
     labs(x = 'module', y = '# of cells', fill = 'cell class') +
-    theme_minimal()+
+    theme_minimal_hgrid()+
     theme(axis.title = element_text(size=10),
           axis.text = element_text(size=8),
           legend.text = element_text(size=8),
