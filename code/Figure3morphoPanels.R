@@ -5,106 +5,429 @@
 
 source("code/Packages_and_Connection.R")
 
-#load json file exported from gephi with the Leiden clusters colored
-#would also work on a json file from catmaid but that uses HEX color codes so the relevant lines in the code would need to be skipped
-#the Figure3-Leiden-modules.json file is also on github
-graph2_json <- fromJSON(file = "data/Figure3-Leiden-modules.json")
+#read the saved igraph format graph file from supplements/
+desmo_conn_graph <- readRDS("supplements/desmo_connectome_graph_igraph.rds")
 
-cells_with_color <- data.table(id=numeric(), color=character())
-setnames(cells_with_color, c("id"), c("skid"))
+#read the saved visNetwork file from supplements/
+conn_graph.visn <- readRDS("supplements/desmo_connectome_graph.rds")
 
-graph2_json$nodes[[1]]$attributes$unit_id
-graph2_json$nodes[[1]]$color
+# plot graph with coordinates from gephi ----------------------------------
 
-cells_with_color[,1]
-#change to data frame
-setDF(cells_with_color)
+#overwrite group value (partition) with side value or other value (for colouring)
+#conn_graph.visn$nodes$group <-  as.character(conn_graph.visn$nodes$side)
 
+#for plotting with different colors, remove colour info (which takes precedence over group colour)
+#conn_graph.visn$nodes$color <- c()
 
-#import from gephi json
-for (i in c(1:length(graph2_json$nodes))){
-  cells_with_color[i,1] <- graph2_json$nodes[[i]]$attributes$unit_id
-  cells_with_color[i,2] <- graph2_json$nodes[[i]]$color
+{
+coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
+  
+visNet <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
+    visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
+    visEdges(smooth = list(type = 'curvedCW', roundness=0),
+             scaling=list(min=1, max=25),
+             color = list(inherit=TRUE, opacity=0.7),
+             arrows = list(to = list(enabled = TRUE, 
+                                     scaleFactor = 0.5, type = 'arrow'))) %>%
+    visNodes(borderWidth=0.3, 
+             color = list(border='black'),
+             opacity = 1, 
+             font = list(size = 20)) %>%
+    visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
+                                       algorithm = 'hierarchical',
+                                       labelOnly=FALSE), 
+               width = 1500, height = 1500, autoResize = FALSE) %>%
+    visInteraction(dragNodes = TRUE, dragView = TRUE,
+                   zoomView = TRUE, hover=TRUE,
+                   multiselect=TRUE) 
+#the visGroups option can be used to define color and shape based 
+#on annotations under $nodes$group e.g.
+  #        %>%
+  #    visGroups(groupname = "left_side", color="black", shape = "dot", 
+  #              opacity=1) %>%
+  #    visGroups(groupname = "right_side", shape = "diamond", 
+  #              opacity=0.5, color="red")
+  
+visNet
+  
+#save as html
+saveNetwork(visNet, "pictures/Full_desmo_connectome_modules.html", selfcontained = TRUE)
+#create png snapshot
+webshot2::webshot(url="pictures/Full_desmo_connectome_modules.html",
+                    file="pictures/Full_desmo_connectome_modules_webshot.png",
+                    vwidth = 1500, vheight = 1500, #define the size of the browser window
+                    cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
 }
-cells_with_color[1,]
-#change back to data table
-setDT(cells_with_color)
-#set the key to be used for indexing
-setkey(cells_with_color, color)
-#to identify the column(s) indexed by
-key(cells_with_color)
-#order by color
-setorder(cells_with_color, color)
-skids <- as.numeric(unlist(cells_with_color[,1]))
 
-#change rgb definiion by adding maxColorValue
-cells_with_color[, color:=gsub(color,pattern=")",replacement = ",maxColorValue = 255)")]
-cells_with_color[1:2,1:2]
-#translate the rgb colors into HEX colors
-#cells_with_color[,color:=eval(parse(text=color))]
-cells_with_color[1:2,1:2]
-colorHEX=list(1:nrow(cells_with_color))
-for (i in c(0:nrow(cells_with_color))){print (eval(parse(text=cells_with_color[i,color])))
-  colorHEX[i] <- eval(parse(text=cells_with_color[i,color]))}
-
-#the partitions are named by their unique colors
-partitions <- unique(cells_with_color[,2])
-partitions
-nrow(partitions)
-
-# plotting by partition ---------------------------------------------------
-
-#load anatomical references
-outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"), invertFaces = T, conn = NULL, pid = 11)
-yolk <- catmaid_get_volume(4, rval = c("mesh3d", "catmaidmesh", "raw"), invertFaces = T, conn = NULL, pid = 11)
-acicula = nlapply(read.neurons.catmaid("^acicula$", pid=11, fetch.annotations = F), function(x) smooth_neuron(x, sigma=6000))
-
-## Function for desaturating colors by specified proportion
-desat <- function(cols, sat=0.5) {
-  X <- diag(c(1, sat, 1)) %*% rgb2hsv(col2rgb(cols))
-  hsv(X[1,], X[2,], X[3,])}
-#usage cc75 <- desat(cc, 0.75)
-
-nopen3d() # opens a pannable 3d window
-
-#iterate through partitions, read neurons from catmaid, plot and save png
-for (i in c(1:nrow(partitions))){
-  #retrieve a skid based on color key
-  subset_skids <- cells_with_color[color==partitions[i],skid]
+# plot neurons by colours matching network pic -----------------------------
+{
+#get names and colours and make df
+names <- sapply(conn_graph.visn$nodes$id, function(x) x)
+colors <- sapply(conn_graph.visn$nodes$color, function(x) x)
+module <- sapply(conn_graph.visn$nodes$partition, function(x) x)
+df <- data.frame(skids, colors, module)
   
-  mfrow3d(1, 1)  #defines the two scenes
-  par3d(windowRect = c(20, 30, 600, 800)) #to define the size of the rgl window
-  nview3d("ventral", extramat=rotationMatrix(0, 1, 0, 0))
-  par3d(zoom=0.52)
+#get skid for module 4, 2nd cell
+df[df$module==4,][2,][1]
   
-  plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.02,
-         col="#E2E2E2",plotengine = getOption("nat.plotengine") )
-  plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
-         col="#E2E2E2") 
-  plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.3,
-         col="black") 
-  
-  #read neurons based on skids and smooth them
-  neurons <- nlapply(read.neurons.catmaid(subset_skids, pid=11), function(x) smooth_neuron(x, sigma=6000))
-
-    #sample colors with different saturation 
-  colors=list(1:length(neurons))
-  for (j in c(1:length(neurons))){colors[j] <- desat(eval(parse(text=partitions[i])),sample(c(4:10/10),1))}
-
-  plot3d(neurons, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-        col=as.character(colors)) 
-  rgl.snapshot(paste("pictures/desmosomal_cluster", i, ".png",sep="") )
-  clear3d()
+#iterate through the neurons and plot them in the colour that was used in the network plot
+{
+for (i in 1:13){
+      print(i)
+      plot_background_ventral()
+      for (j in 1:nrow(df[df$module==i,])){
+        #read the skeleton based on the skid
+        skeleton <- nlapply(read.neurons.catmaid(df[df$module==i,][j,][[1]], pid=11),
+                            function(x) smooth_neuron(x, sigma=6000))
+        #plot skeleton
+        plot3d(skeleton, WithConnectors = F, WithNodes = F, soma=T, lwd=1,
+               rev = FALSE, fixup = F, add=T, alpha=1, col=df[df$module==i,][j,2])
+        }
+      filename = paste("pictures/desmo_conn_module_", i, ".png", sep = "")
+      rgl.snapshot(filename)
+      close3d()
+     }
+    }
 }
 
 
+# graph statistics --------------------------------------------------
+#assign degree to nodes
+V(desmo_conn_graph)$degree <-
+degree(
+  desmo_conn_graph,
+  v = V(desmo_conn_graph),
+  mode = "all",
+  loops = TRUE,
+  normalized = FALSE
+)
+
+#assign weighted degree to nodes
+V(desmo_conn_graph)$weighted_degree <-
+  strength(
+    desmo_conn_graph,
+    v = V(desmo_conn_graph),
+    mode = "all",
+    loops = TRUE,
+)
+
+desmo_conn_graph.tb <- desmo_conn_graph %>%
+  as_tbl_graph() %>%
+  activate(nodes) %>%
+  mutate("authority" = centrality_authority(weights = E(desmo_conn_graph)$weight)) %>%
+  mutate("pagerank" = centrality_pagerank(weights = E(desmo_conn_graph)$weight, 
+                                          directed = TRUE)) %>%
+  mutate("closeness" = centrality_closeness(weights = E(desmo_conn_graph)$weight,
+                                            mode = "all")) %>%
+  mutate("eigen" = centrality_eigen(directed = TRUE)) %>%
+  mutate("hub" = centrality_hub(weights = E(desmo_conn_graph)$weight) ) %>%
+  mutate("node_eccentricity" = node_eccentricity(mode = "all") ) %>%
+  mutate("node_is_cut" = node_is_cut() )  %>%
+  mutate("local_triangles" = local_triangles())
 
 
+#plot node degree distribution
+{
+plot_degree <- as.data.frame(V(desmo_conn_graph)$degree) %>%
+    ggplot(aes(x=V(desmo_conn_graph)$degree)) +
+    geom_histogram(binwidth = 0.05) +
+    scale_x_log10(breaks = c(1,2,5, 10,20))  +
+    labs(x="degree",y="# of nodes",title=" ") +
+    theme_minimal_hgrid() +
+    theme(axis.title = element_text(size=10),
+          axis.text = element_text(size=8),
+          panel.grid.minor = element_blank() ) 
+plot_degree  
+}
 
+#plot node degree against eccentricity
+{
+as_tibble(desmo_conn_graph.tb %>%
+    filter(group %in% c("muscle", "acicula", "circumacicular",
+                        "chaeta", "circumchaetal", "hemichaetal"))) %>%
+    ggplot(aes(x = degree, 
+               y = unlist(pagerank), 
+               color = group,
+               alpha = group,
+               shape = group,
+               size = node_eccentricity)) +
+    geom_point() +
+    scale_x_log10()  +
+    labs(x="degree",y="pagerank",
+         title=" ", color = 'cell class', size = 'eccentricity',
+         alpha = 'cell class', shape = 'cell class') +
+    theme_minimal_hgrid() +
+    scale_color_manual(values = list(muscle = "grey50",
+                                     acicula = "#CC79A7", 
+                                     circumacicular = "#0072B2", 
+                                     chaeta = "#E69F00", 
+                                     circumchaetal = 'black',
+                                     hemichaetal = 'red'),
+                       labels = c("muscle", "acicula", 
+                                  "circumacicular", 
+                                  "chaeta", 
+                                  "circumchaetal", 
+                                  "hemichaetal") )  +
+    scale_shape_manual(values = list(muscle = 1, 
+                                     acicula = 16, 
+                                     circumacicular = 15, 
+                                     chaeta = 17, 
+                                     circumchaetal = 18,
+                                     hemichaetal = 19),
+                       labels = c("muscle", 
+                                  "acicula", 
+                                  "circumacicular", 
+                                  "chaeta", 
+                                  "circumchaetal", 
+                                  "hemichaetal")) +
+    scale_alpha_manual(values = c(muscle = 0.2, 
+                                     acicula = 0.7, 
+                                     circumacicular = 0.6, 
+                                     chaeta = 0.3, 
+                                     circumchaetal = 0.3,
+                                     hemichaetal = 0.5),
+                       labels = c("muscle", 
+                                  "acicula", 
+                                  "circumacicular", 
+                                  "chaeta", 
+                                  "circumchaetal", 
+                                  "hemichaetal") ) +
+    theme(legend.position='right', 
+          axis.title.x = element_text(size=14),
+          axis.title.y = element_text(size=14),
+          axis.text = element_text(size=12),
+          legend.text = element_text(size=8),
+          legend.title = element_text(size=9),
+          legend.key.size = unit(3, "mm"),
+          panel.grid.minor = element_blank() ) +
+    guides(alpha = 'none')
+
+ggsave("pictures/connectome_weighted_degree_vs_pagerank.png", 
+         width=1600, height = 1200, units = "px", bg = "white")
+}
+
+#plot distribution of cell classes across partitions 
+{
+
+#overwrite group with type_of_cell (class)  
+plot_modules <- as_tibble(desmo_conn_graph.tb) %>%
+    group_by(partition) %>%         # Specify group indicator
+    filter(group %in%  c("muscle", "acicula", "circumacicular",
+                         "chaeta", "circumchaetal", "hemichaetal",
+                         "ciliated cell",
+                         "epithelia_cell") ) %>%
+    ggplot(aes(x = partition, fill = group)) +
+    geom_bar() +
+    scale_fill_manual(values = list(muscle = "grey50",
+                                    acicula = "#CC79A7", 
+                                    circumacicular = "#0072B2", 
+                                    chaeta = Okabe_Ito[1], 
+                                    circumchaetal = 'black',
+                                    hemichaetal = Okabe_Ito[2],
+                                    `ciliated cell` = Okabe_Ito[6],
+                      `epithelia_cell` = Okabe_Ito[3]),
+                      labels = c("muscle", "acicula", 
+                                 "circumacicular", 
+                                 "chaeta", 
+                                 "circumchaetal",
+                                 "hemichaetal",
+                                 "ciliated cell", "EC")  ) +
+    scale_x_continuous(limits = c(0,13), breaks = c(1,2,3,4,5,6,7,8,9,10,11,12)) +
+    labs(x = 'module', y = '# of cells', fill = 'cell class') +
+    theme_minimal()+
+    theme(axis.title = element_text(size=10),
+          axis.text = element_text(size=8),
+          legend.text = element_text(size=8),
+          legend.title = element_text(size=10),
+          legend.key.size = unit(3, "mm"),
+          panel.grid.minor = element_blank(),
+          legend.position = 'right')
+
+plot_modules
+
+}
+
+
+# make table about cell statistics -------------------------------------
+
+{
+  
+#get counts of cell types and nodes/edges
+N_mus <- dim(as_tibble(desmo_conn_graph.tb) %>%
+    group_by(partition) %>%         # Specify group indicator
+    filter(group %in%  c("muscle") ))[1]
+
+N_EC <- dim(as_tibble(desmo_conn_graph.tb) %>%
+               group_by(partition) %>%         # Specify group indicator
+               filter(group %in%  c("epithelia_cell") ))[1]
+
+N_bl <- dim(as_tibble(desmo_conn_graph.tb) %>%
+              group_by(partition) %>%         # Specify group indicator
+              filter(group %in%  c("basal lamina") ))[1]
+
+N_ch_ac <- dim(as_tibble(desmo_conn_graph.tb) %>%
+      group_by(partition) %>%         # Specify group indicator
+      filter(group %in%  c("chaeta", "acicula") ))[1]
+
+N_cil <- dim(as_tibble(desmo_conn_graph.tb) %>%
+                 group_by(partition) %>%         # Specify group indicator
+                 filter(group %in%  c("ciliated cell") ))[1]
+
+N_circ <- dim(as_tibble(desmo_conn_graph.tb) %>%
+      group_by(partition) %>%         # Specify group indicator
+      filter(group %in%  c("circumacicular", "circumchaetal") ))[1]
+
+N_hemi <- dim(as_tibble(desmo_conn_graph.tb) %>%
+                group_by(partition) %>%         # Specify group indicator
+                filter(group %in%  c("hemichaetal") ))[1]
+
+N_node <- length(desmo_conn_graph.tb %>%
+      select(name)) 
+
+N_frag <- dim(as_tibble(desmo_conn_graph.tb) %>%
+  filter(segment == "fragment") )[1]
+
+N_edge <- length(E(as.igraph(desmo_conn_graph.tb)))
+
+table <- plot_ly(
+    type = 'table',
+    columnwidth = c(10, 7),
+    columnorder = c(0, 1),
+    header = list(
+      values = c("Type","Number"),
+      align = c("center", "center"),
+      line = list(width = 1, color = 'black'),
+      fill = list(color = c("#E69F00", "#0072B2")),
+      font = list(family = "Arial", size = 14, color = "white")
+    ),
+    cells = list(
+      values = rbind(c("total nodes in the connectome", 
+                       "nodes with soma",
+                       "in-graph desmosomes", 
+                       "muscle cells",
+                       "epidermal cells", 
+                       "aciculo-/ chaetoblasts", 
+                       "circumacicular/-chaetal cells",
+                       "ciliary band cells",
+                       "hemichaetal"), 
+                     c(N_node,
+                       N_node-N_frag,
+                       N_edge,
+                       N_mus, 
+                       N_EC, 
+                       N_ch_ac,
+                       N_circ, 
+                       N_cil,
+                       N_hemi)),
+      align = c("center", "center"),
+      line = list(color = "black", width = 0.3),
+      font = list(family = "Arial", size = 13, color = c("black"))
+    ))
+  
+table
+
+saveNetwork(table, "pictures/desmo_connectome_stats_table.html")
+webshot2::webshot(url="pictures/desmo_connectome_stats_table.html",
+                    file="pictures/desmo_connectome_stats_table.png",
+                    vwidth=400, vheight=300, #define the size of the browser window
+                    cliprect = c(50,20,350, 220), zoom=10)
+  
+}
+
+# assemble figure ---------------------------------------------------------
+
+{
+
+#read with image_read (magick package) and rotate
+img_conn <- image_rotate(image_read("pictures/Full_desmo_connectome_modules_webshot.png"), 180)
+
+panel_mod1 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_1.png")) +
+    draw_label("1) parapodial (sg3l)", x = 0.5, y = 0.05, size = 9)
+panel_mod2 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_2.png")) +
+    draw_label("2) parapodial (sg1l)", x = 0.5, y = 0.05, size = 9)
+panel_mod3 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_3.png")) +
+    draw_label("3) dorsolateral (r)", x = 0.5, y = 0.05, size = 9)
+panel_mod4 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_4.png")) +
+    draw_label("4) ventrolateral (l)", x = 0.5, y = 0.05, size = 9)
+panel_mod5<- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_5.png")) +
+    draw_label("5) parapodial (sg3r)", x = 0.5, y = 0.05, size = 9)
+panel_mod6 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_6.png")) +
+    draw_label("6) sg0 and head", x = 0.5, y = 0.05, size = 9)
+panel_mod7 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_7.png")) +
+    draw_label("7) parapodial (sg2l)", x = 0.5, y = 0.05, size = 9)
+panel_mod8 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_8.png")) +
+    draw_label("8) dorsolateral (l)", x = 0.5, y = 0.05, size = 9)
+panel_mod9 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_9.png")) +
+    draw_label("9) parapodial (sg1r)", x = 0.5, y = 0.05, size = 9)
+panel_mod10 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_10.png")) +
+  draw_label("10) parapodial (sg2r)", x = 0.5, y = 0.05, size = 9)
+panel_mod11 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_11.png")) +
+    draw_label("11) oblique (sg2)", x = 0.5, y = 0.05, size = 9)
+panel_mod12 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_12.png")) +
+    draw_label("12) ventrolateral (r)", x = 0.5, y = 0.05, size = 9)
+
+panel_conn <- ggdraw() + draw_image(img_conn) +
+    draw_label("sg0 and head", x=0.5, y = 0.9, size = 9) +
+    draw_label("parapodial (sg1l)", x=0.65, y = 0.72, size = 9) +
+    draw_label("parapodial (sg1r)", x=0.3, y = 0.68, size = 9) +
+    draw_label("oblique (sg2)", x=0.49, y = 0.54, size = 9) +
+    draw_label("parapodial (sg2l)", x=0.67, y = 0.48, size = 9) +
+    draw_label("parapodial (sg2r)", x=0.3, y = 0.48, size = 9) +
+    draw_label("ventrolateral (l)", x=0.88, y = 0.78, size = 9) +
+    draw_label("ventrolateral (r)", x=0.25, y = 0.8, size = 9) +
+    draw_label("dorsolateral (l)", x=0.88, y = 0.25, size = 9)  +
+    draw_label("dorsolateral (r)", x=0.17, y = 0.32, size = 9) +
+    draw_label("parapodial (sg3l)", x=0.6, y = 0.25, size = 9) +
+    draw_label("parapodial (sg3r)", x=0.38, y = 0.16, size = 9) 
+  
+panel_table <- ggdraw() + draw_image(readPNG("pictures/desmo_connectome_stats_table.png"))
+  
+
+#define layout with textual representation
+layout_A <- "
+#BCD#
+#BCD#
+#BCD#
+HIIIJ
+HIIIJ
+HIIIJ
+KIIIL
+KIIIL
+KIIIL
+MIIIN
+MIIIN
+MIIIN
+#PQR#
+#PQR#
+#PQR#
+"
+panel_A <-  panel_mod9 + panel_mod6 + panel_mod2 + 
+    panel_mod12 + panel_conn + panel_mod4 +
+    panel_mod10 + panel_mod7 + 
+    panel_mod3 + panel_mod8 + 
+    panel_mod5 + panel_mod11 + panel_mod1 + 
+    plot_layout(design = layout_A)
+#convert into single panel
+panel_A <- ggdraw(panel_A)
+
+layout <- "
+AAAAAAAAAAAAAAAAAA
+BBBBBBBBBCCCCCDDDD
+"
+  
+Fig_conn <- panel_A + 
+  panel_table + plot_modules + plot_degree  +
+  plot_layout(design = layout, heights = c(3.8,1)) +
+  plot_annotation(tag_levels = 'A') & 
+  theme(plot.tag = element_text(size = 12, face='plain'))
+  
+ggsave("figures/Figure3.pdf", limitsize = FALSE, 
+         units = c("px"), Fig_conn, width = 2600, height = 3000)
+  
+}
+
+ggsave("figures/Figure3.png", limitsize = FALSE, 
+       units = c("px"), Fig_conn, width = 2600, height = 3000, bg='white')
 
 
 
