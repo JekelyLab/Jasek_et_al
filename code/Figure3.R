@@ -1,11 +1,10 @@
-#Code to generate the anatomical panels of Figure 3 showing the different Leiden modules of the desmosomal connectome graph from Jasek et al 2021
-#Code to generate morphological renderings for Figure3 of the Jasek et al. Desmosomal connectome paper
-#needs as input a json file exported from gephi with module annotations (clusters)
+#Code to generate Figure 3 showing the different Leiden modules of the desmosomal connectome graph from Jasek et al 2021
 #Gaspar Jekely 
 
 source("code/Packages_and_Connection.R")
 
 #read the saved igraph format graph file from supplements/
+#this file was generated with the desmo_connectome_graph.R script
 desmo_conn_graph <- readRDS("supplements/desmo_connectome_graph_igraph.rds")
 
 #read the saved visNetwork file from supplements/
