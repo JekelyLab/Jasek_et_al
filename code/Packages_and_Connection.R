@@ -51,7 +51,8 @@ Tol_muted <- c('#88CCEE', '#44AA99', '#117733', '#332288', '#DDCC77', '#999933',
 library(RColorBrewer)
 display.brewer.all(colorblindFriendly = TRUE)
 brewer12 <- brewer.pal(12, 'Paired')
-
+Reds <- brewer.pal(9, 'Reds')
+pie(rep(1,6),col=Reds[3:9], Reds[3:9])
 
 #read volumes
 #These volumes are 3D structures in the animal's body and provide background 
@@ -87,4 +88,14 @@ plot_background_ventral <- function(x){
          col="grey70")
   par3d(zoom=0.48)
 }
+
+#function to retrieve skids based on two annotations
+skids_by_2annotations <- function(annotation1,annotation2){
+  annotations_cells = list()
+  annotations_cells[[1]] <- catmaid_get_annotations_for_skeletons(annotation1, pid = 11,conn=conn_http1)
+  #we retrieve those skeletons that are also annotated with right_side
+  return(unlist(lapply(annotations_cells,function(x) x[x$annotation==annotation2,1])))
+}
+
+
 
