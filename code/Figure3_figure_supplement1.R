@@ -35,6 +35,8 @@ conn_grouped_graph.visn$nodes$CATMAID_name  <- sub("\\s.*$", "", conn_grouped_gr
 conn_grouped_graph.visn$nodes$label <-  conn_grouped_graph.visn$nodes$CATMAID_name
 
 # generate visNet graph ---------------------------
+min(conn_grouped_graph.visn$edges$value)
+max(conn_grouped_graph.visn$edges$value)
 
 visNet <- visNetwork(conn_grouped_graph.visn$nodes, 
                      conn_grouped_graph.visn$edges) %>% 
@@ -83,7 +85,7 @@ visNet
 saveNetwork(visNet, "source_data/Figure3_figure_supplement1_source_data2.html", selfcontained = TRUE)
 #create png snapshot
 webshot2::webshot(url="source_data/Figure3_figure_supplement1_source_data2.html",
-                    file="pictures/Grouped_desmo_connectome.png",
+                    file="images_notR/Grouped_desmo_connectome.png",
                     vwidth = 1500, vheight = 1500, #define the size of the browser window
                     cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
 
@@ -92,7 +94,7 @@ webshot2::webshot(url="source_data/Figure3_figure_supplement1_source_data2.html"
 # assemble figure ---------------------------------------------------------
 
 {
-panel_ch <- ggdraw() + draw_image(readPNG("pictures/Desmo_grouped_chaeta.png")) +
+panel_ch <- ggdraw() + draw_image(readPNG("images_notR/Desmo_grouped_chaeta.png")) +
   draw_label("partners of chaetae", x = 0.5, y = 0.99, size = 9)
 panel_ERcirc <- ggdraw() + draw_image(readPNG("images_notR/Desmo_grouped_ERcirc.png")) +
   draw_label("partners of chaetal follicle 1", x = 0.5, y = 0.99, size = 9)
