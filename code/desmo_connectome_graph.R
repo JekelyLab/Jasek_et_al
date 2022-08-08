@@ -315,7 +315,7 @@ saveRDS(conn_grouped_graph.visn, "source_data/Figure3_figure_supplement1_source_
 writeLines(capture.output(dput(conn_grouped_graph.visn)), "source_data/Figure3_figure_supplement1_source_data1.txt")
 
 #read the saved visNetwork file from supplements/
-conn_grouped_graph.visn <- readRDS("supplements/Figure3_figure_supplement1_source_data1.rds")
+conn_grouped_graph.visn <- readRDS("source_data/Figure3_figure_supplement1_source_data1.rds")
 
 }
 
