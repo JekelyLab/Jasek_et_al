@@ -306,10 +306,10 @@ conn_grouped_graph.visn <- toVisNetworkData(desmo_grouped_graph)
   
 ## copy column "weight" to new column "value" in list "edges"
 conn_grouped_graph.visn$edges$value <- conn_grouped_graph.visn$edges$weight
-  
+conn_graph.visn <- toVisNetworkData(desmo_conn_graph)
 #save both ungrouped and grouped vis graph with annotations as R data file and txt file printed with dput() to get an exact copy
 saveRDS(conn_graph.visn, "source_data/Figure3_source_data2.rds")
-writeLines(capture.output(dput(conn_grouped_graph.visn)), "source_data/Figure3_source_data2.txt")
+writeLines(capture.output(dput(conn_graph.visn)), "source_data/Figure3_source_data2.txt")
 
 saveRDS(conn_grouped_graph.visn, "source_data/Figure3_figure_supplement1_source_data1.rds")
 writeLines(capture.output(dput(conn_grouped_graph.visn)), "source_data/Figure3_figure_supplement1_source_data1.txt")
