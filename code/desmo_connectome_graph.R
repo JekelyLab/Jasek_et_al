@@ -252,9 +252,9 @@ desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
   mutate(celltype_num = unlist(celltype_id_num))
 
 #save in igraph format
-saveRDS(as.igraph(desmo_conn_graph.tb), "supplements/desmo_connectome_graph_igraph.rds")
+saveRDS(as.igraph(desmo_conn_graph.tb), "source_data/Figure3_source_data1.rds")
 #read the saved igraph format graph file from supplements/
-desmo_conn_graph <- readRDS("supplements/desmo_connectome_graph_igraph.rds")
+desmo_conn_graph <- readRDS("source_data/Figure3_source_data1.rds")
 
 
 # contract vertices by cell type to make grouped graph ---------------------------------
@@ -307,12 +307,15 @@ conn_grouped_graph.visn <- toVisNetworkData(desmo_grouped_graph)
 ## copy column "weight" to new column "value" in list "edges"
 conn_grouped_graph.visn$edges$value <- conn_grouped_graph.visn$edges$weight
   
-#save vis graph with annotations as R data file and txt file printed with dput() to get an exact copy
-saveRDS(conn_grouped_graph.visn, "supplements/desmo_grouped_connectome_graph.rds")
-writeLines(capture.output(dput(conn_grouped_graph.visn)), "supplements/desmo_grouped_connectome_graph.txt")
+#save both ungrouped and grouped vis graph with annotations as R data file and txt file printed with dput() to get an exact copy
+saveRDS(conn_graph.visn, "source_data/Figure3_source_data2.rds")
+writeLines(capture.output(dput(conn_grouped_graph.visn)), "source_data/Figure3_source_data2.txt")
+
+saveRDS(conn_grouped_graph.visn, "source_data/Figure3_figure_supplement1_source_data1.rds")
+writeLines(capture.output(dput(conn_grouped_graph.visn)), "source_data/Figure3_figure_supplement1_source_data1.txt")
 
 #read the saved visNetwork file from supplements/
-conn_grouped_graph.visn <- readRDS("supplements/desmo_grouped_connectome_graph.rds")
+conn_grouped_graph.visn <- readRDS("supplements/Figure3_figure_supplement1_source_data1.rds")
 
 }
 
