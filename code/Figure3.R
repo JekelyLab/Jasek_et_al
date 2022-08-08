@@ -5,10 +5,10 @@ source("code/Packages_and_Connection.R")
 
 #read the saved igraph format graph file from supplements/
 #this file was generated with the desmo_connectome_graph.R script
-desmo_conn_graph <- readRDS("supplements/desmo_connectome_graph_igraph.rds")
+desmo_conn_graph <- readRDS("source_data/Figure3_source_data1.rds")
 
 #read the saved visNetwork file from supplements/
-conn_graph.visn <- readRDS("supplements/desmo_connectome_graph.rds")
+conn_graph.visn <- readRDS("source_data/Figure3_source_data2.rds")
 
 # plot graph with coordinates from gephi ----------------------------------
 
@@ -64,7 +64,7 @@ webshot2::webshot(url="pictures/Full_desmo_connectome_modules.html",
 names <- sapply(conn_graph.visn$nodes$id, function(x) x)
 colors <- sapply(conn_graph.visn$nodes$color, function(x) x)
 module <- sapply(conn_graph.visn$nodes$partition, function(x) x)
-df <- data.frame(skids, colors, module)
+df <- data.frame(names, colors, module)
   
 #get skid for module 4, 2nd cell
 df[df$module==4,][2,][1]
