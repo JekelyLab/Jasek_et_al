@@ -159,7 +159,7 @@ for(i in seq_along(skids)){
     {
       segment_of_cell[i] <- annot_to_search[j]
       break()
-    } else {segment_of_cell[i] <- "fragment" }
+    } else {segment_of_cell[i] <- "fragmentum" }
   } 
   print (i)
 }
@@ -174,7 +174,7 @@ for(i in seq_along(skids)){
     {
       side_of_cell[i] <- annot_to_search[j]
       break()
-    } else {side_of_cell[i] <- "other" }
+    } else {side_of_cell[i] <- "fragmentum" }
   } 
   print (i)
 }
@@ -185,14 +185,13 @@ desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
   mutate(class = unlist(type_of_cell)) %>%
   mutate(CATMAID_name = unlist(cell_names)) %>%
   mutate(segment = unlist(segment_of_cell)) %>%
-  mutate(side = unlist(side_of_cell)) %>%
-  mutate(celltype = unlist(celltype_id))
+  mutate(side = unlist(side_of_cell))
 
 #search celltype_non_neuronal annotations
 celltype_id <- list()
-annot_to_search <- c("fragmentum", "basal lamina", "with_soma", 
-                     paste("celltype_non_neuronal", c(1:92), sep = "")
-                     )
+annot_to_search <- c("fragmentum", "basal lamina", 
+                     paste("celltype_non_neuronal", c(1:92), sep = ""),
+                     "with_soma")
 
 #search annotations and assign to celltype_id list (annotations will be
 #progressively overwritten if duplicate)
@@ -212,6 +211,9 @@ for(i in seq_along(skids)){
 #add type of cell to node$group (can be used for visualisation)
 desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
   mutate(celltype = unlist(celltype_id))
+#if there are still nodes with onle 'other' annotation, delete these
+desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
+  filter(celltype != 'other')
 
 #check unique celltype ids
 N_unique_celltype_ids <- dim(unique(as_tibble(desmo_conn_graph.tb %>%
@@ -222,12 +224,11 @@ N_unique_celltype_ids <- dim(unique(as_tibble(desmo_conn_graph.tb %>%
 celltype_id_list <- as.data.frame(unique(as_tibble(desmo_conn_graph.tb %>%
                                                      select(celltype))) %>%
                                     mutate(grouped_id = c(1:N_unique_celltype_ids)) )
-
 #run again cell type annotation search and add id number as well
 #search celltype_non_neuronal annotations
 celltype_id <- list()
 celltype_id_num <- list()
-annot_to_search <- celltype_id_list[,1]
+annot_to_search <- rev(celltype_id_list[,1])
 #check if 'other' is in the annotation list (should not be)
 celltype_id_list[celltype_id_list == "other"]
 
@@ -261,155 +262,130 @@ desmo_conn_graph <- readRDS("supplements/desmo_connectome_graph_igraph.rds")
 mapping_df <- data.frame(as_tibble(desmo_conn_graph.tb %>%
             select(celltype_num) ))[,1]
 
+V(desmo_conn_graph)$weight <- strength(desmo_conn_graph, 
+                                       vids = V(desmo_conn_graph),
+                                       mode = 'all',
+                                       loops = TRUE)
+
 desmo_grouped_graph <- contract.vertices(desmo_conn_graph, 
                                          mapping = mapping_df,
-                  vertex.attr.comb = list(name = "first", 
-                                          celltype = "first",
-                                          "max"))
+                  vertex.attr.comb = list(x="max", 
+                                          y = "max",
+                                          name = "first", 
+                                          "first"))
 
 #sum edges between the same nodes with simplify
-desmo_grouped_graph <- igraph::simplify(desmo_grouped_graph, remove.loops = FALSE,
-                                     edge.attr.comb = list(weight = "sum", function(x) length(x)) )
-
-desmo_grouped_graph %>%
+desmo_grouped_graph <- igraph::simplify(desmo_grouped_graph, 
+                          remove.loops = FALSE,
+                          edge.attr.comb = list(weight = "sum", 
+                                  function(x) length(x)) )
+V(desmo_grouped_graph)$class
+desmo_grouped_graph.tb <- desmo_grouped_graph %>%
   as_tbl_graph() %>%
-  select(celltype, celltype_num)
+  select(celltype, CATMAID_name, class, weight) %>%
+  filter(class != "basal lamina") %>%
+  filter(class != "other") %>%
+#  filter(class != "epithelia_cell") %>%
+  filter(CATMAID_name != "character(0)")
+
+#get the largest connected component
+desmo_grouped_graph <- as.igraph(desmo_grouped_graph.tb)
+V(desmo_grouped_graph)$class
+cl <- components(desmo_grouped_graph)
+#the largest subnetwork is membership 1
+length(which(cl$membership == 1))
+
+#create a new graph only from the largest connected component
+desmo_grouped_graph = induced_subgraph(desmo_grouped_graph, which(cl$membership == 1))
 
 # VisNetwork conversion ---------------------------------------------------
 
 {
 #convert to visNetwork graph
-conn_graph.visn <- toVisNetworkData(as.igraph(desmo_conn_graph.tb))  
+conn_grouped_graph.visn <- toVisNetworkData(desmo_grouped_graph)  
   
 ## copy column "weight" to new column "value" in list "edges"
-conn_graph.visn$edges$value <- conn_graph.visn$edges$weight
-  
-#color will be assigned by group (type of cell)
-#visGroups - $nodes$color takes precedence
+conn_grouped_graph.visn$edges$value <- conn_grouped_graph.visn$edges$weight
   
 #save vis graph with annotations as R data file and txt file printed with dput() to get an exact copy
-saveRDS(conn_graph.visn, "supplements/desmo_connectome_graph.rds")
-writeLines(capture.output(dput(conn_graph.visn)), "supplements/desmo_connectome_graph.txt")
+saveRDS(conn_grouped_graph.visn, "supplements/desmo_grouped_connectome_graph.rds")
+writeLines(capture.output(dput(conn_grouped_graph.visn)), "supplements/desmo_grouped_connectome_graph.txt")
 
 #read the saved visNetwork file from supplements/
-conn_graph.visn <- readRDS("supplements/desmo_connectome_graph.rds")
+conn_grouped_graph.visn <- readRDS("supplements/desmo_grouped_connectome_graph.rds")
 
 }
 
-# plot graph with coordinates from gephi ----------------------------------
+# plot grouped graph ----------------------------------
 
 #overwrite group value (partition) with side value or other value (for colouring)
-#conn_graph.visn$nodes$group <-  as.character(conn_graph.visn$nodes$side)
+conn_grouped_graph.visn$nodes$group <-  as.character(conn_grouped_graph.visn$nodes$class)
 
+## copy column "weight" to new column "value" in list "edges"
+conn_grouped_graph.visn$edges$value <- sqrt(conn_grouped_graph.visn$edges$weight)
+## copy column "weight" to new column "value" in list "nodes"
+conn_grouped_graph.visn$nodes$value <- conn_grouped_graph.visn$nodes$weight
 #for plotting with different colors, remove colour info (which takes precedence over group colour)
-#conn_graph.visn$nodes$color <- c()
+conn_grouped_graph.visn$nodes$color <- c()
+Reds <- brewer.pal(9, 'Reds')
 
 {
-  coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
   
-  visNet <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
-    visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
-    visEdges(smooth = list(type = 'curvedCW', roundness=0),
+#shorten names after _ and \s
+conn_grouped_graph.visn$nodes$CATMAID_name  <- sub("_.*$", "", conn_grouped_graph.visn$nodes$CATMAID_name)
+conn_grouped_graph.visn$nodes$CATMAID_name  <- sub("\\s.*$", "", conn_grouped_graph.visn$nodes$CATMAID_name)
+
+#assign name to label
+conn_grouped_graph.visn$nodes$label <-  conn_grouped_graph.visn$nodes$CATMAID_name
+conn_grouped_graph.visn$nodes
+visNet <- visNetwork(conn_grouped_graph.visn$nodes, 
+                     conn_grouped_graph.visn$edges) %>% 
+  visIgraphLayout(layout = "layout_nicely", physics = TRUE) %>%
+  visPhysics(solver = "forceAtlas2Based", 
+               forceAtlas2Based = list(gravitationalConstant = -150000,
+                                       centralGravity = 10)) %>%
+  visEdges(smooth = list(type = 'curvedCW', roundness=0),
              scaling=list(min=1, max=25),
-             color = list(inherit=TRUE, opacity=0.7),
-             arrows = list(to = list(enabled = TRUE, 
-                                     scaleFactor = 0.5, type = 'arrow'))) %>%
-    visNodes(borderWidth=0.3, 
+             color = list(color = "#454545", opacity = 0.2)) %>%
+  visNodes(borderWidth=0.3, 
              color = list(border='black'),
-             opacity = 1, 
-             font = list(size = 20)) %>%
-    visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
-                                       algorithm = 'hierarchical',
-                                       labelOnly=FALSE), 
-               width = 1500, height = 1500, autoResize = FALSE) %>%
-    visInteraction(dragNodes = TRUE, dragView = TRUE,
+             scaling=list(min=20, max=50),
+             font = list(size = 35, 
+                         color = "black", 
+                         background = "#DEDEDE")) %>%
+  visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
+                                     algorithm = 'hierarchical',
+                                     labelOnly=FALSE), 
+             width = 1500, height = 1500, autoResize = FALSE) %>%
+  visInteraction(dragNodes = TRUE, dragView = TRUE,
                    zoomView = TRUE, hover=TRUE,
-                   multiselect=TRUE) 
-#the visGroups option can be used to define color and shape based 
-#on annotations under $nodes$group e.g.
-#        %>%
-#    visGroups(groupname = "left_side", color="black", shape = "dot", 
-#              opacity=1) %>%
-#    visGroups(groupname = "right_side", shape = "diamond", 
-#              opacity=0.5, color="red")
+                   multiselect=TRUE)  %>%
+  visGroups(groupname = "muscle", color='grey', shape = "dot", 
+            opacity=0.5) %>%
+  visGroups(groupname = "epithelia_cell", color="#0072B2", shape = "dot", 
+            opacity=1) %>%
+  visGroups(groupname = "circumchaetal", color="#56B4E9", shape = "triangle", 
+            opacity=1) %>%
+  visGroups(groupname = "circumacicular", color="#56B4E9", shape = "triangle", 
+            opacity=1) %>%
+  visGroups(groupname = "acicula", color="#D55E00", shape = "square", 
+            opacity=1) %>%
+  visGroups(groupname = "chaeta", color="#D55E00", shape = "square", 
+            opacity=1) %>%
+  visGroups(groupname = "hemichaetal", color="#56B4E9", shape = "triangle", 
+            opacity=1) %>%
+  visGroups(groupname = "ciliated cell", color="#E69F00", shape = "dot", 
+                                     opacity=0.8) 
 
 visNet
   
 #save as html
-saveNetwork(visNet, "pictures/Full_desmo_connectome_modules.html", selfcontained = TRUE)
+saveNetwork(visNet, "pictures/Grouped_desmo_connectome.html", selfcontained = TRUE)
 #create png snapshot
-webshot2::webshot(url="pictures/Full_desmo_connectome_modules.html",
-                    file="pictures/Full_desmo_connectome_modules_webshot.png",
+webshot2::webshot(url="pictures/Grouped_desmo_connectome.html",
+                    file="pictures/Grouped_desmo_connectome.png",
                     vwidth = 1500, vheight = 1500, #define the size of the browser window
                     cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
 }
 
 
-
-
-{
-#convert to visNetwork graph
-grouped_conn_graph.visn <- toVisNetworkData(desmo_grouped_graph)  
-  
-  ## copy column "weight" to new column "value" in list "edges"
-  conn_graph.visn$edges$value <- conn_graph.visn$edges$weight
-  
-  #color will be assigned by group (type of cell)
-  #visGroups - $nodes$color takes precedence
-  
-  #save vis graph with annotations as R data file and txt file printed with dput() to get an exact copy
-  saveRDS(conn_graph.visn, "supplements/desmo_connectome_graph.rds")
-  writeLines(capture.output(dput(conn_graph.visn)), "supplements/desmo_connectome_graph.txt")
-  
-  #read the saved visNetwork file from supplements/
-  conn_graph.visn <- readRDS("supplements/desmo_connectome_graph.rds")
-  
-}
-
-# plot graph with coordinates from gephi ----------------------------------
-
-#overwrite group value (partition) with side value or other value (for colouring)
-#conn_graph.visn$nodes$group <-  as.character(conn_graph.visn$nodes$side)
-
-#for plotting with different colors, remove colour info (which takes precedence over group colour)
-#conn_graph.visn$nodes$color <- c()
-
-{
-  coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
-  
-  visNet <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
-    visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
-    visEdges(smooth = list(type = 'curvedCW', roundness=0),
-             scaling=list(min=1, max=25),
-             color = list(inherit=TRUE, opacity=0.7),
-             arrows = list(to = list(enabled = TRUE, 
-                                     scaleFactor = 0.5, type = 'arrow'))) %>%
-    visNodes(borderWidth=0.3, 
-             color = list(border='black'),
-             opacity = 1, 
-             font = list(size = 20)) %>%
-    visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
-                                       algorithm = 'hierarchical',
-                                       labelOnly=FALSE), 
-               width = 1500, height = 1500, autoResize = FALSE) %>%
-    visInteraction(dragNodes = TRUE, dragView = TRUE,
-                   zoomView = TRUE, hover=TRUE,
-                   multiselect=TRUE) 
-  #the visGroups option can be used to define color and shape based 
-  #on annotations under $nodes$group e.g.
-  #        %>%
-  #    visGroups(groupname = "left_side", color="black", shape = "dot", 
-  #              opacity=1) %>%
-  #    visGroups(groupname = "right_side", shape = "diamond", 
-  #              opacity=0.5, color="red")
-  
-  visNet
-  
-  #save as html
-  saveNetwork(visNet, "pictures/Full_desmo_connectome_modules.html", selfcontained = TRUE)
-  #create png snapshot
-  webshot2::webshot(url="pictures/Full_desmo_connectome_modules.html",
-                    file="pictures/Full_desmo_connectome_modules_webshot.png",
-                    vwidth = 1500, vheight = 1500, #define the size of the browser window
-                    cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
-}

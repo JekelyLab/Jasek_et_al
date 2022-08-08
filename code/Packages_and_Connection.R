@@ -53,6 +53,7 @@ display.brewer.all(colorblindFriendly = TRUE)
 brewer12 <- brewer.pal(12, 'Paired')
 Reds <- brewer.pal(9, 'Reds')
 pie(rep(1,6),col=Reds[3:9], Reds[3:9])
+pie(rep(1,8),col=Okabe_Ito[1:8], Okabe_Ito[1:8])
 
 #read volumes
 #These volumes are 3D structures in the animal's body and provide background 
