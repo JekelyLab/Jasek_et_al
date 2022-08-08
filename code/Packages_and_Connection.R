@@ -31,6 +31,9 @@ library(RColorBrewer)
 library(visNetwork)
 library(plotly)
 
+library(gridExtra) #to render tables as grobs (grid graphical objects)
+library(grid)
+
 #create directory for R-generated pictures for figure panels (ignored by git)
 dir.create("pictures")
 dir.create("figures")
@@ -98,5 +101,20 @@ skids_by_2annotations <- function(annotation1,annotation2){
   return(unlist(lapply(annotations_cells,function(x) x[x$annotation==annotation2,1])))
 }
 
+
+#define function to retrieve skids from a neuron list based on one to three annotations
+skids_by_annotation <- function(neuron_list,annotation1,annotation2,annotation3){
+  skids1 <- unlist(lapply(neuron_list,function(x) x[x$annotation==annotation1,1]))
+  if(missing(annotation2)){return(skids1) #if annotation2 is missing, will return skids matching the first annotation
+  } else {
+    skids2 <- unlist(lapply(neuron_list,function(x) x[x$annotation==annotation2,1]))
+  }
+  if(missing(annotation3)){return(intersect(skids1,skids2)) #if annotation3 is missing, will return skids matching annotations 1 and 2
+  }   else  {
+    skids3 <- unlist(lapply(neuron_list,function(x) x[x$annotation==annotation3,1]))
+  }
+  skids1_2 <- intersect(skids1,skids2)
+  return(intersect(skids1_2,skids3)) #will return the shared skids between the three annotations  
+}
 
 
