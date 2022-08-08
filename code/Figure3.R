@@ -12,50 +12,70 @@ conn_graph.visn <- readRDS("source_data/Figure3_source_data2.rds")
 
 # plot graph with coordinates from gephi ----------------------------------
 
-#overwrite group value (partition) with side value or other value (for colouring)
-#conn_graph.visn$nodes$group <-  as.character(conn_graph.visn$nodes$side)
-
-#for plotting with different colors, remove colour info (which takes precedence over group colour)
-#conn_graph.visn$nodes$color <- c()
-
 {
 coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
-  
+
+conn_graph.visn$edges$value <- conn_graph.visn$edges$weight
+conn_graph.visn$nodes$value <- conn_graph.visn$nodes$weight
+conn_graph.visn$nodes$label <- conn_graph.visn$nodes$CATMAID_name
+
+#save for supplement
 visNet <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
     visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
     visEdges(smooth = list(type = 'curvedCW', roundness=0),
-             scaling=list(min=1, max=25),
-             color = list(inherit=TRUE, opacity=0.7),
-             arrows = list(to = list(enabled = TRUE, 
-                                     scaleFactor = 0.5, type = 'arrow'))) %>%
+             scaling=list(min=2, max=15),
+             color = list(inherit=TRUE, opacity=0.5)) %>%
     visNodes(borderWidth=0.3, 
              color = list(border='black'),
              opacity = 1, 
-             font = list(size = 20)) %>%
+             scaling=list(min=15, max=50),
+             font = list(size = 15)) %>%
     visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
                                        algorithm = 'hierarchical',
                                        labelOnly=FALSE), 
-               width = 1500, height = 1500, autoResize = FALSE) %>%
+               width = 1500, 
+               height = 1500,
+               autoResize = TRUE) %>%
     visInteraction(dragNodes = TRUE, dragView = TRUE,
                    zoomView = TRUE, hover=TRUE,
-                   multiselect=TRUE) 
-#the visGroups option can be used to define color and shape based 
-#on annotations under $nodes$group e.g.
-  #        %>%
-  #    visGroups(groupname = "left_side", color="black", shape = "dot", 
-  #              opacity=1) %>%
-  #    visGroups(groupname = "right_side", shape = "diamond", 
-  #              opacity=0.5, color="red")
-  
+                   multiselect=TRUE)
+
 visNet
-  
 #save as html
-saveNetwork(visNet, "pictures/Full_desmo_connectome_modules.html", selfcontained = TRUE)
+saveNetwork(visNet, "source_data/Figure3_source_data3.html", selfcontained = TRUE)
+
+#save for figure without node labels
+visNet <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
+  visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
+  visEdges(smooth = list(type = 'curvedCW', roundness=0),
+           scaling=list(min=2, max=15),
+           color = list(inherit=TRUE, opacity=0.5)) %>%
+  visNodes(borderWidth=0.3, 
+           color = list(border='black'),
+           opacity = 1, 
+           scaling=list(min=15, max=50),
+           font = list(size = 0)) %>%
+  visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
+                                     algorithm = 'hierarchical',
+                                     labelOnly=FALSE), 
+             width = 1500, 
+             height = 1500,
+             autoResize = TRUE) %>%
+  visInteraction(dragNodes = TRUE, dragView = TRUE,
+                 zoomView = TRUE, hover=TRUE,
+                 multiselect=TRUE)
+
+#save as html
+saveNetwork(visNet, "pictures/Full_desmo_connectome_modules_webshot.html", selfcontained = TRUE)
 #create png snapshot
-webshot2::webshot(url="pictures/Full_desmo_connectome_modules.html",
-                    file="pictures/Full_desmo_connectome_modules_webshot.png",
-                    vwidth = 1500, vheight = 1500, #define the size of the browser window
-                    cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
+webshot::webshot(url="pictures/Full_desmo_connectome_modules_webshot.html",
+                  file="pictures/Full_desmo_connectome_modules_webshot.png",
+                  vwidth = 1500,
+                  vheight = 1500, #define the size of the browser window
+                  cliprect = c(50, 60, 1500, 1500), 
+                  zoom=5, 
+                  delay = 2
+                  )
 }
 
 # plot neurons by colours matching network pic -----------------------------
@@ -326,10 +346,10 @@ table <- plot_ly(
 table
 
 saveNetwork(table, "pictures/desmo_connectome_stats_table.html")
-webshot2::webshot(url="pictures/desmo_connectome_stats_table.html",
+webshot::webshot(url="pictures/desmo_connectome_stats_table.html",
                     file="pictures/desmo_connectome_stats_table.png",
                     vwidth=400, vheight=300, #define the size of the browser window
-                    cliprect = c(50,20,350, 220), zoom=10)
+                    cliprect = c(20,50,350, 220), zoom=10)
   
 }
 
@@ -338,46 +358,47 @@ webshot2::webshot(url="pictures/desmo_connectome_stats_table.html",
 {
 
 #read with image_read (magick package) and rotate
-img_conn <- image_rotate(image_read("pictures/Full_desmo_connectome_modules_webshot.png"), 180)
+img_conn <- image_rotate(image_read("pictures/Full_desmo_connectome_modules_webshot.png"), 270) %>%
+  image_flip()
 
 panel_mod1 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_1.png")) +
-    draw_label("1) parapodial (sg3l)", x = 0.5, y = 0.05, size = 9)
+    draw_label("1) oblique (sg2)", x = 0.5, y = 0.05, size = 9)
 panel_mod2 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_2.png")) +
-    draw_label("2) parapodial (sg1l)", x = 0.5, y = 0.05, size = 9)
+    draw_label("2) oblique (sg3)", x = 0.5, y = 0.05, size = 9)
 panel_mod3 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_3.png")) +
-    draw_label("3) dorsolateral (r)", x = 0.5, y = 0.05, size = 9)
+    draw_label("3) ventrolateral (l)", x = 0.5, y = 0.05, size = 9)
 panel_mod4 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_4.png")) +
-    draw_label("4) ventrolateral (l)", x = 0.5, y = 0.05, size = 9)
+    draw_label("4) parapodial (sg2r)", x = 0.5, y = 0.05, size = 9)
 panel_mod5<- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_5.png")) +
-    draw_label("5) parapodial (sg3r)", x = 0.5, y = 0.05, size = 9)
+    draw_label("5) parapodial (sg1r)", x = 0.5, y = 0.05, size = 9)
 panel_mod6 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_6.png")) +
     draw_label("6) sg0 and head", x = 0.5, y = 0.05, size = 9)
 panel_mod7 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_7.png")) +
-    draw_label("7) parapodial (sg2l)", x = 0.5, y = 0.05, size = 9)
+    draw_label("7) dorsolateral (l)", x = 0.5, y = 0.05, size = 9)
 panel_mod8 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_8.png")) +
-    draw_label("8) dorsolateral (l)", x = 0.5, y = 0.05, size = 9)
+    draw_label("8) parapodial (sg1l)", x = 0.5, y = 0.05, size = 9)
 panel_mod9 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_9.png")) +
-    draw_label("9) parapodial (sg1r)", x = 0.5, y = 0.05, size = 9)
+    draw_label("9) parapodial (sg3r)", x = 0.5, y = 0.05, size = 9)
 panel_mod10 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_10.png")) +
-  draw_label("10) parapodial (sg2r)", x = 0.5, y = 0.05, size = 9)
+  draw_label("10) parapodial (sg3l)", x = 0.5, y = 0.05, size = 9)
 panel_mod11 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_11.png")) +
-    draw_label("11) oblique (sg2)", x = 0.5, y = 0.05, size = 9)
+    draw_label("11) dorsolateral (r)", x = 0.5, y = 0.05, size = 9)
 panel_mod12 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_12.png")) +
     draw_label("12) ventrolateral (r)", x = 0.5, y = 0.05, size = 9)
 
 panel_conn <- ggdraw() + draw_image(img_conn) +
-    draw_label("sg0 and head", x=0.5, y = 0.9, size = 9) +
+    draw_label("sg0 and head", x=0.42, y = 0.9, size = 9) +
     draw_label("parapodial (sg1l)", x=0.65, y = 0.72, size = 9) +
-    draw_label("parapodial (sg1r)", x=0.3, y = 0.68, size = 9) +
-    draw_label("oblique (sg2)", x=0.49, y = 0.54, size = 9) +
-    draw_label("parapodial (sg2l)", x=0.67, y = 0.48, size = 9) +
+    draw_label("parapodial (sg1r)", x=0.27, y = 0.65, size = 9) +
+    draw_label("oblique (sg2)", x=0.49, y = 0.58, size = 9) +
+    draw_label("oblique (sg3)", x=0.54, y = 0.4, size = 9) +
     draw_label("parapodial (sg2r)", x=0.3, y = 0.48, size = 9) +
     draw_label("ventrolateral (l)", x=0.88, y = 0.78, size = 9) +
     draw_label("ventrolateral (r)", x=0.25, y = 0.8, size = 9) +
-    draw_label("dorsolateral (l)", x=0.88, y = 0.25, size = 9)  +
+    draw_label("dorsolateral (l)", x=0.88, y = 0.42, size = 9)  +
     draw_label("dorsolateral (r)", x=0.17, y = 0.32, size = 9) +
-    draw_label("parapodial (sg3l)", x=0.6, y = 0.25, size = 9) +
-    draw_label("parapodial (sg3r)", x=0.38, y = 0.16, size = 9) 
+    draw_label("parapodial (sg3l)", x=0.8, y = 0.25, size = 9) +
+    draw_label("parapodial (sg3r)", x=0.48, y = 0.22, size = 9) 
   
 panel_table <- ggdraw() + draw_image(readPNG("pictures/desmo_connectome_stats_table.png"))
   
@@ -400,11 +421,11 @@ MIIIN
 #PQR#
 #PQR#
 "
-panel_A <-  panel_mod9 + panel_mod6 + panel_mod2 + 
-    panel_mod12 + panel_conn + panel_mod4 +
-    panel_mod10 + panel_mod7 + 
-    panel_mod3 + panel_mod8 + 
-    panel_mod5 + panel_mod11 + panel_mod1 + 
+panel_A <-  panel_mod5 + panel_mod6 + panel_mod8 + 
+    panel_mod12 + panel_conn + panel_mod3 +
+    panel_mod4 + panel_mod1 + 
+    panel_mod11 + panel_mod7 + 
+    panel_mod9 + panel_mod2 + panel_mod10 + 
     plot_layout(design = layout_A)
 #convert into single panel
 panel_A <- ggdraw(panel_A)
