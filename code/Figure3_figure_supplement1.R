@@ -94,15 +94,15 @@ webshot2::webshot(url="source_data/Figure3_figure_supplement1_source_data2.html"
 {
 panel_ch <- ggdraw() + draw_image(readPNG("pictures/Desmo_grouped_chaeta.png")) +
   draw_label("partners of chaetae", x = 0.5, y = 0.99, size = 9)
-panel_ERcirc <- ggdraw() + draw_image(readPNG("pictures/Desmo_grouped_ERcirc.png")) +
+panel_ERcirc <- ggdraw() + draw_image(readPNG("images_notR/Desmo_grouped_ERcirc.png")) +
   draw_label("partners of chaetal follicle 1", x = 0.5, y = 0.99, size = 9)
-panel_noERcirc <- ggdraw() + draw_image(readPNG("pictures/Desmo_grouped_neERcirc.png")) +
+panel_noERcirc <- ggdraw() + draw_image(readPNG("images_notR/Desmo_grouped_neERcirc.png")) +
   draw_label("partners of chaetal follicle 2", x = 0.5, y = 0.99, size = 9)
-panel_ac <- ggdraw() + draw_image(readPNG("pictures/Desmo_grouped_ac.png")) +
+panel_ac <- ggdraw() + draw_image(readPNG("images_notR/Desmo_grouped_ac.png")) +
   draw_label("partners of aciculae", x = 0.5, y = 0.99, size = 9)
-panel_all <- ggdraw() + draw_image(readPNG("pictures/Desmo_grouped.png")) +
+panel_all <- ggdraw() + draw_image(readPNG("images_notR/Desmo_grouped.png")) +
   draw_label("grouped desmosomal connectome", x = 0.5, y = 0.99, size = 9)
-panel_circumac <- ggdraw() + draw_image(readPNG("pictures/Desmo_grouped_circumac.png")) +
+panel_circumac <- ggdraw() + draw_image(readPNG("images_notR/Desmo_grouped_circumac.png")) +
   draw_label("partners of circumacicular", x = 0.5, y = 0.99, size = 9)
 
 layout <-
