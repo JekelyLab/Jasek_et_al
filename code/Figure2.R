@@ -736,9 +736,9 @@ panel_A <- ggdraw() + draw_image(readPNG("pictures/MUScelltypes_ac.png")) +
   draw_label("d", x = 0.67, y = 0.93, size = 5) 
 
 panel_B <- ggdraw() + draw_image(readPNG("pictures/MUScelltypes_ant_ob.png")) +
-  draw_label("ant. oblique", x = 0.5, y = 1.1, size = 9)
+  draw_label("anterior oblique", x = 0.5, y = 1.1, size = 9)
 panel_C <- ggdraw() + draw_image(readPNG("pictures/MUScelltypes_post_ob.png")) +
-  draw_label("post oblique", x = 0.5, y = 1.1, size = 9)
+  draw_label("posterior oblique", x = 0.5, y = 1.1, size = 9)
 panel_D <- ggdraw() + draw_image(readPNG("pictures/MUScelltypes_chae.png")) +
   draw_label("chaetal", x = 0.5, y = 1.1, size = 9)
 
