@@ -133,7 +133,6 @@ length(max_cliques(desmo_conn_graph_largest, min=3))
 length(max_cliques(desmo_conn_graph_largest, min=4))
 max_cliques4_desmo <- lapply(desmo_subgraphs_1000, function(x) length(max_cliques(x, min=4)))
 max(as.numeric(max_cliques4_desmo))
-V(desmo_subgraphs_1000)
 
 #calculate transitivity centrality (clustering coefficient) 
 transitivity_centr_desmo <- lapply(desmo_subgraphs_1000, 
@@ -404,7 +403,7 @@ degree_all_tb <- full_join(degree_desmo_neuro_sf_pa_tb, degree_erdos_tb)
     geom_freqpoly(aes(x = degree, after_stat(density), 
                       color = graph_type, alpha = replicate), 
                   binwidth = 0.21) +
-    scale_x_sqrt(breaks = c(1, 5, 10, 50, 100)) +
+    scale_x_sqrt(breaks = c(1, 10, 50, 100)) +
     theme_minimal() +
     labs(x = 'node degree', color = 'graph type') +
     theme_minimal() +
@@ -416,10 +415,8 @@ degree_all_tb <- full_join(degree_desmo_neuro_sf_pa_tb, degree_erdos_tb)
                                      4, 5),
                           breaks = c('desmo', 'erdos', 'neuro', 
                                      'pa', 'sf')) +
-    scale_alpha_manual(values = c(5:25)/80) +
+    scale_alpha_manual(values = c(250:1250)/100000) +
     guides(color = "none", alpha = "none")
-  
-degree_plot  
   
 ggsave('pictures/degree.png', degree_plot, limitsize = FALSE, 
          units = c("px"), width = 800, height = 800, bg = 'white')
@@ -429,7 +426,7 @@ weights_plot <- weights_all_tb %>%
     geom_freqpoly(aes(x = weights, after_stat(density), 
                       color = graph_type, alpha = replicate), 
                   binwidth = 0.21) +
-    scale_x_sqrt(breaks = c(2, 10, 100, 400)) +
+    scale_x_sqrt(breaks = c(1, 10, 100, 400)) +
     theme_minimal() +
     labs(x = 'edge weight', color = 'graph type') +
     theme_minimal() +
@@ -441,25 +438,24 @@ weights_plot <- weights_all_tb %>%
                                      4, 5),
                           breaks = c('desmo', 'erdos', 'neuro', 
                                      'pa', 'sf')) +
-    scale_alpha_manual(values = c(5:25)/80) +
+    scale_alpha_manual(values = c(250:1250)/100000) +
     guides(alpha = "none")
-weights_plot
 
 ggsave('pictures/weights.png', weights_plot, limitsize = FALSE, 
        units = c("px"), width = 1100, height = 800, bg = 'white')
 
 }
 
-
 # plot modularity ------------------------------------
 
 {
+    
 modul_plot <- all_graphs_tb %>%
     ggplot() +
     geom_histogram(aes(x = modularity, fill = graph_type), 
-                   binwidth = 0.01, 
-                   alpha = 0.6, color = "grey20", size = 0.1) +
-    scale_x_log10() +
+                   binwidth = 0.005, 
+                   alpha = 0.6, color = "grey20", size = 0.05) +
+    scale_x_continuous() +
     theme_minimal() +
     scale_fill_manual(values = c('#0072B2', '#D55E00', '#E69F00',
                                  'grey90', '#000000'),
@@ -478,8 +474,8 @@ ggsave('pictures/modularity.png', modul_plot, limitsize = FALSE,
 max3_plot <- all_graphs_tb %>%
     ggplot() +
     geom_histogram(aes(x = three_cliques, fill = graph_type), 
-                   binwidth = 0.1, 
-                   alpha = 0.6, color = "grey20", size = 0.1) +
+                   binwidth = 0.05, 
+                   alpha = 0.6, color = "grey20", size = 0.05) +
     scale_x_log10() +
     theme_minimal() +
     scale_fill_manual(values = c('#0072B2', '#D55E00', '#E69F00',
@@ -500,8 +496,8 @@ ggsave('pictures/3cliques.png', max3_plot, limitsize = FALSE,
 trans_plot <- all_graphs_tb %>%
     ggplot() +
     geom_histogram(aes(x = transitivity, fill = graph_type), 
-                   binwidth = 0.1, 
-                   alpha = 0.6, color = "grey20", size = 0.1) +
+                   binwidth = 0.05, 
+                   alpha = 0.6, color = "grey20", size = 0.05) +
     scale_x_log10() +
     theme_minimal() +
     scale_fill_manual(values = c('#0072B2', '#D55E00', '#E69F00',
@@ -522,9 +518,10 @@ ggsave('pictures/transitivity.png', trans_plot, limitsize = FALSE,
 assort_plot <- all_graphs_tb %>%
     ggplot() +
     geom_histogram(aes(x = assortativity, fill = graph_type), 
-                   binwidth = 0.1, 
-                   alpha = 0.6, color = "grey20", size = 0.1) +
+                   binwidth = 0.02, 
+                   alpha = 0.6, color = "grey20", size = 0.05) +
     theme_minimal() +
+    scale_x_continuous(breaks = c(-0.4, 0, 0.5, 1)) +
     scale_fill_manual(values = c('#0072B2', '#D55E00', '#E69F00',
                                  'grey90', '#000000'),
                       breaks = c('desmo', 'erdos', 'neuro', 
@@ -543,9 +540,9 @@ ggsave('pictures/assortativity.png', assort_plot, limitsize = FALSE,
 diameter_plot <- all_graphs_tb %>%
     ggplot() +
     geom_histogram(aes(x = diameter, fill = graph_type), 
-                   binwidth = 0.01, 
-                   alpha = 0.6, color = "grey20", size = 0.1) +
-    scale_x_log10() +
+                   binwidth = 1.2, 
+                   alpha = 0.6, color = "grey20", size = 0.05) +
+    scale_x_continuous() +
     theme_minimal() +
     scale_fill_manual(values = c('#0072B2', '#D55E00', '#E69F00',
                                  'grey90', '#000000'),
@@ -565,9 +562,9 @@ ggsave('pictures/diameter.png', limitsize = FALSE,
 meandist_plot <- all_graphs_tb %>%
     ggplot() +
     geom_histogram(aes(x = meandist, fill = graph_type), 
-                   binwidth = 0.01, 
-                   alpha = 0.6, color = "grey20", size = 0.1) +
-    scale_x_log10() +
+                   binwidth = 0.2, 
+                   alpha = 0.6, color = "grey20", size = 0.05) +
+    scale_x_continuous(breaks = c(5, 10, 15)) +
     theme_minimal() +
     scale_fill_manual(values = c('#0072B2', '#D55E00', '#E69F00',
                                  'grey90', '#000000'),
@@ -580,6 +577,14 @@ meandist_plot
 ggsave('pictures/meandist.png', meandist_plot, limitsize = FALSE, 
          units = c("px"), width = 800, height = 800, bg = 'white')
 }
+
+# save the data tibble ----------------------------------------------------
+
+saveRDS(all_graphs_tb, file = "source_data/Figure4_source_data_1.RDS",
+        compress = TRUE)
+writeLines(capture.output(dput(all_graphs_tb)), "source_data/Figure4_source_data_1.txt")
+
+
 
 # create multi-panel figure -----------------------------------------------
 {
@@ -608,11 +613,11 @@ Fig4 <- degree_weight + modul_diameter + mean_trans_3_ass +
                 guides = 'collect')
 
 ggsave("figures/Figure_4.pdf", limitsize = FALSE, 
-         units = c("px"), Fig4, width = 2800, height = 1400)
+         units = c("px"), Fig4, width = 2800, height = 1300)
 }
 
 ggsave("figures/Figure_4.png", limitsize = FALSE, 
-       units = c("px"), Fig4, width = 2800, height = 1400)
+       units = c("px"), Fig4, width = 2800, height = 1300)
 
 
 
