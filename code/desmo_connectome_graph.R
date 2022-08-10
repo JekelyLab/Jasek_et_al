@@ -1,4 +1,9 @@
-#code to retrieve the desmosomal connectome from CATMAID and convert it into igraph and tbl_graph format
+#code to retrieve the desmosomal connectome from CATMAID 
+#and convert it into igraph, tbl_graph and visNetwork format
+#the first exported gexf graph has to be imported to Gephi for force-field clustering 
+#the code also generates a grouped desmosomal graph and saves it in different formats
+#final files saved to source data
+#these network files are sourced by the coded to generate figures 1, 3 etc.
 
 source("code/Packages_and_Connection.R")
 
@@ -164,6 +169,22 @@ for(i in seq_along(skids)){
   print (i)
 }
 
+
+#annotations to search for
+annot_to_search <- c("notopodium", "neuropodium")
+parapod_region <- list()
+for(i in seq_along(skids)){
+  annot <- catmaid_get_annotations_for_skeletons(skids=skids[i], pid = 11)
+  for (j in seq_along(annot_to_search)) {
+    if(sum(annot[,'annotation'] %in% annot_to_search[j]) ==1 )
+    {
+      parapod_region[i] <- annot_to_search[j]
+      break()
+    } else {parapod_region[i] <- "non_parapodial" }
+  } 
+  print (i)
+}
+
 #annotations to search for
 annot_to_search <- c("left_side", "right_side", "middle")
 side_of_cell <- list()
@@ -185,7 +206,9 @@ desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
   mutate(class = unlist(type_of_cell)) %>%
   mutate(CATMAID_name = unlist(cell_names)) %>%
   mutate(segment = unlist(segment_of_cell)) %>%
-  mutate(side = unlist(side_of_cell))
+  mutate(side = unlist(side_of_cell)) %>%
+  mutate(parapod_region = unlist(parapod_region))
+
 
 #search celltype_non_neuronal annotations
 celltype_id <- list()
@@ -251,6 +274,12 @@ desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
   mutate(celltype = unlist(celltype_id)) %>%
   mutate(celltype_num = unlist(celltype_id_num))
 
+#add node weighted degree
+desmo_conn_graph <- as.igraph(desmo_conn_graph.tb)
+V(desmo_conn_graph)$degree <- strength(desmo_conn_graph, vids = V(desmo_conn_graph),
+                                       mode = 'all', loop = TRUE)
+desmo_conn_graph.tb <- as_tbl_graph(desmo_conn_graph)
+
 #save in igraph format
 saveRDS(as.igraph(desmo_conn_graph.tb), "source_data/Figure3_source_data1.rds")
 #read the saved igraph format graph file from supplements/
@@ -262,11 +291,6 @@ desmo_conn_graph <- readRDS("source_data/Figure3_source_data1.rds")
 mapping_df <- data.frame(as_tibble(desmo_conn_graph.tb %>%
             select(celltype_num) ))[,1]
 
-V(desmo_conn_graph)$weight <- strength(desmo_conn_graph, 
-                                       vids = V(desmo_conn_graph),
-                                       mode = 'all',
-                                       loops = TRUE)
-
 desmo_grouped_graph <- contract.vertices(desmo_conn_graph, 
                                          mapping = mapping_df,
                   vertex.attr.comb = list(x="max", 
@@ -277,12 +301,12 @@ desmo_grouped_graph <- contract.vertices(desmo_conn_graph,
 #sum edges between the same nodes with simplify
 desmo_grouped_graph <- igraph::simplify(desmo_grouped_graph, 
                           remove.loops = FALSE,
-                          edge.attr.comb = list(weight = "sum", 
+                          edge.attr.comb = list(degree = "sum", 
                                   function(x) length(x)) )
 V(desmo_grouped_graph)$class
 desmo_grouped_graph.tb <- desmo_grouped_graph %>%
   as_tbl_graph() %>%
-  select(celltype, CATMAID_name, class, weight) %>%
+  select(celltype, CATMAID_name, class, degree) %>%
   filter(class != "basal lamina") %>%
   filter(class != "other") %>%
 #  filter(class != "epithelia_cell") %>%
@@ -314,81 +338,5 @@ writeLines(capture.output(dput(conn_graph.visn)), "source_data/Figure3_source_da
 saveRDS(conn_grouped_graph.visn, "source_data/Figure3_figure_supplement1_source_data1.rds")
 writeLines(capture.output(dput(conn_grouped_graph.visn)), "source_data/Figure3_figure_supplement1_source_data1.txt")
 
-#read the saved visNetwork file from supplements/
-conn_grouped_graph.visn <- readRDS("source_data/Figure3_figure_supplement1_source_data1.rds")
-
 }
-
-# plot grouped graph ----------------------------------
-
-#overwrite group value (partition) with side value or other value (for colouring)
-conn_grouped_graph.visn$nodes$group <-  as.character(conn_grouped_graph.visn$nodes$class)
-
-## copy column "weight" to new column "value" in list "edges"
-conn_grouped_graph.visn$edges$value <- sqrt(conn_grouped_graph.visn$edges$weight)
-## copy column "weight" to new column "value" in list "nodes"
-conn_grouped_graph.visn$nodes$value <- conn_grouped_graph.visn$nodes$weight
-#for plotting with different colors, remove colour info (which takes precedence over group colour)
-conn_grouped_graph.visn$nodes$color <- c()
-Reds <- brewer.pal(9, 'Reds')
-
-{
-  
-#shorten names after _ and \s
-conn_grouped_graph.visn$nodes$CATMAID_name  <- sub("_.*$", "", conn_grouped_graph.visn$nodes$CATMAID_name)
-conn_grouped_graph.visn$nodes$CATMAID_name  <- sub("\\s.*$", "", conn_grouped_graph.visn$nodes$CATMAID_name)
-
-#assign name to label
-conn_grouped_graph.visn$nodes$label <-  conn_grouped_graph.visn$nodes$CATMAID_name
-conn_grouped_graph.visn$nodes
-visNet <- visNetwork(conn_grouped_graph.visn$nodes, 
-                     conn_grouped_graph.visn$edges) %>% 
-  visIgraphLayout(layout = "layout_nicely", physics = TRUE) %>%
-  visPhysics(solver = "forceAtlas2Based", 
-               forceAtlas2Based = list(gravitationalConstant = -150000,
-                                       centralGravity = 10)) %>%
-  visEdges(smooth = list(type = 'curvedCW', roundness=0),
-             scaling=list(min=1, max=25),
-             color = list(color = "#454545", opacity = 0.2)) %>%
-  visNodes(borderWidth=0.3, 
-             color = list(border='black'),
-             scaling=list(min=20, max=50),
-             font = list(size = 35, 
-                         color = "black", 
-                         background = "#DEDEDE")) %>%
-  visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
-                                     algorithm = 'hierarchical',
-                                     labelOnly=FALSE), 
-             width = 1500, height = 1500, autoResize = FALSE) %>%
-  visInteraction(dragNodes = TRUE, dragView = TRUE,
-                   zoomView = TRUE, hover=TRUE,
-                   multiselect=TRUE)  %>%
-  visGroups(groupname = "muscle", color='grey', shape = "dot", 
-            opacity=0.5) %>%
-  visGroups(groupname = "epithelia_cell", color="#0072B2", shape = "dot", 
-            opacity=1) %>%
-  visGroups(groupname = "circumchaetal", color="#56B4E9", shape = "triangle", 
-            opacity=1) %>%
-  visGroups(groupname = "circumacicular", color="#56B4E9", shape = "triangle", 
-            opacity=1) %>%
-  visGroups(groupname = "acicula", color="#D55E00", shape = "square", 
-            opacity=1) %>%
-  visGroups(groupname = "chaeta", color="#D55E00", shape = "square", 
-            opacity=1) %>%
-  visGroups(groupname = "hemichaetal", color="#56B4E9", shape = "triangle", 
-            opacity=1) %>%
-  visGroups(groupname = "ciliated cell", color="#E69F00", shape = "dot", 
-                                     opacity=0.8) 
-
-visNet
-  
-#save as html
-saveNetwork(visNet, "pictures/Grouped_desmo_connectome.html", selfcontained = TRUE)
-#create png snapshot
-webshot2::webshot(url="pictures/Grouped_desmo_connectome.html",
-                    file="pictures/Grouped_desmo_connectome.png",
-                    vwidth = 1500, vheight = 1500, #define the size of the browser window
-                    cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
-}
-
 
