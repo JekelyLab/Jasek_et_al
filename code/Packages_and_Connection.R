@@ -51,7 +51,7 @@ Okabe_Ito <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00",
                  "#CC79A7", "#000000")
 Tol_muted <- c('#88CCEE', '#44AA99', '#117733', '#332288', '#DDCC77', '#999933',
                  '#CC6677', '#882255', '#AA4499', '#DDDDDD')
-library(RColorBrewer)
+
 display.brewer.all(colorblindFriendly = TRUE)
 brewer12 <- brewer.pal(12, 'Paired')
 Reds <- brewer.pal(9, 'Reds')
