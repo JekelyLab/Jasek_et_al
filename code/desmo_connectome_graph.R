@@ -276,7 +276,7 @@ desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
 
 #add node weighted degree
 desmo_conn_graph <- as.igraph(desmo_conn_graph.tb)
-V(desmo_conn_graph)$degree <- strength(desmo_conn_graph, vids = V(desmo_conn_graph),
+V(desmo_conn_graph)$weighted_degree <- strength(desmo_conn_graph, vids = V(desmo_conn_graph),
                                        mode = 'all', loop = TRUE)
 desmo_conn_graph.tb <- as_tbl_graph(desmo_conn_graph)
 
@@ -321,13 +321,23 @@ length(which(cl$membership == 1))
 
 #create a new graph only from the largest connected component
 desmo_grouped_graph = induced_subgraph(desmo_grouped_graph, which(cl$membership == 1))
+desmo_grouped_graph <- desmo_grouped_graph %>% 
+  as_tbl_graph() %>%
+  mutate(celltype = unlist(celltype)) %>%
+  mutate(CATMAID_name = unlist(CATMAID_name)) %>%
+  mutate(class = unlist(class)) %>%
+  mutate(CATMAID_name = sub("_.*$", "", CATMAID_name)) %>% #truncate names at _ and \s
+  mutate(CATMAID_name = sub("\\s.*$", "", CATMAID_name))
+
+desmo_grouped_graph
+
 
 # VisNetwork conversion ---------------------------------------------------
 
 {
 #convert to visNetwork graph
 conn_grouped_graph.visn <- toVisNetworkData(desmo_grouped_graph)  
-  
+
 ## copy column "weight" to new column "value" in list "edges"
 conn_grouped_graph.visn$edges$value <- conn_grouped_graph.visn$edges$weight
 conn_graph.visn <- toVisNetworkData(desmo_conn_graph)
@@ -337,6 +347,10 @@ writeLines(capture.output(dput(conn_graph.visn)), "source_data/Figure3_source_da
 
 saveRDS(conn_grouped_graph.visn, "source_data/Figure3_figure_supplement1_source_data1.rds")
 writeLines(capture.output(dput(conn_grouped_graph.visn)), "source_data/Figure3_figure_supplement1_source_data1.txt")
+
+desmo_grouped_graph
+saveRDS(desmo_grouped_graph, "source_data/Figure3_figure_supplement1_source_data3.rds")
+writeLines(capture.output(dput(desmo_grouped_graph)), "source_data/Figure3_figure_supplement1_source_data3.txt")
 
 }
 
