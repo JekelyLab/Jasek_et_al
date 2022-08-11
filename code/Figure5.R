@@ -18,17 +18,18 @@ conn_graph.visn$edges$value <- conn_graph.visn$edges$weight
 ## copy column "weight" to new column "value" in list "nodes"
 conn_graph.visn$nodes$value <- conn_graph.visn$nodes$degree
 
+{
 #overwrite group value (partition) with side value or other value (for colouring)
 conn_graph.visn$nodes$group <-  as.character(conn_graph.visn$nodes$side)
 #for plotting with different colors, remove colour info (which takes precedence over group colour)
 conn_graph.visn$nodes$color <- c()
 
 #plot graph colored by side
-{
 coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
-  
+coords_rotated <- autoimage::rotate(coords, pi/2.4, pivot = c(0, 0))
+
 visNet_side <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
-    visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
+    visIgraphLayout(layout = "layout.norm", layoutMatrix = coords_rotated) %>%
     visEdges(smooth = list(type = 'curvedCW', roundness=0),
              scaling=list(min=5, max=30),
              color = list(color='#848484', opacity=0.15)) %>%
@@ -36,7 +37,7 @@ visNet_side <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
              color = list(border='black'),
              opacity = 1, 
              scaling=list(min=25, max=45),
-             font = list(size = 20)) %>%
+             font = list(size = 0)) %>%
     visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
                                        algorithm = 'hierarchical',
                                        labelOnly=FALSE), 
@@ -94,15 +95,15 @@ close3d()
 # graph colored by segment ------------------------------------------------
 
 #overwrite group value (partition) with side value or other value (for colouring)
+{
 conn_graph.visn$nodes$group <-  as.character(conn_graph.visn$nodes$segment)
 
-{
 #color scheme for segments
 segmental_colors <- brewer.pal(6, 'Paired')
 pie(rep(1,6),col=segmental_colors,segmental_colors)
   
 visNet_seg <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
-    visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
+    visIgraphLayout(layout = "layout.norm", layoutMatrix = coords_rotated) %>%
     visEdges(smooth = list(type = 'curvedCW', roundness=0),
              scaling=list(min=5, max=30),
              color = list(color='#848484', opacity=0.15)) %>%
@@ -180,11 +181,11 @@ close3d()
 # color scheme for parapodia ------------------------------------------------
 
 #overwrite group value (partition) with side value or other value (for colouring)
+{
 conn_graph.visn$nodes$group <-  as.character(conn_graph.visn$nodes$parapod_region)
 
-{
 visNet_para <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
-  visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
+  visIgraphLayout(layout = "layout.norm", layoutMatrix = coords_rotated) %>%
   visEdges(smooth = list(type = 'curvedCW', roundness=0),
            scaling=list(min=5, max=30),
            color = list(color='#848484', opacity=0.1)) %>%
@@ -246,7 +247,7 @@ close3d()
 conn_graph.visn$nodes$group <-  as.character(conn_graph.visn$nodes$class)
 
 visNet_acic <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
-  visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
+  visIgraphLayout(layout = "layout.norm", layoutMatrix = coords_rotated) %>%
   visEdges(smooth = list(type = 'curvedCW', roundness=0),
            scaling=list(min=5, max=30),
            color = list(opacity=0.5, inherit = 'both'),
@@ -294,7 +295,7 @@ webshot::webshot(url="pictures/Fig5_desmo_connectome_acic.html",
                  vwidth = 1500, vheight = 1500, #define the size of the browser window
                  cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
 
-)
+
 
 #read skeletons
 muscle <- nlapply(read.neurons.catmaid(skids_by_2annotations("muscle", "desmosome_connectome"), pid=11), 
@@ -343,11 +344,7 @@ panel_left_right_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_left_right.p
   draw_label("a", x = 0.1, y = 0.93, size = 8) +
   draw_label("p", x = 0.1, y = 0.79, size = 8) 
 
-#read with image_read (magick package) and rotate
-img_left_right <- image_read("pictures/Fig5_desmo_connectome_left_right.png") %>%
-    image_rotate(90)
-  
-panel_left_right_gr <- ggdraw() + draw_image(img_left_right) + 
+panel_left_right_gr <- ggdraw() + draw_image(readPNG("pictures/Fig5_desmo_connectome_left_right.png")) + 
     draw_label("left", x = 0.3, y = 0.95, size = 8, color = Okabe_Ito[1]) + 
     draw_label("right", x = 0.7, y = 0.95, size = 8, color = Okabe_Ito[2]) + 
   draw_label("middle", x = 0.5, y = 0.95, size = 8, color = Okabe_Ito[8])
@@ -361,11 +358,7 @@ panel_seg_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_seg.png")) +
   draw_label("sg3", x = 0.13, y = 0.28, size = 9, color = segmental_colors[5]) +
   draw_label("pygidium", x = 0.22, y = 0.14, size = 9, color = segmental_colors[6]) 
 
-
-img_seg <- image_read("pictures/Fig5_desmo_connectome_seg.png") %>%
-  image_rotate(90)
-
-panel_seg_gr <- ggdraw() + draw_image(img_seg) + 
+panel_seg_gr <- ggdraw() + draw_image(readPNG("pictures/Fig5_desmo_connectome_seg.png")) + 
   draw_label("head", x = 0.38, y = 0.90, size = 9, fontface = 'bold', 
              color = segmental_colors[1]) + 
   draw_label("sg0", x = 0.6, y = 0.9, size = 9, fontface = 'bold', color = segmental_colors[2]) +
@@ -377,16 +370,13 @@ panel_seg_gr <- ggdraw() + draw_image(img_seg) +
 
 panel_para_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_para.png"))  
 
-img_para <- image_read("pictures/Fig5_desmo_connectome_para.png") %>%
-  image_rotate(90)
-panel_para_gr <- ggdraw() + draw_image(img_para)  + 
+panel_para_gr <- ggdraw() + draw_image(readPNG("pictures/Fig5_desmo_connectome_para.png"))  + 
   draw_label("neuropodium", x = 0.3, y = 0.9, size = 9, fontface = 'plain', color = Okabe_Ito[1]) +
   draw_label("notopodium", x = 0.2, y = 0.72, size = 9, fontface = 'plain', color = Okabe_Ito[2])
 
 panel_acic_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_mus_ac.png"))
-img_acic <- image_read("pictures/Fig5_desmo_connectome_acic.png")  %>%
-  image_rotate(90)
-panel_acic_gr <- ggdraw() + draw_image(img_acic)    + 
+
+panel_acic_gr <- ggdraw() + draw_image(readPNG("pictures/Fig5_desmo_connectome_acic.png"))    + 
   draw_label("aciculae", x = 0.15, y = 0.73, size = 9, color = Okabe_Ito[8]) + 
   draw_label("circumacicular", x = 0.15, y = 0.67, size = 9, color = Okabe_Ito[2]) + 
   draw_label("muscles", x = 0.15, y = 0.61, size = 9, color = Reds[7])
