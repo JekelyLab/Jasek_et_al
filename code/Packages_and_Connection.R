@@ -34,6 +34,9 @@ library(plotly)
 library(gridExtra) #to render tables as grobs (grid graphical objects)
 library(grid)
 
+library(hash)
+library(autoimage) #to rotate the coordinates of the graph plots
+
 #create directory for R-generated pictures for figure panels (ignored by git)
 dir.create("pictures")
 dir.create("figures")
@@ -51,6 +54,9 @@ Okabe_Ito <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00",
                  "#CC79A7", "#000000")
 Tol_muted <- c('#88CCEE', '#44AA99', '#117733', '#332288', '#DDCC77', '#999933',
                  '#CC6677', '#882255', '#AA4499', '#DDDDDD')
+M_Winding_Col <-  c('#00753F','#1D79B7','#5D8C90','#D4E29E','#FF8734','#E55560',
+'#F9EB4D','#C144BC','#FF9CFF','#8C7700','#77CDFC','#FFDAC7','#E0B1AD','#9467BD',
+'#D88052','#A52A2A','grey')
 
 display.brewer.all(colorblindFriendly = TRUE)
 brewer12 <- brewer.pal(12, 'Paired')
@@ -97,7 +103,7 @@ plot_background_ventral <- function(x){
 skids_by_2annotations <- function(annotation1,annotation2){
   annotations_cells = list()
   annotations_cells[[1]] <- catmaid_get_annotations_for_skeletons(annotation1, pid = 11,conn=conn_http1)
-  #we retrieve those skeletons that are also annotated with right_side
+  #we retrieve those skeletons that are also annotated with the second annotation
   return(unlist(lapply(annotations_cells,function(x) x[x$annotation==annotation2,1])))
 }
 
