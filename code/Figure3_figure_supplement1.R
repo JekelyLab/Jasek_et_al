@@ -27,10 +27,6 @@ Reds <- brewer.pal(9, 'Reds')
 
 # shorten names and assign names to node labels --------------------------------
 
-#shorten names after _ and \s
-conn_grouped_graph.visn$nodes$CATMAID_name  <- sub("_.*$", "", conn_grouped_graph.visn$nodes$CATMAID_name)
-conn_grouped_graph.visn$nodes$CATMAID_name  <- sub("\\s.*$", "", conn_grouped_graph.visn$nodes$CATMAID_name)
-
 #assign name to label
 conn_grouped_graph.visn$nodes$label <-  conn_grouped_graph.visn$nodes$CATMAID_name
 
