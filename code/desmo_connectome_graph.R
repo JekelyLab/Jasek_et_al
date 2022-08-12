@@ -212,9 +212,27 @@ desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
 
 #search celltype_non_neuronal annotations
 celltype_id <- list()
+celltype_id_num <- list()
 annot_to_search <- c("fragmentum", "basal lamina", 
-                     paste("celltype_non_neuronal", c(1:92), sep = ""),
+                     paste("celltype_non_neuronal", c(1:21), sep = ""),
+                     "chaeta_neuro", "chaeta_noto",
+                     "acicula_neuro", "acicula_noto",
+                     "circumacicular_neuro", "circumacicular_noto",
+                     "hemichaetal_neuro", "hemichaetal_noto",
+                     "ER-circumchaetal_neuro", "ER-circumchaetal_noto",
+                     "noER-circumchaetal_neuro", "noER-circumchaetal_noto",
+                     "circumchaetal_neuro", "circumchaetal_noto",
+                     paste("celltype_non_neuronal", c(28:92), sep = ""),
                      "with_soma")
+
+#detailed annotations to search for, separate for notopodium and neuropodium for the acicular/chaetal complex
+#celltype_non_neuronal22 chaeta chaeta_neuro chaeta_noto
+#celltype_non_neuronal23 acicula acicula_neuro acicula_noto
+#celltype_non_neuronal24 circumacicular circumacicular_neuro circumacicular_noto
+#celltype_non_neuronal25 hemichaetal hemichaetal_neuro hemichaetal_noto
+#celltype_non_neuronal26 ER-circumchaetal ER-circumchaetal_neuro ER-circumchaetal_noto
+#celltype_non_neuronal27 noER-circumchaetal noER-circumchaetal_neuro noER-circumchaetal_noto
+#cellgroup_non-neuronal1_circumchaetal circumchaetal_neuro circumchaetal_noto
 
 #search annotations and assign to celltype_id list (annotations will be
 #progressively overwritten if duplicate)
@@ -225,46 +243,10 @@ for(i in seq_along(skids)){
     if(sum(annot[,'annotation'] %in% annot_to_search[j]) ==1 )
     {
       celltype_id[i] <- annot_to_search[j]
-      break()
-    } else {celltype_id[i] <- "other" }
-  } 
-  print (i)
-}
-
-#add type of cell to node$group (can be used for visualisation)
-desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
-  mutate(celltype = unlist(celltype_id))
-#if there are still nodes with onle 'other' annotation, delete these
-desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
-  filter(celltype != 'other')
-
-#check unique celltype ids
-N_unique_celltype_ids <- dim(unique(as_tibble(desmo_conn_graph.tb %>%
-                                                select(celltype))) 
-)[1]
-
-#make a list and number celltype ids (will need for vertex contraction)
-celltype_id_list <- as.data.frame(unique(as_tibble(desmo_conn_graph.tb %>%
-                                                     select(celltype))) %>%
-                                    mutate(grouped_id = c(1:N_unique_celltype_ids)) )
-#run again cell type annotation search and add id number as well
-#search celltype_non_neuronal annotations
-celltype_id <- list()
-celltype_id_num <- list()
-annot_to_search <- rev(celltype_id_list[,1])
-#check if 'other' is in the annotation list (should not be)
-celltype_id_list[celltype_id_list == "other"]
-
-for(i in seq_along(skids)){
-  annot <- catmaid_get_annotations_for_skeletons(skids=skids[i], pid = 11)
-  for (j in seq_along(annot_to_search)) {
-    if(sum(annot[,'annotation'] %in% annot_to_search[j]) ==1 )
-    {
-      celltype_id[i] <- celltype_id_list[j,1]
-      celltype_id_num[i] <- celltype_id_list[j,2]
+      celltype_id_num[i] <- j
       break()
     } else {celltype_id[i] <- "other"
-    celltype_id_num[i] <- length(celltype_id_list[,1])+1 }
+            celltype_id_num[i] <- length(annot_to_search)+1 }
   } 
   print (i)
 }
@@ -273,6 +255,8 @@ for(i in seq_along(skids)){
 desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
   mutate(celltype = unlist(celltype_id)) %>%
   mutate(celltype_num = unlist(celltype_id_num))
+
+celltype_id_list[celltype_id_list == "other"]
 
 #add node weighted degree
 desmo_conn_graph <- as.igraph(desmo_conn_graph.tb)
@@ -287,30 +271,27 @@ desmo_conn_graph <- readRDS("source_data/Figure3_source_data1.rds")
 
 
 # contract vertices by cell type to make grouped graph ---------------------------------
-
 mapping_df <- data.frame(as_tibble(desmo_conn_graph.tb %>%
             select(celltype_num) ))[,1]
 
 desmo_grouped_graph <- contract.vertices(desmo_conn_graph, 
                                          mapping = mapping_df,
-                  vertex.attr.comb = list(x="max", 
-                                          y = "max",
-                                          name = "first", 
+                  vertex.attr.comb = list(name = "first", 
                                           "first"))
-
 #sum edges between the same nodes with simplify
 desmo_grouped_graph <- igraph::simplify(desmo_grouped_graph, 
                           remove.loops = FALSE,
                           edge.attr.comb = list(degree = "sum", 
                                   function(x) length(x)) )
-V(desmo_grouped_graph)$class
+
 desmo_grouped_graph.tb <- desmo_grouped_graph %>%
   as_tbl_graph() %>%
-  select(celltype, CATMAID_name, class, degree) %>%
+  select(celltype, CATMAID_name, class, weighted_degree) %>%
   filter(class != "basal lamina") %>%
   filter(class != "other") %>%
 #  filter(class != "epithelia_cell") %>%
-  filter(CATMAID_name != "character(0)")
+  filter(CATMAID_name != "character(0)") %>%
+  filter(CATMAID_name != "with_soma")
 
 #get the largest connected component
 desmo_grouped_graph <- as.igraph(desmo_grouped_graph.tb)
@@ -329,8 +310,55 @@ desmo_grouped_graph <- desmo_grouped_graph %>%
   mutate(CATMAID_name = sub("_.*$", "", CATMAID_name)) %>% #truncate names at _ and \s
   mutate(CATMAID_name = sub("\\s.*$", "", CATMAID_name))
 
-desmo_grouped_graph
+E(desmo_grouped_graph)$weight
+desmo_grouped_graph %>%
+  as_tbl_graph()
 
+#add noto/neuro to some node names
+desmo_grouped_graph <- desmo_grouped_graph %>%
+  as_tbl_graph() %>%
+  mutate(CATMAID_name = ifelse(celltype == "chaeta_neuro", 
+                               "chaeta_neuro",
+                               CATMAID_name)) %>%
+  mutate(CATMAID_name = ifelse(celltype == "chaeta_noto", 
+                               "chaeta_noto",
+                               CATMAID_name)) %>%
+  mutate(CATMAID_name = ifelse(celltype == "acicula_neuro", 
+                               "acicula_neuro",
+                               CATMAID_name)) %>%
+  mutate(CATMAID_name = ifelse(celltype == "acicula_noto", 
+                               "acicula_noto",
+                               CATMAID_name))  %>%
+  mutate(CATMAID_name = ifelse(celltype == "circumacicular_neuro", 
+                               "circumacicular_neuro",
+                               CATMAID_name)) %>%
+  mutate(CATMAID_name = ifelse(celltype == "circumacicular_noto", 
+                               "circumacicular_noto",
+                               CATMAID_name)) %>%
+  mutate(CATMAID_name = ifelse(celltype == "circumchaetal_neuro", 
+                               "circumchaetal_neuro",
+                               CATMAID_name)) %>%
+  mutate(CATMAID_name = ifelse(celltype == "circumchaetal_noto", 
+                               "circumchaetal_noto",
+                               CATMAID_name)) %>%
+  mutate(CATMAID_name = ifelse(celltype == "ER-circumchaetal_neuro", 
+                               "ER-circumchaetal_neuro",
+                               CATMAID_name)) %>%
+  mutate(CATMAID_name = ifelse(celltype == "ER-circumchaetal_noto", 
+                               "ER-circumchaetal_noto",
+                               CATMAID_name)) %>%
+  mutate(CATMAID_name = ifelse(celltype == "noER-circumchaetal_neuro", 
+                               "noER-circumchaetal_neuro",
+                               CATMAID_name)) %>%
+  mutate(CATMAID_name = ifelse(celltype == "noER-circumchaetal_noto", 
+                               "noER-circumchaetal_noto",
+                               CATMAID_name)) %>%
+  mutate(CATMAID_name = ifelse(celltype == "hemichaetal_neuro", 
+                               "hemichaetal_neuro",
+                               CATMAID_name)) %>%
+  mutate(CATMAID_name = ifelse(celltype == "hemichaetal_noto", 
+                               "hemichaetal_noto",
+                               CATMAID_name))
 
 # VisNetwork conversion ---------------------------------------------------
 
