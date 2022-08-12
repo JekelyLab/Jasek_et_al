@@ -99,6 +99,21 @@ plot_background_ventral <- function(x){
   par3d(zoom=0.48)
 }
 
+
+#plotting function for ventral view with yolk and acicula
+plot_background_ventral_no_acic <- function(x){
+  nopen3d() # opens a pannable 3d window
+  par3d(windowRect = c(20, 30, 600, 800)) #to define the size of the rgl window
+  nview3d("ventral", extramat=rotationMatrix(0, 1, 0, 0))
+  plot3d(bounding_dots, WithConnectors = F, WithNodes = F, soma=F, lwd=1,
+         rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=1,
+         col="white") 
+  plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+         rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=0.05,
+         col="#E2E2E2") 
+  par3d(zoom=0.48)
+}
+
 #function to retrieve skids based on two annotations
 skids_by_2annotations <- function(annotation1,annotation2){
   annotations_cells = list()
