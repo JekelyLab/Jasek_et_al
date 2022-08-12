@@ -24,27 +24,39 @@ node_name_and_degree_high_only <- as_tibble(desmo_conn_graph %>%
 # 3d plotting  ------------------------------------------------------------
 
 {
-plot_background_ventral()
+plot_background_ventral_no_acic()
 par3d(zoom=0.55)
+  
+#plot skeletons with same alpha for comparison
+skeletons <- nlapply(read.neurons.catmaid(node_name_and_degree_high_only$name, pid=11), 
+                        function(x) smooth_neuron(x, sigma=6000))
+plot3d(skeletons, soma = TRUE, lwd = 1, add=T, alpha=0.7, col=Reds[8])
+plot3d(outline, add = TRUE, alpha = 0.017)
+plot3d(scalebar_50um_ventral, color = "black", lw = 2)
+  
+#make snapshot
+rgl.snapshot("pictures/Fig6_desmo_connectome_same_color.png")
+close3d()
 
 #plot skeletons with transparency inversely proportional to weighted degree
+plot_background_ventral_no_acic()
+par3d(zoom=0.55)
+
 for (i in 1:length(node_name_and_degree_high_only$name)) {
   skeleton <- nlapply(read.neurons.catmaid(node_name_and_degree_high_only$name[i], pid=11), 
                       function(x) smooth_neuron(x, sigma=6000))
   plot3d(skeleton, soma = TRUE, lwd = 1, add=T, 
-         alpha=node_name_and_degree_high_only$weighted_degree[i]/max(node_name_and_degree_high_only$weighted_degree),
-         col=Reds[8])
+       # alpha=node_name_and_degree_high_only$weighted_degree[i]/max(node_name_and_degree_high_only$weighted_degree),
+       alpha = 0.7, 
+       #pick discrete colors based on normalised degree
+        col=Reds[round(node_name_and_degree_high_only$weighted_degree[i]/max(node_name_and_degree_high_only$weighted_degree)*10)] 
+)
 }
 
 plot3d(outline, add = TRUE, alpha = 0.017)
-plot3d(acicula, soma=TRUE, lwd=2, add=T, alpha=0.7, col="black") 
-plot3d(scalebar_50um_ventral, color = "black", lw = 2)
 
 #make snapshot
 rgl.snapshot("pictures/Fig6_desmo_connectome_highest_weight_ventral.png")
-
-#remove scalebar for lateral view
-rgl.pop(type = "shapes")
 
 #lateral view
 nview3d("right", extramat=rotationMatrix(pi, 0, 1, 1))
@@ -202,13 +214,23 @@ desmo_grouped_graph <- readRDS("source_data/Figure3_figure_supplement1_source_da
 # generate and plot subgraphs ---------------------------------------------------------------
 
 {
-
 #define color list
-cols <- c(M_Winding_Col, Okabe_Ito, Reds, brewer12, Tol_muted)
+cols <- c(M_Winding_Col, Okabe_Ito, Reds[2:9], brewer12, Tol_muted)
+#make sampling reproducible
+set.seed(23)
 group_colors <- sample(cols, length(V(desmo_grouped_graph)), replace = TRUE)
 V(desmo_grouped_graph)$color <- group_colors
 
-#get subgraph of a single node defined by class
+#assign color by type
+desmo_grouped_graph <- desmo_grouped_graph %>%
+  as_tbl_graph() %>%
+  mutate(color = ifelse(class == "acicula", "#454545", color)) %>%
+  mutate(color = ifelse(class == "chaeta", "#454545", color)) %>%
+  mutate(color = ifelse(class == "circumacicular", "#222222", color)) %>%
+  mutate(color = ifelse(class == "circumchaetal", "#222222", color)) %>%
+  mutate(color = ifelse(class == "hemichaetal", "#878787", color))
+
+#get subgraph of a single node defined by class (not used)
 subgraph <- function(class_id) {desmo_grouped_graph %>% 
   as_tbl_graph() %>%
   convert(to_local_neighborhood,
@@ -217,102 +239,126 @@ subgraph <- function(class_id) {desmo_grouped_graph %>%
           mode = "all")
 }
 
+subgraph_i <- function(class_id) {
+  #make a list of ego graphs for each node selecting only its order 1 neighbourhood
+  subgraphs <- desmo_grouped_graph %>% 
+    make_ego_graph(order = 1,
+                 nodes = which(V(desmo_grouped_graph)$class == class_id),
+                 mode = "all")
+  #get all the node names from the ego graphs list
+  subset_node_names <- unique(unlist(lapply(subgraphs, function(x) print( V(x)$CATMAID_name))))
+  #get the corresponding node ids from the original graph
+  subset_node_ids <- unlist(lapply(subset_node_names, function(x) which(V(desmo_grouped_graph)$CATMAID_name == x) ) )
+  #generate induced subgraph based on the node ids
+  desmo_grouped_graph %>% 
+    induced.subgraph(vids = subset_node_ids )
+}
+
 #derive subgraphs
-subgraph_CA <- subgraph('circumacicular') %>%
+subgraph_CA <- subgraph_i('circumacicular') %>%
   toVisNetworkData()
-subgraph_A <- subgraph('acicula') %>%
-  toVisNetworkData()
-subgraph_C <- subgraph('chaeta') %>%
-  toVisNetworkData()
-subgraph_CC <- subgraph('circumchaetal') %>%
+subgraph_CC <- subgraph_i('circumchaetal') %>%
   toVisNetworkData()
 
 #write edge weight to value column (for vis)
 subgraph_CA$edges$value <- subgraph_CA$edges$weight
 subgraph_CC$edges$value <- subgraph_CC$edges$weight
-subgraph_C$edges$value <- subgraph_C$edges$weight
-subgraph_A$edges$value <- subgraph_A$edges$weight
 
 #add names to label column
 subgraph_CA$nodes$label <- subgraph_CA$nodes$CATMAID_name
 subgraph_CC$nodes$label <- subgraph_CC$nodes$CATMAID_name
-subgraph_C$nodes$label <- subgraph_C$nodes$CATMAID_name
-subgraph_A$nodes$label <- subgraph_A$nodes$CATMAID_name
 
 #add class as group label
 subgraph_CA$nodes$group <- subgraph_CA$nodes$class
 subgraph_CC$nodes$group <- subgraph_CC$nodes$class
-subgraph_C$nodes$group <- subgraph_C$nodes$class
-subgraph_A$nodes$group <- subgraph_A$nodes$class
-
+#check label and add level to nodes for hierarchical layout
+subgraph_CC$nodes$label
+subgraph_CC$nodes$level <- c(1,5,2,
+                             2,4,2,
+                             4,2,3,
+                             3,3,3,
+                             3,3,3,
+                             3,3,3)
+subgraph_CA$nodes$label
+subgraph_CA$nodes$level <- c(1,7,2,
+                             6,2,4,
+                             5,4,3,
+                             4,3,3,
+                             3,4,3,
+                             4,3,3,
+                             4,3,4,
+                             4,5,4,
+                             5,5,4,
+                             3,3,4,
+                             3)
 #define function for visNet graph visualisation
 visNet <- function(nodes, edges) {visNetwork(nodes, 
                      edges) %>% 
   visIgraphLayout(layout = "layout_nicely", physics = TRUE) %>%
-  visPhysics(solver = "forceAtlas2Based", 
-             forceAtlas2Based = list(gravitationalConstant = -150000,
-                                     centralGravity = 10,
-                                     springConstant = 0.001,
-                                     avoidOverlap = 1)) %>%
-  visEdges(smooth = list(type = 'curvedCW', roundness=0),
+#  visPhysics(solver = "forceAtlas2Based", 
+ #            forceAtlas2Based = list(gravitationalConstant = -150000,
+  #                                   centralGravity = 6,
+   #                                  springConstant = 0.001,
+    #                                 avoidOverlap = 1)) %>%
+    visHierarchicalLayout(levelSeparation=330, 
+                          nodeSpacing=29,
+                          direction='LR',
+                          sortMethod='hubsize',
+                          shakeTowards='roots') %>%
+    visEdges(smooth = list(type = 'curvedCW', roundness=0),
            scaling=list(min=1, max=25),
            color = list(color = "#454545", opacity = 0.2)) %>%
   visNodes(borderWidth=0.3, 
            color = list(border='black'),
            scaling=list(min=20, max=50),
-           font = list(size = 35, 
-                       color = "black", 
-                       background = "#DEDEDE")) %>%
+           font = list(size = 42, 
+                       color = "black")) %>%
   visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
                                      algorithm = 'hierarchical',
                                      labelOnly=FALSE), 
-             width = 1500, height = 1500, autoResize = FALSE) %>%
+             width = 2500, height = 1500, autoResize = FALSE) %>%
   visInteraction(dragNodes = TRUE, dragView = TRUE,
                  zoomView = TRUE, hover=TRUE,
                  multiselect=TRUE)  %>%
-  visGroups(groupname = "muscle", color='grey', shape = "dot", 
+  visGroups(groupname = "muscle", shape = "dot", 
+            opacity=0.7) %>%
+  visGroups(groupname = "epithelia_cell", shape = "dot", 
             opacity=1) %>%
-  visGroups(groupname = "epithelia_cell", color="#0072B2", shape = "dot", 
+  visGroups(groupname = "circumchaetal", size = 30, shape = "triangle", 
             opacity=1) %>%
-  visGroups(groupname = "circumchaetal", color="#56B4E9", shape = "triangle", 
+  visGroups(groupname = "circumacicular", size = 30, shape = "triangle", 
             opacity=1) %>%
-  visGroups(groupname = "circumacicular", color="#56B4E9", shape = "triangle", 
+  visGroups(groupname = "acicula", size = 25, shape = "square", 
             opacity=1) %>%
-  visGroups(groupname = "acicula", color="#D55E00", shape = "square", 
+  visGroups(groupname = "chaeta", size = 25, shape = "square", 
             opacity=1) %>%
-  visGroups(groupname = "chaeta", color="#D55E00", shape = "square", 
+  visGroups(groupname = "hemichaetal", shape = "triangle", 
             opacity=1) %>%
-  visGroups(groupname = "hemichaetal", color="#56B4E9", shape = "triangle", 
-            opacity=1) %>%
-  visGroups(groupname = "ciliated cell", color="#E69F00", shape = "dot", 
+  visGroups(groupname = "ciliated cell", shape = "dot", 
             opacity=1) 
 }
 
-visNet(subgraph_CC$nodes, subgraph_CC$edges)
+#check graphs in Viewer
 visNet(subgraph_CA$nodes, subgraph_CA$edges)
-visNet(subgraph_A$nodes, subgraph_A$edges)
-visNet(subgraph_C$nodes, subgraph_C$edges)
+visNet(subgraph_CC$nodes, subgraph_CC$edges)
+
 
 #define graph save function
-saveVisIgraph <- function(visNetname, graphname) {
+saveVisIgraph <- function(visNetname, graphname, top, left, width, height) {
 #save as html
 saveNetwork(visNetname, paste("pictures/Figure6_graph", graphname, ".html", sep = ""), 
             selfcontained = TRUE)
 #create png snapshot
-webshot2::webshot(url=paste("pictures/Figure6_graph", graphname, ".html", sep = ""),
+webshot::webshot(url=paste("pictures/Figure6_graph", graphname, ".html", sep = ""),
                   file=paste("pictures/Figure6_graph", graphname, ".png", sep = ""),
-                  vwidth = 1500, vheight = 1500, #define the size of the browser window
-                  cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
+                  vwidth = 5000, vheight = 5000, #define the size of the browser window
+                  cliprect = c(top, left, width, height), zoom=5, delay = 2)
 }
 
-visCC <- visNet(subgraph_CC$nodes, subgraph_CC$edges)
-saveVisIgraph(visCC, 'circumchae')
 visCA <- visNet(subgraph_CA$nodes, subgraph_CA$edges)
-saveVisIgraph(visCA, 'circumac')
-visC <- visNet(subgraph_C$nodes, subgraph_C$edges)
-saveVisIgraph(visC, 'acic')
-visA <- visNet(subgraph_A$nodes, subgraph_A$edges)
-saveVisIgraph(visA, 'chae')
+saveVisIgraph(visCA, 'circumac', 50,100, 2350, 1500)
+visCC <- visNet(subgraph_CC$nodes, subgraph_CC$edges)
+saveVisIgraph(visCC, 'circumchae', 200,500, 1600, 1300)
 
 }
 
@@ -383,6 +429,9 @@ circumac_color <- tibble(subgraph_CA$nodes) %>%
   select(color) %>%
   pull()
 plot3d(CA_sg2, soma=T, lwd=4, add=T, alpha=1, col=circumac_color)
+#add parapodial scale bar
+scale_bar_10um_parapodium_sg2 <- read.neurons.catmaid("^scale_bar_10um_parapodium_sg2$", pid=11)
+plot3d(scale_bar_10um_parapodium_sg2, lwd = 4, add = T, col = 'black')
 
 #read the MUS OUTLINES for the circumacicular subgraph and plot in the color same as the graph
 for (i in 1:length(subgraph_CA$nodes$label)) {
@@ -407,7 +456,7 @@ circumchaetal_color <- tibble(subgraph_CC$nodes) %>%
   filter(class == 'circumchaetal') %>%
   select(color) %>%
   pull()
-plot3d(CC_sg2, soma=T, lwd=4, add=T, alpha=0.5, col=circumchaetal_color)
+plot3d(CC_sg2, soma=T, lwd=4, add=T, alpha=0.5, col=circumchaetal_color[1])
 
 #read the MUS OUTLINES for the circumachaetal subgraph and plot in the color same as the graph
 for (i in 1:length(subgraph_CC$nodes$label)) {
@@ -431,9 +480,9 @@ close3d()
 
 {
 panel_A <- ggdraw() + 
-  draw_image(readPNG("pictures/Fig6_desmo_connectome_highest_weight_ventral.png")) +
+  draw_image(readPNG("pictures/Fig6_desmo_connectome_same color.png")) +
   draw_label(paste("50 ", "\u00B5", "m", sep = ""), 
-           x = 0.83, y = 0.14, size = 8) +
+           x = 0.83, y = 0.24, size = 8) +
   geom_segment(aes(x = 0.1,
                    y = 0.9,
                    xend = 0.1,
@@ -449,7 +498,10 @@ panel_A <- ggdraw() +
   draw_label("a", x = 0.1, y = 0.93, size = 7) +
   draw_label("p", x = 0.1, y = 0.80, size = 7) 
 
-panel_B <- ggdraw() + 
+panel_B <- ggdraw() +
+  draw_image(readPNG("pictures/Fig6_desmo_connectome_highest_weight_ventral.png"))
+
+panel_C <- ggdraw() + 
   draw_image(readPNG("pictures/Fig6_desmo_connectome_highest_weight_right.png")) +
   geom_segment(aes(x = 0.1,
                    y = 0.9,
@@ -476,19 +528,15 @@ panel_CC <- ggdraw() + draw_image(readPNG("pictures/Figure6_graphcircumchae.png"
   draw_label("circumchaetal & partners", x = 0.5, y = 0.97, size = 8)
 panel_CA <- ggdraw() + draw_image(readPNG("pictures/Figure6_graphcircumac.png")) + 
   draw_label("circumacicular & partners", x = 0.5, y = 0.97, size = 8)
-panel_Ac <- ggdraw() + draw_image(readPNG("pictures/Figure6_graphacic.png")) + 
-  draw_label("aciculae & partners", x = 0.5, y = 0.97, size = 8)
-panel_Ch <- ggdraw() + draw_image(readPNG("pictures/Figure6_graphchae.png")) + 
-  draw_label("chaetae & partners", x = 0.5, y = 0.97, size = 8)
-  
+
 
 panel_Circumacic_partners <- ggdraw() +
-  draw_label(paste("25 ", "\u00B5", "m", sep = ""), 
-             x = 0.83, y = 0.14, size = 9) + 
   draw_image(readPNG("pictures/Fig6_sg2para_MUS_CA_1.png")) + 
+  draw_label(paste("10 ", "\u00B5", "m", sep = ""), 
+             x = 0.2, y = 0.2, size = 9) + 
   draw_label("circumacicular & partners", x = 0.5, y = 0.97, size = 8)  + 
-  draw_label("neuropodium", x = 0.82, y = 0.88, size = 7)  + 
-  draw_label("notopodium", x = 0.8, y = 0.1, size = 7)  +
+  draw_label("notopodium", x = 0.82, y = 0.88, size = 7)  + 
+  draw_label("neuropodium", x = 0.8, y = 0.1, size = 7)  +
   geom_segment(aes(x = 0.1,
                    y = 0.8,
                    xend = 0.1,
@@ -501,14 +549,14 @@ panel_Circumacic_partners <- ggdraw() +
                    yend = 0.8),
                size = 0.3,
                arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) + 
-  draw_label("a", x = 0.1, y = 0.83, size = 7) +
-  draw_label("p", x = 0.1, y = 0.70, size = 7) 
+  draw_label("d", x = 0.1, y = 0.83, size = 7) +
+  draw_label("v", x = 0.1, y = 0.70, size = 7) 
 
 panel_Circumchaetal_partners <- ggdraw() + 
   draw_image(readPNG("pictures/Fig6_sg2para_MUS_CC_1.png")) + 
   draw_label("circumchaetal & partners", x = 0.5, y = 0.97, size = 8) + 
-  draw_label("neuropodium", x = 0.82, y = 0.88, size = 7)  + 
-  draw_label("notopodium", x = 0.8, y = 0.1, size = 7) +
+  draw_label("notopodium", x = 0.82, y = 0.88, size = 7)  + 
+  draw_label("neuropodium", x = 0.8, y = 0.1, size = 7) +
   geom_segment(aes(x = 0.1,
                    y = 0.8,
                    xend = 0.1,
@@ -521,24 +569,24 @@ panel_Circumchaetal_partners <- ggdraw() +
                    yend = 0.8),
                size = 0.3,
                arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) + 
-  draw_label("a", x = 0.1, y = 0.83, size = 7) +
-  draw_label("p", x = 0.1, y = 0.70, size = 7) 
+  draw_label("d", x = 0.1, y = 0.83, size = 7) +
+  draw_label("v", x = 0.1, y = 0.70, size = 7) 
 
 layout <- "
-AAAAAAABBBBBBBCCCCCCCCCCDDDDDDDD
-EEEEEEEEFFFFFFFFGGGGGGGGHHHHHHHH
+AAAAABBBBBCCCCCDDDDDDDDDEEEEEEEE
+FFFFFFFGGGGGGGGGGGHHHHHHHIIIIIII
 "
 
-Figure6 <- panel_A + panel_B + panel_degree_gr + panel_w_degree +
+Figure6 <- panel_A + panel_B + panel_C + panel_degree_gr + panel_w_degree +
   panel_Circumacic_partners + panel_CA + panel_Circumchaetal_partners  + panel_CC +
   plot_layout(design = layout) +
   plot_annotation(tag_levels = 'A') & 
   theme(plot.tag = element_text(size = 12, face='plain'))
 
 ggsave("figures/Figure6.pdf", limitsize = FALSE, 
-       units = c("px"), Figure6, width = 2400, height = 1400)
+       units = c("px"), Figure6, width = 2600, height = 1400)
 
 }
 
 ggsave("figures/Figure6.png", limitsize = FALSE, 
-       units = c("px"), Figure6, width = 2400, height = 1400, bg = 'white')
+       units = c("px"), Figure6, width = 2600, height = 1400, bg = 'white')
