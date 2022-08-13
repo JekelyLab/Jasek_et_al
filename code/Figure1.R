@@ -138,16 +138,10 @@ rm(list = ls(all.names = TRUE))
 # generate graph plot -----------------------------------------------------
 
 {
-#read the saved igraph format graph file from supplements/
+#read the saved visNetwork file from source data
 #this file was generated with the desmo_connectome_graph.R script
-desmo_conn_graph <- readRDS("supplements/desmo_connectome_graph_igraph.rds")
+conn_graph.visn <- readRDS("source_data/Figure3_source_data2.rds")
   
-V(desmo_conn_graph)$weight <- strength(desmo_conn_graph, 
-                                       vids = V(desmo_conn_graph),
-                                       mode = 'all', loops = TRUE)
-#convert to visNetwork graph
-conn_graph.visn <- toVisNetworkData(desmo_conn_graph)  
-conn_graph.visn$nodes$class
 # plot graph with coordinates from gephi ----------------------------------
 
 #overwrite group value (partition) with side value or other value (for colouring)
@@ -157,15 +151,18 @@ conn_graph.visn$nodes$group <-  as.character(conn_graph.visn$nodes$class)
 conn_graph.visn$edges$value <- conn_graph.visn$edges$weight
 ## copy column "weight" to new column "value" in list "nodes"
 conn_graph.visn$nodes$value <- conn_graph.visn$nodes$weight
+
 #for plotting with different colors, remove colour info (which takes precedence over group colour)
 conn_graph.visn$nodes$color <- c()
 Reds <- brewer.pal(9, 'Reds')
 
 {
 coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
-  
+#rotate the coordinates of the graph so that it is left-right symmetric
+coords_rotated <- autoimage::rotate(coords, pi/2.4, pivot = c(0, 0))
+
 visNet <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
-    visIgraphLayout(layout = "layout.norm", layoutMatrix = coords) %>%
+    visIgraphLayout(layout = "layout.norm", layoutMatrix = coords_rotated) %>%
     visEdges(smooth = list(type = 'curvedCW', roundness=0),
              scaling=list(min=5, max=30),
              color = list(color='#848484', opacity=0.4),
@@ -209,7 +206,7 @@ visNet
 #save as html
 saveNetwork(visNet, "pictures/Fig1_desmo_connectome.html", selfcontained = TRUE)
 #create png snapshot
-webshot2::webshot(url="pictures/Fig1_desmo_connectome.html",
+webshot::webshot(url="pictures/Fig1_desmo_connectome.html",
                     file="pictures/Fig1_desmo_connectome.png",
                     vwidth = 1500, vheight = 1500, #define the size of the browser window
                     cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
@@ -270,9 +267,9 @@ panel_des_partners <- ggdraw() +
   draw_image(readPNG("pictures/desmosomal_connectome_mus_partners.png")) + 
   draw_label("desmosomal partners", x = 0.45, y = 0.99, size = 10)
 
-#read with image_read (magick package) and rotate
+#read with image_read (magick package) and flip 
 img_conn <- image_read("pictures/Fig1_desmo_connectome.png") %>%
-image_rotate(180)
+  image_flop()
 
 panel_des_conn <- ggdraw() + draw_image(img_conn) + 
   draw_label("desmosomal connectome", x = 0.45, y = 0.99, size = 10) + 
