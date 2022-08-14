@@ -6,7 +6,6 @@ source("code/Packages_and_Connection.R")
 
 #read the saved igraph format graph file from supplements/
 desmo_conn_graph <- readRDS("source_data/Figure3_source_data1.rds")
-V(desmo_conn_graph)$weighted_degree <- V(desmo_conn_graph)$degree
 
 V(desmo_conn_graph)$degree <- degree(
   desmo_conn_graph,
@@ -30,7 +29,7 @@ par3d(zoom=0.55)
 #plot skeletons with same alpha for comparison
 skeletons <- nlapply(read.neurons.catmaid(node_name_and_degree_high_only$name, pid=11), 
                         function(x) smooth_neuron(x, sigma=6000))
-plot3d(skeletons, soma = TRUE, lwd = 1, add=T, alpha=0.7, col=Reds[8])
+plot3d(skeletons, soma = TRUE, lwd = 1, add=T, alpha=0.6, col=Reds[8])
 plot3d(outline, add = TRUE, alpha = 0.017)
 plot3d(scalebar_50um_ventral, color = "black", lw = 2)
   
@@ -62,7 +61,7 @@ rgl.snapshot("pictures/Fig6_desmo_connectome_highest_weight_ventral.png")
 nview3d("right", extramat=rotationMatrix(pi, 0, 1, 1))
 #define a sagittal clipping plane and re-zoom
 clipplanes3d(1, 0, 0.16, -75700)
-par3d(zoom=0.55)
+par3d(zoom=0.61)
 rgl.snapshot("pictures/Fig6_desmo_connectome_highest_weight_right.png")
 close3d()
 }
@@ -170,9 +169,9 @@ w_degree_plot <- as_tibble(desmo_conn_graph %>%
   filter(class != "other") %>%
   filter(class != "basal lamina") %>%
   select(class, weighted_degree) %>%
-  ggplot(aes(x = class, y = weighted_degree)) +
-  geom_boxplot(outlier.shape = NA) + 
+  ggplot(aes(x = class, y = weighted_degree, alpha = 0)) +
   geom_jitter(width = 0.25, size = 0.6, aes(color = weighted_degree, alpha = weighted_degree/84)) +
+  geom_boxplot(outlier.shape = NA) + 
   scale_colour_gradient(low = Reds[1], high = Reds[9], 
                         guide = "colorbar", 
                         guide_legend('weighted degree')) +
@@ -200,7 +199,6 @@ w_degree_plot <- as_tibble(desmo_conn_graph %>%
                    labels = c("circumacicular", "aciculae", "chaetae",  
                               "muscles", "circumchaetal", "hemichaetal",
                               "epidermal cells", "ciliated cells"))
-
 ggsave("pictures/Figure6_w_degree_plot.png", w_degree_plot,
        width = 1200, units = "px",  height = 1200, limitsize = TRUE)
 
@@ -214,7 +212,7 @@ desmo_grouped_graph <- readRDS("source_data/Figure3_figure_supplement1_source_da
 # generate and plot subgraphs ---------------------------------------------------------------
 
 {
-#define color list
+#define colour list
 cols <- c(M_Winding_Col, Okabe_Ito, Reds[2:9], brewer12, Tol_muted)
 #make sampling reproducible
 set.seed(23)
@@ -482,7 +480,7 @@ close3d()
 panel_A <- ggdraw() + 
   draw_image(readPNG("pictures/Fig6_desmo_connectome_same color.png")) +
   draw_label(paste("50 ", "\u00B5", "m", sep = ""), 
-           x = 0.83, y = 0.24, size = 8) +
+           x = 0.84, y = 0.23, size = 8) +
   geom_segment(aes(x = 0.1,
                    y = 0.9,
                    xend = 0.1,
@@ -524,11 +522,21 @@ degree_scale <- ggdraw() + draw_image(readPNG("pictures/Figure6_degree_scale.png
 
 panel_w_degree <- ggdraw() + draw_image(readPNG("pictures/Figure6_w_degree_plot.png"))
 
-panel_CC <- ggdraw() + draw_image(readPNG("pictures/Figure6_graphcircumchae.png")) + 
-  draw_label("circumchaetal & partners", x = 0.5, y = 0.97, size = 8)
 panel_CA <- ggdraw() + draw_image(readPNG("pictures/Figure6_graphcircumac.png")) + 
-  draw_label("circumacicular & partners", x = 0.5, y = 0.97, size = 8)
+  draw_label("circumacicular & partners", x = 0.5, y = 0.97, size = 8)  + 
+  draw_label("# of desmosomes", x = 0.88, y = 0.92, size = 5) +
+  draw_label("1", x = 0.88, y = 0.88, size = 5) + 
+  draw_label(max(subgraph_CA$nodes$weighted_degree), x = 0.88, y = 0.84, size = 5) +
+  draw_line(x = c(0.9, 0.95), y = c(0.88, 0.88), size = 0.1, color = 'grey') +
+  draw_line(x = c(0.9, 0.95), y = c(0.84, 0.84), size = 1.5, color = 'grey')
 
+panel_CC <- ggdraw() + draw_image(readPNG("pictures/Figure6_graphcircumchae.png")) + 
+  draw_label("circumchaetal & partners", x = 0.5, y = 0.97, size = 8) + 
+  draw_label("# of desmosomes", x = 0.88, y = 0.92, size = 5) +
+  draw_label("1", x = 0.84, y = 0.88, size = 5) + 
+  draw_label(max(subgraph_CC$nodes$weighted_degree), x = 0.84, y = 0.84, size = 5) +
+  draw_line(x = c(0.88, 0.95), y = c(0.88, 0.88), size = 0.1, color = 'grey') +
+  draw_line(x = c(0.88, 0.95), y = c(0.84, 0.84), size = 1.1, color = 'grey')
 
 panel_Circumacic_partners <- ggdraw() +
   draw_image(readPNG("pictures/Fig6_sg2para_MUS_CA_1.png")) + 
@@ -573,7 +581,7 @@ panel_Circumchaetal_partners <- ggdraw() +
   draw_label("v", x = 0.1, y = 0.70, size = 7) 
 
 layout <- "
-AAAAABBBBBCCCCCDDDDDDDDDEEEEEEEE
+AAAAAABBBBBBCCCCCCDDDDDDDEEEEEEE
 FFFFFFFGGGGGGGGGGGHHHHHHHIIIIIII
 "
 
