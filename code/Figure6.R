@@ -480,7 +480,7 @@ close3d()
 panel_A <- ggdraw() + 
   draw_image(readPNG("pictures/Fig6_desmo_connectome_same color.png")) +
   draw_label(paste("50 ", "\u00B5", "m", sep = ""), 
-           x = 0.84, y = 0.23, size = 8) +
+           x = 0.85, y = 0.18, size = 8) +
   geom_segment(aes(x = 0.1,
                    y = 0.9,
                    xend = 0.1,
@@ -524,19 +524,19 @@ panel_w_degree <- ggdraw() + draw_image(readPNG("pictures/Figure6_w_degree_plot.
 
 panel_CA <- ggdraw() + draw_image(readPNG("pictures/Figure6_graphcircumac.png")) + 
   draw_label("circumacicular & partners", x = 0.5, y = 0.97, size = 8)  + 
-  draw_label("# of desmosomes", x = 0.88, y = 0.92, size = 5) +
-  draw_label("1", x = 0.88, y = 0.88, size = 5) + 
-  draw_label(max(subgraph_CA$nodes$weighted_degree), x = 0.88, y = 0.84, size = 5) +
-  draw_line(x = c(0.9, 0.95), y = c(0.88, 0.88), size = 0.1, color = 'grey') +
-  draw_line(x = c(0.9, 0.95), y = c(0.84, 0.84), size = 1.5, color = 'grey')
+  draw_label("# of desmosomes", x = 0.88, y = 0.82, size = 5) +
+  draw_label("1", x = 0.88, y = 0.78, size = 5) + 
+  draw_label(max(subgraph_CA$nodes$weighted_degree), x = 0.88, y = 0.74, size = 5) +
+  draw_line(x = c(0.9, 0.95), y = c(0.78, 0.78), size = 0.1, color = 'grey') +
+  draw_line(x = c(0.9, 0.95), y = c(0.74, 0.74), size = 1.5, color = 'grey')
 
 panel_CC <- ggdraw() + draw_image(readPNG("pictures/Figure6_graphcircumchae.png")) + 
   draw_label("circumchaetal & partners", x = 0.5, y = 0.97, size = 8) + 
-  draw_label("# of desmosomes", x = 0.88, y = 0.92, size = 5) +
-  draw_label("1", x = 0.84, y = 0.88, size = 5) + 
-  draw_label(max(subgraph_CC$nodes$weighted_degree), x = 0.84, y = 0.84, size = 5) +
-  draw_line(x = c(0.88, 0.95), y = c(0.88, 0.88), size = 0.1, color = 'grey') +
-  draw_line(x = c(0.88, 0.95), y = c(0.84, 0.84), size = 1.1, color = 'grey')
+  draw_label("# of desmosomes", x = 0.88, y = 0.82, size = 5) +
+  draw_label("1", x = 0.84, y = 0.78, size = 5) + 
+  draw_label(max(subgraph_CC$nodes$weighted_degree), x = 0.84, y = 0.74, size = 5) +
+  draw_line(x = c(0.88, 0.95), y = c(0.78, 0.78), size = 0.1, color = 'grey') +
+  draw_line(x = c(0.88, 0.95), y = c(0.74, 0.74), size = 1.1, color = 'grey')
 
 panel_Circumacic_partners <- ggdraw() +
   draw_image(readPNG("pictures/Fig6_sg2para_MUS_CA_1.png")) + 
