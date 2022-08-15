@@ -344,10 +344,12 @@ panel_left_right_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_left_right.p
   draw_label("a", x = 0.1, y = 0.93, size = 8) +
   draw_label("p", x = 0.1, y = 0.79, size = 8) 
 
-panel_left_right_gr <- ggdraw() + draw_image(readPNG("pictures/Fig5_desmo_connectome_left_right.png")) + 
-    draw_label("left", x = 0.3, y = 0.95, size = 8, color = Okabe_Ito[1]) + 
-    draw_label("right", x = 0.7, y = 0.95, size = 8, color = Okabe_Ito[2]) + 
-  draw_label("middle", x = 0.5, y = 0.95, size = 8, color = Okabe_Ito[8])
+img_left_right_gr <- image_read("pictures/Fig5_desmo_connectome_left_right.png") %>%
+  image_flop()
+panel_left_right_gr <- ggdraw() + draw_image(img_left_right_gr) + 
+    draw_label("right", x = 0.3, y = 0.9, size = 8, color = Okabe_Ito[2]) + 
+    draw_label("left", x = 0.7, y = 0.9, size = 8, color = Okabe_Ito[1]) + 
+  draw_label("middle", x = 0.5, y = 0.99, size = 8, color = Okabe_Ito[8])
 
 panel_seg_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_seg.png")) + 
   draw_label("head", x = 0.17, y = 0.87, size = 9, 
@@ -358,28 +360,34 @@ panel_seg_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_seg.png")) +
   draw_label("sg3", x = 0.13, y = 0.28, size = 9, color = segmental_colors[5]) +
   draw_label("pygidium", x = 0.22, y = 0.14, size = 9, color = segmental_colors[6]) 
 
-panel_seg_gr <- ggdraw() + draw_image(readPNG("pictures/Fig5_desmo_connectome_seg.png")) + 
-  draw_label("head", x = 0.38, y = 0.90, size = 9, fontface = 'bold', 
+img_seg_gr <- image_read("pictures/Fig5_desmo_connectome_seg.png") %>%
+  image_flop()
+panel_seg_gr <- ggdraw() + draw_image(img_seg_gr) + 
+  draw_label("head", x = 0.35, y = 0.90, size = 9, fontface = 'bold', 
              color = segmental_colors[1]) + 
   draw_label("sg0", x = 0.6, y = 0.9, size = 9, fontface = 'bold', color = segmental_colors[2]) +
-  draw_label("sg1", x = 0.37, y = 0.79, size = 9, fontface = 'bold', color = segmental_colors[3])  +
-  draw_label("sg2", x = 0.45, y = 0.55, size = 9, fontface = 'bold', color = segmental_colors[4]) +
-  draw_label("sg3", x = 0.2, y = 0.2, size = 9, fontface = 'bold', color = segmental_colors[5]) +
-  draw_label("pygidium", x = 0.47, y = 0.43, size = 9, fontface = 'bold', color = segmental_colors[6]) 
+  draw_label("sg1", x = 0.17, y = 0.74, size = 9, fontface = 'bold', color = segmental_colors[3])  +
+  draw_label("sg2", x = 0.45, y = 0.5, size = 9, fontface = 'bold', color = segmental_colors[4]) +
+  draw_label("sg3", x = 0.17, y = 0.2, size = 9, fontface = 'bold', color = segmental_colors[5]) +
+  draw_label("pygidium", x = 0.47, y = 0.4, size = 9, fontface = 'bold', color = segmental_colors[6]) 
 
 
 panel_para_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_para.png"))  
 
-panel_para_gr <- ggdraw() + draw_image(readPNG("pictures/Fig5_desmo_connectome_para.png"))  + 
-  draw_label("neuropodium", x = 0.3, y = 0.9, size = 9, fontface = 'plain', color = Okabe_Ito[1]) +
-  draw_label("notopodium", x = 0.2, y = 0.72, size = 9, fontface = 'plain', color = Okabe_Ito[2])
+img_para_gr <- image_read("pictures/Fig5_desmo_connectome_para.png") %>%
+  image_flop()
+panel_para_gr <- ggdraw() + draw_image(img_para_gr)  + 
+  draw_label("neuropodium", x = 0.25, y = 0.8, size = 9, fontface = 'plain', color = Okabe_Ito[1]) +
+  draw_label("notopodium", x = 0.15, y = 0.62, size = 9, fontface = 'plain', color = Okabe_Ito[2])
 
 panel_acic_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_mus_ac.png"))
 
-panel_acic_gr <- ggdraw() + draw_image(readPNG("pictures/Fig5_desmo_connectome_acic.png"))    + 
+img_acic_gr <- image_read("pictures/Fig5_desmo_connectome_acic.png") %>%
+  image_flop()
+panel_acic_gr <- ggdraw() + draw_image(img_acic_gr)    + 
   draw_label("aciculae", x = 0.15, y = 0.73, size = 9, color = Okabe_Ito[8]) + 
-  draw_label("circumacicular", x = 0.15, y = 0.67, size = 9, color = Okabe_Ito[2]) + 
-  draw_label("muscles", x = 0.15, y = 0.61, size = 9, color = Reds[7])
+  draw_label("circumacicular", x = 0.15, y = 0.43, size = 9, color = Okabe_Ito[2]) + 
+  draw_label("muscles", x = 0.15, y = 0.58, size = 9, color = Reds[7])
 
 layout <- "
 ABCD
