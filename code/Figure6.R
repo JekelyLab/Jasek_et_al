@@ -163,7 +163,6 @@ degree_plot <- as_tibble(desmo_conn_graph %>%
                               "muscle", "circumchaetal", "hemichaetal",
                               "epithelia_cell", "ciliated cell"))
 
-
 w_degree_plot <- as_tibble(desmo_conn_graph %>%  
             as_tbl_graph()) %>%
   filter(class != "other") %>%
@@ -199,8 +198,19 @@ w_degree_plot <- as_tibble(desmo_conn_graph %>%
                    labels = c("circumacicular", "aciculae", "chaetae",  
                               "muscles", "circumchaetal", "hemichaetal",
                               "epidermal cells", "ciliated cells"))
+
 ggsave("pictures/Figure6_w_degree_plot.png", w_degree_plot,
        width = 1200, units = "px",  height = 1200, limitsize = TRUE)
+
+#save source data
+w_degree_plot_source_data <- as_tibble(desmo_conn_graph %>%  
+                                         as_tbl_graph()) %>%
+  filter(class != "other") %>%
+  filter(class != "basal lamina") %>%
+  select(class, weighted_degree)
+
+write_csv(w_degree_plot_source_data, "source_data/Figure6_source_data_1.txt")
+#read_csv("source_data/Figure6_source_data_1.txt")
 
 }
 
@@ -351,6 +361,7 @@ webshot::webshot(url=paste("pictures/Figure6_graph", graphname, ".html", sep = "
                   file=paste("pictures/Figure6_graph", graphname, ".png", sep = ""),
                   vwidth = 5000, vheight = 5000, #define the size of the browser window
                   cliprect = c(top, left, width, height), zoom=5, delay = 2)
+
 }
 
 visCA <- visNet(subgraph_CA$nodes, subgraph_CA$edges)
