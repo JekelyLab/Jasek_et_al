@@ -228,7 +228,7 @@ panelSEM <- ggdraw() + draw_image(readPNG("images_notR/Platynereis_SEM_inverted_
   draw_label("chaetae", x = 0.1, y = 0.6, size = 9) +
   draw_label("cilia", x = 0.85, y = 0.72, size = 9) +
   draw_label("Platynereis", x = 0.3, y = 0.99, size = 10, fontface = "italic") + 
-  draw_label("larva", x = 0.55, y = 0.99, size = 10, fontface = "plain") +
+  draw_label(" larva", x = 0.55, y = 0.99, size = 10, fontface = "plain") +
   draw_label(paste("50 ", "\u00B5", "m", sep = ""), 
              x = 0.2, y = 0.08, size = 9)
 
@@ -237,14 +237,14 @@ panel_mus <- ggdraw() +
   draw_label("head", x = 0.54, y = 0.87, size = 9) +
   draw_label("sg0", x = 0.54, y = 0.69, size = 9) +
   draw_label("sg1", x = 0.52, y = 0.6, size = 9) +
-  draw_label("sg2", x = 0.47, y = 0.49, size = 9) +
+  draw_label("sg2", x = 0.47, y = 0.48, size = 9) +
   draw_label("sg3", x = 0.43, y = 0.33, size = 9) +
   draw_label("pygidium", x = 0.4, y = 0.16, size = 9) +
   draw_label("cirrus sg0", x = 0.85, y = 0.72, size = 9) +
   draw_label("all muscles", x = 0.3, y = 0.99, size = 10) +
-  draw_label("aciculae", x = 0.9, y = 0.28, size = 8) +
+  draw_label("aciculae", x = 0.89, y = 0.28, size = 8) +
   draw_line(
-    x = c(0.58, 0.8, 0.79),
+    x = c(0.58, 0.77, 0.79),
     y = c(0.14, 0.28, 0.42), size = 0.3) +
   geom_segment(aes(x = 0.1,
                    y = 0.9,
