@@ -304,7 +304,7 @@ N_node <- length(desmo_conn_graph.tb %>%
       select(name)) 
 
 N_frag <- dim(as_tibble(desmo_conn_graph.tb) %>%
-  filter(segment == "fragment") )[1]
+  filter(segment == "fragmentum") )[1]
 
 N_edge <- length(E(as.igraph(desmo_conn_graph.tb)))
 
