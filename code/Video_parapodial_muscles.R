@@ -2,7 +2,7 @@
 #Jasek et al 2022 desmosomal connectome paper
 #Gaspar Jekely Feb 2022
 
-library(natverse)
+library(catmaid)
 library(nat)
 library(hash)
 options(nat.plotengine = 'rgl')
@@ -71,6 +71,8 @@ txt_pos <- hash(
 # define which muscles to plot
 MUS_groups <- list(c("MUSobP-neuV", "MUSobP-neuDlong"), "MUSac-neuAV", "MUSac-neure", c("MUSac-neuDach", "MUSac-neuPV"), "MUSac-notM", "MUSac-notA", "MUSac-notP", c("MUSac-i", "MUSac-neuDx"))
 
+dir.create("pictures/Video-PPC")
+
 nopen3d() # opens a pannable 3d window
 
 i = 1
@@ -116,13 +118,20 @@ for (MUS_group in MUS_groups)
   }
 
   #export rotation by frame for video
-  for (l in 1:33){
-    play3d( spin3d( axis = c(0, 0, 10), rpm = 2), duration =1 )
+  for (l in 1:124){
+    play3d( spin3d( axis = c(0, 0, 10), rpm = 2), duration =0.25 )
     print (l)
     #save a snapshot
-    filename <- paste("./pictures/Video_sg2l_Mus_Outlines_spin",  formatC(i, digits = 1, flag = "0"), MUS_group[1], "_frame", formatC(l, digits = 1, flag = "0"), ".png", sep = "")
+    filename <- paste("./pictures/Video-PPC/Video_sg2l_Mus_Outlines_spin",  formatC(i, digits = 1, flag = "0"), MUS_group[1], "_frame", formatC(l, digits = 1, flag = "0"), ".png", sep = "")
     #print(filename)
     rgl.snapshot(filename)
   }
 
 }
+close3d()
+
+#read png files and write video
+library(av)
+av::av_encode_video(paste('pictures/Video-PPC/', list.files("pictures/Video-PPC/", '*.png'), sep = ""), 
+                    framerate = 5,
+                    output = 'videos/Video-PPC.mp4')
