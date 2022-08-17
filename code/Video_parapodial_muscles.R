@@ -9,7 +9,7 @@ options(nat.plotengine = 'rgl')
 require("graphics")
 
 # colorblind-friendly color palette
-Okabe_Ito <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+Okabe_ito_noblack <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
 # sourcing catmaid login, see https://natverse.org/rcatmaid/reference/catmaid_login.html
 conn <- source("~/R/conn.R")
@@ -107,9 +107,9 @@ for (MUS_group in MUS_groups)
   clipplanes3d(0.1, 1, 0, -57000)
   par3d(windowRect = c(0, 0, 800, 800)) #resize for frontal view
   for (MUS in MUS_group) {
-    read_and_plot(MUS, Okabe_Ito[i])
+    read_and_plot(MUS, Okabe_ito_noblack[i])
 
-    if (i == length(Okabe_Ito)) {
+    if (i == length(Okabe_ito_noblack)) {
       i = 1
     }
     else {
