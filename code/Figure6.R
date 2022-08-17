@@ -529,7 +529,7 @@ panel_C <- ggdraw() +
 
 panel_degree_gr <- ggdraw() + draw_image(readPNG("pictures/Fig6_desmo_connectome_degree.png")) 
 
-degree_scale <- ggdraw() + draw_image(readPNG("pictures/Figure6_degree_scale.png"))
+#degree_scale <- ggdraw() + draw_image(readPNG("pictures/Figure6_degree_scale.png"))
 
 panel_w_degree <- ggdraw() + draw_image(readPNG("pictures/Figure6_w_degree_plot.png"))
 
