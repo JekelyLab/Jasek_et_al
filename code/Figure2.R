@@ -491,7 +491,8 @@ n_cells.tb %>%
     guide = "colourbar",
     guide_legend(title = '# of cells'),
     aesthetics = "colour") +
-  scale_y_discrete(limits = rev(rownames(n_cells))) +
+  scale_y_discrete(limits = c(rownames(n_cells)[1:7], rownames(n_cells)[16], rev(rownames(n_cells)[8:14]), rownames(n_cells)[15])) +
+  #scale_y_discrete(limits = rev(rownames(n_cells))) +
   scale_x_discrete(limits = as.character(colnames(n_cells)))
 
 # Saving plot
