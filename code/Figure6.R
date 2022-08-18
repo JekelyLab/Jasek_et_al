@@ -489,7 +489,7 @@ close3d()
 
 {
 panel_A <- ggdraw() + 
-  draw_image(readPNG("pictures/Fig6_desmo_connectome_same color.png")) +
+  draw_image(readPNG("pictures/Fig6_desmo_connectome_same_color.png")) +
   draw_label(paste("50 ", "\u00B5", "m", sep = ""), 
            x = 0.85, y = 0.18, size = 8) +
   geom_segment(aes(x = 0.1,
