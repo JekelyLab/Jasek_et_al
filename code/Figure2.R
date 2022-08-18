@@ -511,6 +511,7 @@ write.csv(n_cells, file = "source_data/Figure2I_source_data_1.csv",
 # tables of muscle names --------------------------------------------------
 
 {
+library(gtable)
   
 not_ac <- tibble(subtype = c("", "", "Notopodial", 
                              "Neuropodial", "", "", "", "", "", "", 

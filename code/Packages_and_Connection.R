@@ -5,37 +5,40 @@ gc() #free up memory and report the memory usage.
 Sys.setenv('R_MAX_VSIZE'=8000000000)
 
 # load nat and all associated packages, incl catmaid
-library(natverse)
-library(magick)
 library(nat)
+library(catmaid)
+
 options(nat.plotengine = 'rgl')
 require("graphics")
 
-library(networkD3)
-library(igraph)
-library(leiden)
-library(beepr) #to run beep() after a section finished
-library(cowplot)
-library(pdftools)
 library(tidyverse)
-library(magick)
+library(tidygraph)
 library(rjson)
 library(data.table)
-library(colorspace)   ## hsv colorspace manipulations
-
-library(png)
-library(patchwork)
-library(tidygraph)
-library(rgexf)
-library(RColorBrewer)
-library(visNetwork)
-library(plotly)
 
 library(gridExtra) #to render tables as grobs (grid graphical objects)
 library(grid)
 
-library(hash)
+library(networkD3)
+library(igraph)
+library(leiden)
+library(rgexf)
+library(visNetwork)
+library(plotly)
 library(autoimage) #to rotate the coordinates of the graph plots
+
+library(beepr) #to run beep() after a section finished
+
+library(cowplot)
+library(patchwork)
+library(magick)
+library(png)
+library(pdftools)
+
+library(colorspace)   ## hsv colorspace manipulations
+library(RColorBrewer)
+
+library(hash)
 
 #create directory for R-generated pictures for figure panels (ignored by git)
 dir.create("pictures")
