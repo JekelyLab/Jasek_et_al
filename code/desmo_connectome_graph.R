@@ -13,6 +13,34 @@ all_desmo_connectors <- catmaid_fetch(path = "11/connectors/", body = list(relat
 # extract ids of desmo connectors
 all_desmo_ids <- sapply(all_desmo_connectors$connectors, "[[", 1)
 
+#define empty vectors
+desmo_id <- c(); x <- c(); y <- c(); z <- c(); partner1 <- c(); partner2 <- c()
+#retrieve all desmosomes by id individually and parse their xyz coordinates and partners
+for (i in 1:length(all_desmo_ids)) {
+  id <- all_desmo_ids[i]
+  desmo <- catmaid_fetch(path = paste("11/connectors/", id, sep = ''), 
+                         body = list(relation_type="desmosome_with", 
+                                     with_partners="true"))
+  desmo_id[i] <- desmo$connector_id
+  x[i] <- desmo$x
+  y[i] <- desmo$y
+  z[i] <- desmo$z
+  partner1[i] <- desmo$partners[[1]]$skeleton_id
+  partner2[i] <- desmo$partners[[2]]$skeleton_id
+}
+
+#assemble all in a tibble
+desmo_with_partners <- tibble('desmo_id' = desmo_id,
+                              'x' = x,
+                              'y' = y,
+                              'z' = z,
+                              'partner1' = partner1,
+                              'partner2' = partner2
+)
+
+
+desmo_with_partners
+
 # find skids connected to the desmosomes
 partners1 <- as.data.frame(sapply(all_desmo_connectors$partners, "[[", 1))
 partners1 <- as.vector(sapply(partners1, "[[", 3))
