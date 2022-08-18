@@ -38,15 +38,13 @@ desmo_with_partners <- tibble('desmo_id' = desmo_id,
                               'partner2' = partner2
 )
 
+write_csv(desmo_with_partners, "data/desmo_with_partners.csv")
 
-desmo_with_partners
-
-# find skids connected to the desmosomes
-partners1 <- as.data.frame(sapply(all_desmo_connectors$partners, "[[", 1))
-partners1 <- as.vector(sapply(partners1, "[[", 3))
-
-partners2 <- as.data.frame(sapply(all_desmo_connectors$partners, "[[", 2))
-partners2 <- as.vector(sapply(partners2, "[[", 3))
+#these are all the skids connected to desmosomes
+partners1 <- desmo_with_partners %>%
+  select(partner1)
+partners2 <- desmo_with_partners %>%
+  select(partner2)
 
 #list of all unique skids
 all_skids <- unique(c(partners1, partners2))
