@@ -1,6 +1,14 @@
-library(natverse)
+library(catmaid)
 
 source("~/R/conn.R")
+
+################################################################################
+# Calculate percentages of desmosomes which are:
+#     - hemidesmosomes
+#     - muscle to muscle
+#     - muscle to muscle, same muscle type
+#     - muscle to muscle, different muscle types
+
 
 all_desmo_connectors <- catmaid_fetch(path = "11/connectors/", body = list(relation_type="desmosome_with", with_partners="true"))
 
@@ -59,3 +67,36 @@ percentage_MUS_same_desmo <- desmo_count_MUS_same / (desmo_count_MUS_other + des
 
 # percentage of muscle to muscle desmosoems which are between different muscle types
 percentage_MUS_other_desmo <- desmo_count_MUS_other / (desmo_count_MUS_other + desmo_count_MUS_same)
+
+
+################################################################################
+# Percentage of cells with desmosomes, which also have black fibers (intermediate filaments)
+
+# get info about all desmo connectors in the Naomi project
+all_desmo_connectors <- catmaid_fetch(path = "11/connectors/", body = list(relation_type="desmosome_with", with_partners="true"))
+
+# extract ids of desmo connectors
+all_desmo_ids <- sapply(all_desmo_connectors$connectors, "[[", 1)
+
+# find skids connected to the desmosomes
+partners1 <- as.data.frame(sapply(all_desmo_connectors$partners, "[[", 1))
+partners1 <- as.vector(sapply(partners1, "[[", 3))
+
+partners2 <- as.data.frame(sapply(all_desmo_connectors$partners, "[[", 1))
+partners2 <- as.vector(sapply(partners2, "[[", 3))
+
+all_skids <- unique(c(partners1, partners2))
+
+annotations_all = catmaid_get_annotations_for_skeletons(all_skids, pid=11)
+
+annotation_mus_skids = annotations_all[grepl("^muscle$", annotations_all$annotation),1]
+annotation_nonmus_skids = setdiff(all_skids, annotation_mus_skids)
+annotation_bl_skids = annotations_all[grepl("^basal lamina$", annotations_all$annotation),1]
+annotation_bf_skids = annotations_all[grepl("^black fibers$", annotations_all$annotation),1]
+annotation_bf_nonbl_skids = setdiff(annotation_bf_skids, annotation_bl_skids)
+
+num_skids_mus_bf = length(intersect(annotation_mus_skids, annotation_bf_skids))
+num_skids_nonmus_bf = length(intersect(annotation_nonmus_skids, annotation_bf_skids))
+num_nonmus = length(annotation_nonmus_skids)
+
+annotation_nonmus_nonbf = setdiff(annotation_nonmus_skids, annotation_bf_skids)
