@@ -1,4 +1,5 @@
 library(catmaid)
+library(tidyverse)
 
 source("~/R/conn.R")
 
@@ -69,6 +70,7 @@ percentage_MUS_same_desmo <- desmo_count_MUS_same / (desmo_count_MUS_other + des
 percentage_MUS_other_desmo <- desmo_count_MUS_other / (desmo_count_MUS_other + desmo_count_MUS_same)
 
 
+
 ################################################################################
 # Percentage of cells with desmosomes, which also have black fibers (intermediate filaments)
 
@@ -100,3 +102,46 @@ num_skids_nonmus_bf = length(intersect(annotation_nonmus_skids, annotation_bf_sk
 num_nonmus = length(annotation_nonmus_skids)
 
 annotation_nonmus_nonbf = setdiff(annotation_nonmus_skids, annotation_bf_skids)
+
+
+################################################################################
+# numbers of cells with tonofibrils, desmosomes or both, by cell type
+
+celltypes_bf_desmo <- data.frame()
+#for (i in c(1:36, 90:92)){
+for (i in c(1:92)){
+  #annotation = paste("annotation:^celltype_non_neuronal", i, "$", sep="")
+  annotation = paste("celltype_non_neuronal", i, sep="")
+  neurons <- read.neurons.catmaid(annotation, pid=11) # I'm not fetching annotations here, but doing it in a separate step later to limit the size of requests. Annotations with over a thousand skids can cause problems
+  skids <- as.integer(sapply(neurons, "[[", 1))
+  connectors <- connectors(neurons)
+  if (length(connectors$skid) == 0) {
+    skids_desmo <- ""
+  } else {
+    desmo <- connectors[connectors$prepost %in% 3,]
+    skids_desmo <- unique(desmo$skid)
+  }
+  annotations <- catmaid_get_annotations_for_skeletons(skids, pid=11)
+  #annotations <- attr(neurons, 'anndf')
+  skids_desmo <- as.integer(skids_desmo)
+  skids_nondesmo <- setdiff(skids, skids_desmo)
+  skids_bf <- annotations[grepl("^black fibers$", annotations$annotation), "skid"]
+  skids_desmo_bf <- intersect(skids_desmo, skids_bf)
+  
+  skids_nonbf <- setdiff(skids, skids_bf)
+  skids_desmo_nonbf <- intersect(skids_desmo, skids_nonbf)
+  
+  skids_nondesmo_bf <- intersect(skids_nondesmo, skids_bf)
+  
+  skids_nondesmo_nonbf <- intersect(skids_nondesmo, skids_nonbf)
+  
+  df=data.frame(celltype=annotation, desmo=length(skids_desmo_nonbf), desmo_tonofibrils=length(skids_desmo_bf), tonofibrils=length(skids_nondesmo_bf), other=length(skids_nondesmo_nonbf), total=length(skids))
+  celltypes_bf_desmo <- rbind(celltypes_bf_desmo, df)
+}
+
+celltype_names <- read.csv("data/non_neuronal_celltypes_names.csv")
+ 
+celltypes_bf_desmo <- left_join(celltype_names, celltypes_bf_desmo, by = c("CATMAID.annotation" = "celltype"))
+#celltypes_bf_desmo <- celltypes_bf_desmo %>% remove_rownames %>% column_to_rownames(var="CATMAID.annotation")
+
+write.csv(celltypes_bf_desmo, "data/percent_cells_with_desmo_bf_by_celltype.csv", row.names = FALSE)
