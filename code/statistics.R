@@ -222,3 +222,25 @@ celltypes_bf_desmo_with_names <- rbind(celltypes_bf_desmo_with_names, df)
 
 write.csv(celltypes_bf_desmo_with_names, "data/percent_cells_with_desmo_bf_by_celltype.csv", row.names = FALSE)
 
+
+celltypes_bf_desmo_with_names_tidy <-  celltypes_bf_desmo_with_names %>%
+                                         select(-total) %>%
+                                         pivot_longer(
+                                           cols = c("desmo", "desmo_tonofibrils", "tonofibrils", "other"), 
+                                           names_to = "characteristic", 
+                                           values_to = "count")
+
+celltypes_bf_desmo_with_names_tidy %>%
+  ggplot(aes(Name, count, fill=characteristic)) +
+  geom_bar(position="fill", stat = "identity") +
+  coord_flip() + 
+  theme_bw() +
+  theme(axis.line = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title = element_blank(),
+        legend.title = element_blank()) 
