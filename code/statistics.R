@@ -220,4 +220,5 @@ df=data.frame(Name="neurons", CATMAID.annotation="celltype1-200", desmo=len_skid
 celltypes_bf_desmo_with_names <- rbind(celltypes_bf_desmo_with_names, df)
 
 
-write.csv(celltypes_bf_desmo, "data/percent_cells_with_desmo_bf_by_celltype.csv", row.names = FALSE)
+write.csv(celltypes_bf_desmo_with_names, "data/percent_cells_with_desmo_bf_by_celltype.csv", row.names = FALSE)
+
