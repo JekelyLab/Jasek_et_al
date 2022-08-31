@@ -108,8 +108,10 @@ annotation_nonmus_nonbf = setdiff(annotation_nonmus_skids, annotation_bf_skids)
 # numbers of cells with tonofibrils, desmosomes or both, by cell type
 
 celltypes_bf_desmo <- data.frame()
-#for (i in c(1:36, 90:92)){
-for (i in c(1:92)){
+
+# non-neuronal cell types excluding somatic muscles
+for (i in c(1:36, 79, 90:92)){
+#for (i in c(1:92)){
   #annotation = paste("annotation:^celltype_non_neuronal", i, "$", sep="")
   annotation = paste("celltype_non_neuronal", i, sep="")
   neurons <- read.neurons.catmaid(annotation, pid=11) # I'm not fetching annotations here, but doing it in a separate step later to limit the size of requests. Annotations with over a thousand skids can cause problems
@@ -141,7 +143,81 @@ for (i in c(1:92)){
 
 celltype_names <- read.csv("data/non_neuronal_celltypes_names.csv")
  
-celltypes_bf_desmo <- left_join(celltype_names, celltypes_bf_desmo, by = c("CATMAID.annotation" = "celltype"))
+celltypes_bf_desmo_with_names <- right_join(celltype_names, celltypes_bf_desmo, by = c("CATMAID.annotation" = "celltype"))
 #celltypes_bf_desmo <- celltypes_bf_desmo %>% remove_rownames %>% column_to_rownames(var="CATMAID.annotation")
+
+
+# somatic muscles
+len_skids_desmo_nonbf <- len_skids_desmo_bf <- len_skids_nondesmo_bf <- len_skids_nondesmo_nonbf <- len_skids <- 0
+for (i in c(37:78, 80:89)) {
+  annotation = paste("celltype_non_neuronal", i, sep="")
+  neurons <- read.neurons.catmaid(annotation, pid=11) # I'm not fetching annotations here, but doing it in a separate step later to limit the size of requests. Annotations with over a thousand skids can cause problems
+  skids <- as.integer(sapply(neurons, "[[", 1))
+  connectors <- connectors(neurons)
+  if (length(connectors$skid) == 0) {
+    skids_desmo <- ""
+  } else {
+    desmo <- connectors[connectors$prepost %in% 3,]
+    skids_desmo <- unique(desmo$skid)
+  }
+  annotations <- catmaid_get_annotations_for_skeletons(skids, pid=11)
+  skids_desmo <- as.integer(skids_desmo)
+  skids_nondesmo <- setdiff(skids, skids_desmo)
+  skids_bf <- annotations[grepl("^black fibers$", annotations$annotation), "skid"]
+  skids_desmo_bf <- intersect(skids_desmo, skids_bf)
+  
+  skids_nonbf <- setdiff(skids, skids_bf)
+  skids_desmo_nonbf <- intersect(skids_desmo, skids_nonbf)
+  
+  skids_nondesmo_bf <- intersect(skids_nondesmo, skids_bf)
+  
+  skids_nondesmo_nonbf <- intersect(skids_nondesmo, skids_nonbf)
+  
+  len_skids_desmo_nonbf <- len_skids_desmo_nonbf + length(skids_desmo_nonbf)
+  len_skids_desmo_bf <- len_skids_desmo_bf + length(skids_desmo_bf)
+  len_skids_nondesmo_bf <- len_skids_nondesmo_bf + length(skids_nondesmo_bf)
+  len_skids_nondesmo_nonbf <- len_skids_nondesmo_nonbf + length(skids_nondesmo_nonbf)
+  len_skids <- len_skids + length(skids)
+  
+}
+df=data.frame(Name="somatic muscles", CATMAID.annotation="celltype_non_neuronal37-78,80-89", desmo=len_skids_desmo_nonbf, desmo_tonofibrils=len_skids_desmo_bf, tonofibrils=len_skids_nondesmo_bf, other=len_skids_nondesmo_nonbf, total=len_skids)
+celltypes_bf_desmo_with_names <- rbind(celltypes_bf_desmo_with_names, df)
+
+# neurons
+len_skids_desmo_nonbf <- len_skids_desmo_bf <- len_skids_nondesmo_bf <- len_skids_nondesmo_nonbf <- len_skids <- 0
+for (i in c(1:200)) {
+  annotation = paste("celltype", i, sep="")
+  neurons <- read.neurons.catmaid(annotation, pid=11) # I'm not fetching annotations here, but doing it in a separate step later to limit the size of requests. Annotations with over a thousand skids can cause problems
+  skids <- as.integer(sapply(neurons, "[[", 1))
+  connectors <- connectors(neurons)
+  if (length(connectors$skid) == 0) {
+    skids_desmo <- ""
+  } else {
+    desmo <- connectors[connectors$prepost %in% 3,]
+    skids_desmo <- unique(desmo$skid)
+  }
+  annotations <- catmaid_get_annotations_for_skeletons(skids, pid=11)
+  skids_desmo <- as.integer(skids_desmo)
+  skids_nondesmo <- setdiff(skids, skids_desmo)
+  skids_bf <- annotations[grepl("^black fibers$", annotations$annotation), "skid"]
+  skids_desmo_bf <- intersect(skids_desmo, skids_bf)
+  
+  skids_nonbf <- setdiff(skids, skids_bf)
+  skids_desmo_nonbf <- intersect(skids_desmo, skids_nonbf)
+  
+  skids_nondesmo_bf <- intersect(skids_nondesmo, skids_bf)
+  
+  skids_nondesmo_nonbf <- intersect(skids_nondesmo, skids_nonbf)
+  
+  len_skids_desmo_nonbf <- len_skids_desmo_nonbf + length(skids_desmo_nonbf)
+  len_skids_desmo_bf <- len_skids_desmo_bf + length(skids_desmo_bf)
+  len_skids_nondesmo_bf <- len_skids_nondesmo_bf + length(skids_nondesmo_bf)
+  len_skids_nondesmo_nonbf <- len_skids_nondesmo_nonbf + length(skids_nondesmo_nonbf)
+  len_skids <- len_skids + length(skids)
+  
+}
+df=data.frame(Name="neurons", CATMAID.annotation="celltype1-200", desmo=len_skids_desmo_nonbf, desmo_tonofibrils=len_skids_desmo_bf, tonofibrils=len_skids_nondesmo_bf, other=len_skids_nondesmo_nonbf, total=len_skids)
+celltypes_bf_desmo_with_names <- rbind(celltypes_bf_desmo_with_names, df)
+
 
 write.csv(celltypes_bf_desmo, "data/percent_cells_with_desmo_bf_by_celltype.csv", row.names = FALSE)
