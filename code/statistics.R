@@ -222,18 +222,28 @@ celltypes_bf_desmo_with_names <- rbind(celltypes_bf_desmo_with_names, df)
 
 write.csv(celltypes_bf_desmo_with_names, "data/percent_cells_with_desmo_bf_by_celltype.csv", row.names = FALSE)
 
+celltypes_bf_desmo_with_names_arranged <- arrange(celltypes_bf_desmo_with_names,
+                                                  other/total,
+                                                  desc(desmo/total),
+                                                  desc(desmo_tonofibrils/total),
+                                                  desc(tonofibrils/total))
 
-celltypes_bf_desmo_with_names_tidy <-  celltypes_bf_desmo_with_names %>%
+celltypes_bf_desmo_with_names_tidy <-  celltypes_bf_desmo_with_names_arranged %>%
                                          select(-total) %>%
                                          pivot_longer(
                                            cols = c("desmo", "desmo_tonofibrils", "tonofibrils", "other"), 
                                            names_to = "characteristic", 
                                            values_to = "count")
 
-celltypes_bf_desmo_with_names_tidy %>%
-  ggplot(aes(Name, count, fill=characteristic)) +
+desmo_tono_graph <- celltypes_bf_desmo_with_names_tidy %>%
+  ggplot(aes(Name, count, fill=factor(characteristic, levels=c("desmo", "desmo_tonofibrils", "tonofibrils", "other")))) +
   geom_bar(position="fill", stat = "identity") +
+  scale_x_discrete(limits = rev(celltypes_bf_desmo_with_names_arranged$Name)) +
+  scale_y_reverse() +
+  geom_text(aes(label = count), position = "fill", hjust=1, size = 2) +
   coord_flip() + 
+  #scale_fill_manual(values = c("#E69F00","#D55E00","#CC79A7","lightgrey")) + # Okabe Ito
+  scale_fill_manual(values = c("#4477AA","#AA3377","#EE6677","lightgrey")) + # Tol
   theme_bw() +
   theme(axis.line = element_blank(),
         panel.grid.major = element_blank(),
@@ -241,6 +251,12 @@ celltypes_bf_desmo_with_names_tidy %>%
         panel.border = element_blank(),
         panel.background = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank(),
         axis.title = element_blank(),
-        legend.title = element_blank()) 
+        axis.text.x = element_blank(),
+        legend.title = element_blank())
+
+ggsave("pictures/desmo_tonofibril_percentages_by_celltype.pdf", limitsize = FALSE, 
+       units = c("px"), desmo_tono_graph, width = 2000, height = 2000)
+
+ggsave("pictures/desmo_tonofibril_percentages_by_celltype.png", limitsize = FALSE, 
+       units = c("px"), desmo_tono_graph, width = 2000, height = 2000, bg = 'white')
