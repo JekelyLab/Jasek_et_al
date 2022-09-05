@@ -6,6 +6,8 @@ source("code/Packages_and_Connection.R")
 #read the tibble with desmosome ids, xyz coordinates and partners 1 and 2
 desmo_with_partners <- read_csv("data/desmo_with_partners.csv")
 
+celltype_names <- read.csv("data/non_neuronal_celltypes_names.csv")
+
 #read skids of connectome neurons to plot as anatomical ref
 connectome_skids <- catmaid_skids("^connectome_neuron$", pid=11)
 #read a random subset of connectome skeletons only for speed up
@@ -70,57 +72,94 @@ plot_two_cell_types_with_desmo <- function(annotation1, annotation2,
 
 }
 
-#background plot
-plot_background_ventral_no_acic()
 
-#plot MUSlongD and MUSobP_notD
-plot_two_cell_types_with_desmo("celltype_non_neuronal75", 
-                               "celltype_non_neuronal54",
-                               Okabe_Ito[1], Okabe_Ito[5], 
-                               FALSE, FALSE)
-texts3d(49000,76000, 88000, text = "MUSlongD", col='black', cex = 2)
-texts3d(29000,76000, 105000, text = "MUSobP-notD", col='black', cex = 2)
+plot_connected_desmo <- function(celltype1, celltype2, celltype3, textpos1, textpos2, textpos3) {
+  #background plot
+  plot_background_ventral_no_acic()
+  
+  annot1 <- celltype_names[celltype_names$Name == celltype1, "CATMAID.annotation"]
+  annot2 <- celltype_names[celltype_names$Name == celltype2, "CATMAID.annotation"]
+  annot3 <- celltype_names[celltype_names$Name == celltype3, "CATMAID.annotation"]
+  
+  plot_two_cell_types_with_desmo(annot1,
+                                 annot2,
+                                 Okabe_Ito[1], Okabe_Ito[5], 
+                                 FALSE, FALSE)
+  texts3d(textpos1, text = celltype1, col=Okabe_Ito[1], cex = 2)
+  texts3d(textpos2, text = celltype2, col=Okabe_Ito[5], cex = 2)
+  
 
-#plot MUSobP_notD and EC-circumchaetal
-plot_two_cell_types_with_desmo("celltype_non_neuronal28", 
-                               "celltype_non_neuronal54",
-                               Okabe_Ito[7], Okabe_Ito[5],
-                               TRUE, FALSE)
-texts3d(33000,76000, 122000, text = "EC-circumchaetal", col='black', cex = 2)
-
-#plot outline and connectome as anatomical ref
-plot3d(connectome, add=T, alpha=0.1, lw = 1, col = "black") 
-plot3d(outline, add = T, alpha = 0.02, col = "#E2E2E2") 
-
-#snapshot with text
-rgl.snapshot("videos/Video7_desmo_partners_A.png")
-
-#get the ids of text objects from the rgl window with ids3d()
-text_ids <- ids3d() %>% 
-  as_tibble() %>%
-  filter(type == 'text') %>%
-  select(id) %>%
-  pull()
-
-#remove text
-rgl.pop(type = 'shapes', id = text_ids)
-
-#full rotation with extramat - also works with many skeletons with alpha<1
-for (i in 100:200){
-  nview3d("ventral", extramat=rotationMatrix((i-100)*2*pi/100, 0, 0, 1))
-  #save a snapshot in the working directory
-  rgl.snapshot(paste("videos/Video7_desmo_partners_spin", i, ".png", sep = ""))
+  plot_two_cell_types_with_desmo(annot3, 
+                                 annot2,
+                                 Okabe_Ito[7], Okabe_Ito[5],
+                                 TRUE, FALSE)
+  texts3d(textpos3, text = celltype3, col=Okabe_Ito[7], cex = 2)
+  
+  #plot outline and connectome as anatomical ref
+  plot3d(connectome, add=T, alpha=0.1, lw = 1, col = "black") 
+  plot3d(outline, add = T, alpha = 0.02, col = "#E2E2E2") 
+  
+  #snapshot with text
+  rgl.snapshot(paste("videos/Video7_desmo_partners_", celltype1, celltype2, celltype3, ".png", sep = ""))
+  
+  #get the ids of text objects from the rgl window with ids3d()
+  text_ids <- ids3d() %>% 
+    as_tibble() %>%
+    filter(type == 'text') %>%
+    select(id) %>%
+    pull()
+  
+  #remove text
+  rgl.pop(type = 'shapes', id = text_ids)
+  
+  #full rotation with extramat - also works with many skeletons with alpha<1
+  for (i in 100:200){
+    nview3d("ventral", extramat=rotationMatrix((i-100)*2*pi/100, 0, 0, 1))
+    #save a snapshot in the working directory
+    rgl.snapshot(paste("videos/Video7_desmo_partners_", celltype1, celltype2, celltype3, "_spin_", i, ".png", sep = ""))
+  }
+  
+  close3d()
 }
 
+# because passing a list of lists to lapply results in unexpected behavior, I have to do this manually:
+plot_connected_desmo("MUSlongD", 
+                     "MUSobP-notD", 
+                     "EC-circumchaetal", 
+                     c(49000,76000, 88000), 
+                     c(29000,76000, 105000), 
+                     c(33000,76000, 122000))
+plot_connected_desmo("circumacicular", 
+                     "MUSac-notA", 
+                     "EC", 
+                     c(49000,76000, 88000), 
+                     c(38000,76000, 70000),
+                     c(29000,76000, 105000))
+plot_connected_desmo("circumacicular", 
+                     "MUSac-notM", "EC", 
+                     c(59000,76000, 88000), 
+                     c(29000,76000, 105000), 
+                     c(33000,76000, 122000))
+plot_connected_desmo("circumacicular", 
+                     "MUSac-neuDach", 
+                     "EC", 
+                     c(68000,76000, 110000), 
+                     c(79000,76000, 57000), 
+                     c(106000,76000, 150000))
+plot_connected_desmo("hemichaetal", 
+                     "MUSchae-neuVob", 
+                     "EC", 
+                     c(39000,76000, 52000), 
+                     c(32000,76000, 105000), 
+                     c(83000,76000, 168000))
 
-close3d()
 
 #read png files and write video
 library(av)
-av::av_encode_video(paste('videos/', list.files("videos", '*.png'), sep = ""), 
+av::av_encode_video(paste('videos/', list.files("videos/", "Video7_desmo_partners.*.png"), sep = ""), 
                     framerate = 5,
-                    output = 'videos/Video_desmo_partners.mp4')
+                    output = 'videos/Video7_desmo_partners.mp4')
 
 
-file.remove(paste('videos/', list.files("videos", '*.png'), sep = ""))
+file.remove(paste('videos/', list.files("videos/Video7_", '*.png'), sep = ""))
 #delete individual video frames
