@@ -100,7 +100,9 @@ plot_connected_desmo <- function(celltype1, celltype2, celltype3, textpos1, text
   plot3d(outline, add = T, alpha = 0.02, col = "#E2E2E2") 
   
   #snapshot with text
-  rgl.snapshot(paste("videos/Video7_desmo_partners_", celltype1, celltype2, celltype3, ".png", sep = ""))
+  for (j in 1:8) {
+    rgl.snapshot(paste("videos/Video7_desmo_partners_", celltype1, celltype2, celltype3, "_first_", j, ".png", sep = ""))
+  }
   
   #get the ids of text objects from the rgl window with ids3d()
   text_ids <- ids3d() %>% 
@@ -157,9 +159,9 @@ plot_connected_desmo("hemichaetal",
 #read png files and write video
 library(av)
 av::av_encode_video(paste('videos/', list.files("videos/", "Video7_desmo_partners.*.png"), sep = ""), 
-                    framerate = 5,
+                    framerate = 6,
                     output = 'videos/Video7_desmo_partners.mp4')
 
 
-file.remove(paste('videos/', list.files("videos/Video7_", '*.png'), sep = ""))
+file.remove(paste('videos/', list.files("videos/", "Video7_.*.png"), sep = ""))
 #delete individual video frames
