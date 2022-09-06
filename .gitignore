@@ -41,3 +41,14 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# LibreOffice lock files
+*.~lock*
+
+# vim
+*~
+*.swp
+*.swo
+
+# Mac stuff
+.DS_Store
