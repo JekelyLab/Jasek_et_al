@@ -6,22 +6,57 @@ source("code/Packages_and_Connection.R")
 
 # read cells and connectors --------------------------------------------------------------
 {
-outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"),
-  invertFaces = T, conn = NULL, pid = 11)
+outline <- catmaid_get_volume(
+  1, 
+  rval = c("mesh3d", "catmaidmesh", "raw"),
+  invertFaces = T, 
+  conn = NULL, 
+  pid = 11
+)
 
-yolk <- catmaid_get_volume(4, rval = c("mesh3d", "catmaidmesh", "raw"),
-  invertFaces = T, conn = NULL, pid = 11)
+yolk <- catmaid_get_volume(
+  4, 
+  rval = c("mesh3d", "catmaidmesh", "raw"),
+  invertFaces = T, 
+  conn = NULL, 
+  pid = 11
+)
 
-acicula = nlapply(read.neurons.catmaid("^acicula$", pid=11, 
-                                      fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+acicula = nlapply(
+  read.neurons.catmaid(
+    "^acicula$", 
+    pid=11, 
+    fetch.annotations = T
+    ), 
+  function(x) smooth_neuron(x, sigma=6000)
+)
 
-cirri = nlapply(read.neurons.catmaid("^anterior pair of tentacular cirri$", pid=11, 
-                                       fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+cirri = nlapply(
+  read.neurons.catmaid(
+    "^anterior pair of tentacular cirri$", 
+    pid=11, 
+    fetch.annotations = T
+    ), 
+  function(x) smooth_neuron(x, sigma=6000)
+)
 
-muscle = nlapply(read.neurons.catmaid("^muscle$", pid=11, 
-                                       fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-desmosome_connectome_non_muscle = nlapply(read.neurons.catmaid("^desmosome_connectome_non_muscle$", pid=11, 
-                                                                   fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+muscle = nlapply(
+  read.neurons.catmaid(
+    "^muscle$", 
+    pid=11, 
+    fetch.annotations = T
+    ), 
+  function(x) smooth_neuron(x, sigma=6000)
+)
+
+desmosome_connectome_non_muscle = nlapply(
+  read.neurons.catmaid(
+    "^desmosome_connectome_non_muscle$", 
+    pid=11, 
+    fetch.annotations = T
+    ), 
+  function(x) smooth_neuron(x, sigma=6000)
+)
 
 #read muscle skids by segment with custom function (sourced from Packages_and_Connections.R)
 muscle_head <- skids_by_2annotations("muscle", "episphere")
@@ -32,18 +67,53 @@ muscle_sg3 <- skids_by_2annotations("muscle", "segment_3")
 muscle_pyg <- skids_by_2annotations("muscle", "pygidium")
 
 #read muscle skeletons and smooth
-muscle_head <- nlapply(read.neurons.catmaid(muscle_head, pid=11), 
-                       function(x) smooth_neuron(x, sigma=6000))
-muscle_sg0 <- nlapply(read.neurons.catmaid(muscle_sg0, pid=11), 
-                      function(x) smooth_neuron(x, sigma=6000))
-muscle_sg1 <- nlapply(read.neurons.catmaid(muscle_sg1, pid=11), 
-                      function(x) smooth_neuron(x, sigma=6000))
-muscle_sg2 <- nlapply(read.neurons.catmaid(muscle_sg2, pid=11), 
-                      function(x) smooth_neuron(x, sigma=6000))
-muscle_sg3 <- nlapply(read.neurons.catmaid(muscle_sg3, pid=11), 
-                      function(x) smooth_neuron(x, sigma=6000))
-muscle_pyg <- nlapply(read.neurons.catmaid(muscle_pyg, pid=11), 
-                      function(x) smooth_neuron(x, sigma=6000))
+muscle_head <- nlapply(
+  read.neurons.catmaid(
+    muscle_head, 
+    pid=11
+    ), 
+  function(x) smooth_neuron(x, sigma=6000)
+)
+
+muscle_sg0 <- nlapply(
+  read.neurons.catmaid(
+    muscle_sg0, 
+    pid=11
+    ), 
+  function(x) smooth_neuron(x, sigma=6000)
+)
+
+muscle_sg1 <- nlapply(
+  read.neurons.catmaid(
+    muscle_sg1, 
+    pid=11
+    ),
+  function(x) smooth_neuron(x, sigma=6000)
+)
+
+muscle_sg2 <- nlapply(
+  read.neurons.catmaid(
+    muscle_sg2, 
+    pid=11
+    ),
+  function(x) smooth_neuron(x, sigma=6000)
+)
+
+muscle_sg3 <- nlapply(
+  read.neurons.catmaid(
+    muscle_sg3, 
+    pid=11
+    ),
+  function(x) smooth_neuron(x, sigma=6000)
+)
+
+muscle_pyg <- nlapply(
+  read.neurons.catmaid(
+    muscle_pyg, 
+    pid=11
+    ),
+  function(x) smooth_neuron(x, sigma=6000)
+)
 
 #get the connectors
 MUSconn <- connectors(muscle)
@@ -65,20 +135,37 @@ nview3d("ventral", extramat=rotationMatrix(0, 1, 0, 0))
 par3d(zoom=0.52)
 
 #panel B of Figure 2
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.04,
-       col="#E2E2E2") 
+plot3d(
+  outline, 
+  add=T, 
+  alpha=0.04,
+  col="#E2E2E2"
+) 
 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.1,
-       col="#E2E2E2") 
+plot3d(
+  yolk, 
+  add=T, 
+  alpha=0.1,
+  col="#E2E2E2"
+) 
 
-plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=3,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
-       col="black") 
+plot3d(
+  acicula, 
+  soma=T, 
+  lwd=3,
+  add=T,
+  alpha=0.5,
+  col="black"
+) 
 
-plot3d(cirri, WithConnectors = F, WithNodes = F, soma=TRUE, lwd=1,
-       add=T, alpha=0.4, col="grey") 
+plot3d(
+  cirri, 
+  soma=TRUE, 
+  lwd=1,
+  add=T, 
+  alpha=0.4, 
+  col="grey"
+) 
 
 #color scheme for segments
 segmental_colors <- brewer.pal(6, 'Paired')
@@ -97,17 +184,38 @@ rgl.snapshot("pictures/desmosomal_connectome_mus.png")
 
 #panel C of Figure 1
 clear3d()
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.04,
-       col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.1,
-       col="#E2E2E2") 
-plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=3,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
-       col="black") 
-plot3d(MUSconn3$x, MUSconn3$y, MUSconn3$z, add = TRUE, 
-       col=hcl.colors(20000, palette='Oranges'), size=4, alpha=0.5)
+plot3d(
+  outline, 
+  add=T, 
+  alpha=0.04,
+  col="#E2E2E2"
+) 
+
+plot3d(
+  yolk, 
+  add=T, 
+  alpha=0.1,
+  col="#E2E2E2"
+) 
+
+plot3d(
+  acicula, 
+  soma=T, 
+  lwd=3,
+  add=T, 
+  alpha=0.5,
+  col="black"
+) 
+
+plot3d(
+  MUSconn3$x, 
+  MUSconn3$y, 
+  MUSconn3$z, 
+  add = TRUE, 
+  col=hcl.colors(20000, palette='Oranges'), 
+  size=4, 
+  alpha=0.5
+)
 
 #make snapshot
 rgl.snapshot("pictures/desmosomal_connectome_mus_desmosomes.png")
@@ -115,18 +223,43 @@ rgl.snapshot("pictures/desmosomal_connectome_mus_desmosomes.png")
 #panel D of Figure 2
 clear3d()
 
-plot3d(desmosome_connectome_non_muscle, WithConnectors = F, WithNodes = F, soma=T, lwd=1,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
-       col=hcl.colors(length(desmosome_connectome_non_muscle), palette='Blues')) 
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.04,
-       col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.1,
-       col="#E2E2E2") 
-plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=3,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
-       col="black") 
+plot3d(
+  desmosome_connectome_non_muscle, 
+  soma=T, 
+  lwd=1,
+  add=T, 
+  alpha=0.5,
+  col=hcl.colors(
+    length(
+      desmosome_connectome_non_muscle
+      ), 
+    palette='Blues'
+    )
+) 
+
+plot3d(
+  outline, 
+  add=T, 
+  alpha=0.04,
+  col="#E2E2E2"
+) 
+
+plot3d(
+  yolk, 
+  add=T, 
+  alpha=0.1,
+  col="#E2E2E2"
+) 
+
+plot3d(
+  acicula, 
+  soma=T, 
+  lwd=3,
+  add=T, 
+  alpha=0.5,
+  col="black"
+) 
+
 #make snapshot
 rgl.snapshot("pictures/desmosomal_connectome_mus_partners.png")
 close3d()
@@ -157,7 +290,13 @@ conn_graph.visn$nodes$color <- c()
 Reds <- brewer.pal(9, 'Reds')
 
 {
-coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
+coords <- matrix(
+  c(
+    conn_graph.visn$nodes$x, conn_graph.visn$nodes$y
+    ), 
+  ncol=2
+)
+
 #rotate the coordinates of the graph so that it is left-right symmetric
 coords_rotated <- autoimage::rotate(coords, pi/2.4, pivot = c(0, 0))
 
@@ -206,10 +345,16 @@ visNet
 #save as html
 saveNetwork(visNet, "pictures/Fig1_desmo_connectome.html", selfcontained = TRUE)
 #create png snapshot
-webshot::webshot(url="pictures/Fig1_desmo_connectome.html",
-                    file="pictures/Fig1_desmo_connectome.png",
-                    vwidth = 1500, vheight = 1500, #define the size of the browser window
-                    cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
+webshot::webshot(
+  url="pictures/Fig1_desmo_connectome.html",
+  file="pictures/Fig1_desmo_connectome.png",
+  vwidth = 1500, 
+  vheight = 1500, #define the size of the browser window
+  cliprect = c(50, 60, 1500, 1500), 
+  zoom=5, 
+  delay = 2
+)
+
 }
 
 }
@@ -294,11 +439,24 @@ Figure1 <- panelSEM + panel_mus + panel_des + panel_des_partners +
   theme(plot.tag = element_text(size = 12, face='plain'))
 
 
-ggsave("figures/Figure1.pdf", limitsize = FALSE, 
-       units = c("px"), Figure1, width = 2600, height = 2000)
+ggsave(
+  "figures/Figure1.pdf", 
+  limitsize = FALSE, 
+  units = c("px"), 
+  Figure1, 
+  width = 2600, 
+  height = 2000
+)
 
 }
 
-ggsave("figures/Figure1.png", limitsize = FALSE, 
-       units = c("px"), Figure1, width = 2600, height = 2000, bg = 'white')
+ggsave(
+  "figures/Figure1.png", 
+  limitsize = FALSE, 
+  units = c("px"), 
+  Figure1, 
+  width = 2600, 
+  height = 2000, 
+  bg = 'white'
+)
 
