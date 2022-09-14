@@ -149,9 +149,10 @@ rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rg
 plot_two_panel_background()
 
 {
+next3d(clear=F);
 counter = 0
 for (j in c(37:89)){    #iterate through the cell type list 
-  next3d(clear=F); counter = counter+1; print(j)
+  counter = counter+1; print(j)
   nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1)); par3d(zoom=0.5)
   
   #assign color
@@ -180,6 +181,7 @@ for (j in c(37:89)){    #iterate through the cell type list
                                          fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
     plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
   }
+  next3d(clear = F)
 }
 #make snapshot
 rgl.snapshot("pictures/MUScelltypes_all.png")
@@ -212,6 +214,7 @@ for (j in c(37:47)){    #iterate through the celltype list
                                          fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
     plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
   }
+  next3d(clear = F)
 }
 
 rgl.snapshot("pictures/MUScelltypes_ac.png")
@@ -241,6 +244,7 @@ for (j in c(48:53)){    #iterate through the celltype list
                                            fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
       plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
     }
+    next3d(clear = F)
   }
   
   rgl.snapshot("pictures/MUScelltypes_ant_ob.png")
@@ -270,6 +274,7 @@ for (j in c(54:62)){    #iterate through the celltype list
                                          fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
     plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
   }
+  next3d(clear = F)
 }
 
 rgl.snapshot("pictures/MUScelltypes_post_ob.png")
@@ -299,6 +304,7 @@ plot_two_panel_background()
                                            fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
       plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
     }
+    next3d(clear = F)
   }
   
   rgl.snapshot("pictures/MUScelltypes_chae.png")
@@ -329,6 +335,7 @@ for (j in c(74)){    #iterate through the celltype list
                                          fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
     plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
   }
+  next3d(clear = F)
 }
 
 rgl.snapshot("pictures/MUScelltypes_trans.png")
@@ -358,6 +365,7 @@ for (j in c(75:77)){    #iterate through the celltype list
                                          fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
     plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
   }
+  next3d(clear = F)
 }
 
 rgl.snapshot("pictures/MUScelltypes_long.png")
@@ -387,6 +395,7 @@ for (j in c(78:89)){    #iterate through the celltype list
                                          fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
     plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
   }
+  next3d(clear = F)
 }
 
 rgl.snapshot("pictures/MUScelltypes_head_dig.png")
