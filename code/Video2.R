@@ -71,7 +71,7 @@ txt_pos <- hash(
 # define which muscles to plot
 MUS_groups <- list(c("MUSobP-neuV", "MUSobP-neuDlong"), "MUSac-neuAV", "MUSac-neure", c("MUSac-neuDach", "MUSac-neuPV"), "MUSac-notM", "MUSac-notA", "MUSac-notP", c("MUSac-i", "MUSac-neuDx"))
 
-dir.create("pictures/Video2")
+dir.create("videos/Video2")
 
 nopen3d() # opens a pannable 3d window
 
@@ -118,11 +118,15 @@ for (MUS_group in MUS_groups)
   }
 
   #export rotation by frame for video
-  for (l in 1:124){
-    play3d( spin3d( axis = c(0, 0, 10), rpm = 2), duration =0.25 )
+  for (l in 1:230){
+    play3d( spin3d( axis = c(0, 0, 10), rpm = 4), duration =0.1 )
     print (l)
     #save a snapshot
-    filename <- paste("./pictures/Video2/Video2_sg2l_Mus_Outlines_spin",  formatC(i, digits = 1, flag = "0"), MUS_group[1], "_frame", formatC(l, digits = 1, flag = "0"), ".png", sep = "")
+    filename <- paste("./videos/Video2/Video2_sg2l_Mus_Outlines_spin",
+                      formatC(i, digits = 1, flag = "0"),
+                      MUS_group[1], "_frame",
+                      formatC(l, digits = 2, flag = "0"),
+                      ".png", sep = "")
     #print(filename)
     rgl.snapshot(filename)
   }
@@ -132,6 +136,8 @@ close3d()
 
 #read png files and write video
 library(av)
-av::av_encode_video(paste('pictures/Video2/', list.files("pictures/Video2/", '*.png'), sep = ""), 
-                    framerate = 5,
+av::av_encode_video(paste('videos/Video2/', list.files("videos/Video2/", '*.png'), sep = ""), 
+                    framerate = 12,
                     output = 'videos/Video2.mp4')
+
+unlink("videos/Video2/", recursive = T)
