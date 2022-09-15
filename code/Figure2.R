@@ -189,107 +189,24 @@ rgl.snapshot("pictures/MUScelltypes_all.png")
 close3d()
 }
 
-#plot acicular muscles
-{
-plot_two_panel_background()
-next3d(clear=F)
-plot3d(scalebar_50um_ventral, color = 'black', lwd = 2)
-nview3d("ventral", extramat=rotationMatrix(0, 1, 0, 0))
-counter = 0
-for (j in c(37:47)){    #iterate through the celltype list 
-  counter = counter+1; print(j)
-   #assign color
-  color= color_ac
-  cells=celltypelist[[j]]
-  #smooth with sigma 6000
-  cells_smoothed=nlapply(cells, function(x) smooth_neuron(x, sigma=6000))
-  #plot cells
-  plot3d(cells_smoothed, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-  next3d(clear=F)
-  skids_raw=left_skids[j]
-  #retrieve from catmaid all left cells of a type
-  for (skids in skids_raw){
-    if(skids_raw=="integer(0)") break; #some muscle celltypes are in the middle of the body so do not have righ or left members
-    cells = nlapply(read.neurons.catmaid(skids, pid=11, 
-                                         fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-    plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-  }
-  next3d(clear = F)
-}
 
-rgl.snapshot("pictures/MUScelltypes_ac.png")
-close3d()
-}
+MUSgroups <-list(
+  list(color_ac, "ac", c(37:47)),
+  list(color_obant, "ant_ob", c(48:53)),
+  list(color_obpost, "post_ob", c(54:62)),
+  list(color_ch, "chae", c(63:73)),
+  list(color_tr, "trans", 74),
+  list(color_lon, "long", c(75:77)),
+  list(color_head, "head_dig", c(78:89))
+)
 
-#plot anterior oblique muscles
-{
-plot_two_panel_background()
-next3d(clear=F)
-counter = 0
-for (j in c(48:53)){    #iterate through the celltype list 
-    counter = counter+1; print(j)
-    #assign color
-    color= color_obant
-    cells=celltypelist[[j]]
-    #smooth with sigma 6000
-    cells_smoothed=nlapply(cells, function(x) smooth_neuron(x, sigma=6000))
-    #plot cells
-    plot3d(cells_smoothed, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-    next3d(clear=F)
-    skids_raw=left_skids[j]
-    #retrieve from catmaid all left cells of a type
-    for (skids in skids_raw){
-      if(skids_raw=="integer(0)") break; #some muscle celltypes are in the middle of the body so do not have righ or left members
-      cells = nlapply(read.neurons.catmaid(skids, pid=11, 
-                                           fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-      plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-    }
-    next3d(clear = F)
-  }
-  
-  rgl.snapshot("pictures/MUScelltypes_ant_ob.png")
-  close3d()
-}
-
-#plot posterior oblique muscles
-{
-plot_two_panel_background()
-next3d(clear=F)
-counter = 0
-for (j in c(54:62)){    #iterate through the celltype list 
-  counter = counter+1; print(j)
-  #assign color
-  color= color_obpost
-  cells=celltypelist[[j]]
-  #smooth with sigma 6000
-  cells_smoothed=nlapply(cells, function(x) smooth_neuron(x, sigma=6000))
-  #plot cells
-  plot3d(cells_smoothed, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-  next3d(clear=F)
-  skids_raw=left_skids[j]
-  #retrieve from catmaid all left cells of a type
-  for (skids in skids_raw){
-    if(skids_raw=="integer(0)") break; #some muscle celltypes are in the middle of the body so do not have righ or left members
-    cells = nlapply(read.neurons.catmaid(skids, pid=11, 
-                                         fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-    plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-  }
-  next3d(clear = F)
-}
-
-rgl.snapshot("pictures/MUScelltypes_post_ob.png")
-close3d()
-}
-
-#plot chaetal muscles
-{
-plot_two_panel_background()
+# function to plot major muscle groups
+plotMUSgroups <- function(color, filenameext, celltypenumbers){
+  plot_two_panel_background()
   next3d(clear=F)
   counter = 0
-  for (j in c(63:73)){    #iterate through the celltype list 
-    counter = counter+1; print(j)
-    #assign color
-    color= color_ch
+  for (j in celltypenumbers) {    #iterate through the celltype list 
+    counter = counter+1
     cells=celltypelist[[j]]
     #smooth with sigma 6000
     cells_smoothed=nlapply(cells, function(x) smooth_neuron(x, sigma=6000))
@@ -299,7 +216,7 @@ plot_two_panel_background()
     skids_raw=left_skids[j]
     #retrieve from catmaid all left cells of a type
     for (skids in skids_raw){
-      if(skids_raw=="integer(0)") break; #some muscle celltypes are in the middle of the body so do not have righ or left members
+      if(skids_raw=="integer(0)") break; #some muscle celltypes are in the middle of the body so do not have right or left members
       cells = nlapply(read.neurons.catmaid(skids, pid=11, 
                                            fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
       plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
@@ -307,100 +224,15 @@ plot_two_panel_background()
     next3d(clear = F)
   }
   
-  rgl.snapshot("pictures/MUScelltypes_chae.png")
+  rgl.snapshot(paste("pictures/MUScelltypes_", filenameext, ".png", sep = ""))
   close3d()
 }
 
 
-#plot transverse muscles
-{
-plot_two_panel_background()
-next3d(clear=F)
-counter = 0
-for (j in c(74)){    #iterate through the celltype list 
-  counter = counter+1; print(j)
-  #assign color
-  color= color_tr
-  cells=celltypelist[[j]]
-  #smooth with sigma 6000
-  cells_smoothed=nlapply(cells, function(x) smooth_neuron(x, sigma=6000))
-  #plot cells
-  plot3d(cells_smoothed, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-  next3d(clear=F)
-  skids_raw=left_skids[j]
-  #retrieve from catmaid all left cells of a type
-  for (skids in skids_raw){
-    if(skids_raw=="integer(0)") break; #some muscle celltypes are in the middle of the body so do not have righ or left members
-    cells = nlapply(read.neurons.catmaid(skids, pid=11, 
-                                         fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-    plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-  }
-  next3d(clear = F)
+for (i in (1:length(MUSgroups))) {
+  plotMUSgroups(MUSgroups[[i]][[1]], MUSgroups[[i]][[2]], MUSgroups[[i]][[3]])
 }
 
-rgl.snapshot("pictures/MUScelltypes_trans.png")
-close3d()
-}
-
-#plot Longitudinal muscles
-{
-plot_two_panel_background()
-next3d(clear=F)
-counter = 0
-for (j in c(75:77)){    #iterate through the celltype list 
-  counter = counter+1; print(j)
-  #assign color
-  color= color_lon
-  cells=celltypelist[[j]]
-  #smooth with sigma 6000
-  cells_smoothed=nlapply(cells, function(x) smooth_neuron(x, sigma=6000))
-  #plot cells
-  plot3d(cells_smoothed, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-  next3d(clear=F)
-  skids_raw=left_skids[j]
-  #retrieve from catmaid all left cells of a type
-  for (skids in skids_raw){
-    if(skids_raw=="integer(0)") break; #some muscle celltypes are in the middle of the body so do not have righ or left members
-    cells = nlapply(read.neurons.catmaid(skids, pid=11, 
-                                         fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-    plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-  }
-  next3d(clear = F)
-}
-
-rgl.snapshot("pictures/MUScelltypes_long.png")
-close3d()
-}
-
-#plot head and digestive muscles
-{
-plot_two_panel_background()
-next3d(clear=F)
-counter = 0
-for (j in c(78:89)){    #iterate through the celltype list 
-  counter = counter+1; print(j)
-  #assign color
-  color= color_head
-  cells=celltypelist[[j]]
-  #smooth with sigma 6000
-  cells_smoothed=nlapply(cells, function(x) smooth_neuron(x, sigma=6000))
-  #plot cells
-  plot3d(cells_smoothed, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-  next3d(clear=F)
-  skids_raw=left_skids[j]
-  #retrieve from catmaid all left cells of a type
-  for (skids in skids_raw){
-    if(skids_raw=="integer(0)") break; #some muscle celltypes are in the middle of the body so do not have righ or left members
-    cells = nlapply(read.neurons.catmaid(skids, pid=11, 
-                                         fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-    plot3d(cells, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
-  }
-  next3d(clear = F)
-}
-
-rgl.snapshot("pictures/MUScelltypes_head_dig.png")
-close3d()
-}
 
 # make table of cells per segment per muscle type -------------------------
 
