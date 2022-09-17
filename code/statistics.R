@@ -240,7 +240,7 @@ desmo_tono_graph <- celltypes_bf_desmo_with_names_tidy %>%
   geom_bar(position="fill", stat = "identity") +
   scale_x_discrete(limits = rev(celltypes_bf_desmo_with_names_arranged$Name)) +
   scale_y_reverse() +
-  geom_text(aes(label = count), position = "fill", hjust=1, size = 2) +
+  geom_text(aes(label = count), position = "fill", hjust=1, size = 2, family="ArialMT") +
   coord_flip() + 
   #scale_fill_manual(values = c("#E69F00","#D55E00","#CC79A7","lightgrey")) + # Okabe Ito
   scale_fill_manual(values = c("#4477AA","#AA3377","#EE6677","lightgrey")) + # Tol
@@ -253,7 +253,8 @@ desmo_tono_graph <- celltypes_bf_desmo_with_names_tidy %>%
         axis.ticks = element_blank(),
         axis.title = element_blank(),
         axis.text.x = element_blank(),
-        legend.title = element_blank())
+        legend.title = element_blank(),
+        text=element_text(family="ArialMT"))
 
 ggsave("pictures/desmo_tonofibril_percentages_by_celltype.pdf", limitsize = FALSE, 
        units = c("px"), desmo_tono_graph, width = 2000, height = 2000)
