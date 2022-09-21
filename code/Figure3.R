@@ -144,7 +144,6 @@ desmo_conn_graph.tb <- desmo_conn_graph %>%
   mutate("node_is_cut" = node_is_cut() )  %>%
   mutate("local_triangles" = local_triangles())
 
-
 #plot node degree distribution
 {
 plot_degree <- as.data.frame(V(desmo_conn_graph)$degree) %>%
@@ -276,6 +275,11 @@ N_mus <- dim(as_tibble(desmo_conn_graph.tb) %>%
     group_by(partition) %>%         # Specify group indicator
     filter(group %in%  c("muscle") ))[1]
 
+N_bl <- dim(as_tibble(desmo_conn_graph.tb) %>%
+               group_by(partition) %>%         # Specify group indicator
+               filter(group %in%  c("basal lamina") ))[1]
+N_bl
+
 N_EC <- dim(as_tibble(desmo_conn_graph.tb) %>%
                group_by(partition) %>%         # Specify group indicator
                filter(group %in%  c("epithelia_cell") ))[1]
@@ -308,6 +312,12 @@ N_frag <- dim(as_tibble(desmo_conn_graph.tb) %>%
 
 N_edge <- length(E(as.igraph(desmo_conn_graph.tb)))
 
+N_desmo <- desmo_conn_graph.tb %>%
+  activate(edges) %>%
+  select(weight) %>%
+  pull() %>%
+  sum()
+
 table <- plot_ly(
     type = 'table',
     columnwidth = c(10, 7),
@@ -322,7 +332,8 @@ table <- plot_ly(
     cells = list(
       values = rbind(c("total nodes in the connectome", 
                        "nodes with soma",
-                       "in-graph desmosomes", 
+                       "edges", 
+                       "in-graph desmosomes",
                        "muscle cells",
                        "epidermal cells", 
                        "aciculo-/ chaetoblasts", 
@@ -332,6 +343,7 @@ table <- plot_ly(
                      c(N_node,
                        N_node-N_frag,
                        N_edge,
+                       N_desmo,
                        N_mus, 
                        N_EC, 
                        N_ch_ac,
