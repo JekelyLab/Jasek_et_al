@@ -102,3 +102,40 @@ num_skids_nonmus_bf = length(intersect(annotation_nonmus_skids, annotation_bf_sk
 num_nonmus = length(annotation_nonmus_skids)
 
 annotation_nonmus_nonbf = setdiff(annotation_nonmus_skids, annotation_bf_skids)
+
+
+################################################################################
+# Find any desmosomes with only one partner - these shouldn't exist and
+# should be corrected in the database
+
+# get info about all desmo connectors in the Naomi project
+all_desmo_connectors <- catmaid_fetch(path = "11/connectors/",
+                                      body = list(relation_type="desmosome_with", 
+                                                  with_partners="true"))
+
+for (i in (1:length(all_desmo_connectors$partners))) {
+  if ( length(all_desmo_connectors$partners[[i]]) < 2 ) {
+    print(all_desmo_connectors$partners[[i]][[1]][[2]])
+  }
+}
+
+
+################################################################################
+# Find skids with "black fibers" tag but no annotation, and vice versa
+# this is to find mistakes in the database
+
+all_tags <- catmaid_get_label_stats(pid = 11)
+
+skids_with_bf_tags <- all_tags %>% 
+  filter(labelName=="black fibers") %>% 
+  select(skeletonID) %>%
+  unlist() %>%
+  unique()
+
+bf_annotation <- catmaid_query_by_annotation("^black fibers$", 
+                                              pid = 11)
+
+skids_with_bf_annotation <- bf_annotation$skid
+
+bf_only_annotation <- setdiff(skids_with_bf_annotation, skids_with_bf_tags)
+bf_only_tag <- setdiff(skids_with_bf_tags, skids_with_bf_annotation)
