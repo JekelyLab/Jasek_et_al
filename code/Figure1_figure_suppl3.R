@@ -10,6 +10,14 @@ source("~/R/conn.R")
 
 celltypes_bf_desmo <- data.frame()
 
+all_tags <- catmaid_get_label_stats(pid = 11)
+
+skids_with_bf_tags <- all_tags %>% 
+  filter(labelName=="black fibers") %>% 
+  select(skeletonID) %>%
+  unlist() %>%
+  unique()
+
 # non-neuronal cell types excluding somatic muscles
 for (i in c(1:36, 79, 90:92)){
   #for (i in c(1:92)){
@@ -24,11 +32,9 @@ for (i in c(1:36, 79, 90:92)){
     desmo <- connectors[connectors$prepost %in% 3,]
     skids_desmo <- unique(desmo$skid)
   }
-  annotations <- catmaid_get_annotations_for_skeletons(skids, pid=11)
-  #annotations <- attr(neurons, 'anndf')
   skids_desmo <- as.integer(skids_desmo)
   skids_nondesmo <- setdiff(skids, skids_desmo)
-  skids_bf <- annotations[grepl("^black fibers$", annotations$annotation), "skid"]
+  skids_bf <- intersect(skids, skids_with_bf_tags)
   skids_desmo_bf <- intersect(skids_desmo, skids_bf)
   
   skids_nonbf <- setdiff(skids, skids_bf)
@@ -61,10 +67,9 @@ for (i in c(37:78, 80:89)) {
     desmo <- connectors[connectors$prepost %in% 3,]
     skids_desmo <- unique(desmo$skid)
   }
-  annotations <- catmaid_get_annotations_for_skeletons(skids, pid=11)
   skids_desmo <- as.integer(skids_desmo)
   skids_nondesmo <- setdiff(skids, skids_desmo)
-  skids_bf <- annotations[grepl("^black fibers$", annotations$annotation), "skid"]
+  skids_bf <- intersect(skids, skids_with_bf_tags)
   skids_desmo_bf <- intersect(skids_desmo, skids_bf)
   
   skids_nonbf <- setdiff(skids, skids_bf)
@@ -97,10 +102,9 @@ for (i in c(1:200)) {
     desmo <- connectors[connectors$prepost %in% 3,]
     skids_desmo <- unique(desmo$skid)
   }
-  annotations <- catmaid_get_annotations_for_skeletons(skids, pid=11)
   skids_desmo <- as.integer(skids_desmo)
   skids_nondesmo <- setdiff(skids, skids_desmo)
-  skids_bf <- annotations[grepl("^black fibers$", annotations$annotation), "skid"]
+  skids_bf <- intersect(skids, skids_with_bf_tags)
   skids_desmo_bf <- intersect(skids_desmo, skids_bf)
   
   skids_nonbf <- setdiff(skids, skids_bf)
@@ -162,3 +166,5 @@ ggsave("figures/Figure1_figure_suppl3.pdf", limitsize = FALSE,
 
 ggsave("figures/Figure1_figure_suppl3.png", limitsize = FALSE, 
        units = c("px"), desmo_tono_graph, width = 2000, height = 2000, bg = 'white')
+
+
