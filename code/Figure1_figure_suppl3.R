@@ -69,7 +69,7 @@ for (i in c(1:36, 79, 90:92)){
                    desmo=length(skids_desmo_nonbf),
                    desmo_tonofibrils=length(skids_desmo_bf),
                    tonofibrils=length(skids_nondesmo_bf),
-                   other=length(skids_nondesmo_nonbf),
+                   neither=length(skids_nondesmo_nonbf),
                    total=length(skids_with_annotation))
   celltypes_bf_desmo <- rbind(celltypes_bf_desmo, df)
 }
@@ -100,7 +100,7 @@ df=data.frame(Name="somatic muscles",
               desmo=len_skids_desmo_nonbf,
               desmo_tonofibrils=len_skids_desmo_bf,
               tonofibrils=len_skids_nondesmo_bf,
-              other=len_skids_nondesmo_nonbf,
+              neither=len_skids_nondesmo_nonbf,
               total=len_skids_with_annotation)
 celltypes_bf_desmo_with_names <- rbind(celltypes_bf_desmo_with_names, df)
 
@@ -122,7 +122,7 @@ df=data.frame(Name="neurons",
               desmo=len_skids_desmo_nonbf,
               desmo_tonofibrils=len_skids_desmo_bf,
               tonofibrils=len_skids_nondesmo_bf,
-              other=len_skids_nondesmo_nonbf,
+              neither=len_skids_nondesmo_nonbf,
               total=len_skids_with_annotation)
 celltypes_bf_desmo_with_names <- rbind(celltypes_bf_desmo_with_names, df)
 
@@ -130,7 +130,7 @@ celltypes_bf_desmo_with_names <- rbind(celltypes_bf_desmo_with_names, df)
 write.csv(celltypes_bf_desmo_with_names, "data/percent_cells_with_desmo_bf_by_celltype.csv", row.names = FALSE)
 
 celltypes_bf_desmo_with_names_arranged <- arrange(celltypes_bf_desmo_with_names,
-                                                  other/total,
+                                                  neither/total,
                                                   desc(desmo/total),
                                                   desc(desmo_tonofibrils/total),
                                                   desc(tonofibrils/total))
@@ -138,7 +138,7 @@ celltypes_bf_desmo_with_names_arranged <- arrange(celltypes_bf_desmo_with_names,
 celltypes_bf_desmo_with_names_tidy <-  celltypes_bf_desmo_with_names_arranged %>%
   select(-total) %>%
   pivot_longer(
-    cols = c("desmo", "desmo_tonofibrils", "tonofibrils", "other"), 
+    cols = c("desmo", "desmo_tonofibrils", "tonofibrils", "neither"), 
     names_to = "characteristic", 
     values_to = "count")
 
@@ -146,7 +146,7 @@ desmo_tono_graph <- celltypes_bf_desmo_with_names_tidy %>%
   ggplot(aes(Name,
              count,
              fill=factor(characteristic,
-                         levels=c("desmo", "desmo_tonofibrils", "tonofibrils", "other")))) +
+                         levels=c("desmo", "desmo_tonofibrils", "tonofibrils", "neither")))) +
   geom_bar(position="fill",
            stat = "identity") +
   scale_x_discrete(limits = rev(celltypes_bf_desmo_with_names_arranged$Name)) +
