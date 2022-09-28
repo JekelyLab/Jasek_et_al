@@ -24,21 +24,29 @@ chaeta_sg2l = nlapply(read.neurons.catmaid("^chaeta_sg2l$", pid=11), function(x)
 
 
 # read and plot muscles
-read_and_plot <- function (x, color) {
-  xsg2l <- paste(x, "_sg2l", sep = "") # only segment 2 on the left
+read_and_plot <- function (namepattern, segment, color) {
+  xsg2l <- paste(namepattern, "_", segment, sep = "") # only segment 2 on the left
   xskids <- catmaid_query_by_name(xsg2l, pid=11) # include skeletons and outlines
-  xskids <- xskids$skid
-  neurons = nlapply(read.neurons.catmaid(xskids, pid=11),
-                  function(y) smooth_neuron(y, sigma=1000))
-  plot3d(neurons, WithConnectors = F, WithNodes = F, soma=TRUE, lwd=3,
-        rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=1,
-        col=color)
-  # add text labels
-  texts3d(unlist(txt_pos[[x]]), text = x, col='black', cex = 2)
+  if (length(xskids)>0) {
+    xskids <- xskids$skid
+    neurons = nlapply(read.neurons.catmaid(xskids, pid=11),
+                    function(y) smooth_neuron(y, sigma=1000))
+    
+    plot3d(neurons, WithConnectors = F, WithNodes = F, soma=TRUE, lwd=3,
+          rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=1,
+          col=color)
+    # add text labels
+    if (length(txt_pos) > 1) {
+      texts3d(unlist(txt_pos[[namepattern]]), 
+              text = namepattern,
+              col='black',
+              cex = 2)
+    }
+  }
   # cleanup
   rm(xskids)
   rm(neurons)
-  rm(x)
+  rm(namepattern)
   rm(xsg2l)
 }
 
@@ -69,15 +77,21 @@ txt_pos <- hash(
 
 
 # define which muscles to plot
-MUS_groups <- list(c("MUSobP-neuV", "MUSobP-neuDlong"), "MUSac-neuAV", "MUSac-neure", c("MUSac-neuDach", "MUSac-neuPV"), "MUSac-notM", "MUSac-notA", "MUSac-notP", c("MUSac-i", "MUSac-neuDx"))
+MUS_groups <- list(c("MUSobP-neuV", "MUSobP-neuDlong"),
+                   "MUSac-neuAV",
+                   "MUSac-neure",
+                   c("MUSac-neuDach", "MUSac-neuPV"),
+                   "MUSac-notM",
+                   "MUSac-notA",
+                   "MUSac-notP",
+                   c("MUSac-i", "MUSac-neuDx"))
 
 dir.create("videos/Video2")
 
 nopen3d() # opens a pannable 3d window
 
 i = 1
-for (MUS_group in MUS_groups)
-{
+for (MUS_group in MUS_groups) {
   clear3d()
   # plot landmarks
   plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
@@ -98,7 +112,7 @@ for (MUS_group in MUS_groups)
   par3d(zoom=0.6)
   nview3d("ventral", extramat=rotationMatrix(0.2, 1, 1, 1))
   #z-axis clip
-  clipplanes3d(0, 0, -1, 133000)
+  clipplanes3d(0, 0, -1, 145000)
   #z-axis clip from top
   clipplanes3d(0, 0, 1, -66000)
   #y-axis clip
@@ -107,7 +121,7 @@ for (MUS_group in MUS_groups)
   clipplanes3d(0.1, 1, 0, -57000)
   par3d(windowRect = c(0, 0, 800, 800)) #resize for frontal view
   for (MUS in MUS_group) {
-    read_and_plot(MUS, Okabe_ito_noblack[i])
+    read_and_plot(MUS, "sg2l", Okabe_ito_noblack[i])
 
     if (i == length(Okabe_ito_noblack)) {
       i = 1
@@ -131,6 +145,86 @@ for (MUS_group in MUS_groups)
     rgl.snapshot(filename)
   }
 
+}
+close3d()
+
+################################################################################
+# last rotation show all muscle groups
+
+txt_pos <- NULL
+
+names_non_neuronal <- read.csv("data/non_neuronal_celltypes_names.csv")
+names_MUS <- list()
+for (i in c(37:89)) {
+  annotation_MUS <- paste("celltype_non_neuronal", i, sep="")
+  name_MUS <- names_non_neuronal %>% 
+    filter(CATMAID.annotation == annotation_MUS) %>% 
+    select(Name) %>%
+    unlist() %>%
+    unname()
+  print(name_MUS)
+  names_MUS[[name_MUS]] <- annotation_MUS
+}
+
+
+cols_obant = hcl.colors(16, palette='Purple-Blue')
+color_obant = sample(cols_obant[1:6])
+cols_obpost = hcl.colors(16, palette='Green-Yellow')
+color_obpost = sample(cols_obpost[1:9])
+cols_ac = hcl.colors(20, palette='Blues 3')
+color_ac = sample(cols_ac[1:11])
+cols_ch = hcl.colors(16, palette='OrRd')
+color_ch = sample(cols_ch[1:11])
+cols_tr = hcl.colors(10, palette='YlOrBr')
+color_tr = sample(cols_tr[1:1])
+color_MUS <- c(color_ac, color_obant, color_obpost, color_ch, color_tr)
+
+nopen3d()
+
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=0.07,
+       col="#E2E2E2")
+plot3d(acicula_sg2l, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=1,
+       col="grey50")
+plot3d(chaeta_sg2l, WithConnectors = F, WithNodes = F, soma=T, lwd=1,
+       rev = FALSE, fixup = F, add=T, forceClipregion = F, alpha=1,
+       col="grey80")
+
+
+#we define a z clipping plane for the frontal view
+par3d(zoom=0.6)
+nview3d("ventral", extramat=rotationMatrix(0.2, 1, 1, 1))
+#z-axis clip
+clipplanes3d(0, 0, -1, 145000)
+#z-axis clip from top
+clipplanes3d(0, 0, 1, -66000)
+#y-axis clip
+clipplanes3d(1, 0, 0.001, -60000)
+#x-axis clip
+clipplanes3d(0.1, 1, 0, -57000)
+par3d(windowRect = c(0, 0, 800, 800)) #resize for frontal view
+
+# all sg2 volumes, including MUStrans
+for (i in (1:38)) {
+  MUS <- names(names_MUS)[i]
+  read_and_plot(MUS, "sg2l", color_MUS[i])
+}
+
+# sg3 MUStrans
+read_and_plot("MUStrans", "sg3l", color_MUS[i])
+
+#export rotation by frame for video
+for (l in 1:230){
+  play3d( spin3d( axis = c(0, 0, 10), rpm = 4), duration =0.1 )
+  print (l)
+  #save a snapshot
+  filename <- paste("./videos/Video2/Video2_sg2l_Mus_Outlines_spin",
+                    formatC(i, digits = 1, flag = "0"),
+                    "_xall", "_frame",
+                    formatC(l, digits = 2, flag = "0"),
+                    ".png", sep = "")
+  rgl.snapshot(filename)
 }
 close3d()
 
