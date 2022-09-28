@@ -155,7 +155,7 @@ desmo_tono_graph <- celltypes_bf_desmo_with_names_tidy %>%
             position = "fill",
             hjust = 1,
             size = 2,
-            family="ArialMT") +
+            family="Arial") +
   coord_flip() + 
   #scale_fill_manual(values = c("#E69F00","#D55E00","#CC79A7","lightgrey")) + # Okabe Ito
   scale_fill_manual(values = c("#4477AA","#AA3377","#EE6677","lightgrey")) + # Tol
@@ -169,7 +169,7 @@ desmo_tono_graph <- celltypes_bf_desmo_with_names_tidy %>%
         axis.title = element_blank(),
         axis.text.x = element_blank(),
         legend.title = element_blank(),
-        text=element_text(family="ArialMT"))
+        text=element_text(family="Arial"))
 
 ggsave("figures/Figure1_figure_suppl3.pdf", limitsize = FALSE, 
        units = c("px"), desmo_tono_graph, width = 2000, height = 2000)
