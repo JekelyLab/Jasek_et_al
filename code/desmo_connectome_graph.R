@@ -42,12 +42,15 @@ write_csv(desmo_with_partners, "data/desmo_with_partners.csv")
 
 #these are all the skids connected to desmosomes
 partners1 <- desmo_with_partners %>%
-  select(partner1)
+  select(partner1) %>%
+  pull()
 partners2 <- desmo_with_partners %>%
-  select(partner2)
+  select(partner2) %>%
+  pull()
 
 #list of all unique skids
 all_skids <- unique(c(partners1, partners2))
+length(all_skids)
 
 #generate a graph with all_skids as nodes
 g <- make_empty_graph() %>%
@@ -282,14 +285,12 @@ desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
   mutate(celltype = unlist(celltype_id)) %>%
   mutate(celltype_num = unlist(celltype_id_num))
 
-celltype_id_list[celltype_id_list == "other"]
-
 #add node weighted degree
 desmo_conn_graph <- as.igraph(desmo_conn_graph.tb)
 V(desmo_conn_graph)$weighted_degree <- strength(desmo_conn_graph, vids = V(desmo_conn_graph),
                                        mode = 'all', loop = TRUE)
 desmo_conn_graph.tb <- as_tbl_graph(desmo_conn_graph)
-
+desmo_conn_graph.tb
 #save in igraph format
 saveRDS(as.igraph(desmo_conn_graph.tb), "source_data/Figure3_source_data1.rds")
 #read the saved igraph format graph file from supplements/
@@ -395,6 +396,7 @@ conn_grouped_graph.visn <- toVisNetworkData(desmo_grouped_graph)
 ## copy column "weight" to new column "value" in list "edges"
 conn_grouped_graph.visn$edges$value <- conn_grouped_graph.visn$edges$weight
 conn_graph.visn <- toVisNetworkData(desmo_conn_graph)
+
 #save both ungrouped and grouped vis graph with annotations as R data file and txt file printed with dput() to get an exact copy
 saveRDS(conn_graph.visn, "source_data/Figure3_source_data2.rds")
 writeLines(capture.output(dput(conn_graph.visn)), "source_data/Figure3_source_data2.txt")
