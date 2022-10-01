@@ -26,7 +26,7 @@ conn_graph.visn$nodes$color <- c()
 
 #plot graph colored by side
 coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
-coords_rotated <- autoimage::rotate(coords, pi/2.4, pivot = c(0, 0))
+coords_rotated <- autoimage::rotate(coords, pi/14, pivot = c(0, 0))
 
 visNet_side <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
     visIgraphLayout(layout = "layout.norm", layoutMatrix = coords_rotated) %>%
@@ -55,7 +55,7 @@ visNet_side <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
            opacity=0, size = 0)
 
 
-visNet_side
+
 
 #save as html
 saveNetwork(visNet_side, "pictures/Fig5_desmo_connectome_left_right.html", selfcontained = TRUE)
@@ -134,8 +134,7 @@ visNet_seg <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
     visGroups(groupname = "fragmentum", color="white", shape = "dot", 
               opacity=0, size = 0)
   
-visNet_seg
-  
+
 #save as html
 saveNetwork(visNet_seg, "pictures/Fig5_desmo_connectome_seg.html", selfcontained = TRUE)
 #create png snapshot
@@ -208,7 +207,6 @@ visNet_para <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
   visGroups(groupname = "non_parapodial", color="#454545", shape = "dot", 
             opacity=0.1, size = 15)
 
-visNet_para
 
 #save as html
 saveNetwork(visNet_para, "pictures/Fig5_desmo_connectome_para.html", selfcontained = TRUE)
@@ -285,7 +283,6 @@ visNet_acic <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
   visGroups(groupname = "hemichaetal", color="#FFFFFF", shape = "dot", 
             opacity=0.1, size = 15)
 
-visNet_acic
 
 #save as html
 saveNetwork(visNet_acic, "pictures/Fig5_desmo_connectome_acic.html", selfcontained = TRUE)
