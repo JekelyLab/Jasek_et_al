@@ -120,9 +120,9 @@ visNet_degree <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
 visNet_degree
 
 #save as html
-saveNetwork(visNet_degree, "pictures/Fig6_desmo_connectome_degree.html", selfcontained = TRUE)
+saveNetwork(visNet_degree, "supplements/Fig6_desmo_connectome_degree.html", selfcontained = TRUE)
 #create png snapshot
-webshot::webshot(url="pictures/Fig6_desmo_connectome_degree.html",
+webshot::webshot(url="supplements/Fig6_desmo_connectome_degree.html",
                  file="pictures/Fig6_desmo_connectome_degree.png",
                  vwidth = 1500, vheight = 1500, #define the size of the browser window
                  cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
@@ -286,7 +286,7 @@ subgraph_CC$nodes$level <- c(1,5,2,
                              4,2,3,
                              3,3,3,
                              3,3,3,
-                             3,3,3)
+                             3,3,3,3)
 subgraph_CA$nodes$label
 subgraph_CA$nodes$level <- c(1,7,2,
                              6,2,4,
@@ -354,10 +354,10 @@ visNet(subgraph_CC$nodes, subgraph_CC$edges)
 #define graph save function
 saveVisIgraph <- function(visNetname, graphname, top, left, width, height) {
 #save as html
-saveNetwork(visNetname, paste("pictures/Figure6_graph", graphname, ".html", sep = ""), 
+saveNetwork(visNetname, paste("supplements/Figure6_graph", graphname, ".html", sep = ""), 
             selfcontained = TRUE)
 #create png snapshot
-webshot::webshot(url=paste("pictures/Figure6_graph", graphname, ".html", sep = ""),
+webshot::webshot(url=paste("supplements/Figure6_graph", graphname, ".html", sep = ""),
                   file=paste("pictures/Figure6_graph", graphname, ".png", sep = ""),
                   vwidth = 5000, vheight = 5000, #define the size of the browser window
                   cliprect = c(top, left, width, height), zoom=5, delay = 2)
