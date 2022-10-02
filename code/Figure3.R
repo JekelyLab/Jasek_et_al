@@ -382,29 +382,29 @@ img_conn <- image_rotate(image_read("pictures/Full_desmo_connectome_modules_webs
   image_flop()
 
 panel_mod1 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_1.png")) +
-    draw_label("dorsolateral (l)", x = 0.5, y = 0.05, size = 9)
+    draw_label("dorsolateral (l) [1]", x = 0.5, y = 0.05, size = 9)
 panel_mod2 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_2.png")) +
-    draw_label("dorsolateral (r)", x = 0.5, y = 0.05, size = 9)
+    draw_label("dorsolateral (r) [2]", x = 0.5, y = 0.05, size = 9)
 panel_mod3 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_3.png")) +
-    draw_label("oblique (sg3)", x = 0.5, y = 0.05, size = 9)
+    draw_label("oblique (sg3) [3]", x = 0.5, y = 0.05, size = 9)
 panel_mod4 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_4.png")) +
-    draw_label("parapodial (sg1l)", x = 0.5, y = 0.05, size = 9)
+    draw_label("parapodial (sg1l) [4]", x = 0.5, y = 0.05, size = 9)
 panel_mod5<- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_5.png")) +
-    draw_label("ventrolateral (l)", x = 0.5, y = 0.05, size = 9)
+    draw_label("ventrolateral (l) [5]", x = 0.5, y = 0.05, size = 9)
 panel_mod6 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_6.png")) +
-    draw_label("oblique (sg2)", x = 0.5, y = 0.05, size = 9)
+    draw_label("oblique (sg2) [6]", x = 0.5, y = 0.05, size = 9)
 panel_mod7 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_7.png")) +
-    draw_label("sg0 and head", x = 0.5, y = 0.05, size = 9)
+    draw_label("sg0 and head [7]", x = 0.5, y = 0.05, size = 9)
 panel_mod8 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_8.png")) +
-    draw_label("parapodial (sg1r)", x = 0.5, y = 0.05, size = 9)
+    draw_label("parapodial (sg1r) [8]", x = 0.5, y = 0.05, size = 9)
 panel_mod9 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_9.png")) +
-    draw_label("ventrolateral (r)", x = 0.5, y = 0.05, size = 9)
+    draw_label("ventrolateral (r) [9]", x = 0.5, y = 0.05, size = 9)
 panel_mod10 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_10.png")) +
-  draw_label("parapodial (sg3l)", x = 0.5, y = 0.05, size = 9)
+  draw_label("parapodial (sg3l) [10]", x = 0.5, y = 0.05, size = 9)
 panel_mod11 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_11.png")) +
-    draw_label("parapodial (sg3r)", x = 0.5, y = 0.05, size = 9)
+    draw_label("parapodial (sg3r) [11]", x = 0.5, y = 0.05, size = 9)
 panel_mod12 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_12.png")) +
-    draw_label("parapodial (sg3r)", x = 0.5, y = 0.05, size = 9)
+    draw_label("parapodial (sg3r) [12]", x = 0.5, y = 0.05, size = 9)
 
 panel_conn <- ggdraw() + draw_image(img_conn) +
     draw_label("sg0 and head", x=0.52, y = 0.9, size = 9) +
