@@ -23,10 +23,13 @@ conn_graph.visn$nodes$value <- conn_graph.visn$nodes$degree
 conn_graph.visn$nodes$group <-  as.character(conn_graph.visn$nodes$side)
 #for plotting with different colors, remove colour info (which takes precedence over group colour)
 conn_graph.visn$nodes$color <- c()
+#change labels to skeleton name
+conn_graph.visn$nodes$label <- conn_graph.visn$nodes$CATMAID_name
 
 #plot graph colored by side
 coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
 coords_rotated <- autoimage::rotate(coords, pi/14, pivot = c(0, 0))
+
 
 visNet_side <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
     visIgraphLayout(layout = "layout.norm", layoutMatrix = coords_rotated) %>%
@@ -47,13 +50,12 @@ visNet_side <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
                    multiselect=TRUE) %>%
     visGroups(groupname = "left_side", color=Okabe_Ito[1], shape = "dot", 
                 opacity=1) %>%
-  visGroups(groupname = "right_side", color=Okabe_Ito[2], shape = "dot", 
+    visGroups(groupname = "right_side", color=Okabe_Ito[2], shape = "dot", 
             opacity=1) %>%
-  visGroups(groupname = "middle", color=Okabe_Ito[8], size = 40, shape = "square", 
+    visGroups(groupname = "middle", color=Okabe_Ito[8], size = 40, shape = "square", 
            opacity=0.8) %>%
-  visGroups(groupname = "fragmentum", color="#EEEEEE", shape = "dot", 
-           opacity=0, size = 0)
-
+    visGroups(groupname = "fragmentum", color="#EEEEEE", shape = "dot", 
+           opacity=0, size = 0) 
 
 
 
@@ -142,6 +144,46 @@ webshot::webshot(url="pictures/Fig5_desmo_connectome_seg.html",
                    file="pictures/Fig5_desmo_connectome_seg.png",
                    vwidth = 1500, vheight = 1500, #define the size of the browser window
                    cliprect = c(50, 60, 1500, 1500), zoom=5, delay = 2)
+
+#save graph as interactive html
+visNet_seg <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
+  visIgraphLayout(layout = "layout.norm", layoutMatrix = coords_rotated) %>%
+  visEdges(smooth = list(type = 'curvedCW', roundness=0),
+           scaling=list(min=5, max=30),
+           color = list(color='#848484', opacity=0.15)) %>%
+  visNodes(borderWidth=0.3, 
+           color = list(border='black'),
+           opacity = 1, 
+           scaling=list(min=20, max=20),
+           font = list(size = 25)) %>%
+  visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
+                                     algorithm = 'hierarchical',
+                                     labelOnly=FALSE), 
+             width = 1500, height = 1500, autoResize = FALSE,
+             nodesIdSelection = list(enabled = TRUE)) %>%
+  visInteraction(dragNodes = TRUE, dragView = TRUE,
+                 zoomView = TRUE, hover=TRUE,
+                 multiselect=TRUE) %>%
+  visGroups(groupname = "episphere", color=segmental_colors[1], shape = "triangle", 
+            opacity=1, size = 30) %>%
+  visGroups(groupname = "segment_0", color=segmental_colors[2], shape = "square", 
+            opacity=1) %>%
+  visGroups(groupname = "segment_1", color=segmental_colors[3], shape = "dot", 
+            opacity=1) %>%
+  visGroups(groupname = "segment_2", color=segmental_colors[4], shape = "dot", 
+            opacity=1) %>%
+  visGroups(groupname = "segment_3", color=segmental_colors[5], shape = "dot", 
+            opacity=1) %>%
+  visGroups(groupname = "pygidium", color=segmental_colors[6], shape = "square", 
+            opacity=1) %>%
+  visGroups(groupname = "fragmentum", color="white", shape = "dot", 
+            opacity=0, size = 0)
+
+
+#save as html
+saveNetwork(visNet_seg, "supplements/Fig5_desmo_connectome_seg_interactive.html", selfcontained = TRUE)
+
+
 
 #read skeletons
 head <- nlapply(read.neurons.catmaid(skids_by_2annotations("episphere", "desmosome_connectome"), pid=11), 
