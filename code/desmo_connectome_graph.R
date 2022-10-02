@@ -12,7 +12,7 @@ all_desmo_connectors <- catmaid_fetch(path = "11/connectors/", body = list(relat
 
 # extract ids of desmo connectors
 all_desmo_ids <- sapply(all_desmo_connectors$connectors, "[[", 1)
-
+length(all_desmo_ids)
 #define empty vectors
 desmo_id <- c(); x <- c(); y <- c(); z <- c(); partner1 <- c(); partner2 <- c()
 #retrieve all desmosomes by id individually and parse their xyz coordinates and partners
@@ -66,6 +66,7 @@ for (i in 1:length(partners1)){
                         to = as.character(partners2[i])), node_key = 'name') }
 #list nodes
 V(g)$name
+length(V(g)$name)
 #list edges
 E(g)
 
@@ -105,6 +106,11 @@ desmo_conn_graph.tb <- desmo_conn_graph %>%
   activate(nodes) %>%
   mutate(partition = partition) %>%
   mutate(color = col[partition])
+
+desmo_conn_graph.tb %>%
+  activate(nodes) %>%
+  select(name) %>%
+  write.csv("data/desmo_connectome_ids.csv")
 
 # export graph for gephi to do force field layout -------------------------
 
