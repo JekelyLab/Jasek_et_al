@@ -284,7 +284,7 @@ annot_to_search <- c("fragmentum", "basal lamina",
                      "chaeFC-hemi_neuro", "chaeFC-hemi_noto",
                      "chaeFC-ER_neuro", "chaeFC-ER_noto",
                      "chaeFC-noER_neuro", "chaeFC-noER_noto",
-                     "chaeFC_neuro", "chaeFC_noto",
+                     "chaeFC-EC_neuro", "chaeFC-EC_noto",
                      paste("celltype_non_neuronal", c(28:92), sep = ""),
                      "with_soma")
 
@@ -295,7 +295,7 @@ annot_to_search <- c("fragmentum", "basal lamina",
 #celltype_non_neuronal25 hemichaetal hemichaetal_neuro hemichaetal_noto
 #celltype_non_neuronal26 chaeFC-ER chaeFC-ER_neuro chaeFC-ER_noto
 #celltype_non_neuronal27 chaeFC-noER chaeFC-noER_neuro chaeFC-noER_noto
-#cellgroup_non-neuronal1_chaeFC chaeFC_neuro chaeFC_noto
+#cellgroup_non-neuronal1_chaeFC chaeFC-EC_neuro chaeFC-EC_noto
 
 #search annotations and assign to celltype_id list (annotations will be
 #progressively overwritten if duplicate)
@@ -396,11 +396,11 @@ desmo_grouped_graph <- desmo_grouped_graph %>%
   mutate(CATMAID_name = ifelse(celltype == "acFC_noto", 
                                "acFC_noto",
                                CATMAID_name)) %>%
-  mutate(CATMAID_name = ifelse(celltype == "chaeFC_neuro", 
-                               "chaeFC_neuro",
+  mutate(CATMAID_name = ifelse(celltype == "chaeFC-EC_neuro", 
+                               "chaeFC-EC_neuro",
                                CATMAID_name)) %>%
-  mutate(CATMAID_name = ifelse(celltype == "chaeFC_noto", 
-                               "chaeFC_noto",
+  mutate(CATMAID_name = ifelse(celltype == "chaeFC-EC_noto", 
+                               "chaeFC-EC_noto",
                                CATMAID_name)) %>%
   mutate(CATMAID_name = ifelse(celltype == "chaeFC-ER_neuro", 
                                "chaeFC-ER_neuro",
