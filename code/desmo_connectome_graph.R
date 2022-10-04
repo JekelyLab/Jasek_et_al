@@ -173,9 +173,9 @@ length(cell_names)
 #check for the presence of the annotations and add the annotation to the type_of_cell list
 type_of_cell <- list()
 annot_to_search <- c("muscle", "epithelia_cell", "basal lamina", 
-                     "acicula", "chaeta", "circumacicular",
-                     "circumchaetal", "ciliated cell",
-                     "hemichaetal")
+                     "acicula", "chaeta", "acFC",
+                     "chaeFC", "ciliated cell",
+                     "chaeFC-hemi")
 for(i in seq_along(skids)){
   annot <- catmaid_get_annotations_for_skeletons(skids=skids[i], pid = 11)
   for (j in seq_along(annot_to_search)) {
@@ -252,22 +252,22 @@ annot_to_search <- c("fragmentum", "basal lamina",
                      paste("celltype_non_neuronal", c(1:21), sep = ""),
                      "chaeta_neuro", "chaeta_noto",
                      "acicula_neuro", "acicula_noto",
-                     "circumacicular_neuro", "circumacicular_noto",
-                     "hemichaetal_neuro", "hemichaetal_noto",
-                     "ER-circumchaetal_neuro", "ER-circumchaetal_noto",
-                     "noER-circumchaetal_neuro", "noER-circumchaetal_noto",
-                     "circumchaetal_neuro", "circumchaetal_noto",
+                     "acFC_neuro", "acFC_noto",
+                     "chaeFC-hemi_neuro", "chaeFC-hemi_noto",
+                     "chaeFC-ER_neuro", "chaeFC-ER_noto",
+                     "chaeFC-noER_neuro", "chaeFC-noER_noto",
+                     "chaeFC_neuro", "chaeFC_noto",
                      paste("celltype_non_neuronal", c(28:92), sep = ""),
                      "with_soma")
 
 #detailed annotations to search for, separate for notopodium and neuropodium for the acicular/chaetal complex
 #celltype_non_neuronal22 chaeta chaeta_neuro chaeta_noto
 #celltype_non_neuronal23 acicula acicula_neuro acicula_noto
-#celltype_non_neuronal24 circumacicular circumacicular_neuro circumacicular_noto
+#celltype_non_neuronal24 acFC acFC_neuro acFC_noto
 #celltype_non_neuronal25 hemichaetal hemichaetal_neuro hemichaetal_noto
-#celltype_non_neuronal26 ER-circumchaetal ER-circumchaetal_neuro ER-circumchaetal_noto
-#celltype_non_neuronal27 noER-circumchaetal noER-circumchaetal_neuro noER-circumchaetal_noto
-#cellgroup_non-neuronal1_circumchaetal circumchaetal_neuro circumchaetal_noto
+#celltype_non_neuronal26 chaeFC-ER chaeFC-ER_neuro chaeFC-ER_noto
+#celltype_non_neuronal27 chaeFC-noER chaeFC-noER_neuro chaeFC-noER_noto
+#cellgroup_non-neuronal1_chaeFC chaeFC_neuro chaeFC_noto
 
 #search annotations and assign to celltype_id list (annotations will be
 #progressively overwritten if duplicate)
@@ -362,35 +362,35 @@ desmo_grouped_graph <- desmo_grouped_graph %>%
   mutate(CATMAID_name = ifelse(celltype == "acicula_noto", 
                                "acicula_noto",
                                CATMAID_name))  %>%
-  mutate(CATMAID_name = ifelse(celltype == "circumacicular_neuro", 
-                               "circumacicular_neuro",
+  mutate(CATMAID_name = ifelse(celltype == "acFC_neuro", 
+                               "acFC_neuro",
                                CATMAID_name)) %>%
-  mutate(CATMAID_name = ifelse(celltype == "circumacicular_noto", 
-                               "circumacicular_noto",
+  mutate(CATMAID_name = ifelse(celltype == "acFC_noto", 
+                               "acFC_noto",
                                CATMAID_name)) %>%
-  mutate(CATMAID_name = ifelse(celltype == "circumchaetal_neuro", 
-                               "circumchaetal_neuro",
+  mutate(CATMAID_name = ifelse(celltype == "chaeFC_neuro", 
+                               "chaeFC_neuro",
                                CATMAID_name)) %>%
-  mutate(CATMAID_name = ifelse(celltype == "circumchaetal_noto", 
-                               "circumchaetal_noto",
+  mutate(CATMAID_name = ifelse(celltype == "chaeFC_noto", 
+                               "chaeFC_noto",
                                CATMAID_name)) %>%
-  mutate(CATMAID_name = ifelse(celltype == "ER-circumchaetal_neuro", 
-                               "ER-circumchaetal_neuro",
+  mutate(CATMAID_name = ifelse(celltype == "chaeFC-ER_neuro", 
+                               "chaeFC-ER_neuro",
                                CATMAID_name)) %>%
-  mutate(CATMAID_name = ifelse(celltype == "ER-circumchaetal_noto", 
-                               "ER-circumchaetal_noto",
+  mutate(CATMAID_name = ifelse(celltype == "chaeFC-ER_noto", 
+                               "chaeFC-ER_noto",
                                CATMAID_name)) %>%
-  mutate(CATMAID_name = ifelse(celltype == "noER-circumchaetal_neuro", 
-                               "noER-circumchaetal_neuro",
+  mutate(CATMAID_name = ifelse(celltype == "chaeFC-noER_neuro", 
+                               "chaeFC-noER_neuro",
                                CATMAID_name)) %>%
-  mutate(CATMAID_name = ifelse(celltype == "noER-circumchaetal_noto", 
-                               "noER-circumchaetal_noto",
+  mutate(CATMAID_name = ifelse(celltype == "chaeFC-noER_noto", 
+                               "chaeFC-noER_noto",
                                CATMAID_name)) %>%
-  mutate(CATMAID_name = ifelse(celltype == "hemichaetal_neuro", 
-                               "hemichaetal_neuro",
+  mutate(CATMAID_name = ifelse(celltype == "chaeFC-hemi_neuro", 
+                               "chaeFC-hemi_neuro",
                                CATMAID_name)) %>%
-  mutate(CATMAID_name = ifelse(celltype == "hemichaetal_noto", 
-                               "hemichaetal_noto",
+  mutate(CATMAID_name = ifelse(celltype == "chaeFC-hemi_noto", 
+                               "chaeFC-hemi_noto",
                                CATMAID_name))
 
 # VisNetwork conversion ---------------------------------------------------
