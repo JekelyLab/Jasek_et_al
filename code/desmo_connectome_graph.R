@@ -8,19 +8,25 @@
 source("code/Packages_and_Connection.R")
 
 # get info about all desmo connectors in the Naomi project
-all_desmo_connectors <- catmaid_fetch(path = "11/connectors/", body = list(relation_type="desmosome_with", with_partners="true"))
+all_desmo_connectors <- catmaid_fetch(
+  path = "11/connectors/", 
+  body = list(relation_type="desmosome_with", with_partners="true")
+)
 
 # extract ids of desmo connectors
 all_desmo_ids <- sapply(all_desmo_connectors$connectors, "[[", 1)
 length(all_desmo_ids)
 #define empty vectors
-desmo_id <- c(); x <- c(); y <- c(); z <- c(); partner1 <- c(); partner2 <- c()
+desmo_id <- c(); x <- c(); y <- c(); z <- c(); 
+partner1 <- c(); partner2 <- c()
 #retrieve all desmosomes by id individually and parse their xyz coordinates and partners
 for (i in 1:length(all_desmo_ids)) {
   id <- all_desmo_ids[i]
-  desmo <- catmaid_fetch(path = paste("11/connectors/", id, sep = ''), 
-                         body = list(relation_type="desmosome_with", 
-                                     with_partners="true"))
+  desmo <- catmaid_fetch(
+    path = paste("11/connectors/", id, sep = ''), 
+    body = list(relation_type="desmosome_with", 
+    with_partners="true")
+    )
   desmo_id[i] <- desmo$connector_id
   x[i] <- desmo$x
   y[i] <- desmo$y
@@ -30,12 +36,13 @@ for (i in 1:length(all_desmo_ids)) {
 }
 
 #assemble all in a tibble
-desmo_with_partners <- tibble('desmo_id' = desmo_id,
-                              'x' = x,
-                              'y' = y,
-                              'z' = z,
-                              'partner1' = partner1,
-                              'partner2' = partner2
+desmo_with_partners <- tibble(
+  'desmo_id' = desmo_id,
+  'x' = x,
+  'y' = y,
+  'z' = z,
+  'partner1' = partner1,
+  'partner2' = partner2
 )
 
 write_csv(desmo_with_partners, "data/desmo_with_partners.csv")
@@ -62,8 +69,14 @@ g <- g %>%
 
 #add edges based on partner1 and partner2 list with bind_edges, use name as node_key
 for (i in 1:length(partners1)){
-     g <- g  %>% bind_edges(data.frame(from = as.character(partners1[i]), 
-                        to = as.character(partners2[i])), node_key = 'name') }
+     g <- g  %>% bind_edges(
+       data.frame(
+         from = as.character(partners1[i]), 
+         to = as.character(partners2[i])
+         ), 
+       node_key = 'name'
+     ) 
+}
 #list nodes
 V(g)$name
 length(V(g)$name)
@@ -82,21 +95,32 @@ g.largest = induced_subgraph(g, which(cl$membership == 1))
 E(g.largest)$weight = 1
 
 #sum edges between the same nodes with simplify
-desmo_conn_graph <- igraph::simplify(g.largest, remove.loops = FALSE,
-            edge.attr.comb = list(weight = "sum", function(x) length(x)) )
+desmo_conn_graph <- igraph::simplify(
+  g.largest, 
+  remove.loops = FALSE,
+  edge.attr.comb = list(weight = "sum", function(x) length(x)) 
+)
 
 E(desmo_conn_graph)$weight
 
 #clustering with Leiden algorithm
-partition <- leiden(desmo_conn_graph, weights = E(desmo_conn_graph)$weight, 
-                    partition_type = "RBConfigurationVertexPartition",
-                    resolution_parameter = 0.27,
-                    n_iterations = -1, seed = 42)
+partition <- leiden(
+  desmo_conn_graph, 
+  weights = E(desmo_conn_graph)$weight, 
+  partition_type = "RBConfigurationVertexPartition",
+  resolution_parameter = 0.25,
+  n_iterations = -1, 
+  seed = 42
+)
+
 max(partition)
 
 #define colors
 blues <- brewer.pal(9, 'Blues')
-col=c(brewer.pal(12, 'Paired'), sample(blues, (max(partition)-12), replace=TRUE))
+col=c(
+  brewer.pal(12, 'Paired'), 
+  sample(blues, (max(partition)-12), replace=TRUE)
+)
 
 #assign partition value and color to nodes
 # If vertices are in the same cluster/partition, give them the same colour
@@ -172,10 +196,12 @@ length(cell_names)
 #iterate through skid list, get annotations for the first skid in every cell type
 #check for the presence of the annotations and add the annotation to the type_of_cell list
 type_of_cell <- list()
-annot_to_search <- c("muscle", "epithelia_cell", "basal lamina", 
-                     "acicula", "chaeta", "acFC",
-                     "chaeFC", "ciliated cell",
-                     "chaeFC-hemi")
+annot_to_search <- c(
+  "muscle", "epithelia_cell", "basal lamina", 
+  "acicula", "chaeta", "acFC",
+  "chaeFC-all", "ciliated cell"
+)
+
 for(i in seq_along(skids)){
   annot <- catmaid_get_annotations_for_skeletons(skids=skids[i], pid = 11)
   for (j in seq_along(annot_to_search)) {
@@ -189,8 +215,10 @@ for(i in seq_along(skids)){
 }
 
 #annotations to search for
-annot_to_search <- c("episphere", "segment_0", "segment_1", 
-                     "segment_2", "segment_3", "pygidium")
+annot_to_search <- c(
+  "episphere", "segment_0", "segment_1", 
+  "segment_2", "segment_3", "pygidium"
+)
 segment_of_cell <- list()
 for(i in seq_along(skids)){
   annot <- catmaid_get_annotations_for_skeletons(skids=skids[i], pid = 11)
