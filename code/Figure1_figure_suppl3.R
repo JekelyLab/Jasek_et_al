@@ -176,3 +176,101 @@ ggsave("figures/Figure1_figure_suppl3.pdf", limitsize = FALSE,
 
 ggsave("figures/Figure1_figure_suppl3.png", limitsize = FALSE, 
        units = c("px"), desmo_tono_graph, width = 2000, height = 2000, bg = 'white')
+
+
+
+################################################################################
+# visualize desmosomes, "black fibers" tags, and skeletons with "black fibers" annotations in 3D
+
+desmo_connectors_all <- catmaid_fetch(path = "11/connectors/", body = list(relation_type="desmosome_with", with_partners="true"))
+
+desmo_x <- sapply(desmo_connectors_all$connectors, "[[", 2)
+desmo_y <- sapply(desmo_connectors_all$connectors, "[[", 3)
+desmo_z <- sapply(desmo_connectors_all$connectors, "[[", 4)
+
+tags_all <- catmaid_get_label_stats(pid = 11)
+
+skids_with_bf_tags_all <- tags_all %>% 
+  filter(labelName=="black fibers") %>% 
+  select(skeletonID) %>%
+  unlist() %>%
+  unique()
+
+treenodes_with_bf_tags_all <- tags_all %>% 
+  filter(labelName=="black fibers") %>% 
+  select(treenodeID) %>%
+  unlist() %>%
+  unique()
+
+
+bf_skeletons = nlapply(
+  read.neurons.catmaid(
+    "^black fibers$", 
+    pid=11, 
+    fetch.annotations = T
+  ), 
+  function(x) smooth_neuron(x, sigma=6000)
+)
+
+nopen3d() # opens a pannable 3d window
+mfrow3d(1, 1)  #defines the two scenes
+par3d(windowRect = c(20, 30, 600, 800)) #to define the size of the rgl window
+nview3d("ventral", extramat=rotationMatrix(0, 1, 0, 0))
+par3d(zoom=0.52)
+
+plot3d(
+  outline, 
+  add=T, 
+  alpha=0.04,
+  col="#E2E2E2"
+) 
+
+plot3d(
+  yolk, 
+  add=T, 
+  alpha=0.06,
+  col="#E2E2E2"
+) 
+
+plot3d(
+  acicula, 
+  soma=T, 
+  lwd=3,
+  add=T, 
+  alpha=0.5,
+  col="black"
+) 
+
+plot3d(
+  desmo_x,
+  desmo_y,
+  desmo_z,
+  add = TRUE, 
+  col=hcl.colors(20000, palette='Oranges'), 
+  size=3, 
+  alpha=0.5
+)
+
+plot3d(
+  bf_skeletons, 
+  soma=T, 
+  lwd=2,
+  add=T,
+  alpha=0.3,
+  col="light blue"
+) 
+
+for (i in c(treenode_ids=treenodes_with_bf_tags_all)) {
+  treenodes_bf_detail <- catmaid_fetch(path = "11/treenodes/compact-detail", body = list(treenode_ids=i))
+  
+  plot3d(
+    treenodes_bf_detail[[1]][[3]],
+    treenodes_bf_detail[[1]][[4]],
+    treenodes_bf_detail[[1]][[5]],
+    add = TRUE, 
+    col=hcl.colors(1, palette='Blues'), 
+    size=3, 
+    alpha=0.5
+  )
+}
+
