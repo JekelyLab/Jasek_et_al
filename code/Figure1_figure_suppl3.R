@@ -171,10 +171,10 @@ desmo_tono_graph <- celltypes_bf_desmo_with_names_tidy %>%
         legend.title = element_blank(),
         text=element_text(family="Arial"))
 
-ggsave("figures/Figure1_figure_suppl3.pdf", limitsize = FALSE, 
+ggsave("figures/Figure1_figure_suppl3_desmo-tono_graph.pdf", limitsize = FALSE, 
        units = c("px"), desmo_tono_graph, width = 2000, height = 2000)
 
-ggsave("figures/Figure1_figure_suppl3.png", limitsize = FALSE, 
+ggsave("figures/Figure1_figure_suppl3_desmo-tono_graph.png", limitsize = FALSE, 
        units = c("px"), desmo_tono_graph, width = 2000, height = 2000, bg = 'white')
 
 
@@ -212,43 +212,114 @@ bf_skeletons = nlapply(
   function(x) smooth_neuron(x, sigma=6000)
 )
 
-nopen3d() # opens a pannable 3d window
-mfrow3d(1, 1)  #defines the two scenes
-par3d(windowRect = c(20, 30, 600, 800)) #to define the size of the rgl window
-nview3d("ventral", extramat=rotationMatrix(0, 1, 0, 0))
-par3d(zoom=0.52)
+tags_bf_x <- NULL
+tags_bf_y <- NULL
+tags_bf_z <- NULL
 
-plot3d(
-  outline, 
-  add=T, 
-  alpha=0.04,
-  col="#E2E2E2"
-) 
+for (i in (1:length(treenodes_with_bf_tags_all))) {
+  print(i)
+  print(treenodes_with_bf_tags_all[i])
+  treenodes_bf_detail <- catmaid_fetch(path = "11/treenodes/compact-detail", 
+                                       body = list(treenode_ids=treenodes_with_bf_tags_all[i]))
+  tags_bf_x[i] <-  treenodes_bf_detail[[1]][[3]]
+  tags_bf_y[i] <-  treenodes_bf_detail[[1]][[4]]
+  tags_bf_z[i] <-  treenodes_bf_detail[[1]][[5]]
+}
 
-plot3d(
-  yolk, 
-  add=T, 
-  alpha=0.06,
-  col="#E2E2E2"
-) 
 
-plot3d(
-  acicula, 
-  soma=T, 
-  lwd=3,
-  add=T, 
-  alpha=0.5,
-  col="black"
-) 
+plot_landmarks <- function() {
+#plot meshes and background reference cells
+plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.04,
+       col="#E2E2E2") 
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
+       col="#E2E2E2") 
+plot3d(bounding_dots, WithConnectors = F, WithNodes = F, soma=F, lwd=1, rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1, col="white") 
+plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.6,
+       col="grey50")
+}
+
+
+nopen3d(); mfrow3d(1, 2)  #defines the two scenes
+#define the size of the rgl window, the view and zoom
+par3d(windowRect = c(0, 0, 600, 800)); nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1)); par3d(zoom=0.5)
+
+#define the size of the rgl window
+par3d(windowRect = c(20, 30, 1200, 800)) 
+
+#define view and zoom
+nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1)); par3d(zoom=0.5)
+
+
+#add a text label
+texts3d(35000,0, 0, text = "ventral view", col="black", cex = 2.5)
+
+#move to next panel in rgl window
+next3d(clear=F)
+#define view
+nview3d("right", extramat=rotationMatrix(pi, 0, 1, 1))
+#define a sagittal clipping plane and re-zoom
+clipplanes3d(1, 0, 0.16, -75700)
+par3d(zoom=0.55)
+
+next3d(clear=F)
+
+#define the lighting
+clear3d(type = "lights"); 
+rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rgl.light(-60, -30, specular = "gray5")
+#set background color
+bg3d("gray100")
+next3d(clear=F)
+rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rgl.light(-60, -30, specular = "gray5")
+
+next3d(clear=F)
+
+texts3d(35000,0, 0, text = "ventral view", col="black", cex = 2.5)
 
 plot3d(
   desmo_x,
   desmo_y,
   desmo_z,
   add = TRUE, 
-  col=hcl.colors(20000, palette='Oranges'), 
-  size=3, 
-  alpha=0.5
+  col=hcl.colors(20000, palette='Blues'), 
+  size=4, 
+  alpha=0.8
+)
+
+plot_landmarks()
+
+next3d(clear=F)
+
+texts3d(115000,30000, 8020, text = "left view", col="black", cex = 2.5)
+
+plot3d(
+  desmo_x,
+  desmo_y,
+  desmo_z,
+  add = TRUE, 
+  col=hcl.colors(20000, palette='Blues'), 
+  size=4, 
+  alpha=0.8
+)
+
+plot_landmarks()
+
+rgl.snapshot("pictures/Fig1_suppl3_desmosomes.png")
+
+next3d(clear = T)
+
+texts3d(35000,0, 0, text = "ventral view", col="black", cex = 2.5)
+
+plot3d(
+  tags_bf_x,
+  tags_bf_y,
+  tags_bf_z,
+  add = TRUE, 
+  col=hcl.colors(1, palette='Reds'), 
+  size=5, 
+  alpha=0.8
 )
 
 plot3d(
@@ -256,21 +327,91 @@ plot3d(
   soma=T, 
   lwd=2,
   add=T,
-  alpha=0.3,
-  col="light blue"
+  alpha=0.4,
+  col="light pink"
 ) 
 
-for (i in c(treenode_ids=treenodes_with_bf_tags_all)) {
-  treenodes_bf_detail <- catmaid_fetch(path = "11/treenodes/compact-detail", body = list(treenode_ids=i))
-  
-  plot3d(
-    treenodes_bf_detail[[1]][[3]],
-    treenodes_bf_detail[[1]][[4]],
-    treenodes_bf_detail[[1]][[5]],
-    add = TRUE, 
-    col=hcl.colors(1, palette='Blues'), 
-    size=3, 
-    alpha=0.5
-  )
-}
+plot_landmarks()
 
+next3d(clear = T)
+
+texts3d(115000,30000, 8020, text = "left view", col="black", cex = 2.5)
+
+plot3d(
+  tags_bf_x,
+  tags_bf_y,
+  tags_bf_z,
+  add = TRUE, 
+  col=hcl.colors(1, palette='Reds'), 
+  size=5, 
+  alpha=0.8
+)
+
+plot3d(
+  bf_skeletons, 
+  soma=T, 
+  lwd=2,
+  add=T,
+  alpha=0.4,
+  col="light pink"
+) 
+
+plot_landmarks()
+
+rgl.snapshot("pictures/Fig1_suppl3_tonofibrils.png")
+
+next3d(clear = F)
+
+plot3d(
+  desmo_x,
+  desmo_y,
+  desmo_z,
+  add = TRUE, 
+  col=hcl.colors(20000, palette='Blues'), 
+  size=4, 
+  alpha=0.8
+)
+
+next3d(clear = F)
+
+plot3d(
+  desmo_x,
+  desmo_y,
+  desmo_z,
+  add = TRUE, 
+  col=hcl.colors(20000, palette='Blues'), 
+  size=4, 
+  alpha=0.8
+)
+
+rgl.snapshot("pictures/Fig1_suppl3_tonofibrils-desmosomes.png")
+
+# assemble figure ---------------------------------------------------------
+
+{
+  panel_A <-desmo_tono_graph
+  
+  panel_B <- ggdraw() + draw_image(readPNG("pictures/Fig1_suppl3_tonofibrils.png")) 
+  panel_C <- ggdraw() + draw_image(readPNG("pictures/Fig1_suppl3_desmosomes.png"))
+  panel_D <- ggdraw() + draw_image(readPNG("pictures/Fig1_suppl3_tonofibrils-desmosomes.png"))
+  
+  layout <- "
+AAAABBBB
+CCCCDDDD
+"
+  
+  Figure1_suppl3 <- panel_A + panel_B + 
+    panel_C + panel_D +
+    plot_layout(design = layout, heights = c(1, 1, 1, 1.6)) +
+    plot_annotation(tag_levels = list(c('A', 'B',
+                                        'C', 'D'))) & 
+    theme(plot.tag = element_text(size = 12, face='plain'))
+  
+  
+  ggsave("figures/Figure1_figure_supplement3.pdf", limitsize = FALSE, 
+         units = c("px"), Figure1_suppl3, width = 2600, height = 2400)
+  
+  
+  ggsave("figures/Figure1_figure_supplement3.pdf", limitsize = FALSE, 
+         units = c("px"), Figure1_suppl3, width = 2600, height = 2400, bg='white')
+}
