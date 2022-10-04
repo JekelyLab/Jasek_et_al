@@ -13,19 +13,19 @@ chaeta = nlapply(read.neurons.catmaid("^celltype_non_neuronal22$", pid=11,
 acicula = nlapply(read.neurons.catmaid("^celltype_non_neuronal23$", pid=11, 
                                        fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
 
-circumacicular<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal24$", pid=11, fetch.annotations = T), 
+acFC<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal24$", pid=11, fetch.annotations = T), 
                           function(x) smooth_neuron(x, sigma=6000))	
 
-hemichaetal<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal25$", pid=11, fetch.annotations = T), 
+chaeFC_hemi<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal25$", pid=11, fetch.annotations = T), 
                           function(x) smooth_neuron(x, sigma=6000))	
 
-ER_circumchaetal <-  nlapply(read.neurons.catmaid("^celltype_non_neuronal26$", pid=11, fetch.annotations = T), 
+chaeFC_ER <-  nlapply(read.neurons.catmaid("^celltype_non_neuronal26$", pid=11, fetch.annotations = T), 
                        function(x) smooth_neuron(x, sigma=6000))	
 
-noER_circumchaetal<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal27$", pid=11, fetch.annotations = T), 
+chaeFC_noER<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal27$", pid=11, fetch.annotations = T), 
                        function(x) smooth_neuron(x, sigma=6000))	
 
-EC_circumchaetal<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal28$", pid=11, fetch.annotations = T), 
+chaeFC_EC<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal28$", pid=11, fetch.annotations = T), 
                               function(x) smooth_neuron(x, sigma=6000))	
 
 outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"),
@@ -58,7 +58,7 @@ plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
 plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="grey60")
-plot3d(circumacicular, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(acFC, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="#FD8D3C")
 
@@ -80,14 +80,14 @@ plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
 plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="grey60")
-plot3d(circumacicular, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(acFC, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="#FD8D3C")
 
 #make a snapshot to the working directory
-rgl.snapshot("pictures/acicula_circumacicular.png")
+rgl.snapshot("pictures/acicula_acFC.png")
 
-# plot chaetae with circumchaetal -----------------------------------------
+# plot chaetae with chaeFC ---------------------------------------------
 
 #help to pick some colors
 brewer.pal(9, 'Set3')
@@ -106,16 +106,16 @@ plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
 plot3d(chaeta, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="grey60")
-plot3d(hemichaetal, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(chaeFC_hemi, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="#FD8D3C")
-plot3d(ER_circumchaetal, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(chaeFC_ER, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="#80B1D3")
-plot3d(noER_circumchaetal, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(chaeFC_noER, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="#B3DE69")
-plot3d(EC_circumchaetal, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(chaeFC_EC, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="#FCCDE5")
 
@@ -136,22 +136,22 @@ plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
 plot3d(chaeta, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="grey60")
-plot3d(hemichaetal, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(chaeFC_hemi, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="#FD8D3C")
-plot3d(ER_circumchaetal, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(chaeFC_ER, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="#80B1D3")
-plot3d(noER_circumchaetal, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(chaeFC_noER, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="#B3DE69")
-plot3d(EC_circumchaetal, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+plot3d(chaeFC_EC, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="#FCCDE5")
 
 
 #make a snapshot to the working directory
-rgl.snapshot("pictures/chaeta_circumchaetal.png")
+rgl.snapshot("pictures/chaeta_chaeFC.png")
 
 
 #######################################################
@@ -172,10 +172,10 @@ plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
 plot3d(acicula, WithConnectors = T, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="grey10")
-plot3d(circumacicular, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
+plot3d(acFC, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
        col="#FD8D3C")
-rgl.snapshot("pictures/acicula_circumacicular_desmosomes_closeup.png")
+rgl.snapshot("pictures/acicula_acFC_desmosomes_closeup.png")
 
 clear3d()
 
@@ -193,19 +193,19 @@ plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
        col="#E2E2E2") 
 clipplanes3d(1, 0, 0.16, -79700)
 
-plot3d(hemichaetal, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
+plot3d(chaeFC_hemi, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
        col="#FD8D3C")
-plot3d(ER_circumchaetal, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
+plot3d(chaeFC_ER, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
        col="#80B1D3")
-plot3d(noER_circumchaetal, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
+plot3d(chaeFC_noER, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
        col="#B3DE69")
-plot3d(EC_circumchaetal, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
+plot3d(chaeFC_EC, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
        col="#FCCDE5")
-rgl.snapshot("pictures/chaeta_circumchaetal_desmosomes_closeup.png")
+rgl.snapshot("pictures/chaeta_chaeFC_desmosomes_closeup.png")
 close3d()
 close3d()
 
@@ -316,9 +316,9 @@ close3d()
 
 # assemble figure --------------------------------------------------------
 
-panel_acic_circ <- ggdraw() + draw_image(readPNG("pictures/acicula_circumacicular.png")) +  
+panel_acic_circ <- ggdraw() + draw_image(readPNG("pictures/acicula_acFC.png")) +  
   draw_label("aciculae", x = 0.4, y = 0.99, size = 10, hjust = 0) +
-  draw_label("circumacicular", x = 0.4, y = 0.94, size = 10, hjust = 0, color = '#FD8D3C') +
+  draw_label("acFC", x = 0.4, y = 0.94, size = 10, hjust = 0, color = '#FD8D3C') +
   geom_segment(aes(x = 0.05,
                  y = 0.95,
                  xend = 0.05,
@@ -345,15 +345,15 @@ panel_acic_circ <- ggdraw() + draw_image(readPNG("pictures/acicula_circumacicula
   draw_label("d", x = 0.96, y = 0.95, size = 8) 
 
 panel_chae_circ <- ggdraw() + 
-  draw_image(readPNG("pictures/chaeta_circumchaetal.png")) + 
+  draw_image(readPNG("pictures/chaeta_chaeFC.png")) + 
   draw_label("chaetae", x = 0.4, y = 0.99, size = 10, hjust = 0) +
-  draw_label("hemichaetal", x = 0.4, y = 0.95, size = 10, 
+  draw_label("chaeFC-hemi", x = 0.4, y = 0.95, size = 10, 
              hjust = 0, color = '#FD8D3C') +
-  draw_label("ER circumchaetal", x = 0.4, y = 0.91, size = 10, 
+  draw_label("chaeFC-ER", x = 0.4, y = 0.91, size = 10, 
              hjust = 0, color = '#80B1D3') +
-  draw_label("noER circumchaetal", x = 0.4, y = 0.87, size = 10, 
+  draw_label("chaeFC-noER", x = 0.4, y = 0.87, size = 10, 
              hjust = 0, color = '#B3DE69') +
-  draw_label("EC circumchaetal", x = 0.4, y = 0.83, size = 10, 
+  draw_label("chaeFC-EC", x = 0.4, y = 0.83, size = 10, 
              hjust = 0, color = '#FCCDE5')  +
   draw_label("neuropodia", x = 0.54, y = 0.68, size = 10)  +
   draw_label("notopodia", x = 0.88, y = 0.64, size = 10)  +
@@ -393,14 +393,14 @@ panel_chae_circ <- ggdraw() +
 
 
 panel_acic_circ_close <- ggdraw() + 
-  draw_image(readPNG("pictures/acicula_circumacicular_desmosomes_closeup.png")) + 
+  draw_image(readPNG("pictures/acicula_acFC_desmosomes_closeup.png")) + 
   draw_label("aciculae", x = 0.97, y = 0.8, hjust = 1, size = 10) +
-  draw_label("circumacicular", x = 0.97, y = 0.72, size = 10, 
+  draw_label("acFC", x = 0.97, y = 0.72, size = 10, 
        hjust = 1, color = '#FD8D3C')  +
   draw_label("desmosomes", x = 0.97, y = 0.64, size = 10, 
              hjust = 1, color = '#FFFFFF') 
 panel_chae_circ_close <- ggdraw() + 
-  draw_image(readPNG("pictures/chaeta_circumchaetal_desmosomes_closeup.png")) + 
+  draw_image(readPNG("pictures/chaeta_chaeFC_desmosomes_closeup.png")) + 
   draw_label("aciculae", x = 0.97, y = 0.82, hjust = 1, size = 10) +
   draw_label("chaetae", x = 0.97, y = 0.74, size = 10, 
              hjust = 1, color = 'grey40')  +
