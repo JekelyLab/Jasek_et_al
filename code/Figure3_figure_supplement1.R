@@ -101,7 +101,7 @@ panel_ac <- ggdraw() + draw_image(readPNG("images_notR/Desmo_grouped_ac.png")) +
 panel_all <- ggdraw() + draw_image(readPNG("images_notR/Desmo_grouped.png")) +
   draw_label("grouped desmosomal connectome", x = 0.5, y = 0.99, size = 9)
 panel_circumac <- ggdraw() + draw_image(readPNG("images_notR/Desmo_grouped_circumac.png")) +
-  draw_label("partners of circumacicular", x = 0.5, y = 0.99, size = 9)
+  draw_label("partners of acicular follicle", x = 0.5, y = 0.99, size = 9)
 
 layout <-
 "ABC
