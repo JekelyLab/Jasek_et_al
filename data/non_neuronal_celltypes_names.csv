@@ -22,11 +22,11 @@ nephridium,celltype_non_neuronal20
 nephridiumTip,celltype_non_neuronal21
 chaeta,celltype_non_neuronal22
 acicula,celltype_non_neuronal23
-circumacicular,celltype_non_neuronal24
-hemichaetal,celltype_non_neuronal25
-ER-circumchaetal,celltype_non_neuronal26
-noER-circumchaetal,celltype_non_neuronal27
-EC-circumchaetal,celltype_non_neuronal28
+acFC,celltype_non_neuronal24
+chaeFC-hemi,celltype_non_neuronal25
+chaeFC-ER,celltype_non_neuronal26
+chaeFC-noER,celltype_non_neuronal27
+chaeFC-EC,celltype_non_neuronal28
 HeadGland,celltype_non_neuronal29
 InterparaGland,celltype_non_neuronal30
 spinMicroGland,celltype_non_neuronal31
