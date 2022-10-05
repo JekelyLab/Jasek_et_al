@@ -39,6 +39,7 @@ library(colorspace)   ## hsv colorspace manipulations
 library(RColorBrewer)
 
 library(hash)
+library(av)
 
 #create directory for R-generated pictures for figure panels (ignored by git)
 dir.create("pictures")
