@@ -28,7 +28,7 @@ conn_graph.visn$nodes$label <- conn_graph.visn$nodes$CATMAID_name
 
 #plot graph colored by side
 coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
-coords_rotated <- autoimage::rotate(coords, pi/14, pivot = c(0, 0))
+coords_rotated <- autoimage::rotate(coords, -pi/30, pivot = c(0, 0))
 
 
 visNet_side <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>% 
@@ -308,7 +308,7 @@ visNet_acic <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
             opacity=0.5) %>%
   visGroups(groupname = "acicula", color=Okabe_Ito[8], size = 55, shape = "dot", 
             opacity=1) %>%
-  visGroups(groupname = "circumacicular", color=Okabe_Ito[2], shape = "dot", 
+  visGroups(groupname = "acFC", color=Okabe_Ito[2], shape = "dot", 
             opacity=1, size = 45) %>%
   visGroups(groupname = "basal lamina", color="#FFFFFF", shape = "dot", 
             opacity=0.1, size = 15) %>%
@@ -318,11 +318,11 @@ visNet_acic <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
             opacity=0.1, size = 15) %>%
   visGroups(groupname = "other", color="#FFFFFF", shape = "dot", 
             opacity=0.1, size = 15) %>%
-  visGroups(groupname = "circumchaetal", color="#FFFFFF", shape = "dot", 
+  visGroups(groupname = "chaeFC-all", color="#FFFFFF", shape = "dot", 
             opacity=0.1, size = 15) %>%
   visGroups(groupname = "ciliated cell", color="#FFFFFF", shape = "dot", 
             opacity=0.1, size = 15) %>%
-  visGroups(groupname = "hemichaetal", color="#FFFFFF", shape = "dot", 
+  visGroups(groupname = "chaeFC-all", color="#FFFFFF", shape = "dot", 
             opacity=0.1, size = 15)
 
 
@@ -383,8 +383,7 @@ panel_left_right_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_left_right.p
   draw_label("a", x = 0.1, y = 0.93, size = 8) +
   draw_label("p", x = 0.1, y = 0.79, size = 8) 
 
-img_left_right_gr <- image_read("pictures/Fig5_desmo_connectome_left_right.png") %>%
-  image_flop()
+img_left_right_gr <- image_read("pictures/Fig5_desmo_connectome_left_right.png") 
 panel_left_right_gr <- ggdraw() + draw_image(img_left_right_gr) + 
     draw_label("right", x = 0.3, y = 0.9, size = 8, color = Okabe_Ito[2]) + 
     draw_label("left", x = 0.7, y = 0.9, size = 8, color = Okabe_Ito[1]) + 
@@ -399,8 +398,7 @@ panel_seg_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_seg.png")) +
   draw_label("sg3", x = 0.13, y = 0.28, size = 9, color = segmental_colors[5]) +
   draw_label("pygidium", x = 0.22, y = 0.14, size = 9, color = segmental_colors[6]) 
 
-img_seg_gr <- image_read("pictures/Fig5_desmo_connectome_seg.png") %>%
-  image_flop()
+img_seg_gr <- image_read("pictures/Fig5_desmo_connectome_seg.png") 
 panel_seg_gr <- ggdraw() + draw_image(img_seg_gr) + 
   draw_label("head", x = 0.35, y = 0.90, size = 9, fontface = 'bold', 
              color = segmental_colors[1]) + 
@@ -413,19 +411,17 @@ panel_seg_gr <- ggdraw() + draw_image(img_seg_gr) +
 
 panel_para_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_para.png"))  
 
-img_para_gr <- image_read("pictures/Fig5_desmo_connectome_para.png") %>%
-  image_flop()
+img_para_gr <- image_read("pictures/Fig5_desmo_connectome_para.png")
 panel_para_gr <- ggdraw() + draw_image(img_para_gr)  + 
   draw_label("neuropodium", x = 0.25, y = 0.8, size = 9, fontface = 'plain', color = Okabe_Ito[1]) +
   draw_label("notopodium", x = 0.15, y = 0.62, size = 9, fontface = 'plain', color = Okabe_Ito[2])
 
 panel_acic_3d <- ggdraw() + draw_image(readPNG("pictures/Fig5_mus_ac.png"))
 
-img_acic_gr <- image_read("pictures/Fig5_desmo_connectome_acic.png") %>%
-  image_flop()
+img_acic_gr <- image_read("pictures/Fig5_desmo_connectome_acic.png")
 panel_acic_gr <- ggdraw() + draw_image(img_acic_gr)    + 
   draw_label("aciculae", x = 0.15, y = 0.73, size = 9, color = Okabe_Ito[8]) + 
-  draw_label("circumacicular", x = 0.15, y = 0.43, size = 9, color = Okabe_Ito[2]) + 
+  draw_label("acFC", x = 0.15, y = 0.43, size = 9, color = Okabe_Ito[2]) + 
   draw_label("muscles", x = 0.15, y = 0.58, size = 9, color = Reds[7])
 
 layout <- "
