@@ -20,14 +20,18 @@ node_name_and_degree_high_only <- as_tibble(desmo_conn_graph %>%
   filter(weighted_degree > 10) %>%
   select(name, weighted_degree))
 
+node_name <- as_tibble(desmo_conn_graph %>%  
+  as_tbl_graph() %>%
+  select(name, weighted_degree))
+
 # 3d plotting  ------------------------------------------------------------
 
 {
 plot_background_ventral_no_acic()
 par3d(zoom=0.55)
   
-#plot skeletons with same alpha for comparison
-skeletons <- nlapply(read.neurons.catmaid(node_name_and_degree_high_only$name, pid=11), 
+#plot all skeletons with same alpha
+skeletons <- nlapply(read.neurons.catmaid(node_name$name, pid=11), 
                         function(x) smooth_neuron(x, sigma=6000))
 plot3d(skeletons, soma = TRUE, lwd = 1, add=T, alpha=0.6, col=Reds[8])
 plot3d(outline, add = TRUE, alpha = 0.017)
@@ -37,7 +41,9 @@ plot3d(scalebar_50um_ventral, color = "black", lw = 2)
 rgl.snapshot("pictures/Fig6_desmo_connectome_same_color.png")
 close3d()
 
-#plot skeletons with transparency inversely proportional to weighted degree
+# plot skeletons with transparency inversely proportional to weighted degree,
+# omit low weighted degree as they would be basically transparent but considerably
+# slow down plotting
 plot_background_ventral_no_acic()
 par3d(zoom=0.55)
 
