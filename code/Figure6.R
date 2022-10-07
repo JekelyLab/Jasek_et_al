@@ -283,14 +283,14 @@ subgraph_CA$nodes$group <- subgraph_CA$nodes$class
 subgraph_CC$nodes$group <- subgraph_CC$nodes$class
 #check label and add level to nodes for hierarchical layout
 subgraph_CC$nodes$label
-subgraph_CC$nodes$level <- c(1,5,2,
-                             2,4,2,
-                             4,2,
-                             4,3,3,
+subgraph_CC$nodes$level <- c(1,6,2,
+                             2,5,2,
+                             5,2,5,
                              3,3,3,
+                             3,4,4,
+                             4,4,3,
                              3,3,3,
-                             3,3,3,
-                             3,3)
+                             4)
 subgraph_CA$nodes$label
 subgraph_CA$nodes$level <- c(1,7,2,
                              6,2,4,
@@ -369,8 +369,8 @@ webshot::webshot(url=paste("supplements/Figure6_graph_", graphname, ".html", sep
 visCA <- visNet(subgraph_CA$nodes, subgraph_CA$edges)
 saveVisIgraph(visCA, 'acFC', 50,100, 2350, 1500)
 visCC <- visNet(subgraph_CC$nodes, subgraph_CC$edges)
-saveVisIgraph(visCC, 'chaeFC', 200,500, 1600, 1300)
-
+#saveVisIgraph(visCC, 'chaeFC', 200,500, 1600, 1300)
+saveVisIgraph(visCC, 'chaeFC', 150,250, 2100, 1300)
 }
 
 
@@ -595,7 +595,7 @@ panel_chaeFC_partners <- ggdraw() +
 
 layout <- "
 AAAAAABBBBBBCCCCCCDDDDDDDEEEEEEE
-FFFFFFFGGGGGGGGGGGHHHHHHHIIIIIII
+FFFFFFFGGGGGGGGGGHHHHHHHIIIIIIII
 "
 
 Figure6 <- panel_A + panel_B + panel_C + panel_degree_gr + panel_w_degree +
