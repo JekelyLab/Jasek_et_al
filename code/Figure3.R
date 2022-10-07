@@ -16,7 +16,7 @@ conn_graph.visn <- readRDS("source_data/Figure3_source_data2.rds")
 coords <- matrix(c(conn_graph.visn$nodes$x, conn_graph.visn$nodes$y), ncol=2)
 coords_rotated <- autoimage::rotate(
   coords, 
-  pi/14, 
+  -pi/30, 
   pivot = c(0, 0)
 )
 

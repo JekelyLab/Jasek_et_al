@@ -107,8 +107,8 @@ E(desmo_conn_graph)$weight
 partition <- leiden(
   desmo_conn_graph, 
   weights = E(desmo_conn_graph)$weight, 
-  partition_type = "RBConfigurationVertexPartition",
-  resolution_parameter = 0.25,
+  partition_type = "ModularityVertexPartition.Bipartite",
+  resolution_parameter = 0.01,
   n_iterations = -1, 
   seed = 42
 )
