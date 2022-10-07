@@ -20,14 +20,18 @@ node_name_and_degree_high_only <- as_tibble(desmo_conn_graph %>%
   filter(weighted_degree > 10) %>%
   select(name, weighted_degree))
 
+node_name <- as_tibble(desmo_conn_graph %>%  
+  as_tbl_graph() %>%
+  select(name, weighted_degree))
+
 # 3d plotting  ------------------------------------------------------------
 
 {
 plot_background_ventral_no_acic()
 par3d(zoom=0.55)
   
-#plot skeletons with same alpha for comparison
-skeletons <- nlapply(read.neurons.catmaid(node_name_and_degree_high_only$name, pid=11), 
+#plot all skeletons with same alpha
+skeletons <- nlapply(read.neurons.catmaid(node_name$name, pid=11), 
                         function(x) smooth_neuron(x, sigma=6000))
 plot3d(skeletons, soma = TRUE, lwd = 1, add=T, alpha=0.6, col=Reds[8])
 plot3d(outline, add = TRUE, alpha = 0.017)
@@ -37,7 +41,9 @@ plot3d(scalebar_50um_ventral, color = "black", lw = 2)
 rgl.snapshot("pictures/Fig6_desmo_connectome_same_color.png")
 close3d()
 
-#plot skeletons with transparency inversely proportional to weighted degree
+# plot skeletons with transparency inversely proportional to weighted degree,
+# omit low weighted degree as they would be basically transparent but considerably
+# slow down plotting
 plot_background_ventral_no_acic()
 par3d(zoom=0.55)
 
@@ -159,9 +165,12 @@ degree_plot <- as_tibble(desmo_conn_graph %>%
                       legend.text = element_text(size = 9),
                       legend.title = element_text(size = 11),
   ) +
-  scale_x_discrete(limits = c("circumacicular", "acicula", "chaeta",  
-                              "muscle", "circumchaetal", "hemichaetal",
-                              "epithelia_cell", "ciliated cell"))
+  scale_x_discrete(limits = c("acFC", "acicula", "chaeta",  
+                              "muscle", "chaeFC-all",
+                              "epithelia_cell", "ciliated cell"),
+                   labels = c("acFC", "aciculae", "chaetae",  
+                              "muscles", "chaeFC",
+                              "epidermal cells", "ciliated cells"))
 
 w_degree_plot <- as_tibble(desmo_conn_graph %>%  
             as_tbl_graph()) %>%
@@ -192,11 +201,11 @@ w_degree_plot <- as_tibble(desmo_conn_graph %>%
         legend.key.size = unit(4, "mm"),
         legend.position = 'top'
   ) +
-  scale_x_discrete(limits = c("circumacicular", "acicula", "chaeta",  
-                              "muscle", "circumchaetal", "hemichaetal",
+  scale_x_discrete(limits = c("acFC", "acicula", "chaeta",  
+                              "muscle", "chaeFC-all",
                               "epithelia_cell", "ciliated cell"),
-                   labels = c("circumacicular", "aciculae", "chaetae",  
-                              "muscles", "circumchaetal", "hemichaetal",
+                   labels = c("acFC", "aciculae", "chaetae",  
+                              "muscles", "chaeFC",
                               "epidermal cells", "ciliated cells"))
 
 ggsave("pictures/Figure6_w_degree_plot.png", w_degree_plot,
@@ -234,9 +243,8 @@ desmo_grouped_graph <- desmo_grouped_graph %>%
   as_tbl_graph() %>%
   mutate(color = ifelse(class == "acicula", "#454545", color)) %>%
   mutate(color = ifelse(class == "chaeta", "#454545", color)) %>%
-  mutate(color = ifelse(class == "circumacicular", "#222222", color)) %>%
-  mutate(color = ifelse(class == "circumchaetal", "#222222", color)) %>%
-  mutate(color = ifelse(class == "hemichaetal", "#878787", color))
+  mutate(color = ifelse(class == "acFC", "#222222", color)) %>%
+  mutate(color = ifelse(class == "chaeFC", "#222222", color))
 
 #get subgraph of a single node defined by class (not used)
 subgraph <- function(class_id) {desmo_grouped_graph %>% 
@@ -263,9 +271,9 @@ subgraph_i <- function(class_id) {
 }
 
 #derive subgraphs
-subgraph_CA <- subgraph_i('circumacicular') %>%
+subgraph_CA <- subgraph_i('acFC') %>%
   toVisNetworkData()
-subgraph_CC <- subgraph_i('circumchaetal') %>%
+subgraph_CC <- subgraph_i('chaeFC-all') %>%
   toVisNetworkData()
 
 #write edge weight to value column (for vis)
@@ -281,24 +289,26 @@ subgraph_CA$nodes$group <- subgraph_CA$nodes$class
 subgraph_CC$nodes$group <- subgraph_CC$nodes$class
 #check label and add level to nodes for hierarchical layout
 subgraph_CC$nodes$label
-subgraph_CC$nodes$level <- c(1,5,2,
-                             2,4,2,
-                             4,2,3,
+subgraph_CC$nodes$level <- c(1,6,2,
+                             2,5,2,
+                             5,2,5,
                              3,3,3,
+                             3,4,4,
+                             4,4,3,
                              3,3,3,
-                             3,3,3,3)
+                             4)
 subgraph_CA$nodes$label
 subgraph_CA$nodes$level <- c(1,7,2,
                              6,2,4,
                              5,4,3,
                              4,3,3,
-                             3,4,3,
                              4,3,3,
-                             4,3,4,
+                             4,4,3,
                              4,5,4,
                              5,5,4,
-                             3,3,4,
-                             3)
+                             5,5,5,
+                             3,3,3,
+                             4)
 #define function for visNet graph visualisation
 visNet <- function(nodes, edges) {visNetwork(nodes, 
                      edges) %>% 
@@ -332,15 +342,13 @@ visNet <- function(nodes, edges) {visNetwork(nodes,
             opacity=0.7) %>%
   visGroups(groupname = "epithelia_cell", shape = "dot", 
             opacity=1) %>%
-  visGroups(groupname = "circumchaetal", size = 30, shape = "triangle", 
+  visGroups(groupname = "chaeFC", size = 30, shape = "triangle", 
             opacity=1) %>%
-  visGroups(groupname = "circumacicular", size = 30, shape = "triangle", 
+  visGroups(groupname = "chaeFC-all", size = 30, shape = "triangle", 
             opacity=1) %>%
   visGroups(groupname = "acicula", size = 25, shape = "square", 
             opacity=1) %>%
   visGroups(groupname = "chaeta", size = 25, shape = "square", 
-            opacity=1) %>%
-  visGroups(groupname = "hemichaetal", shape = "triangle", 
             opacity=1) %>%
   visGroups(groupname = "ciliated cell", shape = "dot", 
             opacity=1) 
@@ -354,21 +362,21 @@ visNet(subgraph_CC$nodes, subgraph_CC$edges)
 #define graph save function
 saveVisIgraph <- function(visNetname, graphname, top, left, width, height) {
 #save as html
-saveNetwork(visNetname, paste("supplements/Figure6_graph", graphname, ".html", sep = ""), 
+saveNetwork(visNetname, paste("supplements/Figure6_graph_", graphname, ".html", sep = ""), 
             selfcontained = TRUE)
 #create png snapshot
-webshot::webshot(url=paste("supplements/Figure6_graph", graphname, ".html", sep = ""),
-                  file=paste("pictures/Figure6_graph", graphname, ".png", sep = ""),
+webshot::webshot(url=paste("supplements/Figure6_graph_", graphname, ".html", sep = ""),
+                  file=paste("pictures/Figure6_graph_", graphname, ".png", sep = ""),
                   vwidth = 5000, vheight = 5000, #define the size of the browser window
                   cliprect = c(top, left, width, height), zoom=5, delay = 2)
 
 }
 
 visCA <- visNet(subgraph_CA$nodes, subgraph_CA$edges)
-saveVisIgraph(visCA, 'circumac', 50,100, 2350, 1500)
+saveVisIgraph(visCA, 'acFC', 50,100, 2350, 1500)
 visCC <- visNet(subgraph_CC$nodes, subgraph_CC$edges)
-saveVisIgraph(visCC, 'circumchae', 200,500, 1600, 1300)
-
+#saveVisIgraph(visCC, 'chaeFC', 200,500, 1600, 1300)
+saveVisIgraph(visCC, 'chaeFC', 150,250, 2100, 1300)
 }
 
 
@@ -381,10 +389,10 @@ chaeta_sg2 <- nlapply(read.neurons.catmaid(chaeta_sg2_skids, pid=11),
 acic_sg2_skids <- skids_by_2annotations("acicula", "segment_2")
 acicula_sg2 <- nlapply(read.neurons.catmaid(acic_sg2_skids, pid=11),
                       function(x) smooth_neuron(x, sigma=6000))
-CC_sg2_skids <- skids_by_2annotations("circumchaetal", "segment_2")
+CC_sg2_skids <- skids_by_2annotations("chaeFC-all", "segment_2")
 CC_sg2 <- nlapply(read.neurons.catmaid(CC_sg2_skids, pid=11),
                       function(x) smooth_neuron(x, sigma=6000))
-CA_sg2_skids <- skids_by_2annotations("circumacicular", "segment_2")
+CA_sg2_skids <- skids_by_2annotations("acFC", "segment_2")
 CA_sg2 <- nlapply(read.neurons.catmaid(CA_sg2_skids, pid=11),
                       function(x) smooth_neuron(x, sigma=6000))
 }
@@ -433,16 +441,16 @@ OUTLINE_skids <- attributes(OUTLINE_names) #skids are the attributes of the name
 OUTLINE_names <- unname(OUTLINE_names)
 
 plot_background_sg2_parapod()
-circumac_color <- tibble(subgraph_CA$nodes) %>%
-  filter(class == 'circumacicular') %>%
+acFC_color <- tibble(subgraph_CA$nodes) %>%
+  filter(class == 'acFC') %>%
   select(color) %>%
   pull()
-plot3d(CA_sg2, soma=T, lwd=4, add=T, alpha=1, col=circumac_color)
+plot3d(CA_sg2, soma=T, lwd=4, add=T, alpha=1, col=acFC_color)
 #add parapodial scale bar
 scale_bar_10um_parapodium_sg2 <- read.neurons.catmaid("^scale_bar_10um_parapodium_sg2$", pid=11)
 plot3d(scale_bar_10um_parapodium_sg2, lwd = 4, add = T, col = 'black')
 
-#read the MUS OUTLINES for the circumacicular subgraph and plot in the color same as the graph
+#read the MUS OUTLINES for the acFC subgraph and plot in the color same as the graph
 for (i in 1:length(subgraph_CA$nodes$label)) {
   color <- subgraph_CA$nodes$color[i]
   #only names in sg2
@@ -461,13 +469,13 @@ rgl.snapshot("pictures/Fig6_sg2para_MUS_CA_1.png")
 close3d()
 
 plot_background_sg2_parapod()
-circumchaetal_color <- tibble(subgraph_CC$nodes) %>%
-  filter(class == 'circumchaetal') %>%
+chaeFC_color <- tibble(subgraph_CC$nodes) %>%
+  filter(class == 'chaeFC') %>%
   select(color) %>%
   pull()
-plot3d(CC_sg2, soma=T, lwd=4, add=T, alpha=0.5, col=circumchaetal_color[1])
+plot3d(CC_sg2, soma=T, lwd=4, add=T, alpha=0.5, col=chaeFC_color[1])
 
-#read the MUS OUTLINES for the circumachaetal subgraph and plot in the color same as the graph
+#read the MUS OUTLINES for the chaeFC subgraph and plot in the color same as the graph
 for (i in 1:length(subgraph_CC$nodes$label)) {
   color <- subgraph_CC$nodes$color[i]
   #only names in sg2
@@ -533,27 +541,27 @@ panel_degree_gr <- ggdraw() + draw_image(readPNG("pictures/Fig6_desmo_connectome
 
 panel_w_degree <- ggdraw() + draw_image(readPNG("pictures/Figure6_w_degree_plot.png"))
 
-panel_CA <- ggdraw() + draw_image(readPNG("pictures/Figure6_graphcircumac.png")) + 
-  draw_label("circumacicular & partners", x = 0.5, y = 0.97, size = 8)  + 
+panel_CA <- ggdraw() + draw_image(readPNG("pictures/Figure6_graph_acFC.png")) + 
+  draw_label("acFC & partners", x = 0.5, y = 0.97, size = 8)  + 
   draw_label("# of desmosomes", x = 0.88, y = 0.82, size = 5) +
   draw_label("1", x = 0.88, y = 0.78, size = 5) + 
   draw_label(max(subgraph_CA$nodes$weighted_degree), x = 0.88, y = 0.74, size = 5) +
   draw_line(x = c(0.9, 0.95), y = c(0.78, 0.78), size = 0.1, color = 'grey') +
   draw_line(x = c(0.9, 0.95), y = c(0.74, 0.74), size = 1.5, color = 'grey')
 
-panel_CC <- ggdraw() + draw_image(readPNG("pictures/Figure6_graphcircumchae.png")) + 
-  draw_label("circumchaetal & partners", x = 0.5, y = 0.97, size = 8) + 
+panel_CC <- ggdraw() + draw_image(readPNG("pictures/Figure6_graph_chaeFC.png")) + 
+  draw_label("chaeFC & partners", x = 0.5, y = 0.97, size = 8) + 
   draw_label("# of desmosomes", x = 0.88, y = 0.82, size = 5) +
   draw_label("1", x = 0.84, y = 0.78, size = 5) + 
   draw_label(max(subgraph_CC$nodes$weighted_degree), x = 0.84, y = 0.74, size = 5) +
   draw_line(x = c(0.88, 0.95), y = c(0.78, 0.78), size = 0.1, color = 'grey') +
   draw_line(x = c(0.88, 0.95), y = c(0.74, 0.74), size = 1.1, color = 'grey')
 
-panel_Circumacic_partners <- ggdraw() +
+panel_acFC_partners <- ggdraw() +
   draw_image(readPNG("pictures/Fig6_sg2para_MUS_CA_1.png")) + 
   draw_label(paste("10 ", "\u00B5", "m", sep = ""), 
              x = 0.2, y = 0.2, size = 9) + 
-  draw_label("circumacicular & partners", x = 0.5, y = 0.97, size = 8)  + 
+  draw_label("acFC & partners", x = 0.5, y = 0.97, size = 8)  + 
   draw_label("notopodium", x = 0.82, y = 0.88, size = 7)  + 
   draw_label("neuropodium", x = 0.8, y = 0.1, size = 7)  +
   geom_segment(aes(x = 0.1,
@@ -571,9 +579,9 @@ panel_Circumacic_partners <- ggdraw() +
   draw_label("d", x = 0.1, y = 0.83, size = 7) +
   draw_label("v", x = 0.1, y = 0.70, size = 7) 
 
-panel_Circumchaetal_partners <- ggdraw() + 
+panel_chaeFC_partners <- ggdraw() + 
   draw_image(readPNG("pictures/Fig6_sg2para_MUS_CC_1.png")) + 
-  draw_label("circumchaetal & partners", x = 0.5, y = 0.97, size = 8) + 
+  draw_label("chaeFC & partners", x = 0.5, y = 0.97, size = 8) + 
   draw_label("notopodium", x = 0.82, y = 0.88, size = 7)  + 
   draw_label("neuropodium", x = 0.8, y = 0.1, size = 7) +
   geom_segment(aes(x = 0.1,
@@ -593,11 +601,11 @@ panel_Circumchaetal_partners <- ggdraw() +
 
 layout <- "
 AAAAAABBBBBBCCCCCCDDDDDDDEEEEEEE
-FFFFFFFGGGGGGGGGGGHHHHHHHIIIIIII
+FFFFFFFGGGGGGGGGGHHHHHHHIIIIIIII
 "
 
 Figure6 <- panel_A + panel_B + panel_C + panel_degree_gr + panel_w_degree +
-  panel_Circumacic_partners + panel_CA + panel_Circumchaetal_partners  + panel_CC +
+  panel_acFC_partners + panel_CA + panel_chaeFC_partners  + panel_CC +
   plot_layout(design = layout) +
   plot_annotation(tag_levels = 'A') & 
   theme(plot.tag = element_text(size = 12, face='plain'))
