@@ -183,7 +183,7 @@ as_tibble(desmo_conn_graph.tb %>%
                                      acicula = "#CC79A7", 
                                      acFC = "#0072B2", 
                                      chaeta = "#E69F00", 
-                                     chaeFC-all = 'black'),
+                                     `chaeFC-all` = 'black'),
                        labels = c("muscle", "acicula", 
                                   "acFC", 
                                   "chaeta", 
@@ -192,7 +192,7 @@ as_tibble(desmo_conn_graph.tb %>%
                                      acicula = 16, 
                                      acFC = 15, 
                                      chaeta = 17, 
-                                     chaeFC-all = 18),
+                                     `chaeFC-all` = 18),
                        labels = c("muscle", 
                                   "acicula", 
                                   "acFC", 
@@ -202,7 +202,7 @@ as_tibble(desmo_conn_graph.tb %>%
                                      acicula = 0.7, 
                                      acFC = 0.6, 
                                      chaeta = 0.3, 
-                                     chaeFC-all = 0.3),
+                                     `chaeFC-all` = 0.3),
                        labels = c("muscle", 
                                   "acicula", 
                                   "acFC", 
@@ -426,7 +426,7 @@ MIIIN
 #PQR#
 #PQR#
 "
-panel_A <-  panel_mod3 + panel_mod6 + panel_mod10 + 
+panel_A <-  panel_mod10 + panel_mod6 + panel_mod3 + 
     panel_mod8 + panel_conn + panel_mod7 +
     panel_mod2 + panel_mod1 + 
     panel_mod5 + panel_mod4 + 
