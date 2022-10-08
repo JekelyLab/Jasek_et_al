@@ -104,13 +104,13 @@ desmo_conn_graph <- igraph::simplify(
 E(desmo_conn_graph)$weight
 
 #clustering with Leiden algorithm
-partition <- leiden(
+partition <- leiden::leiden(
   desmo_conn_graph, 
   weights = E(desmo_conn_graph)$weight, 
-  partition_type = "ModularityVertexPartition.Bipartite",
-  resolution_parameter = 0.01,
+  partition_type = "RBConfigurationVertexPartition",
+  resolution_parameter = 0.3,
   n_iterations = -1, 
-  seed = 42
+  seed = 333
 )
 
 max(partition)
@@ -180,6 +180,7 @@ desmo_conn_graph.tb <- activate(desmo_conn_graph.tb, nodes) %>%
 
 # search for names and annotations --------------------------------------------------
 
+{
 #nodes are named with the skid, use these to get neuron names from CATMAID
 #get names with the tidygraph pull function
 skids <- pull(desmo_conn_graph.tb, name)
@@ -262,6 +263,7 @@ for(i in seq_along(skids)){
   } 
   print (i)
 }
+}
 
 #add type of cell to node$group (can be used for visualisation)
 desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
@@ -274,6 +276,7 @@ desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
 
 
 #search celltype_non_neuronal annotations
+{
 celltype_id <- list()
 celltype_id_num <- list()
 annot_to_search <- c("fragmentum", "basal lamina", 
@@ -313,6 +316,7 @@ for(i in seq_along(skids)){
   } 
   print (i)
 }
+}
 
 #add type of cell to node$group (can be used for visualisation)
 desmo_conn_graph.tb <- desmo_conn_graph.tb %>%
@@ -332,6 +336,7 @@ desmo_conn_graph <- readRDS("source_data/Figure3_source_data1.rds")
 
 
 # contract vertices by cell type to make grouped graph ---------------------------------
+{
 mapping_df <- data.frame(as_tibble(desmo_conn_graph.tb %>%
             select(celltype_num) ))[,1]
 
@@ -420,7 +425,7 @@ desmo_grouped_graph <- desmo_grouped_graph %>%
   mutate(CATMAID_name = ifelse(celltype == "chaeFC-hemi_noto", 
                                "chaeFC-hemi_noto",
                                CATMAID_name))
-
+}
 # VisNetwork conversion ---------------------------------------------------
 
 {
