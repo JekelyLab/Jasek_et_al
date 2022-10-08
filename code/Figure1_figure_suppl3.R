@@ -1,13 +1,9 @@
-#  don't source the giant packages and connection script, it's too big and almost all of it is not needed
+#R code to generate Figure1 figure supplement 3 of the Jasek et al Desmosomal connectome paper
 
-library(catmaid)
-library(tidyverse)
+source("code/Packages_and_Connection.R")
 
-source("~/R/conn.R")
 
-################################################################################
-# numbers of cells with tonofibrils, desmosomes or both, by cell type
-
+# numbers of cells with tonofibrils, desmosomes or both, by cell t --------
 
 # get all skids with "black fibers" tag
 # there are also annotations for this but tags are more reliable because they
@@ -55,8 +51,6 @@ count_desmo_tono <- function(annot) {
   skids_nondesmo_nonbf <<- intersect(skids_nondesmo, skids_nonbf)
  
 }
-
-
 
 celltypes_bf_desmo <- data.frame()
 
