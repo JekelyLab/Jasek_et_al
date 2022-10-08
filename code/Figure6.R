@@ -29,9 +29,9 @@ node_name <- as_tibble(desmo_conn_graph %>%
 {
 plot_background_ventral_no_acic()
 par3d(zoom=0.55)
-  
+
 #plot all skeletons with same alpha
-skeletons <- nlapply(read.neurons.catmaid(node_name$name, pid=11), 
+skeletons <- nlapply(read.neurons.catmaid(node_name_and_degree_high_only$name, pid=11), 
                         function(x) smooth_neuron(x, sigma=6000))
 plot3d(skeletons, soma = TRUE, lwd = 1, add=T, alpha=0.6, col=Reds[8])
 plot3d(outline, add = TRUE, alpha = 0.017)
@@ -342,8 +342,6 @@ visNet <- function(nodes, edges) {visNetwork(nodes,
             opacity=0.7) %>%
   visGroups(groupname = "epithelia_cell", shape = "dot", 
             opacity=1) %>%
-  visGroups(groupname = "chaeFC", size = 30, shape = "triangle", 
-            opacity=1) %>%
   visGroups(groupname = "chaeFC-all", size = 30, shape = "triangle", 
             opacity=1) %>%
   visGroups(groupname = "acicula", size = 25, shape = "square", 
@@ -542,7 +540,7 @@ panel_degree_gr <- ggdraw() + draw_image(readPNG("pictures/Fig6_desmo_connectome
 panel_w_degree <- ggdraw() + draw_image(readPNG("pictures/Figure6_w_degree_plot.png"))
 
 panel_CA <- ggdraw() + draw_image(readPNG("pictures/Figure6_graph_acFC.png")) + 
-  draw_label("acFC & partners", x = 0.5, y = 0.97, size = 8)  + 
+  draw_label("acFC and partners", x = 0.5, y = 0.97, size = 8)  + 
   draw_label("# of desmosomes", x = 0.88, y = 0.82, size = 5) +
   draw_label("1", x = 0.88, y = 0.78, size = 5) + 
   draw_label(max(subgraph_CA$nodes$weighted_degree), x = 0.88, y = 0.74, size = 5) +
@@ -550,7 +548,7 @@ panel_CA <- ggdraw() + draw_image(readPNG("pictures/Figure6_graph_acFC.png")) +
   draw_line(x = c(0.9, 0.95), y = c(0.74, 0.74), size = 1.5, color = 'grey')
 
 panel_CC <- ggdraw() + draw_image(readPNG("pictures/Figure6_graph_chaeFC.png")) + 
-  draw_label("chaeFC & partners", x = 0.5, y = 0.97, size = 8) + 
+  draw_label("chaeFC and partners", x = 0.5, y = 0.97, size = 8) + 
   draw_label("# of desmosomes", x = 0.88, y = 0.82, size = 5) +
   draw_label("1", x = 0.84, y = 0.78, size = 5) + 
   draw_label(max(subgraph_CC$nodes$weighted_degree), x = 0.84, y = 0.74, size = 5) +
@@ -561,7 +559,7 @@ panel_acFC_partners <- ggdraw() +
   draw_image(readPNG("pictures/Fig6_sg2para_MUS_CA_1.png")) + 
   draw_label(paste("10 ", "\u00B5", "m", sep = ""), 
              x = 0.2, y = 0.2, size = 9) + 
-  draw_label("acFC & partners", x = 0.5, y = 0.97, size = 8)  + 
+  draw_label("acFC and partners", x = 0.5, y = 0.97, size = 8)  + 
   draw_label("notopodium", x = 0.82, y = 0.88, size = 7)  + 
   draw_label("neuropodium", x = 0.8, y = 0.1, size = 7)  +
   geom_segment(aes(x = 0.1,
@@ -581,7 +579,7 @@ panel_acFC_partners <- ggdraw() +
 
 panel_chaeFC_partners <- ggdraw() + 
   draw_image(readPNG("pictures/Fig6_sg2para_MUS_CC_1.png")) + 
-  draw_label("chaeFC & partners", x = 0.5, y = 0.97, size = 8) + 
+  draw_label("chaeFC and partners", x = 0.5, y = 0.97, size = 8) + 
   draw_label("notopodium", x = 0.82, y = 0.88, size = 7)  + 
   draw_label("neuropodium", x = 0.8, y = 0.1, size = 7) +
   geom_segment(aes(x = 0.1,
