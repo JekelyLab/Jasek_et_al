@@ -95,7 +95,7 @@ df[df$module==4,][2,][1]
   
 #iterate through the neurons and plot them in the colour that was used in the network plot
 {
-for (i in 1:13){
+for (i in 1:14){
       print(i)
       plot_background_ventral()
       for (j in 1:nrow(df[df$module==i,])){
@@ -165,8 +165,8 @@ plot_degree
 #plot node degree against eccentricity
 {
 as_tibble(desmo_conn_graph.tb %>%
-    filter(group %in% c("muscle", "acicula", "circumacicular",
-                        "chaeta", "circumchaetal", "hemichaetal"))) %>%
+    filter(group %in% c("muscle", "acicula", "acFC",
+                        "chaeta", "chaeFC-all"))) %>%
     ggplot(aes(x = degree, 
                y = unlist(pagerank), 
                color = group,
@@ -181,39 +181,33 @@ as_tibble(desmo_conn_graph.tb %>%
     theme_minimal_hgrid() +
     scale_color_manual(values = list(muscle = "grey50",
                                      acicula = "#CC79A7", 
-                                     circumacicular = "#0072B2", 
+                                     acFC = "#0072B2", 
                                      chaeta = "#E69F00", 
-                                     circumchaetal = 'black',
-                                     hemichaetal = 'red'),
+                                     chaeFC-all = 'black'),
                        labels = c("muscle", "acicula", 
-                                  "circumacicular", 
+                                  "acFC", 
                                   "chaeta", 
-                                  "circumchaetal", 
-                                  "hemichaetal") )  +
+                                  "chaeFC") )  +
     scale_shape_manual(values = list(muscle = 1, 
                                      acicula = 16, 
-                                     circumacicular = 15, 
+                                     acFC = 15, 
                                      chaeta = 17, 
-                                     circumchaetal = 18,
-                                     hemichaetal = 19),
+                                     chaeFC-all = 18),
                        labels = c("muscle", 
                                   "acicula", 
-                                  "circumacicular", 
+                                  "acFC", 
                                   "chaeta", 
-                                  "circumchaetal", 
-                                  "hemichaetal")) +
+                                  "chaeFC")) +
     scale_alpha_manual(values = c(muscle = 0.2, 
                                      acicula = 0.7, 
-                                     circumacicular = 0.6, 
+                                     acFC = 0.6, 
                                      chaeta = 0.3, 
-                                     circumchaetal = 0.3,
-                                     hemichaetal = 0.5),
+                                     chaeFC-all = 0.3),
                        labels = c("muscle", 
                                   "acicula", 
-                                  "circumacicular", 
+                                  "acFC", 
                                   "chaeta", 
-                                  "circumchaetal", 
-                                  "hemichaetal") ) +
+                                  "chaeFC") ) +
     theme(legend.position='right', 
           axis.title.x = element_text(size=14),
           axis.title.y = element_text(size=14),
@@ -234,25 +228,23 @@ ggsave("pictures/connectome_weighted_degree_vs_pagerank.png",
 #overwrite group with type_of_cell (class)  
 plot_modules <- as_tibble(desmo_conn_graph.tb) %>%
     group_by(partition) %>%         # Specify group indicator
-    filter(group %in%  c("muscle", "acicula", "circumacicular",
-                         "chaeta", "circumchaetal", "hemichaetal",
+    filter(group %in%  c("muscle", "acicula", "acFC",
+                         "chaeta", "chaeFC-all", 
                          "ciliated cell",
                          "epithelia_cell") ) %>%
     ggplot(aes(x = partition, fill = group)) +
     geom_bar() +
     scale_fill_manual(values = list(muscle = "grey50",
                                     acicula = "#CC79A7", 
-                                    circumacicular = "#0072B2", 
+                                    acFC = "#0072B2", 
                                     chaeta = Okabe_Ito[1], 
-                                    circumchaetal = 'black',
-                                    hemichaetal = Okabe_Ito[2],
+                                    `chaeFC-all` = 'black',
                                     `ciliated cell` = Okabe_Ito[6],
                       `epithelia_cell` = Okabe_Ito[3]),
                       labels = c("muscle", "acicula", 
-                                 "circumacicular", 
+                                 "acFC", 
                                  "chaeta", 
-                                 "circumchaetal",
-                                 "hemichaetal",
+                                 "chaeFC",
                                  "ciliated cell", "EC")  ) +
     scale_x_continuous(limits = c(0,13), breaks = c(1,2,3,4,5,6,7,8,9,10,11,12)) +
     labs(x = 'module', y = '# of cells', fill = 'cell class') +
@@ -302,11 +294,8 @@ N_cil <- dim(as_tibble(desmo_conn_graph.tb) %>%
 
 N_circ <- dim(as_tibble(desmo_conn_graph.tb) %>%
       group_by(partition) %>%         # Specify group indicator
-      filter(group %in%  c("circumacicular", "circumchaetal") ))[1]
+      filter(group %in%  c("acFC", "chaeFC-all") ))[1]
 
-N_hemi <- dim(as_tibble(desmo_conn_graph.tb) %>%
-                group_by(partition) %>%         # Specify group indicator
-                filter(group %in%  c("hemichaetal") ))[1]
 
 dim(as_tibble(desmo_conn_graph.tb) %>%
       group_by(partition) %>%         # Specify group indicator
@@ -345,9 +334,8 @@ table <- plot_ly(
                        "muscle cells",
                        "epidermal cells", 
                        "aciculo-/ chaetoblasts", 
-                       "circumacicular/-chaetal cells",
-                       "ciliary band cells",
-                       "hemichaetal"), 
+                       "acicular/chaetal follicle cells",
+                       "ciliary band cells"), 
                      c(N_node,
                        N_node-N_frag,
                        N_edge,
@@ -356,8 +344,7 @@ table <- plot_ly(
                        N_EC, 
                        N_ch_ac,
                        N_circ, 
-                       N_cil,
-                       N_hemi)),
+                       N_cil)),
       align = c("center", "center"),
       line = list(color = "black", width = 0.3),
       font = list(family = "Arial", size = 13, color = c("black"))
@@ -378,33 +365,32 @@ webshot::webshot(url="pictures/desmo_connectome_stats_table.html",
 {
 
 #read with image_read (magick package) and rotate
-img_conn <- image_rotate(image_read("pictures/Full_desmo_connectome_modules_webshot.png"), 0) %>%
-  image_flop()
+img_conn <- image_read("pictures/Full_desmo_connectome_modules_webshot.png")
 
 panel_mod1 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_1.png")) +
     draw_label("dorsolateral (l) [1]", x = 0.5, y = 0.05, size = 9)
 panel_mod2 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_2.png")) +
     draw_label("dorsolateral (r) [2]", x = 0.5, y = 0.05, size = 9)
 panel_mod3 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_3.png")) +
-    draw_label("oblique (sg3) [3]", x = 0.5, y = 0.05, size = 9)
+    draw_label("ventrolateral (l) [3]", x = 0.5, y = 0.05, size = 9)
 panel_mod4 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_4.png")) +
-    draw_label("parapodial (sg1l) [4]", x = 0.5, y = 0.05, size = 9)
+    draw_label("oblique (sg3) [4]", x = 0.5, y = 0.05, size = 9)
 panel_mod5<- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_5.png")) +
-    draw_label("ventrolateral (l) [5]", x = 0.5, y = 0.05, size = 9)
+    draw_label("oblique (sg2) [5]", x = 0.5, y = 0.05, size = 9)
 panel_mod6 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_6.png")) +
-    draw_label("oblique (sg2) [6]", x = 0.5, y = 0.05, size = 9)
+    draw_label("sg0 and head [6]", x = 0.5, y = 0.05, size = 9)
 panel_mod7 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_7.png")) +
-    draw_label("sg0 and head [7]", x = 0.5, y = 0.05, size = 9)
+    draw_label("parapodial (sg1l) [7]", x = 0.5, y = 0.05, size = 9)
 panel_mod8 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_8.png")) +
     draw_label("parapodial (sg1r) [8]", x = 0.5, y = 0.05, size = 9)
 panel_mod9 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_9.png")) +
-    draw_label("ventrolateral (r) [9]", x = 0.5, y = 0.05, size = 9)
+    draw_label("parapodial (sg3r) [9]", x = 0.5, y = 0.05, size = 9)
 panel_mod10 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_10.png")) +
-  draw_label("parapodial (sg3l) [10]", x = 0.5, y = 0.05, size = 9)
+  draw_label("ventrolateral (r) [10]", x = 0.5, y = 0.05, size = 9)
 panel_mod11 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_11.png")) +
     draw_label("parapodial (sg3r) [11]", x = 0.5, y = 0.05, size = 9)
 panel_mod12 <- ggdraw() + draw_image(readPNG("pictures/desmo_conn_module_12.png")) +
-    draw_label("parapodial (sg3r) [12]", x = 0.5, y = 0.05, size = 9)
+    draw_label("parapodial (sg3l) [12]", x = 0.5, y = 0.05, size = 9)
 
 panel_conn <- ggdraw() + draw_image(img_conn) +
     draw_label("sg0 and head", x=0.52, y = 0.9, size = 9) +
@@ -417,7 +403,7 @@ panel_conn <- ggdraw() + draw_image(img_conn) +
     draw_label("dorsolateral (l)", x=0.88, y = 0.32, size = 9)  +
     draw_label("dorsolateral (r)", x=0.17, y = 0.42, size = 9) +
     draw_label("parapodial (sg3l)", x=0.7, y = 0.15, size = 9) +
-    draw_label("parapodial (sg3r)", x=0.3, y = 0.22, size = 9) 
+    draw_label("parapodial (sg3r)", x=0.3, y = 0.22, size = 9)
   
 panel_table <- ggdraw() + draw_image(readPNG("pictures/desmo_connectome_stats_table.png"))
   
@@ -440,11 +426,11 @@ MIIIN
 #PQR#
 #PQR#
 "
-panel_A <-  panel_mod9 + panel_mod7 + panel_mod5 + 
-    panel_mod8 + panel_conn + panel_mod4 +
+panel_A <-  panel_mod3 + panel_mod6 + panel_mod10 + 
+    panel_mod8 + panel_conn + panel_mod7 +
     panel_mod2 + panel_mod1 + 
-    panel_mod11 + panel_mod6 + 
-    panel_mod12 + panel_mod3 + panel_mod10 + 
+    panel_mod5 + panel_mod4 + 
+    panel_mod9 + panel_mod11 + panel_mod12 + 
     plot_layout(design = layout_A)
 #convert into single panel
 panel_A <- ggdraw(panel_A)
