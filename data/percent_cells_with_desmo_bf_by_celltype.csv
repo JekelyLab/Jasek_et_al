@@ -16,7 +16,7 @@
 "flat glia","celltype_non_neuronal15",5,1,0,15,21
 "radial-glia-like","celltype_non_neuronal16",1,27,14,4,46
 "MVGland","celltype_non_neuronal17",0,0,0,6,6
-"microvillarCell","celltype_non_neuronal18",0,0,2,12,14
+"microvillarCell","celltype_non_neuronal18",0,0,2,11,13
 "protonephridium","celltype_non_neuronal19",1,0,0,3,4
 "nephridium","celltype_non_neuronal20",0,0,0,14,14
 "nephridiumTip","celltype_non_neuronal21",0,0,0,2,2
