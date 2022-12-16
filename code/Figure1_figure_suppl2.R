@@ -1,453 +1,399 @@
-#R code to generate figure panels for Figure 1 figure supplement 2 in Jasek et al. Platynereis desmosomal connectome paper
-#Uses Natverse and accesses the data on catmaid
-#Gaspar Jekely
+#R code to generate Figure1 figure supplement 3 of the Jasek et al Desmosomal connectome paper
 
 source("code/Packages_and_Connection.R")
 
-# retrieve cells and smooth them with sigma 6000 --------------------------
 
-{
-chaeta = nlapply(read.neurons.catmaid("^celltype_non_neuronal22$", pid=11, 
-                                      fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+# numbers of cells with tonofibrils, desmosomes or both, by cell t --------
 
-acicula = nlapply(read.neurons.catmaid("^celltype_non_neuronal23$", pid=11, 
-                                       fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
+# get all skids with "black fibers" tag
+# there are also annotations for this but tags are more reliable because they
+# will always stay with the structure when splitting neurons
 
-acFC<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal24$", pid=11, fetch.annotations = T), 
-                          function(x) smooth_neuron(x, sigma=6000))	
+tags_all <- catmaid_get_label_stats(pid = 11)
 
-chaeFC_hemi<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal25$", pid=11, fetch.annotations = T), 
-                          function(x) smooth_neuron(x, sigma=6000))	
+skids_with_bf_tags_all <- tags_all %>% 
+  filter(labelName=="black fibers") %>% 
+  select(skeletonID) %>%
+  unlist() %>%
+  unique()
 
-chaeFC_ER <-  nlapply(read.neurons.catmaid("^celltype_non_neuronal26$", pid=11, fetch.annotations = T), 
-                       function(x) smooth_neuron(x, sigma=6000))	
 
-chaeFC_noER<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal27$", pid=11, fetch.annotations = T), 
-                       function(x) smooth_neuron(x, sigma=6000))	
+# get all skids with desmosomes
+desmo_connectors_all <- catmaid_fetch(path = "11/connectors/", body = list(relation_type="desmosome_with", with_partners="true"))
 
-chaeFC_EC<-  nlapply(read.neurons.catmaid("^celltype_non_neuronal28$", pid=11, fetch.annotations = T), 
-                              function(x) smooth_neuron(x, sigma=6000))	
+partners1 <- as.data.frame(sapply(desmo_connectors_all$partners, "[[", 1))
+partners1 <- as.vector(sapply(partners1, "[[", 3))
 
-outline <- catmaid_get_volume(1, rval = c("mesh3d", "catmaidmesh", "raw"),
-                              invertFaces = T, conn = NULL, pid = 11)
-yolk <- catmaid_get_volume(4, rval = c("mesh3d", "catmaidmesh", "raw"),
-                           invertFaces = T, conn = NULL, pid = 11)
+partners2 <- as.data.frame(sapply(desmo_connectors_all$partners, "[[", 2))
+partners2 <- as.vector(sapply(partners2, "[[", 3))
+
+skids_desmo_all <- unique(c(partners1, partners2))
+
+
+# function to count number of cells with desmosomes, tonofibrils, both or neither, per celltype
+count_desmo_tono <- function(annot) {
+  annotation_query = paste("^", annot,"$", sep="")
+  cells_with_annotation <<- catmaid_query_by_annotation(annotation_query, 
+                                                       pid = 11)
+  
+  skids_with_annotation <<- cells_with_annotation$skid
+  
+  skids_desmo <<- intersect(skids_with_annotation, skids_desmo_all)
+  skids_nondesmo <<- setdiff(skids_with_annotation, skids_desmo)
+  skids_bf <<- intersect(skids_with_annotation, skids_with_bf_tags_all)
+  skids_desmo_bf <<- intersect(skids_desmo, skids_bf)
+  
+  skids_nonbf <<- setdiff(skids_with_annotation, skids_bf)
+  skids_desmo_nonbf <<- intersect(skids_desmo, skids_nonbf)
+  
+  skids_nondesmo_bf <<- intersect(skids_nondesmo, skids_bf)
+  
+  skids_nondesmo_nonbf <<- intersect(skids_nondesmo, skids_nonbf)
+ 
 }
 
-# 3d plotting -------------------------------------------------------------
+celltypes_bf_desmo <- data.frame()
 
-#help to pick some colors
-library(RColorBrewer)
-display.brewer.all(colorblindFriendly = TRUE)
-brewer.pal(9, 'Blues')
+# non-neuronal cell types excluding somatic muscles
+for (i in c(1:36, 79, 90:92)){
+  annotation = paste("celltype_non_neuronal", i, sep="")
+  count_desmo_tono(annotation)
+  
+  df <- data.frame(celltype=annotation,
+                   desmo=length(skids_desmo_nonbf),
+                   desmo_tonofibrils=length(skids_desmo_bf),
+                   tonofibrils=length(skids_nondesmo_bf),
+                   neither=length(skids_nondesmo_nonbf),
+                   total=length(skids_with_annotation))
+  celltypes_bf_desmo <- rbind(celltypes_bf_desmo, df)
+}
 
-# 3d plotting of cells
+
+celltype_names <- read.csv("data/non_neuronal_celltypes_names.csv")
+
+celltypes_bf_desmo_with_names <- right_join(celltype_names,
+                                            celltypes_bf_desmo,
+                                            by = c("CATMAID.annotation" = "celltype"))
+
+
+# somatic muscles
+len_skids_desmo_nonbf <- len_skids_desmo_bf <- len_skids_nondesmo_bf <- len_skids_nondesmo_nonbf <- len_skids_with_annotation <- 0
+for (i in c(37:78, 80:89)) {
+  annotation = paste("celltype_non_neuronal", i, sep="")
+  count_desmo_tono(annotation)
+  
+  len_skids_desmo_nonbf <- len_skids_desmo_nonbf + length(skids_desmo_nonbf)
+  len_skids_desmo_bf <- len_skids_desmo_bf + length(skids_desmo_bf)
+  len_skids_nondesmo_bf <- len_skids_nondesmo_bf + length(skids_nondesmo_bf)
+  len_skids_nondesmo_nonbf <- len_skids_nondesmo_nonbf + length(skids_nondesmo_nonbf)
+  len_skids_with_annotation <- len_skids_with_annotation + length(skids_with_annotation)
+  
+}
+df=data.frame(Name="somatic muscles",
+              CATMAID.annotation="celltype_non_neuronal37-78,80-89",
+              desmo=len_skids_desmo_nonbf,
+              desmo_tonofibrils=len_skids_desmo_bf,
+              tonofibrils=len_skids_nondesmo_bf,
+              neither=len_skids_nondesmo_nonbf,
+              total=len_skids_with_annotation)
+celltypes_bf_desmo_with_names <- rbind(celltypes_bf_desmo_with_names, df)
+
+# neurons
+len_skids_desmo_nonbf <- len_skids_desmo_bf <- len_skids_nondesmo_bf <- len_skids_nondesmo_nonbf <- len_skids_with_annotation <- 0
+for (i in c(1:200)) {
+  annotation = paste("celltype", i, sep="")
+  count_desmo_tono(annotation)
+  
+  len_skids_desmo_nonbf <- len_skids_desmo_nonbf + length(skids_desmo_nonbf)
+  len_skids_desmo_bf <- len_skids_desmo_bf + length(skids_desmo_bf)
+  len_skids_nondesmo_bf <- len_skids_nondesmo_bf + length(skids_nondesmo_bf)
+  len_skids_nondesmo_nonbf <- len_skids_nondesmo_nonbf + length(skids_nondesmo_nonbf)
+  len_skids_with_annotation <- len_skids_with_annotation + length(skids_with_annotation)
+  
+}
+df=data.frame(Name="neurons",
+              CATMAID.annotation="celltype1-200",
+              desmo=len_skids_desmo_nonbf,
+              desmo_tonofibrils=len_skids_desmo_bf,
+              tonofibrils=len_skids_nondesmo_bf,
+              neither=len_skids_nondesmo_nonbf,
+              total=len_skids_with_annotation)
+celltypes_bf_desmo_with_names <- rbind(celltypes_bf_desmo_with_names, df)
+
+
+write.csv(celltypes_bf_desmo_with_names, "data/percent_cells_with_desmo_bf_by_celltype.csv", row.names = FALSE)
+
+celltypes_bf_desmo_with_names_arranged <- arrange(celltypes_bf_desmo_with_names,
+                                                  neither/total,
+                                                  desc(desmo/total),
+                                                  desc(desmo_tonofibrils/total),
+                                                  desc(tonofibrils/total))
+
+celltypes_bf_desmo_with_names_tidy <-  celltypes_bf_desmo_with_names_arranged %>%
+  select(-total) %>%
+  pivot_longer(
+    cols = c("desmo", "desmo_tonofibrils", "tonofibrils", "neither"), 
+    names_to = "characteristic", 
+    values_to = "count")
+
+desmo_tono_graph <- celltypes_bf_desmo_with_names_tidy %>%
+  ggplot(aes(Name,
+             count,
+             fill=factor(characteristic,
+                         levels=c("desmo", "desmo_tonofibrils", "tonofibrils", "neither")))) +
+  geom_bar(position="fill",
+           stat = "identity") +
+  scale_x_discrete(limits = rev(celltypes_bf_desmo_with_names_arranged$Name)) +
+  scale_y_reverse() +
+  geom_text(aes(label = count),
+            position = "fill",
+            hjust = 1,
+            size = 2,
+            family="sans") +
+  coord_flip() + 
+  #scale_fill_manual(values = c("#E69F00","#D55E00","#CC79A7","lightgrey")) + # Okabe Ito
+  scale_fill_manual(values = c("#4477AA","#AA3377","#EE6677","lightgrey")) + # Tol
+  theme_bw() +
+  theme(axis.line = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        axis.text.x = element_blank(),
+        legend.title = element_blank(),
+        text=element_text(family="sans", size = 12))
+
+ggsave("pictures/Figure1_figure_suppl3_desmo-tono_graph.png", limitsize = FALSE, 
+       units = c("px"), desmo_tono_graph, width = 2400, height = 1600, bg = 'white')
+
+
+# visualize desmosomes, "black fibers" tags, and skeletons with "b --------
+
+desmo_connectors_all <- catmaid_fetch(path = "11/connectors/", body = list(relation_type="desmosome_with", with_partners="true"))
+
+desmo_x <- sapply(desmo_connectors_all$connectors, "[[", 2)
+desmo_y <- sapply(desmo_connectors_all$connectors, "[[", 3)
+desmo_z <- sapply(desmo_connectors_all$connectors, "[[", 4)
+
+tags_all <- catmaid_get_label_stats(pid = 11)
+
+skids_with_bf_tags_all <- tags_all %>% 
+  filter(labelName=="black fibers") %>% 
+  select(skeletonID) %>%
+  unlist() %>%
+  unique()
+
+treenodes_with_bf_tags_all <- tags_all %>% 
+  filter(labelName=="black fibers") %>% 
+  select(treenodeID) %>%
+  unlist() %>%
+  unique()
+
+
+bf_skeletons = nlapply(
+  read.neurons.catmaid(
+    "^black fibers$", 
+    pid=11, 
+    fetch.annotations = T
+  ), 
+  function(x) smooth_neuron(x, sigma=6000)
+)
+
+tags_bf_x <- NULL
+tags_bf_y <- NULL
+tags_bf_z <- NULL
+
+for (i in (1:length(treenodes_with_bf_tags_all))) {
+  print(i)
+  print(treenodes_with_bf_tags_all[i])
+  treenodes_bf_detail <- catmaid_fetch(path = "11/treenodes/compact-detail", 
+                                       body = list(treenode_ids=treenodes_with_bf_tags_all[i]))
+  tags_bf_x[i] <-  treenodes_bf_detail[[1]][[3]]
+  tags_bf_y[i] <-  treenodes_bf_detail[[1]][[4]]
+  tags_bf_z[i] <-  treenodes_bf_detail[[1]][[5]]
+}
+
+
+plot_landmarks <- function() {
+#plot meshes and background reference cells
+plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.04,
+       col="#E2E2E2") 
+plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
+       col="#E2E2E2") 
+plot3d(bounding_dots, WithConnectors = F, WithNodes = F, soma=F, lwd=1, rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1, col="white") 
+plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
+       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.6,
+       col="grey50")
+}
+
+
 nopen3d(); mfrow3d(1, 2)  #defines the two scenes
 #define the size of the rgl window, the view and zoom
-par3d(windowRect = c(20, 30, 1200, 800)); nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1))
-par3d(zoom=0.52)
+par3d(windowRect = c(0, 0, 600, 800))
+nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1)); par3d(zoom=0.5)
+#define the size of the rgl window
+par3d(windowRect = c(20, 30, 1200, 800)) 
 
+plot3d(
+  desmo_x,
+  desmo_y,
+  desmo_z,
+  add = TRUE, 
+  col=hcl.colors(20000, palette='Blues'), 
+  size=4, 
+  alpha=0.8
+)
 
-#plot meshes and background reference cells
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
-       col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-       col="#E2E2E2") 
-plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="grey60")
-plot3d(acFC, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="#FD8D3C")
+plot_landmarks()
 
 #move to next panel in rgl window
 next3d(clear=F)
+
 #define view
 nview3d("right", extramat=rotationMatrix(pi, 0, 1, 1))
 #define a sagittal clipping plane and re-zoom
 clipplanes3d(1, 0, 0.16, -75700)
-par3d(zoom=0.52)
+par3d(zoom=0.55)
 
-#plot 
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
-       col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-       col="#E2E2E2") 
-plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="grey60")
-plot3d(acFC, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="#FD8D3C")
+plot3d(
+  desmo_x,
+  desmo_y,
+  desmo_z,
+  add = TRUE, 
+  col=hcl.colors(20000, palette='Blues'), 
+  size=4, 
+  alpha=0.8
+)
 
-#make a snapshot to the working directory
-rgl.snapshot("pictures/acicula_acFC.png")
+plot_landmarks()
 
-# plot chaetae with chaeFC ---------------------------------------------
-
-#help to pick some colors
-brewer.pal(9, 'Set3')
-
-#move to next panel in rgl window
+#define the lighting
+clear3d(type = "lights"); 
+rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rgl.light(-60, -30, specular = "gray5")
+#set background color
+bg3d("gray100")
 next3d(clear=F)
-#clear it
-clear3d()
-#plot meshes and background reference cells
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
-       col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-       col="#E2E2E2") 
-plot3d(chaeta, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="grey60")
-plot3d(chaeFC_hemi, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="#FD8D3C")
-plot3d(chaeFC_ER, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="#80B1D3")
-plot3d(chaeFC_noER, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="#B3DE69")
-plot3d(chaeFC_EC, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="#FCCDE5")
+rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rgl.light(-60, -30, specular = "gray5")
 
-#move to next panel in rgl window
-next3d(clear=F)
-#define view
-nview3d("right", extramat=rotationMatrix(pi, 0, 1, 1))
-#define a sagittal clipping plane and re-zoom
-clipplanes3d(1, 0, 0.16, -75700)
-par3d(zoom=0.52)
+rgl.snapshot("pictures/Fig1_suppl3_desmosomes.png")
 
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.05,
-       col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-       col="#E2E2E2") 
-plot3d(chaeta, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="grey60")
-plot3d(chaeFC_hemi, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="#FD8D3C")
-plot3d(chaeFC_ER, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="#80B1D3")
-plot3d(chaeFC_noER, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="#B3DE69")
-plot3d(chaeFC_EC, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="#FCCDE5")
+next3d(clear = T)
 
+plot3d(
+  tags_bf_x,
+  tags_bf_y,
+  tags_bf_z,
+  add = TRUE, 
+  col=hcl.colors(1, palette='Reds'), 
+  size=5, 
+  alpha=0.9
+)
 
-#make a snapshot to the working directory
-rgl.snapshot("pictures/chaeta_chaeFC.png")
+plot3d(
+  bf_skeletons, 
+  soma=T, 
+  lwd=2,
+  add=T,
+  alpha=0.2,
+  col="light pink"
+) 
+plot_landmarks()
 
+next3d(clear = T)
 
-#######################################################
-#display desmosomes
+plot3d(
+  tags_bf_x,
+  tags_bf_y,
+  tags_bf_z,
+  add = TRUE, 
+  col=hcl.colors(1, palette='Reds'), 
+  size=5, 
+  alpha=0.9
+)
 
-# 3d plotting of cells
-nopen3d(); mfrow3d(1, 1)  #defines the two scenes
-#define the size of the rgl window, the view and zoom
-par3d(windowRect = c(20, 30, 400, 198)); nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1))
-par3d(zoom=0.16)
-clipplanes3d(1, 0, 0.16, -75700)
-rgl.bg(color='grey80')
+plot3d(
+  bf_skeletons, 
+  soma=T, 
+  lwd=2,
+  add=T,
+  alpha=0.2,
+  col="light pink"
+) 
 
-#plot aciculae
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-       col="#E2E2E2") 
-plot3d(acicula, WithConnectors = T, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="grey10")
-plot3d(acFC, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
-       col="#FD8D3C")
-rgl.snapshot("pictures/acicula_acFC_desmosomes_closeup.png")
+plot_landmarks()
 
-clear3d()
+rgl.snapshot("pictures/Fig1_suppl3_tonofibrils.png")
 
-#plot aciculae as reference, but without connectors
-plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="grey10")
+next3d(clear = F)
 
-#plot chaetae and others with connectors
-plot3d(chaeta, WithConnectors = T, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col="grey60")
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-       col="#E2E2E2") 
-clipplanes3d(1, 0, 0.16, -79700)
+plot3d(
+  desmo_x,
+  desmo_y,
+  desmo_z,
+  add = TRUE, 
+  col=hcl.colors(20000, palette='Blues'), 
+  size=4, 
+  alpha=0.8
+)
 
-plot3d(chaeFC_hemi, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
-       col="#FD8D3C")
-plot3d(chaeFC_ER, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
-       col="#80B1D3")
-plot3d(chaeFC_noER, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
-       col="#B3DE69")
-plot3d(chaeFC_EC, WithConnectors = T, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.5,
-       col="#FCCDE5")
-rgl.snapshot("pictures/chaeta_chaeFC_desmosomes_closeup.png")
+next3d(clear = F)
+
+plot3d(
+  desmo_x,
+  desmo_y,
+  desmo_z,
+  add = TRUE, 
+  col=hcl.colors(20000, palette='Blues'), 
+  size=4, 
+  alpha=0.8
+)
+
+rgl.snapshot("pictures/Fig1_suppl3_tonofibrils-desmosomes.png")
 close3d()
-close3d()
+# assemble figure ---------------------------------------------------------
 
+{
+panel_A <- ggdraw() + draw_image(
+  readPNG("pictures/Figure1_figure_suppl3_desmo-tono_graph.png")
+) 
 
-# retrieve and plot the other cell types and basal lamina from  --------
-
-annot_desm_non_muscle <- catmaid_get_annotations_for_skeletons('^desmosome_connectome_non_muscle$', pid = 11)
-head(annot_desm_non_muscle)
-nlapply(read.neurons.catmaid("^bounding_dots$", pid=11, 
-                             fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
-cilia_with_desm <- nlapply(read.neurons.catmaid(annot_desm_non_muscle$skid[annot_desm_non_muscle$annotation=='ciliated cell'],
-                                                pid=11), function(x) smooth_neuron(x, sigma=6000))
-EC_with_desm <- nlapply(read.neurons.catmaid(annot_desm_non_muscle$skid[annot_desm_non_muscle$annotation=='celltype_non_neuronal90'], 
-                                             pid=11), function(x) smooth_neuron(x, sigma=6000))
-glia_with_desm <- nlapply(read.neurons.catmaid(annot_desm_non_muscle$skid[annot_desm_non_muscle$annotation=='glia'], 
-                                               pid=11), function(x) smooth_neuron(x, sigma=6000))
-bl_with_desm <- nlapply(read.neurons.catmaid(annot_desm_non_muscle$skid[annot_desm_non_muscle$annotation=='basal lamina'], 
-                                             pid=11), function(x) smooth_neuron(x, sigma=6000))
-pigment_with_desm <- nlapply(read.neurons.catmaid(annot_desm_non_muscle$skid[annot_desm_non_muscle$annotation=='pigment cell'], 
-                                                  pid=11), function(x) smooth_neuron(x, sigma=6000))
-
-length(annot_desm_non_muscle$skid[annot_desm_non_muscle$annotation=='ciliated cell'])
-
-#plotting
-# 3d plotting of cells
-nopen3d(); mfrow3d(1, 1)  #defines the two scenes
-#define the size of the rgl window, the view and zoom
-par3d(windowRect = c(20, 30, 600, 800)); nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1))
-par3d(zoom=0.52)
-rgl.bg(color='white')
-#plot ciliated cells from desmosomal connectome
-clear3d()
-#plot meshes and background reference cells
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.02,
-       col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-       col="#E2E2E2") 
-plot3d(cilia_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col=hcl.colors(length(cilia_with_desm), 'Reds'))
-rgl.snapshot("pictures/cilia_with_desm.png")
-
-
-#plot glia cells from desmosomal connectome
-clear3d()
-#plot meshes and background reference cells
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.02,
-         col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-         col="#E2E2E2") 
-plot3d(glia_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-       rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-       col=hcl.colors(length(glia_with_desm), 'Blues'))
-rgl.snapshot("pictures/glia_with_desm.png")
-
-
-
-
-#plot EC cells from desmosomal connectome
-clear3d()
-#plot meshes and background reference cells
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.02,
-         col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-         col="#E2E2E2") 
-plot3d(EC_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-         col=hcl.colors(length(EC_with_desm), 'Purples 3'))
-rgl.snapshot("pictures/EC_with_desm.png")
-
-
-#plot pigment cells from desmosomal connectome
-clear3d()
-#plot meshes and background reference cells
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.02,
-         col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-         col="#E2E2E2") 
-plot3d(pigment_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-         col=hcl.colors(length(pigment_with_desm), 'Teal'))
-rgl.snapshot("pictures/pigment_with_desm.png")
-
-
-
-#plot basal lamina from desmosomal connectome
-clear3d()
-#plot meshes and background reference cells
-plot3d(outline, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.02,
-         col="#E2E2E2") 
-plot3d(yolk, WithConnectors = F, WithNodes = F, soma=F, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=0.07,
-         col="#E2E2E2") 
-plot3d(bl_with_desm, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
-         rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
-         col=hcl.colors(length(bl_with_desm), 'Spectral'))
-rgl.snapshot("pictures/bl_with_desm.png")
-close3d()
-
-# assemble figure --------------------------------------------------------
-
-panel_acic_circ <- ggdraw() + draw_image(readPNG("pictures/acicula_acFC.png")) +  
-  draw_label("aciculae", x = 0.4, y = 0.99, size = 10, hjust = 0) +
-  draw_label("acFC", x = 0.4, y = 0.94, size = 10, hjust = 0, color = '#FD8D3C') +
-  geom_segment(aes(x = 0.05,
-                 y = 0.95,
-                 xend = 0.05,
-                 yend = 0.87),
-             arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) +
-  geom_segment(aes(x = 0.05,
-                   y = 0.87,
-                   xend = 0.05,
-                   yend = 0.95),
-               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) + 
-  draw_label("a", x = 0.05, y = 0.98, size = 8) +
-  draw_label("p", x = 0.05, y = 0.84, size = 8) +
-  geom_segment(aes(x = 0.85,
-                   y = 0.95,
-                   xend = 0.93,
-                   yend = 0.95),
-               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) +
-  geom_segment(aes(x = 0.93,
-                   y = 0.95,
-                   xend = 0.85,
-                   yend = 0.95),
-               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) + 
-  draw_label("v", x = 0.82, y = 0.95, size = 8) +
-  draw_label("d", x = 0.96, y = 0.95, size = 8) 
-
-panel_chae_circ <- ggdraw() + 
-  draw_image(readPNG("pictures/chaeta_chaeFC.png")) + 
-  draw_label("chaetae", x = 0.4, y = 0.99, size = 10, hjust = 0) +
-  draw_label("chaeFC-hemi", x = 0.4, y = 0.95, size = 10, 
-             hjust = 0, color = '#FD8D3C') +
-  draw_label("chaeFC-ER", x = 0.4, y = 0.91, size = 10, 
-             hjust = 0, color = '#80B1D3') +
-  draw_label("chaeFC-noER", x = 0.4, y = 0.87, size = 10, 
-             hjust = 0, color = '#B3DE69') +
-  draw_label("chaeFC-EC", x = 0.4, y = 0.83, size = 10, 
-             hjust = 0, color = '#FCCDE5')  +
-  draw_label("neuropodia", x = 0.54, y = 0.68, size = 10)  +
-  draw_label("notopodia", x = 0.88, y = 0.64, size = 10)  +
-  geom_segment(aes(x = 0.05,
-                   y = 0.95,
-                   xend = 0.05,
-                   yend = 0.87),
-               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) +
-  geom_segment(aes(x = 0.05,
-                   y = 0.87,
-                   xend = 0.05,
-                   yend = 0.95),
-               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) + 
-  draw_label("a", x = 0.05, y = 0.98, size = 8) +
-  draw_label("p", x = 0.05, y = 0.84, size = 8) +
-  geom_segment(aes(x = 0.85,
-                   y = 0.95,
-                   xend = 0.93,
-                   yend = 0.95),
-               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) +
-  geom_segment(aes(x = 0.93,
-                   y = 0.95,
-                   xend = 0.85,
-                   yend = 0.95),
-               arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) + 
-  draw_label("v", x = 0.82, y = 0.95, size = 8) +
-  draw_label("d", x = 0.96, y = 0.95, size = 8) +
-  draw_line(x = c(0.53, 0.63), y = c(0.65, 0.62), size = 0.2) +
-  draw_line(x = c(0.53, 0.62), y = c(0.65, 0.5), size = 0.2) +
-  draw_line(x = c(0.53, 0.61), y = c(0.65, 0.3), size = 0.2) +
-  draw_line(x = c(0.87, 0.76), y = c(0.6, 0.62), size = 0.2) +
-  draw_line(x = c(0.87, 0.75), y = c(0.6, 0.5), size = 0.2) +
-  draw_line(x = c(0.87, 0.74), y = c(0.6, 0.3), size = 0.2) +
-  draw_line(x = c(0.2, 0.45, 0.45, 0.2, 0.2), 
-            y = c(0.57, 0.57, 0.41, 0.41, 0.57), size = 0.3, linetype = 2)
+panel_B <- ggdraw() + draw_image(
+  readPNG("pictures/Fig1_suppl3_tonofibrils.png")) +
+  draw_label("ventral view", x = 0.15, y = 0.95, size = 9) +
+  draw_label("left view", x = 0.85, y = 0.95, size = 9) +
+  draw_label("tonofibrils", x = 0.5, y = 0.97, size = 11) 
   
+panel_C <- ggdraw() + draw_image(
+  readPNG("pictures/Fig1_suppl3_desmosomes.png"))  +
+  draw_label("ventral view", x = 0.15, y = 0.95, size = 9) +
+  draw_label("left view", x = 0.85, y = 0.95, size = 9) +
+  draw_label("desmosomes", x = 0.5, y = 0.97, size = 11)
 
+panel_D <- ggdraw() + draw_image(
+  readPNG("pictures/Fig1_suppl3_tonofibrils-desmosomes.png")) +
+  draw_label("ventral view", x = 0.15, y = 0.95, size = 9) +
+  draw_label("left view", x = 0.85, y = 0.95, size = 9) 
 
-panel_acic_circ_close <- ggdraw() + 
-  draw_image(readPNG("pictures/acicula_acFC_desmosomes_closeup.png")) + 
-  draw_label("aciculae", x = 0.97, y = 0.8, hjust = 1, size = 10) +
-  draw_label("acFC", x = 0.97, y = 0.72, size = 10, 
-       hjust = 1, color = '#FD8D3C')  +
-  draw_label("desmosomes", x = 0.97, y = 0.64, size = 10, 
-             hjust = 1, color = '#FFFFFF') 
-panel_chae_circ_close <- ggdraw() + 
-  draw_image(readPNG("pictures/chaeta_chaeFC_desmosomes_closeup.png")) + 
-  draw_label("aciculae", x = 0.97, y = 0.82, hjust = 1, size = 10) +
-  draw_label("chaetae", x = 0.97, y = 0.74, size = 10, 
-             hjust = 1, color = 'grey40')  +
-  draw_label("desmosomes", x = 0.97, y = 0.66, size = 10, 
-             hjust = 1, color = '#FFFFFF') 
-
-panel_close <- ggdraw(panel_acic_circ_close / panel_chae_circ_close)
-
-panel_cilia <- ggdraw() + 
-  draw_image(readPNG("pictures/cilia_with_desm.png")) + 
-  draw_label("ciliary band cells", x = 0.45, y = 0.99, size = 10) 
-
-panel_glia <- ggdraw() + 
-  draw_image(readPNG("pictures/glia_with_desm.png")) + 
-  draw_label("glia cells", x = 0.45, y = 0.99, size = 10) 
-
-panel_EC <- ggdraw() + 
-  draw_image(readPNG("pictures/EC_with_desm.png")) + 
-  draw_label("epidermal cells", x = 0.45, y = 0.99, size = 10)
-panel_pigment <- ggdraw() + 
-  draw_image(readPNG("pictures/pigment_with_desm.png")) + 
-  draw_label("pigment cells", x = 0.45, y = 0.99, size = 10)
-panel_bl <- ggdraw() + 
-  draw_image(readPNG("pictures/bl_with_desm.png")) + 
-  draw_label("basal lamina fragments", x = 0.45, y = 0.99, size = 10)
-
-
+  
 layout <- "
-AAAAAAABBBBBBBCCCCCC
-AAAAAAABBBBBBBCCCCCC
-EEEEFFFFGGGGHHHHIIII
+AB
+CD
 "
 
-Figure1_figSuppl2 <- panel_acic_circ + panel_chae_circ + panel_close +
-  panel_cilia +  panel_EC + panel_glia + panel_pigment + panel_bl +
-  plot_layout(design = layout, 
-              guides = 'collect', 
-              tag_level = 'new',
-              heights = c(0.5, 0.5, 1)) +
+Figure1_suppl3 <- panel_A + panel_B + 
+  panel_C + panel_D +
+  plot_layout(design = layout) +
   plot_annotation(tag_levels = 'A') & 
   theme(plot.tag = element_text(size = 12, face='plain'))
-
-
-ggsave("figures/Figure1_figSuppl2.pdf", limitsize = FALSE, 
-       units = c("px"), Figure1_figSuppl2, width = 3600, height = 2100)
-
-
-ggsave("figures/Figure1_figSuppl2.png", limitsize = FALSE, 
-       units = c("px"), Figure1_figSuppl2, width = 3600, height = 2100, bg = 'white')
-
+  
+  
+ggsave("figures/Figure1_figure_supplement3.pdf", limitsize = FALSE, 
+         units = c("px"), Figure1_suppl3, width = 2400, height = 1600)
+  
+ggsave("figures/Figure1_figure_supplement3.png", limitsize = FALSE, 
+         units = c("px"), Figure1_suppl3, width = 2400, height = 1600, bg='white')
+}
