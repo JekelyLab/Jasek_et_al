@@ -1,4 +1,4 @@
-#R code to generate Figure1 figure supplement 3 of the Jasek et al Desmosomal connectome paper
+#R code to generate Figure1 figure supplement 2 of the Jasek et al Desmosomal connectome paper
 
 source("code/Packages_and_Connection.R")
 
@@ -165,7 +165,7 @@ desmo_tono_graph <- celltypes_bf_desmo_with_names_tidy %>%
         legend.title = element_blank(),
         text=element_text(family="sans", size = 12))
 
-ggsave("pictures/Figure1_figure_suppl3_desmo-tono_graph.png", limitsize = FALSE, 
+ggsave("pictures/Figure1_figure_suppl2_desmo-tono_graph.png", limitsize = FALSE, 
        units = c("px"), desmo_tono_graph, width = 2400, height = 1600, bg = 'white')
 
 
@@ -279,7 +279,7 @@ bg3d("gray100")
 next3d(clear=F)
 rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rgl.light(-60, -30, specular = "gray5")
 
-rgl.snapshot("pictures/Fig1_suppl3_desmosomes.png")
+rgl.snapshot("pictures/Fig1_suppl2_desmosomes.png")
 
 next3d(clear = T)
 
@@ -326,7 +326,7 @@ plot3d(
 
 plot_landmarks()
 
-rgl.snapshot("pictures/Fig1_suppl3_tonofibrils.png")
+rgl.snapshot("pictures/Fig1_suppl2_tonofibrils.png")
 
 next3d(clear = F)
 
@@ -352,29 +352,29 @@ plot3d(
   alpha=0.8
 )
 
-rgl.snapshot("pictures/Fig1_suppl3_tonofibrils-desmosomes.png")
+rgl.snapshot("pictures/Fig1_suppl2_tonofibrils-desmosomes.png")
 close3d()
 # assemble figure ---------------------------------------------------------
 
 {
 panel_A <- ggdraw() + draw_image(
-  readPNG("pictures/Figure1_figure_suppl3_desmo-tono_graph.png")
+  readPNG("pictures/Figure1_figure_suppl2_desmo-tono_graph.png")
 ) 
 
 panel_B <- ggdraw() + draw_image(
-  readPNG("pictures/Fig1_suppl3_tonofibrils.png")) +
+  readPNG("pictures/Fig1_suppl2_tonofibrils.png")) +
   draw_label("ventral view", x = 0.15, y = 0.95, size = 9) +
   draw_label("left view", x = 0.85, y = 0.95, size = 9) +
   draw_label("tonofibrils", x = 0.5, y = 0.97, size = 11) 
   
 panel_C <- ggdraw() + draw_image(
-  readPNG("pictures/Fig1_suppl3_desmosomes.png"))  +
+  readPNG("pictures/Fig1_suppl2_desmosomes.png"))  +
   draw_label("ventral view", x = 0.15, y = 0.95, size = 9) +
   draw_label("left view", x = 0.85, y = 0.95, size = 9) +
   draw_label("desmosomes", x = 0.5, y = 0.97, size = 11)
 
 panel_D <- ggdraw() + draw_image(
-  readPNG("pictures/Fig1_suppl3_tonofibrils-desmosomes.png")) +
+  readPNG("pictures/Fig1_suppl2_tonofibrils-desmosomes.png")) +
   draw_label("ventral view", x = 0.15, y = 0.95, size = 9) +
   draw_label("left view", x = 0.85, y = 0.95, size = 9) 
 
@@ -384,16 +384,16 @@ AB
 CD
 "
 
-Figure1_suppl3 <- panel_A + panel_B + 
+Figure1_suppl2 <- panel_A + panel_B + 
   panel_C + panel_D +
   plot_layout(design = layout) +
   plot_annotation(tag_levels = 'A') & 
   theme(plot.tag = element_text(size = 12, face='plain'))
   
   
-ggsave("figures/Figure1_figure_supplement3.pdf", limitsize = FALSE, 
-         units = c("px"), Figure1_suppl3, width = 2400, height = 1600)
+ggsave("figures/Figure1_figure_supplement2.pdf", limitsize = FALSE, 
+         units = c("px"), Figure1_suppl2, width = 2400, height = 1600)
   
-ggsave("figures/Figure1_figure_supplement3.png", limitsize = FALSE, 
-         units = c("px"), Figure1_suppl3, width = 2400, height = 1600, bg='white')
+ggsave("figures/Figure1_figure_supplement2.png", limitsize = FALSE, 
+         units = c("px"), Figure1_suppl2, width = 2400, height = 1600, bg='white')
 }

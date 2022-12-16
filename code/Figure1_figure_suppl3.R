@@ -1,4 +1,4 @@
-#R code to generate figure panels for Figure 1 figure supplement 2 in Jasek et al. Platynereis desmosomal connectome paper
+#R code to generate figure panels for Figure 1 figure supplement 3 in Jasek et al. Platynereis desmosomal connectome paper
 #Uses Natverse and accesses the data on catmaid
 #Gaspar Jekely
 
@@ -434,7 +434,7 @@ AAAAAAABBBBBBBCCCCCC
 EEEEFFFFGGGGHHHHIIII
 "
 
-Figure1_figSuppl2 <- panel_acic_circ + panel_chae_circ + panel_close +
+Figure1_figSuppl3 <- panel_acic_circ + panel_chae_circ + panel_close +
   panel_cilia +  panel_EC + panel_glia + panel_pigment + panel_bl +
   plot_layout(design = layout, 
               guides = 'collect', 
@@ -444,10 +444,10 @@ Figure1_figSuppl2 <- panel_acic_circ + panel_chae_circ + panel_close +
   theme(plot.tag = element_text(size = 12, face='plain'))
 
 
-ggsave("figures/Figure1_figSuppl2.pdf", limitsize = FALSE, 
-       units = c("px"), Figure1_figSuppl2, width = 3600, height = 2100)
+ggsave("figures/Figure1_figSuppl3.pdf", limitsize = FALSE, 
+       units = c("px"), Figure1_figSuppl3, width = 3600, height = 2100)
 
 
-ggsave("figures/Figure1_figSuppl2.png", limitsize = FALSE, 
-       units = c("px"), Figure1_figSuppl2, width = 3600, height = 2100, bg = 'white')
+ggsave("figures/Figure1_figSuppl3.png", limitsize = FALSE, 
+       units = c("px"), Figure1_figSuppl3, width = 3600, height = 2100, bg = 'white')
 
