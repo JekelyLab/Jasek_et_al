@@ -1,234 +1,127 @@
-#code for Video7 of the Jasek et al 2021 desmosomal connectome paper
-#Gaspar Jekely
+#R code to generate Video7 (related to Figure8-figure-supplement1) of the Jasek et al. Platynereis desmosomal connectome paper
+#Uses Natverse and accesses the data on catmaid
+#Gaspar Jekely 
 
 source("code/Packages_and_Connection.R")
 
-#read the tibble with desmosome ids, xyz coordinates and partners 1 and 2
-desmo_with_partners <- read_csv("data/desmo_with_partners.csv")
+# Motoneuron plotting -------------------------------------------------------------
 
-celltype_names <- read.csv("data/non_neuronal_celltypes_names.csv")
+MN_names <- c("MNbow", "MNacicX","MNchae", "vMN1-2","MNwave","MNbiramous", "MNhose", "MNcrab", "MNladder", "MNspider type1", "MNspider type2","MNring")
+annotations_MN <- c("celltype67", "celltype69","celltype165","vMN1-2", "celltype68", "celltype63", "celltype66", "celltype65", "celltype151","celltype61","celltype62","celltype64")
+annotations_MN_mus <- c("MNbow_mus", "MNacicX_MUS","MNche_mus","vMN1-2_mus","MNwave_mus","MNbiramous_mus", "MNhose_mus","MNcrab_mus", "MNladder_mus","MNspider_type1_mus",
+                        "MNspider_type2_mus","MNring_mus")
+annotations_MN_mus_des <- c("MNbow_mus_des", "MNacicX_MUS_des","MNche_mus_des","vMN1-2_mus_des","MNwave_mus_des", "MNbiramous_mus_des", "MNhose_mus_des","MNcrab_mus_des", "MNladder_mus_des",
+                            "MNspider_type1_mus_des","MNspider_type2_mus_des","MNring_mus_des")
+colors <- hcl.colors(40, palette = "Blues 3", rev=F)
+colors <- colors[15:40]
+Blues <- brewer.pal(9, 'Blues')[4:9]
+Reds <- brewer.pal(9, 'Reds')[3:8]
+Greens <- brewer.pal(9, 'Greens')[3:8]
 
-#define function to read two cell classes and plot desmosomes between them and 
-#skeletons from the two cell classes that are connected
-plot_two_cell_types_with_desmo <- function(
-  annotation1, 
-  annotation2, 
-  color1, 
-  color2, 
-  soma1, 
-  soma2) {
-  annot1 <- paste("annotation:", annotation1, sep = "")
-  annot2 <- paste("annotation:", annotation2, sep = "")
-  celltype1_skids <- catmaid_skids(annot1, pid=11)
-  celltype2_skids <- catmaid_skids(annot2, pid=11)
-  
-  celltype1_obP_des <- desmo_with_partners %>%
-    filter(partner1 %in% celltype1_skids & partner2 %in% celltype2_skids |
-          partner2 %in% celltype1_skids & partner1 %in% celltype2_skids)
-  
-  skids1 <- celltype1_obP_des %>%
-    filter(partner1 %in% celltype1_skids) %>%
-    select(partner1) %>%
-    pull()
-  
-  skids2 <- celltype1_obP_des %>%
-    filter(partner2 %in% celltype1_skids) %>%
-    select(partner2) %>%
-    pull()
-  
-  celltype1_restricted_skids <- c(skids1, skids2)
-  
-  skids1b <- celltype1_obP_des %>%
-    filter(partner1 %in% celltype2_skids) %>%
-    select(partner1) %>%
-    pull()
-  
-  skids2b <- celltype1_obP_des %>%
-    filter(partner2 %in% celltype2_skids) %>%
-    select(partner2) %>%
-    pull()
-  
-  celltype2_restricted_skids <- c(skids1b, skids2b)
-  
-  #get xyz coordinates
-  x <- unlist(celltype1_obP_des %>% select(x))
-  y <- unlist(celltype1_obP_des %>% select(y))
-  z <- unlist(celltype1_obP_des %>% select(z))
-  
-  #read skeletons based on skids
-  celltype1 <- nlapply(
-    read.neurons.catmaid(
-      unique(
-        celltype1_restricted_skids
-        ), 
-      pid=11),
-    function(x) smooth_neuron(x, sigma=6000)
-    )
-  celltype2 <- nlapply(
-    read.neurons.catmaid(
-      unique(
-        celltype2_restricted_skids
-        ), 
-      pid=11),
-    function(x) smooth_neuron(x, sigma=6000))
-  
-  #plot the shared desmosomes by xyz coordinates 
-  plot3d(x, y, z, add = TRUE, col='red', size=6, alpha=1)
-  
-  #plot the two cell groups
-  plot3d(
-    celltype1, 
-    add = TRUE, 
-    soma = soma1, 
-    col=color1, 
-    lw=3, 
-    alpha=0.4
-    )
-  plot3d(
-    celltype2, 
-    add = TRUE, 
-    soma = soma2, 
-    col=color2, 
-    lw=3, 
-    alpha=0.5
-    )
+plot_background_ventral_no_acic()
+par3d(zoom=0.57)
 
+for (i in c(1:12)){
+  clear3d() 
+  #read skeletons from catmaid by annotation
+  MN = nlapply(read.neurons.catmaid(annotations_MN[i], pid=11, 
+                                    fetch.annotations = F), function(x) smooth_neuron(x, sigma=6000))
+  MN_mus = nlapply(read.neurons.catmaid(annotations_MN_mus[i], pid=11, 
+                                        fetch.annotations = F), function(x) smooth_neuron(x, sigma=6000))
+  MN_mus_des  = nlapply(read.neurons.catmaid(annotations_MN_mus_des[i], pid=11, 
+                                             fetch.annotations = F), function(x) smooth_neuron(x, sigma=6000))
+  plot3d(yolk, lwd=2,
+         add=T,alpha=0.05,
+         col="#E2E2E2") 
+  plot3d(outline, add=T,alpha=0.03,
+         col="#E2E2E2") 
+  plot3d(bounding_dots, WithConnectors = F, WithNodes = F, soma=F, lwd=1, rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1, col="white") 
+  plot3d(MN, soma=T, lwd=4,
+         add=T, alpha=1,
+         col=sample(Blues, length(MN), replace = TRUE)) 
+  #add a text label
+  texts3d(47000,0, 0, text = MN_names[i], col= "Black", cex = 1.5)
+  rgl.snapshot(paste("videos/Video7_A", i, MN_names[i], "_1.png", sep=""))
+  #plot muscles clustered by nblast clusters
+  plot3d(MN_mus, col=sample(Reds, length(MN_mus), replace = TRUE), 
+         soma=F, add=T, lwd=3, alpha=0.7)
+  #add a text label
+  texts3d(47000,0, 7000, text = paste(MN_names[i], " muscle targets"), col= "Red", cex = 1.5)
+  rgl.snapshot(paste("videos/Video7_A", i, MN_names[i], "_2.png", sep=""))
+  plot3d(MN_mus_des, soma=T, lwd=2,
+         alpha=0.6,
+         col=sample(Greens, length(MN_mus_des), replace = TRUE))
+  #add a text label
+  texts3d(47000,0, 14000, text = "desmosomal targets", col=hcl.colors(1, palette='YlGn'), cex = 1.5)
+  par3d(zoom=0.57)
+  rgl.snapshot(paste("videos/Video7_A", i, MN_names[i], "_3.png", sep=""))
+  
 }
 
+#plot all
+clear3d() 
+plot3d(yolk, lwd=2,
+       add=T,alpha=0.05,
+       col="#E2E2E2") 
 
-plot_connected_desmo <- function(
-  celltype1, 
-  celltype2,
-  celltype3, 
-  textpos1, 
-  textpos2, 
-  textpos3) {
-  #background plot
-  plot_background_ventral_no_acic()
-  annot1 <- celltype_names[celltype_names$Name == celltype1, "CATMAID.annotation"]
-  annot2 <- celltype_names[celltype_names$Name == celltype2, "CATMAID.annotation"]
-  annot3 <- celltype_names[celltype_names$Name == celltype3, "CATMAID.annotation"]
-  
-  plot_two_cell_types_with_desmo(
-    annot1,
-    annot2,
-    Okabe_Ito[1], 
-    Okabe_Ito[5], 
-    FALSE, 
-    FALSE
-    )
-  texts3d(textpos1, text = celltype1, col=Okabe_Ito[1], cex = 2)
-  texts3d(textpos2, text = celltype2, col=Okabe_Ito[5], cex = 2)
-  
 
-  plot_two_cell_types_with_desmo(
-    annot3, 
-    annot2,
-    Okabe_Ito[7], 
-    Okabe_Ito[5],
-    TRUE, 
-    FALSE
-    )
-  texts3d(textpos3, text = celltype3, col=Okabe_Ito[7], cex = 2)
+for (i in c(1:12)){
+  #read skeletons from catmaid by annotation
+  MN = nlapply(read.neurons.catmaid(annotations_MN[i], pid=11, 
+                                    fetch.annotations = F), function(x) smooth_neuron(x, sigma=6000))
+  MN_mus = nlapply(read.neurons.catmaid(annotations_MN_mus[i], pid=11, 
+                                        fetch.annotations = F), function(x) smooth_neuron(x, sigma=6000))
+  MN_mus_des  = nlapply(read.neurons.catmaid(annotations_MN_mus_des[i], pid=11, 
+                                             fetch.annotations = F), function(x) smooth_neuron(x, sigma=6000))
+  plot3d(MN, soma=T, lwd=4, WithConnectors = FALSE,
+         add=T, alpha=1,
+         col=sample(Blues, length(MN), replace = TRUE)) 
+  plot3d(bounding_dots, WithConnectors = F, WithNodes = F, soma=F, lwd=1, rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1, col="white") 
+  rgl.snapshot(paste("videos/Video7_B", i, MN_names[i], "_all1.png", sep=""))
+  #plot muscles clustered by nblast clusters
+  plot3d(MN_mus, col=sample(Reds, length(MN_mus), replace = TRUE), 
+         soma=F, add=T, lwd=3, alpha=1)
+  rgl.snapshot(paste("videos/Video7_B", i, MN_names[i], "_all2.png", sep=""))
+  plot3d(MN_mus_des, soma=T, lwd=2,
+         alpha=1,
+         col=sample(Greens, length(MN_mus_des), replace = TRUE))
+  par3d(zoom=0.57)
+  rgl.snapshot(paste("videos/Video7_B", i, MN_names[i], "_all3.png", sep=""))
   
-  #plot outline and connectome as anatomical ref
-#  plot3d(connectome, add=T, alpha=0.1, lw = 1, col = "black") 
-  plot3d(outline, add = T, alpha = 0.02, col = "#E2E2E2") 
-  
-  #snapshot with text
-  for (j in 1:8) {
-    rgl.snapshot(paste("videos/Video7_desmo_partners_", celltype1, celltype2, celltype3, "_first_", j, ".png", sep = ""))
-  }
-  
-  #get the ids of text objects from the rgl window with ids3d()
-  text_ids <- ids3d() %>% 
-    as_tibble() %>%
-    filter(type == 'text') %>%
-    select(id) %>%
-    pull()
-  
-  #remove text
-  rgl.pop(type = 'shapes', id = text_ids)
-  
-  #full rotation with extramat - also works with many skeletons with alpha<1
-  for (i in 100:200){
-    nview3d("ventral", extramat=rotationMatrix((i-100)*2*pi/100, 0, 0, 1))
-    #save a snapshot in the working directory
-    rgl.snapshot(paste("videos/Video7_desmo_partners_", celltype1, celltype2, celltype3, "_spin_", i, ".png", sep = ""))
-  }
-  
-  close3d()
 }
 
-# because passing a list of lists to lapply results in unexpected behavior, I have to do this manually:
-plot_connected_desmo(
-  "MUSlongD", 
-  "MUSobP-notD", 
-  "EC-circumchaetal", 
-  c(49000,76000, 88000), 
-  c(29000,76000, 105000), 
-  c(33000,76000, 122000)
-)
+plot3d(outline, add=T,alpha=0.03,
+       col="#E2E2E2") 
 
-plot_connected_desmo(
-  "circumacicular", 
-  "MUSac-notA", 
-  "EC", 
-  c(49000,76000, 88000), 
-  c(38000,76000, 70000),
-  c(29000,76000, 105000)
-)
+#full rotation
+for (i in 100:257){
+  play3d( spin3d( axis = c(0, 0, 10), rpm = 0.1), duration = 2)
+  next3d(clear=F)
+  play3d( spin3d( axis = c(0, 0, 10), rpm = 0.1), duration = 2)
+  next3d(clear=F)
+  print (i)
+  #save a snapshot in the working directory
+  rgl.snapshot(paste("videos/Video7_C_MNall_spin", i, ".png", sep = ""))
+}
+close3d()
 
-plot_connected_desmo(
-  "circumacicular", 
-  "MUSac-notM", 
-  "EC", 
-  c(59000,76000, 88000), 
-  c(29000,76000, 105000), 
-  c(33000,76000, 122000)
-)
 
-plot_connected_desmo(
-  "circumacicular", 
-  "MUSac-neuDach", 
-  "EC", 
-  c(68000,76000, 110000), 
-  c(79000,76000, 57000), 
-  c(106000,76000, 150000)
-)
-
-plot_connected_desmo(
-  "hemichaetal", 
-  "MUSchae-neuVob", 
-  "EC", 
-  c(39000,76000, 52000), 
-  c(32000,76000, 105000), 
-  c(83000,76000, 168000)
-)
-
+# assemble video ---------------------------------------------------------
 
 #read png files and write video
 library(av)
-av::av_encode_video(
-  paste(
-    'videos/', 
-    list.files(
-      "videos/", 
-      "Video7_desmo_partners.*.png"
-      ), 
-    sep = ""),
-  framerate = 6,
-  output = 'videos/Video7.mp4'
-)
+av::av_encode_video(paste('videos/', list.files("videos", '*.png'), sep = ""), 
+                    framerate = 5,
+                    output = 'videos/Video7.mp4')
 
 
-file.remove(
-  paste(
-    'videos/', 
-    list.files(
-      "videos/", 
-      "Video7_.*.png"
-      ), 
-    sep = "")
-  )
 #delete individual video frames
+file.remove(paste('videos/', list.files("videos", '*.png'), sep = ""))
+
+
+
+
+
+
+
+
