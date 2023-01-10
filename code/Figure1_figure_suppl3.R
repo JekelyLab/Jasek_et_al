@@ -44,7 +44,7 @@ brewer.pal(9, 'Blues')
 # 3d plotting of cells
 nopen3d(); mfrow3d(1, 2)  #defines the two scenes
 #define the size of the rgl window, the view and zoom
-par3d(windowRect = c(20, 30, 1200, 800)); nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1))
+par3d(windowRect = c(20, 30, 1200, 800)); nview3d("ventral", extramat=rotationMatrix(0, 0, 1, 1))
 par3d(zoom=0.52)
 
 
@@ -61,7 +61,13 @@ plot3d(acicula, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
 plot3d(acFC, WithConnectors = F, WithNodes = F, soma=T, lwd=2,
        rev = FALSE, fixup = F, add=T, forceClipregion = TRUE, alpha=1,
        col="#FD8D3C")
-
+plot3d(
+  scalebar_50um_ventral, 
+  lwd=2,
+  add=T,
+  alpha=1,
+  col="black"
+) 
 #move to next panel in rgl window
 next3d(clear=F)
 #define view
@@ -160,7 +166,7 @@ rgl.snapshot("pictures/chaeta_chaeFC.png")
 # 3d plotting of cells
 nopen3d(); mfrow3d(1, 1)  #defines the two scenes
 #define the size of the rgl window, the view and zoom
-par3d(windowRect = c(20, 30, 400, 198)); nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1))
+par3d(windowRect = c(20, 30, 400, 198)); nview3d("ventral", extramat=rotationMatrix(0, 0, 1, 1))
 par3d(zoom=0.16)
 clipplanes3d(1, 0, 0.16, -75700)
 rgl.bg(color='grey80')
@@ -213,7 +219,7 @@ close3d()
 # retrieve and plot the other cell types and basal lamina from  --------
 
 annot_desm_non_muscle <- catmaid_get_annotations_for_skeletons('^desmosome_connectome_non_muscle$', pid = 11)
-head(annot_desm_non_muscle)
+
 nlapply(read.neurons.catmaid("^bounding_dots$", pid=11, 
                              fetch.annotations = T), function(x) smooth_neuron(x, sigma=6000))
 cilia_with_desm <- nlapply(read.neurons.catmaid(annot_desm_non_muscle$skid[annot_desm_non_muscle$annotation=='ciliated cell'],
@@ -233,7 +239,7 @@ length(annot_desm_non_muscle$skid[annot_desm_non_muscle$annotation=='ciliated ce
 # 3d plotting of cells
 nopen3d(); mfrow3d(1, 1)  #defines the two scenes
 #define the size of the rgl window, the view and zoom
-par3d(windowRect = c(20, 30, 600, 800)); nview3d("ventral", extramat=rotationMatrix(pi/20, 0, 1, 1))
+par3d(windowRect = c(20, 30, 600, 800)); nview3d("ventral", extramat=rotationMatrix(0, 0, 1, 1))
 par3d(zoom=0.52)
 rgl.bg(color='white')
 #plot ciliated cells from desmosomal connectome
@@ -342,7 +348,9 @@ panel_acic_circ <- ggdraw() + draw_image(readPNG("pictures/acicula_acFC.png")) +
                    yend = 0.95),
                arrow = arrow(type = 'closed', length = unit(0.8, "mm"))) + 
   draw_label("v", x = 0.82, y = 0.95, size = 8) +
-  draw_label("d", x = 0.96, y = 0.95, size = 8) 
+  draw_label("d", x = 0.96, y = 0.95, size = 8)  +
+  draw_label(paste("50 ", "\u00B5", "m", sep = ""), 
+             x = 0.41, y = 0.17, size = 9)
 
 panel_chae_circ <- ggdraw() + 
   draw_image(readPNG("pictures/chaeta_chaeFC.png")) + 
@@ -387,8 +395,8 @@ panel_chae_circ <- ggdraw() +
   draw_line(x = c(0.87, 0.76), y = c(0.6, 0.62), size = 0.2) +
   draw_line(x = c(0.87, 0.75), y = c(0.6, 0.5), size = 0.2) +
   draw_line(x = c(0.87, 0.74), y = c(0.6, 0.3), size = 0.2) +
-  draw_line(x = c(0.2, 0.45, 0.45, 0.2, 0.2), 
-            y = c(0.57, 0.57, 0.41, 0.41, 0.57), size = 0.3, linetype = 2)
+  draw_line(x = c(0.22, 0.47, 0.47, 0.22, 0.22), 
+            y = c(0.56, 0.56, 0.40, 0.40, 0.56), size = 0.3, linetype = 2)
   
 
 
