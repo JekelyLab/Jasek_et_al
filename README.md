@@ -1,3 +1,6 @@
 # Jasek_et_al
-Desmosomal connectome project - code used in the 2021 Jasek et al Desmosomal connectome paper
+This repository holds code used to analyse data, generate images, figures and videos for the following paper:
 
+Desmosomal connectomics of all somatic muscles in an annelid larva
+Sanja Jasek, Csaba Verasztó, Emelie Brodrick, Réza Shahidi, Tom Kazimiers, Alexandra Kerbl, Gáspár Jékely 
+Dec 20, 2022 https://doi.org/10.7554/eLife.71231
