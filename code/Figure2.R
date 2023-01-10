@@ -212,6 +212,8 @@ plotMUSgroups <- function(color, filenameext, celltypenumbers){
     cells_smoothed=nlapply(cells, function(x) smooth_neuron(x, sigma=6000))
     #plot cells
     plot3d(cells_smoothed, soma=T, lwd=3, col=color[counter], add=T, alpha=1, forceClipregion = TRUE); bg3d(col="white")
+    
+    nview3d("ventral", extramat=rotationMatrix(0, 1, 0, 0))
     next3d(clear=F)
     skids_raw=left_skids[j]
     #retrieve from catmaid all left cells of a type
@@ -228,8 +230,18 @@ plotMUSgroups <- function(color, filenameext, celltypenumbers){
   close3d()
 }
 
+#plot first muscle group with scale bar
+plotMUSgroups(MUSgroups[[1]][[1]], MUSgroups[[1]][[2]], MUSgroups[[1]][[3]])
+plot3d(
+  scalebar_50um_ventral, 
+  lwd=2,
+  add=T,
+  alpha=1,
+  col="black"
+) 
 
-for (i in (1:length(MUSgroups))) {
+#plot other muscle groups without scale bar
+for (i in (2:length(MUSgroups))) {
   plotMUSgroups(MUSgroups[[i]][[1]], MUSgroups[[i]][[2]], MUSgroups[[i]][[3]])
 }
 
