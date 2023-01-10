@@ -278,6 +278,7 @@ rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rg
 bg3d("gray100")
 next3d(clear=F)
 rgl.light(60, 30, diffuse = "gray70"); rgl.light(60, 30, specular = "gray5"); rgl.light(-60, -30, specular = "gray5")
+nview3d("ventral", extramat=rotationMatrix(0, 1, 0, 0))
 
 rgl.snapshot("pictures/Fig1_suppl2_desmosomes.png")
 
@@ -325,8 +326,63 @@ plot3d(
 ) 
 
 plot_landmarks()
+plot3d(
+  scalebar_50um_ventral, 
+  lwd=2,
+  add=T,
+  alpha=1,
+  col="black"
+) 
+nview3d("ventral", extramat=rotationMatrix(0, 1, 0, 0))
 
 rgl.snapshot("pictures/Fig1_suppl2_tonofibrils.png")
+
+
+next3d(clear = T)
+
+plot3d(
+  tags_bf_x,
+  tags_bf_y,
+  tags_bf_z,
+  add = TRUE, 
+  col=hcl.colors(1, palette='Reds'), 
+  size=5, 
+  alpha=0.9
+)
+
+plot3d(
+  bf_skeletons, 
+  soma=T, 
+  lwd=2,
+  add=T,
+  alpha=0.2,
+  col="light pink"
+) 
+plot_landmarks()
+
+next3d(clear = T)
+
+plot3d(
+  tags_bf_x,
+  tags_bf_y,
+  tags_bf_z,
+  add = TRUE, 
+  col=hcl.colors(1, palette='Reds'), 
+  size=5, 
+  alpha=0.9
+)
+
+plot3d(
+  bf_skeletons, 
+  soma=T, 
+  lwd=2,
+  add=T,
+  alpha=0.2,
+  col="light pink"
+) 
+
+plot_landmarks()
+
 
 next3d(clear = F)
 
@@ -365,7 +421,9 @@ panel_B <- ggdraw() + draw_image(
   readPNG("pictures/Fig1_suppl2_tonofibrils.png")) +
   draw_label("ventral view", x = 0.15, y = 0.95, size = 9) +
   draw_label("left view", x = 0.85, y = 0.95, size = 9) +
-  draw_label("tonofibrils", x = 0.5, y = 0.97, size = 11) 
+  draw_label("tonofibrils", x = 0.5, y = 0.97, size = 11)  +
+  draw_label(paste("50 ", "\u00B5", "m", sep = ""), 
+             x = 0.43, y = 0.1, size = 9)
   
 panel_C <- ggdraw() + draw_image(
   readPNG("pictures/Fig1_suppl2_desmosomes.png"))  +
