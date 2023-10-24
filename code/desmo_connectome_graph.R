@@ -82,6 +82,7 @@ V(g)$name
 length(V(g)$name)
 #list edges
 E(g)
+class(g)
 
 # check connected components  ---------------------------
 cl <- components(g)
@@ -102,11 +103,26 @@ desmo_conn_graph <- igraph::simplify(
 )
 
 E(desmo_conn_graph)$weight
+length(E(desmo_conn_graph))
+#check if graph is directed
+is_directed(desmo_conn_graph)
+
+#convert to non-directed graph
+desmo_conn_graph_und <- desmo_conn_graph %>%
+  as_tbl_graph() %>%
+  to_undirected()
+
+E(desmo_conn_graph_und)$weight
+length(E(desmo_conn_graph_und))
+length(V(desmo_conn_graph_und))
+#check if graph is directed
+is_directed(desmo_conn_graph_und)
+
 
 #clustering with Leiden algorithm
 partition <- leiden::leiden(
   desmo_conn_graph, 
-  weights = E(desmo_conn_graph)$weight, 
+  weights = E(desmo_conn_graph_und)$weight, 
   partition_type = "RBConfigurationVertexPartition",
   resolution_parameter = 0.3,
   n_iterations = -1, 
@@ -125,7 +141,7 @@ col=c(
 #assign partition value and color to nodes
 # If vertices are in the same cluster/partition, give them the same colour
 #convert to tidy graph
-desmo_conn_graph.tb <- desmo_conn_graph %>%
+desmo_conn_graph.tb <- desmo_conn_graph_und %>%
   as_tbl_graph() %>%
   activate(nodes) %>%
   mutate(partition = partition) %>%
@@ -136,12 +152,16 @@ desmo_conn_graph.tb %>%
   select(name) %>%
   write.csv("data/desmo_connectome_ids.csv")
 
+is_directed(desmo_conn_graph.tb)
+
+saveRDS(as.igraph(desmo_conn_graph.tb), "source_data/Figure3_source_data_undirected_1.rds")
+
 # export graph for gephi to do force field layout -------------------------
 
 # Serialise the graph to Gephi format
 gexf_data <- rgexf::igraph.to.gexf(desmo_conn_graph.tb)
 # Write the network into a gexf (Gephi) file
-write.gexf(gexf_data, output = "data/full_desmo_connectome_graph.gexf")
+write.gexf(gexf_data, output = "data/full_desmo_connectome_graph_und.gexf")
 
 #Force field clustering was carried out with the Force Atlas tool in Gephi (0.9.2)
 #The inertia was set to 0.1, repulsion strength was 35, 
